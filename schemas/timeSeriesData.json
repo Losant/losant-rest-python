@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolution": {
+      "type": "number"
+    },
+    "aggregation": {
+      "type": "string"
+    },
+    "devices": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Fa-f\\d]{24}$": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "points": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "time": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "data": {
+                    "type": "object",
+                    "patternProperties": {
+                      "^[0-9a-zA-Z_-]{1,255}$": {
+                        "type": [
+                          "number",
+                          "string",
+                          "boolean"
+                        ]
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "data",
+                  "time"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "points"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "start",
+    "end",
+    "resolution",
+    "aggregation",
+    "devices"
+  ]
+}

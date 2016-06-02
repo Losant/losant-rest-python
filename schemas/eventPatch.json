@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "enum": [
+        "new",
+        "acknowledged",
+        "resolved"
+      ]
+    },
+    "comment": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "data": {
+      "$ref": "#/definitions/data"
+    }
+  },
+  "additionalProperties": false
+}

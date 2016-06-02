@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "view"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "email",
+    "role"
+  ]
+}
