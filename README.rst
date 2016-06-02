@@ -167,3 +167,8 @@ Resources
 * webhooks (`Webhooks <docs/webhooks.rst>`_)
 
   Resource wrapper for actions that are performed on Webhook collections.
+
+
+Copyright (c) 2016 Losant IoT, Inc
+
+https://www.losant.com
