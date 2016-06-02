@@ -5,8 +5,8 @@ Data
 Actions
 -------
 
-* `Time Series Query <#timeseriesquery>`_
-* `Last Value Query <#lastvaluequery>`_
+* `Time Series Query <#time-series-query>`_
+* `Last Value Query <#last-value-query>`_
 
 
 Time Series Query

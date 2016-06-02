@@ -5,9 +5,9 @@ Auth
 Actions
 -------
 
-* `Authenticate User <#authenticateuser>`_
-* `Authenticate User Github <#authenticateusergithub>`_
-* `Authenticate Device <#authenticatedevice>`_
+* `Authenticate User <#authenticate-user>`_
+* `Authenticate User Github <#authenticate-user-github>`_
+* `Authenticate Device <#authenticate-device>`_
 
 
 Authenticate User

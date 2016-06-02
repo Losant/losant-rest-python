@@ -9,10 +9,10 @@ Actions
 * `Patch <#patch>`_
 * `Delete <#delete>`_
 * `Debug <#debug>`_
-* `Get Log Entries <#getlogentries>`_
-* `Press Virtual Button <#pressvirtualbutton>`_
-* `Get Storage Entries <#getstorageentries>`_
-* `Set Storage Entry <#setstorageentry>`_
+* `Get Log Entries <#get-log-entries>`_
+* `Press Virtual Button <#press-virtual-button>`_
+* `Get Storage Entries <#get-storage-entries>`_
+* `Set Storage Entry <#set-storage-entry>`_
 
 
 Get

@@ -8,7 +8,7 @@ Actions
 * `Get <#get>`_
 * `Patch <#patch>`_
 * `Delete <#delete>`_
-* `Bulk Create <#bulkcreate>`_
+* `Bulk Create <#bulk-create>`_
 
 
 Get

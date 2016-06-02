@@ -8,13 +8,13 @@ Actions
 * `Get <#get>`_
 * `Patch <#patch>`_
 * `Delete <#delete>`_
-* `Verify Email <#verifyemail>`_
-* `Enable Two Factor Auth <#enabletwofactorauth>`_
-* `Disable Two Factor Auth <#disabletwofactorauth>`_
-* `Disconnect Github <#disconnectgithub>`_
-* `Disconnect Twitter <#disconnecttwitter>`_
-* `Add Recent Item <#addrecentitem>`_
-* `Fetch Recent Items <#fetchrecentitems>`_
+* `Verify Email <#verify-email>`_
+* `Enable Two Factor Auth <#enable-two-factor-auth>`_
+* `Disable Two Factor Auth <#disable-two-factor-auth>`_
+* `Disconnect Github <#disconnect-github>`_
+* `Disconnect Twitter <#disconnect-twitter>`_
+* `Add Recent Item <#add-recent-item>`_
+* `Fetch Recent Items <#fetch-recent-items>`_
 
 
 Get

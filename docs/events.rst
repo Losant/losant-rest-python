@@ -7,7 +7,7 @@ Actions
 
 * `Get <#get>`_
 * `Post <#post>`_
-* `Most Recent by Severity <#mostrecentbyseverity>`_
+* `Most Recent by Severity <#most-recent-by-severity>`_
 
 
 Get

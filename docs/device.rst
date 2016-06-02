@@ -8,11 +8,11 @@ Actions
 * `Get <#get>`_
 * `Patch <#patch>`_
 * `Delete <#delete>`_
-* `Get State <#getstate>`_
-* `Send State <#sendstate>`_
-* `Get Command <#getcommand>`_
-* `Send Command <#sendcommand>`_
-* `Get Log Entries <#getlogentries>`_
+* `Get State <#get-state>`_
+* `Send State <#send-state>`_
+* `Get Command <#get-command>`_
+* `Send Command <#send-command>`_
+* `Get Log Entries <#get-log-entries>`_
 
 
 Get

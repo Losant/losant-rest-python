@@ -8,11 +8,11 @@ Actions
 * `Get <#get>`_
 * `Patch <#patch>`_
 * `Delete <#delete>`_
-* `Pending Invites <#pendinginvites>`_
-* `Invite Member <#invitemember>`_
-* `Revoke Invite <#revokeinvite>`_
-* `Modify Member <#modifymember>`_
-* `Remove Member <#removemember>`_
+* `Pending Invites <#pending-invites>`_
+* `Invite Member <#invite-member>`_
+* `Revoke Invite <#revoke-invite>`_
+* `Modify Member <#modify-member>`_
+* `Remove Member <#remove-member>`_
 
 
 Get
