@@ -24,8 +24,8 @@ print(result)
         'connectionInfo': { 'connected': 0, 'time': '2016-06-01T17:16:02.324Z' },
         '_links': {
             'devices': {'href': '/applications/myAppId/devices' },
-            'self': { 'href': '/applications/myAppId/devices/myDevId'},
-            'application': {'href': '/applications/myAppId'}
+            'self': { 'href': '/applications/myAppId/devices/myDevId' },
+            'application': { 'href': '/applications/myAppId' }
         },
         'attributes': [
             { 'name': 'voltage', 'dataType': 'number' },

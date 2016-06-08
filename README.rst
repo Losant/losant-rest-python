@@ -24,24 +24,25 @@ the Losant Platform and report state for a device.
 ::
 
     from losantrest import Client
-    from analog import Analog
+    from analog import AnalogSensor
 
     client = Client()
     creds = {
-        "deviceId": "my-device-id",
-        "key": "my-app-access-key",
-        "secret": "my-app-access-secret"
+        'deviceId': 'my-device-id',
+        'key': 'my-app-access-key',
+        'secret': 'my-app-access-secret'
     }
     response = client.auth.authenticate_device(credentials=creds)
 
-    client.access_token = response["token"]
-    app_id = response["applicationId"]
+    client.auth_token = response['token']
+    app_id = response['applicationId']
 
-    state = { "temperature": Analog.read() }
-    response = client.device.send_state(deviceId="my-device-id",
+    state = {'data': {'temperature': AnalogSensor.read()}}
+    response = client.device.send_state(deviceId='my-device-id',
         applicationId=app_id, deviceState=state)
 
     print(response)
+    """ {'success': True} """
 
 
 API Documentation
@@ -86,7 +87,7 @@ Resources
 
 * application_key (`Application Key <docs/applicationKey.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Application Key.
+  Resource wrapper for actions that are performed on a single Application Key.
 
 * application_keys (`Application Keys <docs/applicationKeys.rst>`_)
 
@@ -94,7 +95,7 @@ Resources
 
 * application (`Application <docs/application.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Application.
+  Resource wrapper for actions that are performed on a single Application.
 
 * applications (`Applications <docs/applications.rst>`_)
 
@@ -106,7 +107,7 @@ Resources
 
 * dashboard (`Dashboard <docs/dashboard.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Dashboard.
+  Resource wrapper for actions that are performed on a single Dashboard.
 
 * dashboards (`Dashboards <docs/dashboards.rst>`_)
 
@@ -118,7 +119,7 @@ Resources
 
 * device (`Device <docs/device.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Device.
+  Resource wrapper for actions that are performed on a single Device.
 
 * devices (`Devices <docs/devices.rst>`_)
 
@@ -126,7 +127,7 @@ Resources
 
 * device_recipe (`Device Recipe <docs/deviceRecipe.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Device Recipe.
+  Resource wrapper for actions that are performed on a single Device Recipe.
 
 * device_recipes (`Device Recipes <docs/deviceRecipes.rst>`_)
 
@@ -134,7 +135,7 @@ Resources
 
 * event (`Event <docs/event.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Event.
+  Resource wrapper for actions that are performed on a single Event.
 
 * events (`Events <docs/events.rst>`_)
 
@@ -142,7 +143,7 @@ Resources
 
 * flow (`Flow <docs/flow.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Workflow.
+  Resource wrapper for actions that are performed on a single Workflow.
 
 * flows (`Flows <docs/flows.rst>`_)
 
@@ -154,7 +155,7 @@ Resources
 
 * org (`Org <docs/org.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Organization.
+  Resource wrapper for actions that are performed on a single Organization.
 
 * orgs (`Orgs <docs/orgs.rst>`_)
 
@@ -162,7 +163,7 @@ Resources
 
 * webhook (`Webhook <docs/webhook.rst>`_)
 
-  Resource wrapper for actions that are preformed on a single Webhook.
+  Resource wrapper for actions that are performed on a single Webhook.
 
 * webhooks (`Webhooks <docs/webhooks.rst>`_)
 
