@@ -13,12 +13,13 @@ class Devices(object):
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField
-        *  {string} sortDirection
-        *  {string} page
-        *  {string} perPage
-        *  {string} filterField
-        *  {string} filter
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
+        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {hash} tagFilter - Array of tag pairs to filter by. (https://api.losant.com/#/definitions/deviceTagFilter)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -49,6 +50,8 @@ class Devices(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "tagFilter" in kwargs:
+            query_params["tagFilter"] = kwargs["tagFilter"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -66,7 +69,7 @@ class Devices(object):
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {dict} device - New device information (https://api.losant.com/#/definitions/devicePost)
+        *  {hash} device - New device information (https://api.losant.com/#/definitions/devicePost)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -96,6 +99,45 @@ class Devices(object):
             query_params["_embedded"] = kwargs["_embedded"]
 
         path = "/applications/{applicationId}/devices".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
+    def send_command(self, **kwargs):
+        """
+        Send a command to multiple devices
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {hash} multiDeviceCommand - Command to send to the device (https://api.losant.com/#/definitions/multiDeviceCommand)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If command was successfully sent (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "multiDeviceCommand" in kwargs:
+            body = kwargs["multiDeviceCommand"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/devices/command".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

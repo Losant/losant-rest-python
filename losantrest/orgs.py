@@ -12,12 +12,12 @@ class Orgs(object):
         Returns the organizations associated with the current user
 
         Parameters:
-        *  {string} sortField
-        *  {string} sortDirection
-        *  {string} page
-        *  {string} perPage
-        *  {string} filterField
-        *  {string} filter
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
+        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -61,7 +61,7 @@ class Orgs(object):
         Create a new organization
 
         Parameters:
-        *  {dict} organization - New organization information (https://api.losant.com/#/definitions/orgPost)
+        *  {hash} organization - New organization information (https://api.losant.com/#/definitions/orgPost)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response

@@ -4,18 +4,18 @@
 import requests
 from .access_token import AccessToken
 from .access_tokens import AccessTokens
+from .application import Application
 from .application_key import ApplicationKey
 from .application_keys import ApplicationKeys
-from .application import Application
 from .applications import Applications
 from .auth import Auth
 from .dashboard import Dashboard
 from .dashboards import Dashboards
 from .data import Data
 from .device import Device
-from .devices import Devices
 from .device_recipe import DeviceRecipe
 from .device_recipes import DeviceRecipes
+from .devices import Devices
 from .event import Event
 from .events import Events
 from .flow import Flow
@@ -33,7 +33,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.3.7
+    Built For Version 1.3.8
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -41,18 +41,18 @@ class Client(object):
         self.auth_token = auth_token
         self.access_token = AccessToken(self)
         self.access_tokens = AccessTokens(self)
+        self.application = Application(self)
         self.application_key = ApplicationKey(self)
         self.application_keys = ApplicationKeys(self)
-        self.application = Application(self)
         self.applications = Applications(self)
         self.auth = Auth(self)
         self.dashboard = Dashboard(self)
         self.dashboards = Dashboards(self)
         self.data = Data(self)
         self.device = Device(self)
-        self.devices = Devices(self)
         self.device_recipe = DeviceRecipe(self)
         self.device_recipes = DeviceRecipes(self)
+        self.devices = Devices(self)
         self.event = Event(self)
         self.events = Events(self)
         self.flow = Flow(self)
@@ -71,7 +71,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.3.7"
+        headers["Accept-Version"] = "^1.3.8"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

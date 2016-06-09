@@ -7,9 +7,44 @@ class Dashboard(object):
     def __init__(self, client):
         self.client = client
 
+    def delete(self, **kwargs):
+        """
+        Deletes a dashboard
+
+        Parameters:
+        *  {string} dashboardId - ID of the associated dashboard
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If dashboard was successfully deleted (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  404 - Error if dashboard was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "dashboardId" in kwargs:
+            path_params["dashboardId"] = kwargs["dashboardId"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/dashboards/{dashboardId}".format(**path_params)
+
+        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
+
     def get(self, **kwargs):
         """
-        Retrieves information on an dashboard
+        Retrieves information on a dashboard
 
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
@@ -48,7 +83,7 @@ class Dashboard(object):
 
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
-        *  {dict} dashboard - Object containing new dashboard properties (https://api.losant.com/#/definitions/dashboardPatch)
+        *  {hash} dashboard - Object containing new dashboard properties (https://api.losant.com/#/definitions/dashboardPatch)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -80,39 +115,4 @@ class Dashboard(object):
         path = "/dashboards/{dashboardId}".format(**path_params)
 
         return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
-
-    def delete(self, **kwargs):
-        """
-        Deletes an dashboard
-
-        Parameters:
-        *  {string} dashboardId - ID of the associated dashboard
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - If dashboard was successfully deleted (https://api.losant.com/#/definitions/success)
-
-        Errors:
-        *  404 - Error if dashboard was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "dashboardId" in kwargs:
-            path_params["dashboardId"] = kwargs["dashboardId"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/dashboards/{dashboardId}".format(**path_params)
-
-        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
 

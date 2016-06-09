@@ -7,86 +7,6 @@ class Flow(object):
     def __init__(self, client):
         self.client = client
 
-    def get(self, **kwargs):
-        """
-        Retrieves information on an flow
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} flowId - ID associated with the flow
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - Flow information (https://api.losant.com/#/definitions/flow)
-
-        Errors:
-        *  404 - Error if flow was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "flowId" in kwargs:
-            path_params["flowId"] = kwargs["flowId"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/flows/{flowId}".format(**path_params)
-
-        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
-
-    def patch(self, **kwargs):
-        """
-        Updates information about a flow
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} flowId - ID associated with the flow
-        *  {dict} flow - Object containing new properties of the flow (https://api.losant.com/#/definitions/flowPatch)
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - Updated flow information (https://api.losant.com/#/definitions/flow)
-
-        Errors:
-        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if flow is not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "flowId" in kwargs:
-            path_params["flowId"] = kwargs["flowId"]
-        if "flow" in kwargs:
-            body = kwargs["flow"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/flows/{flowId}".format(**path_params)
-
-        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
-
     def delete(self, **kwargs):
         """
         Deletes a flow
@@ -125,9 +45,9 @@ class Flow(object):
 
         return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
 
-    def debug(self, **kwargs):
+    def get(self, **kwargs):
         """
-        Streams real time flow debug events using SSE
+        Retrieves information on a flow
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -137,7 +57,7 @@ class Flow(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Stream of flow debug events
+        *  200 - Flow information (https://api.losant.com/#/definitions/flow)
 
         Errors:
         *  404 - Error if flow was not found (https://api.losant.com/#/definitions/error)
@@ -159,7 +79,7 @@ class Flow(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/flows/{flowId}/debug".format(**path_params)
+        path = "/applications/{applicationId}/flows/{flowId}".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
@@ -170,8 +90,8 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {string} limit
-        *  {string} since
+        *  {string} limit - Max log entries to return (ordered by time descending)
+        *  {string} since - Look for log entries since this time (ms since epoch)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -206,47 +126,6 @@ class Flow(object):
         path = "/applications/{applicationId}/flows/{flowId}/logs".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
-
-    def press_virtual_button(self, **kwargs):
-        """
-        Presses the specified virtual button on the flow
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} flowId - ID associated with the flow
-        *  {dict} button - Object containing button key and payload (https://api.losant.com/#/definitions/virtualButtonPress)
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - Virtual button was pressed (https://api.losant.com/#/definitions/success)
-
-        Errors:
-        *  404 - Error if flow was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "flowId" in kwargs:
-            path_params["flowId"] = kwargs["flowId"]
-        if "button" in kwargs:
-            body = kwargs["button"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/flows/{flowId}/virtualButton".format(**path_params)
-
-        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
     def get_storage_entries(self, **kwargs):
         """
@@ -286,6 +165,89 @@ class Flow(object):
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
+    def patch(self, **kwargs):
+        """
+        Updates information about a flow
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} flowId - ID associated with the flow
+        *  {hash} flow - Object containing new properties of the flow (https://api.losant.com/#/definitions/flowPatch)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Updated flow information (https://api.losant.com/#/definitions/flow)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if flow is not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "flowId" in kwargs:
+            path_params["flowId"] = kwargs["flowId"]
+        if "flow" in kwargs:
+            body = kwargs["flow"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/flows/{flowId}".format(**path_params)
+
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
+
+    def press_virtual_button(self, **kwargs):
+        """
+        Presses the specified virtual button on the flow
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} flowId - ID associated with the flow
+        *  {hash} button - Object containing button key and payload (https://api.losant.com/#/definitions/virtualButtonPress)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Virtual button was pressed (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  404 - Error if flow was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "flowId" in kwargs:
+            path_params["flowId"] = kwargs["flowId"]
+        if "button" in kwargs:
+            body = kwargs["button"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/flows/{flowId}/virtualButton".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
     def set_storage_entry(self, **kwargs):
         """
         Sets a storage value
@@ -293,7 +255,7 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {dict} entry - Object containing storage entry (https://api.losant.com/#/definitions/flowStorageEntry)
+        *  {hash} entry - Object containing storage entry (https://api.losant.com/#/definitions/flowStorageEntry)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response

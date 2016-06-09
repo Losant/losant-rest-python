@@ -9,16 +9,16 @@ class Dashboards(object):
 
     def get(self, **kwargs):
         """
-        Returns the dashboards owned by the current user
+        Returns the dashboards the current user has permission to see
 
         Parameters:
-        *  {string} sortField
-        *  {string} sortDirection
-        *  {string} page
-        *  {string} perPage
-        *  {string} filterField
-        *  {string} filter
-        *  {string} orgId
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, ownerId
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
+        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {string} orgId - If not provided, return all dashboards. If provided but blank, only return dashboards belonging to the current user.  If provided and an id, only return dashboards belonging to the given organization id.
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -61,10 +61,10 @@ class Dashboards(object):
 
     def post(self, **kwargs):
         """
-        Create a new dasboard owned by the current user
+        Create a new dasboard
 
         Parameters:
-        *  {dict} dashboard - New dashboard information (https://api.losant.com/#/definitions/dashboardPost)
+        *  {hash} dashboard - New dashboard information (https://api.losant.com/#/definitions/dashboardPost)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response

@@ -9,16 +9,16 @@ class Applications(object):
 
     def get(self, **kwargs):
         """
-        Returns the applications owned by the current user
+        Returns the applications the current user has permission to see
 
         Parameters:
-        *  {string} sortField
-        *  {string} sortDirection
-        *  {string} page
-        *  {string} perPage
-        *  {string} filterField
-        *  {string} filter
-        *  {string} orgId
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, ownerId
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
+        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {string} orgId - If not provided, return all applications. If provided but blank, only return applications belonging to the current user.  If provided and an id, only return applications belonging to the given organization id.
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -61,10 +61,10 @@ class Applications(object):
 
     def post(self, **kwargs):
         """
-        Create a new application owned by the current user
+        Create a new application
 
         Parameters:
-        *  {dict} application - New application information (https://api.losant.com/#/definitions/applicationPost)
+        *  {hash} application - New application information (https://api.losant.com/#/definitions/applicationPost)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response

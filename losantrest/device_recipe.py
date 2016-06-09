@@ -7,6 +7,85 @@ class DeviceRecipe(object):
     def __init__(self, client):
         self.client = client
 
+    def bulk_create(self, **kwargs):
+        """
+        Bulk creates devices using this recipe from a CSV
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} deviceRecipeId - ID associated with the device recipe
+        *  {hash} bulkInfo - Object containing bulk creation info (https://api.losant.com/#/definitions/deviceRecipeBulkCreatePost)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  201 - If devices were sucessfully created (https://api.losant.com/#/definitions/deviceRecipeBulkCreate)
+
+        Errors:
+        *  404 - Error if device recipe was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "deviceRecipeId" in kwargs:
+            path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
+        if "bulkInfo" in kwargs:
+            body = kwargs["bulkInfo"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/device-recipes/{deviceRecipeId}/bulkCreate".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
+    def delete(self, **kwargs):
+        """
+        Deletes a device recipe
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} deviceRecipeId - ID associated with the device recipe
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If device recipe was successfully deleted (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  404 - Error if device recipe was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "deviceRecipeId" in kwargs:
+            path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/device-recipes/{deviceRecipeId}".format(**path_params)
+
+        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
+
     def get(self, **kwargs):
         """
         Retrieves information on a device recipe
@@ -52,7 +131,7 @@ class DeviceRecipe(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceRecipeId - ID associated with the device recipe
-        *  {dict} deviceRecipe - Object containing new properties of the device recipe (https://api.losant.com/#/definitions/deviceRecipePatch)
+        *  {hash} deviceRecipe - Object containing new properties of the device recipe (https://api.losant.com/#/definitions/deviceRecipePatch)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -86,83 +165,4 @@ class DeviceRecipe(object):
         path = "/applications/{applicationId}/device-recipes/{deviceRecipeId}".format(**path_params)
 
         return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
-
-    def delete(self, **kwargs):
-        """
-        Deletes a device recipe
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} deviceRecipeId - ID associated with the device recipe
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - If device recipe was successfully deleted (https://api.losant.com/#/definitions/success)
-
-        Errors:
-        *  404 - Error if device recipe was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "deviceRecipeId" in kwargs:
-            path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/device-recipes/{deviceRecipeId}".format(**path_params)
-
-        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
-
-    def bulk_create(self, **kwargs):
-        """
-        Bulk creates devices using this recipe from a CSV
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} deviceRecipeId - ID associated with the device recipe
-        *  {dict} bulkInfo - Object containing bulk creation info (https://api.losant.com/#/definitions/deviceRecipeBulkCreatePost)
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  201 - If devices were sucessfully created (https://api.losant.com/#/definitions/deviceRecipeBulkCreate)
-
-        Errors:
-        *  404 - Error if device recipe was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "deviceRecipeId" in kwargs:
-            path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
-        if "bulkInfo" in kwargs:
-            body = kwargs["bulkInfo"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/device-recipes/{deviceRecipeId}/bulkCreate".format(**path_params)
-
-        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
