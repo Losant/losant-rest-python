@@ -20,6 +20,7 @@ class AccessTokens(object):
         *  200 - Collection of accessTokens (https://api.losant.com/#/definitions/accessTokens)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}

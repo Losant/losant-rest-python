@@ -21,6 +21,7 @@ class Org(object):
         *  200 - If organization was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -56,6 +57,7 @@ class Org(object):
         *  200 - Organization information (https://api.losant.com/#/definitions/org)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if organization not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -208,6 +210,7 @@ class Org(object):
         *  200 - Invitation information (https://api.losant.com/#/definitions/orgInvites)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if organization not found (https://api.losant.com/#/definitions/error)
         """
 

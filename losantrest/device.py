@@ -22,6 +22,7 @@ class Device(object):
         *  200 - If device was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if device was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -60,6 +61,7 @@ class Device(object):
         *  200 - Device information (https://api.losant.com/#/definitions/device)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if device was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -100,6 +102,7 @@ class Device(object):
         *  200 - Recent device commands (https://api.losant.com/#/definitions/deviceCommands)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if device was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -141,9 +144,10 @@ class Device(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Recent log entries
+        *  200 - Recent log entries (https://api.losant.com/#/definitions/deviceLog)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if device was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -188,6 +192,7 @@ class Device(object):
         *  200 - Recent device states (https://api.losant.com/#/definitions/deviceStates)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if device was not found (https://api.losant.com/#/definitions/error)
         """
 

@@ -22,6 +22,7 @@ class ApplicationKey(object):
         *  200 - If applicationKey was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if applicationKey was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -60,6 +61,7 @@ class ApplicationKey(object):
         *  200 - applicationKey information (https://api.losant.com/#/definitions/applicationKey)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if applicationKey was not found (https://api.losant.com/#/definitions/error)
         """
 

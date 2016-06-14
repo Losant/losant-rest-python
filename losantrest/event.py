@@ -22,6 +22,7 @@ class Event(object):
         *  200 - If event was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if event was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -60,6 +61,7 @@ class Event(object):
         *  200 - Event information (https://api.losant.com/#/definitions/event)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if event was not found (https://api.losant.com/#/definitions/error)
         """
 

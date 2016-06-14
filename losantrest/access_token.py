@@ -21,6 +21,7 @@ class AccessToken(object):
         *  200 - If accessToken was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if accessToken was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -56,6 +57,7 @@ class AccessToken(object):
         *  200 - Access token information (https://api.losant.com/#/definitions/accessToken)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if accessToken was not found (https://api.losant.com/#/definitions/error)
         """
 

@@ -27,6 +27,7 @@ class Dashboards(object):
         *  200 - Collection of dashboards (https://api.losant.com/#/definitions/dashboards)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}

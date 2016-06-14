@@ -27,6 +27,7 @@ class DeviceRecipes(object):
         *  200 - Collection of device recipes (https://api.losant.com/#/definitions/deviceRecipes)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 

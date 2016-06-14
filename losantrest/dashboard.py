@@ -21,6 +21,7 @@ class Dashboard(object):
         *  200 - If dashboard was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if dashboard was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -56,6 +57,7 @@ class Dashboard(object):
         *  200 - Dashboard information (https://api.losant.com/#/definitions/dashboard)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if dashboard was not found (https://api.losant.com/#/definitions/error)
         """
 

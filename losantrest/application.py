@@ -21,6 +21,7 @@ class Application(object):
         *  200 - If application was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
@@ -56,6 +57,7 @@ class Application(object):
         *  200 - Application information (https://api.losant.com/#/definitions/application)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 

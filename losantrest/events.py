@@ -28,6 +28,7 @@ class Events(object):
         *  200 - Collection of events (https://api.losant.com/#/definitions/events)
 
         Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
         *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 

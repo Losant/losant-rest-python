@@ -30,10 +30,10 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
 
 #### Successful Responses
 
@@ -45,6 +45,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if flow was not found |
 
 <br/>
@@ -63,10 +64,10 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
 
 #### Successful Responses
 
@@ -78,6 +79,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if flow was not found |
 
 <br/>
@@ -96,23 +98,24 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
-| limit | string | N | Max log entries to return (ordered by time descending) | 1 |
-| since | string | N | Look for log entries since this time (ms since epoch) |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
+| limit | string | N | Max log entries to return (ordered by time descending) | 1 | 10 |
+| since | string | N | Look for log entries since this time (ms since epoch) | 0 | 1465790400000 |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | undefined | Recent log entries |
+| 200 | [Workflow Log](_schemas.md#workflow-log) | Recent log entries |
 
 #### Error Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if device was not found |
 
 <br/>
@@ -131,21 +134,22 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | undefined | The stored values |
+| 200 | [Workflow Storage Entries](_schemas.md#workflow-storage-entries) | The stored values |
 
 #### Error Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if flow was not found |
 
 <br/>
@@ -165,11 +169,11 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
-| flow | [Workflow Patch](_schemas.md#workflow-patch) | Y | Object containing new properties of the flow |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
+| flow | [Workflow Patch](_schemas.md#workflow-patch) | Y | Object containing new properties of the flow |  | [Workflow Patch Example](_schemas.md#workflow-patch-example) |
 
 #### Successful Responses
 
@@ -201,11 +205,11 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
-| button | [Virtual Button Press](_schemas.md#virtual-button-press) | Y | Object containing button key and payload |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
+| button | [Virtual Button Press](_schemas.md#virtual-button-press) | Y | Object containing button key and payload |  | [Virtual Button Press Example](_schemas.md#virtual-button-press-example) |
 
 #### Successful Responses
 
@@ -217,6 +221,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if flow was not found |
 
 <br/>
@@ -236,11 +241,11 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| flowId | string | Y | ID associated with the flow |  |
-| entry | [Workflow Storage Entry](_schemas.md#workflow-storage-entry) | Y | Object containing storage entry |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| flowId | string | Y | ID associated with the flow |  | 575ed18f7ae143cd83dc4aa6 |
+| entry | [Workflow Storage Entry](_schemas.md#workflow-storage-entry) | Y | Object containing storage entry |  | [Workflow Storage Entry Example](_schemas.md#workflow-storage-entry-example) |
 
 #### Successful Responses
 
@@ -252,4 +257,5 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if flow was not found |

@@ -31,10 +31,10 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
 
 #### Successful Responses
 
@@ -46,6 +46,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if device was not found |
 
 <br/>
@@ -64,10 +65,10 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
 
 #### Successful Responses
 
@@ -79,6 +80,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if device was not found |
 
 <br/>
@@ -97,12 +99,12 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
-| limit | string | N | Max command entries to return (ordered by time descending) | 1 |
-| since | string | N | Look for command entries since this time (ms since epoch) |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| limit | string | N | Max command entries to return (ordered by time descending) | 1 | 10 |
+| since | string | N | Look for command entries since this time (ms since epoch) | 0 | 1465790400000 |
 
 #### Successful Responses
 
@@ -114,6 +116,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if device was not found |
 
 <br/>
@@ -132,23 +135,24 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
-| limit | string | N | Max log entries to return (ordered by time descending) | 1 |
-| since | string | N | Look for log entries since this time (ms since epoch) |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| limit | string | N | Max log entries to return (ordered by time descending) | 1 | 10 |
+| since | string | N | Look for log entries since this time (ms since epoch) | 0 | 1465790400000 |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | undefined | Recent log entries |
+| 200 | [Device Log](_schemas.md#device-log) | Recent log entries |
 
 #### Error Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if device was not found |
 
 <br/>
@@ -167,12 +171,12 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
-| limit | string | N | Max state entries to return (ordered by time descending) | 1 |
-| since | string | N | Look for state entries since this time (ms since epoch) |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| limit | string | N | Max state entries to return (ordered by time descending) | 1 | 10 |
+| since | string | N | Look for state entries since this time (ms since epoch) | 0 | 1465790400000 |
 
 #### Successful Responses
 
@@ -184,6 +188,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if device was not found |
 
 <br/>
@@ -203,11 +208,11 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
-| device | [Device Patch](_schemas.md#device-patch) | Y | Object containing new properties of the device |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| device | [Device Patch](_schemas.md#device-patch) | Y | Object containing new properties of the device |  | [Device Patch Example](_schemas.md#device-patch-example) |
 
 #### Successful Responses
 
@@ -239,11 +244,11 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
-| deviceCommand | [Device Command](_schemas.md#device-command) | Y | Command to send to the device |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| deviceCommand | [Device Command](_schemas.md#device-command) | Y | Command to send to the device |  | [Device Command Example](_schemas.md#device-command-example) |
 
 #### Successful Responses
 
@@ -275,11 +280,11 @@ print(result)
 
 #### Available Parameters
 
-| Name | Type | Required | Description | Default |
-| ---- | ---- | -------- | ----------- | ------- |
-| applicationId | string | Y | ID associated with the application |  |
-| deviceId | string | Y | ID associated with the device |  |
-| deviceState | [Device State](_schemas.md#device-state) | Y | Object containing the current state of the device |  |
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| deviceState | [Device State](_schemas.md#device-state) | Y | Object containing the current state of the device |  | [Device State Example](_schemas.md#device-state-example) |
 
 #### Successful Responses
 
