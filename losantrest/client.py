@@ -2,6 +2,8 @@
 # pylint: disable=E0401
 
 import requests
+import collections
+import sys
 from .access_token import AccessToken
 from .access_tokens import AccessTokens
 from .application import Application
@@ -26,6 +28,9 @@ from .orgs import Orgs
 from .webhook import Webhook
 from .webhooks import Webhooks
 from .losant_error import LosantError
+
+if sys.version_info[0] == 3:
+    basestring = str
 
 class Client(object):
     """
@@ -76,6 +81,7 @@ class Client(object):
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
         path = self.url + path
+        params = self.flatten_params(params)
         response = requests.request(method, path, params=params, headers=headers, json=body)
 
         result = response.text
@@ -86,5 +92,31 @@ class Client(object):
 
         if response.status_code >= 400:
             raise LosantError(response.status_code, result)
+
+        return result
+
+    def flatten_params(self, data, base_key=None):
+        """ Flatten out nested arrays and dicts in query params into correct format """
+        result = {}
+
+        if data is None:
+            return result
+
+        map_data = None
+        if not isinstance(data, collections.Mapping):
+            map_data = []
+            for idx, val in enumerate(data):
+                map_data.append([str(idx), val])
+        else:
+            map_data = list(data.items())
+
+        for key, value in map_data:
+            if not base_key is None:
+                key = base_key + "[" + key + "]"
+
+            if isinstance(value, basestring) or not hasattr(value, "__iter__"):
+                result[key] = value
+            else:
+                result.update(self.flatten_params(value, key))
 
         return result
