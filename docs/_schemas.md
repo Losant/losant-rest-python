@@ -1024,8 +1024,8 @@ Schema for the sucessful response when authenticating a Device
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
@@ -1144,6 +1144,9 @@ Schema for a single Dashboard
       "type": "number",
       "minimum": 5,
       "maximum": 600
+    },
+    "isPasswordProtected": {
+      "type": "boolean"
     },
     "public": {
       "type": "boolean"
@@ -1288,6 +1291,12 @@ Schema for the body of a Dashboard modification request
     },
     "public": {
       "type": "boolean"
+    },
+    "password": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "additionalProperties": false
@@ -1382,6 +1391,12 @@ Schema for the body of a Dashboard creation request
     },
     "public": {
       "type": "boolean"
+    },
+    "password": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   },
   "additionalProperties": false,
@@ -1459,6 +1474,9 @@ Schema for a collection of Dashboards
             "type": "number",
             "minimum": 5,
             "maximum": 600
+          },
+          "isPasswordProtected": {
+            "type": "boolean"
           },
           "public": {
             "type": "boolean"
@@ -1664,13 +1682,13 @@ Schema for a single Device
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
     },
-    "masterId": {
+    "gatewayId": {
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     },
@@ -2025,13 +2043,13 @@ Schema for the body of a Device modification request
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
     },
-    "masterId": {
+    "gatewayId": {
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     }
@@ -2135,13 +2153,13 @@ Schema for the body of a Device creation request
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
     },
-    "masterId": {
+    "gatewayId": {
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     }
@@ -2277,13 +2295,13 @@ Schema for a single Device Recipe
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
     },
-    "masterId": {
+    "gatewayId": {
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     }
@@ -2476,13 +2494,13 @@ Schema for the body of a Device Recipe modification request
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
     },
-    "masterId": {
+    "gatewayId": {
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     }
@@ -2597,13 +2615,13 @@ Schema for the body of a Device Recipe creation request
       "type": "string",
       "enum": [
         "standalone",
-        "master",
-        "owned",
+        "gateway",
+        "peripheral",
         "floating",
         "virtual"
       ]
     },
-    "masterId": {
+    "gatewayId": {
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     }
@@ -2748,13 +2766,13 @@ Schema for a collection of Device Recipes
             "type": "string",
             "enum": [
               "standalone",
-              "master",
-              "owned",
+              "gateway",
+              "peripheral",
               "floating",
               "virtual"
             ]
           },
-          "masterId": {
+          "gatewayId": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
           }
@@ -3089,13 +3107,13 @@ Schema for a collection of Devices
             "type": "string",
             "enum": [
               "standalone",
-              "master",
-              "owned",
+              "gateway",
+              "peripheral",
               "floating",
               "virtual"
             ]
           },
-          "masterId": {
+          "gatewayId": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
           },

@@ -49,6 +49,7 @@ class Dashboard(object):
 
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
+        *  {string} password - Password for password-protected dashboards
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -68,6 +69,8 @@ class Dashboard(object):
 
         if "dashboardId" in kwargs:
             path_params["dashboardId"] = kwargs["dashboardId"]
+        if "password" in kwargs:
+            query_params["password"] = kwargs["password"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
