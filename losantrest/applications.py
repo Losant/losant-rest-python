@@ -19,6 +19,7 @@ class Applications(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} orgId - If not provided, return all applications. If provided but blank, only return applications belonging to the current user.  If provided and an id, only return applications belonging to the given organization id.
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -49,6 +50,8 @@ class Applications(object):
             query_params["filter"] = kwargs["filter"]
         if "orgId" in kwargs:
             query_params["orgId"] = kwargs["orgId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -66,6 +69,7 @@ class Applications(object):
 
         Parameters:
         *  {hash} application - New application information (https://api.losant.com/#/definitions/applicationPost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -84,6 +88,8 @@ class Applications(object):
 
         if "application" in kwargs:
             body = kwargs["application"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

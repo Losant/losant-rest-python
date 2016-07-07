@@ -14,6 +14,7 @@ class ApplicationKey(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} applicationKeyId - ID associated with the applicationKey
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -35,6 +36,8 @@ class ApplicationKey(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "applicationKeyId" in kwargs:
             path_params["applicationKeyId"] = kwargs["applicationKeyId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -53,6 +56,7 @@ class ApplicationKey(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} applicationKeyId - ID associated with the applicationKey
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -74,6 +78,8 @@ class ApplicationKey(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "applicationKeyId" in kwargs:
             path_params["applicationKeyId"] = kwargs["applicationKeyId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -93,6 +99,7 @@ class ApplicationKey(object):
         *  {string} applicationId - ID associated with the application
         *  {string} applicationKeyId - ID associated with the applicationKey
         *  {hash} applicationKey - Object containing new properties of the applicationKey (https://api.losant.com/#/definitions/applicationKeyPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -116,6 +123,8 @@ class ApplicationKey(object):
             path_params["applicationKeyId"] = kwargs["applicationKeyId"]
         if "applicationKey" in kwargs:
             body = kwargs["applicationKey"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

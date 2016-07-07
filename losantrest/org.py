@@ -13,6 +13,7 @@ class Org(object):
 
         Parameters:
         *  {string} orgId - ID associated with the organization
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -32,6 +33,8 @@ class Org(object):
 
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -49,6 +52,7 @@ class Org(object):
 
         Parameters:
         *  {string} orgId - ID associated with the organization
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -68,6 +72,8 @@ class Org(object):
 
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -86,6 +92,7 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} invite - Object containing new invite info (https://api.losant.com/#/definitions/orgInvitePost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -107,6 +114,8 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "invite" in kwargs:
             body = kwargs["invite"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -125,6 +134,7 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} member - Object containing new member pair (https://api.losant.com/#/definitions/orgMemberPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -146,6 +156,8 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "member" in kwargs:
             body = kwargs["member"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -164,6 +176,7 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} organization - Object containing new organization properties (https://api.losant.com/#/definitions/orgPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -185,6 +198,8 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "organization" in kwargs:
             body = kwargs["organization"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -202,6 +217,7 @@ class Org(object):
 
         Parameters:
         *  {string} orgId - ID associated with the organization
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -221,6 +237,8 @@ class Org(object):
 
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -239,6 +257,7 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} userId - Id of user to remove
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -260,6 +279,8 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "userId" in kwargs:
             query_params["userId"] = kwargs["userId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -278,6 +299,7 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} inviteId - Id of invite to revoke
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -299,6 +321,8 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "inviteId" in kwargs:
             query_params["inviteId"] = kwargs["inviteId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

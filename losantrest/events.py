@@ -20,6 +20,7 @@ class Events(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: subject
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} state - If provided, return events only in the given state. Accepted values are: new, acknowledged, resolved
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -53,6 +54,8 @@ class Events(object):
             query_params["filter"] = kwargs["filter"]
         if "state" in kwargs:
             query_params["state"] = kwargs["state"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -71,6 +74,7 @@ class Events(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} filter - Filter to apply against event subjects. Supports globbing. Blank or not provided means no filtering.
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -91,6 +95,8 @@ class Events(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -112,6 +118,7 @@ class Events(object):
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} state - If provided, act on events only in the given state. Accepted values are: new, acknowledged, resolved
         *  {hash} updates - Object containing updated information for the events (https://api.losant.com/#/definitions/eventPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -139,6 +146,8 @@ class Events(object):
             query_params["state"] = kwargs["state"]
         if "updates" in kwargs:
             body = kwargs["updates"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -157,6 +166,7 @@ class Events(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} event - New event information (https://api.losant.com/#/definitions/eventPost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -179,6 +189,8 @@ class Events(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "event" in kwargs:
             body = kwargs["event"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

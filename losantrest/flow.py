@@ -14,6 +14,7 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -35,6 +36,8 @@ class Flow(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "flowId" in kwargs:
             path_params["flowId"] = kwargs["flowId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -53,6 +56,7 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -74,6 +78,8 @@ class Flow(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "flowId" in kwargs:
             path_params["flowId"] = kwargs["flowId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -94,6 +100,7 @@ class Flow(object):
         *  {string} flowId - ID associated with the flow
         *  {string} limit - Max log entries to return (ordered by time descending)
         *  {string} since - Look for log entries since this time (ms since epoch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -119,6 +126,8 @@ class Flow(object):
             query_params["limit"] = kwargs["limit"]
         if "since" in kwargs:
             query_params["since"] = kwargs["since"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -137,6 +146,7 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -158,6 +168,8 @@ class Flow(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "flowId" in kwargs:
             path_params["flowId"] = kwargs["flowId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -177,6 +189,7 @@ class Flow(object):
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
         *  {hash} flow - Object containing new properties of the flow (https://api.losant.com/#/definitions/flowPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -200,6 +213,8 @@ class Flow(object):
             path_params["flowId"] = kwargs["flowId"]
         if "flow" in kwargs:
             body = kwargs["flow"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -219,6 +234,7 @@ class Flow(object):
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
         *  {hash} button - Object containing button key and payload (https://api.losant.com/#/definitions/virtualButtonPress)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -242,6 +258,8 @@ class Flow(object):
             path_params["flowId"] = kwargs["flowId"]
         if "button" in kwargs:
             body = kwargs["button"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -261,6 +279,7 @@ class Flow(object):
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
         *  {hash} entry - Object containing storage entry (https://api.losant.com/#/definitions/flowStorageEntry)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -284,6 +303,8 @@ class Flow(object):
             path_params["flowId"] = kwargs["flowId"]
         if "entry" in kwargs:
             body = kwargs["entry"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

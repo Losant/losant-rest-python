@@ -14,6 +14,7 @@ class Data(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} query - The query parameters (https://api.losant.com/#/definitions/lastValueQuery)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -35,6 +36,8 @@ class Data(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "query" in kwargs:
             body = kwargs["query"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -53,6 +56,7 @@ class Data(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} query - The query parameters (https://api.losant.com/#/definitions/timeSeriesQuery)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -74,6 +78,8 @@ class Data(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "query" in kwargs:
             body = kwargs["query"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

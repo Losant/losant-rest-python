@@ -13,6 +13,7 @@ class Application(object):
 
         Parameters:
         *  {string} applicationId - ID of the associated application
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -32,6 +33,8 @@ class Application(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -49,6 +52,7 @@ class Application(object):
 
         Parameters:
         *  {string} applicationId - ID of the associated application
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -68,6 +72,8 @@ class Application(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -86,6 +92,7 @@ class Application(object):
         Parameters:
         *  {string} applicationId - ID of the associated application
         *  {hash} application - Object containing new application properties (https://api.losant.com/#/definitions/applicationPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -107,6 +114,8 @@ class Application(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "application" in kwargs:
             body = kwargs["application"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

@@ -15,6 +15,7 @@ class DeviceRecipe(object):
         *  {string} applicationId - ID associated with the application
         *  {string} deviceRecipeId - ID associated with the device recipe
         *  {hash} bulkInfo - Object containing bulk creation info (https://api.losant.com/#/definitions/deviceRecipeBulkCreatePost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -38,6 +39,8 @@ class DeviceRecipe(object):
             path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
         if "bulkInfo" in kwargs:
             body = kwargs["bulkInfo"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -56,6 +59,7 @@ class DeviceRecipe(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceRecipeId - ID associated with the device recipe
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -77,6 +81,8 @@ class DeviceRecipe(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "deviceRecipeId" in kwargs:
             path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -95,6 +101,7 @@ class DeviceRecipe(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceRecipeId - ID associated with the device recipe
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -116,6 +123,8 @@ class DeviceRecipe(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "deviceRecipeId" in kwargs:
             path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -135,6 +144,7 @@ class DeviceRecipe(object):
         *  {string} applicationId - ID associated with the application
         *  {string} deviceRecipeId - ID associated with the device recipe
         *  {hash} deviceRecipe - Object containing new properties of the device recipe (https://api.losant.com/#/definitions/deviceRecipePatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -158,6 +168,8 @@ class DeviceRecipe(object):
             path_params["deviceRecipeId"] = kwargs["deviceRecipeId"]
         if "deviceRecipe" in kwargs:
             body = kwargs["deviceRecipe"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

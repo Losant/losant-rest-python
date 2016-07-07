@@ -13,6 +13,7 @@ class Dashboard(object):
 
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -32,6 +33,8 @@ class Dashboard(object):
 
         if "dashboardId" in kwargs:
             path_params["dashboardId"] = kwargs["dashboardId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -50,6 +53,7 @@ class Dashboard(object):
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
         *  {string} password - Password for password-protected dashboards
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -71,6 +75,8 @@ class Dashboard(object):
             path_params["dashboardId"] = kwargs["dashboardId"]
         if "password" in kwargs:
             query_params["password"] = kwargs["password"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -89,6 +95,7 @@ class Dashboard(object):
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
         *  {hash} dashboard - Object containing new dashboard properties (https://api.losant.com/#/definitions/dashboardPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -110,6 +117,8 @@ class Dashboard(object):
             path_params["dashboardId"] = kwargs["dashboardId"]
         if "dashboard" in kwargs:
             body = kwargs["dashboard"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

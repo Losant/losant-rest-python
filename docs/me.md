@@ -114,7 +114,7 @@ print(result)
 Disconnects the user from Github
 
 ```python
-result = client.me.disconnect_github()
+result = client.me.disconnect_github(**optional_params)
 
 print(result)
 ```
@@ -142,7 +142,7 @@ No parameters needed for this call.
 Disconnects the user from Twitter
 
 ```python
-result = client.me.disconnect_twitter()
+result = client.me.disconnect_twitter(**optional_params)
 
 print(result)
 ```
@@ -290,7 +290,7 @@ print(result)
 Sends an email verification to the user
 
 ```python
-result = client.me.verify_email()
+result = client.me.verify_email(**optional_params)
 
 print(result)
 ```

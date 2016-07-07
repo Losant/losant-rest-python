@@ -14,6 +14,7 @@ class Webhook(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} webhookId - ID associated with the webhook
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -35,6 +36,8 @@ class Webhook(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "webhookId" in kwargs:
             path_params["webhookId"] = kwargs["webhookId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -53,6 +56,7 @@ class Webhook(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} webhookId - ID associated with the webhook
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -74,6 +78,8 @@ class Webhook(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "webhookId" in kwargs:
             path_params["webhookId"] = kwargs["webhookId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -93,6 +99,7 @@ class Webhook(object):
         *  {string} applicationId - ID associated with the application
         *  {string} webhookId - ID associated with the webhook
         *  {hash} webhook - Object containing new properties of the webhook (https://api.losant.com/#/definitions/webhookPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -116,6 +123,8 @@ class Webhook(object):
             path_params["webhookId"] = kwargs["webhookId"]
         if "webhook" in kwargs:
             body = kwargs["webhook"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

@@ -12,6 +12,7 @@ class AccessTokens(object):
         Returns the accessTokens for a user
 
         Parameters:
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -28,6 +29,8 @@ class AccessTokens(object):
         headers = {}
         body = None
 
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -45,6 +48,7 @@ class AccessTokens(object):
 
         Parameters:
         *  {hash} accessToken - AccessToken information (https://api.losant.com/#/definitions/accessTokenPost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -63,6 +67,8 @@ class AccessTokens(object):
 
         if "accessToken" in kwargs:
             body = kwargs["accessToken"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

@@ -7,11 +7,13 @@ parameters and the potential responses.
 ##### Contents
 
 *   [Delete](#delete)
+*   [Export](#export)
 *   [Get](#get)
 *   [Get Command](#get-command)
 *   [Get Log Entries](#get-log-entries)
 *   [Get State](#get-state)
 *   [Patch](#patch)
+*   [Remove Data](#remove-data)
 *   [Send Command](#send-command)
 *   [Send State](#send-state)
 
@@ -41,6 +43,42 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Success](_schemas.md#success) | If device was successfully deleted |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if device was not found |
+
+<br/>
+
+## Export
+
+Creates a device data export (to be emailed to the requestor). Defaults to all data.
+
+```python
+result = client.device.export(
+    applicationId=my_application_id,
+    deviceId=my_device_id)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| start | string | N | Start time of export (ms since epoch - 0 means now, negative is relative to now) | 1 | 1465790400000 |
+| end | string | N | End time of export (ms since epoch - 0 means now, negative is relative to now) | 0 | 1465790400000 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If generation of export was successfully started |
 
 #### Error Responses
 
@@ -219,6 +257,42 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Device](_schemas.md#device) | Updated device information |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if device was not found |
+
+<br/>
+
+## Remove Data
+
+Removes all device data for the specified time range. Defaults to all data.
+
+```python
+result = client.device.remove_data(
+    applicationId=my_application_id,
+    deviceId=my_device_id)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| start | string | N | Start time of export (ms since epoch - 0 means now, negative is relative to now) | 1 | 1465790400000 |
+| end | string | N | End time of export (ms since epoch - 0 means now, negative is relative to now) | 0 | 1465790400000 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If data removal was successfully started |
 
 #### Error Responses
 

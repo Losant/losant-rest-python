@@ -13,6 +13,7 @@ class AccessToken(object):
 
         Parameters:
         *  {string} accessTokenId - ID associated with the accessToken
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -32,6 +33,8 @@ class AccessToken(object):
 
         if "accessTokenId" in kwargs:
             path_params["accessTokenId"] = kwargs["accessTokenId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -49,6 +52,7 @@ class AccessToken(object):
 
         Parameters:
         *  {string} accessTokenId - ID associated with the accessToken
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -68,6 +72,8 @@ class AccessToken(object):
 
         if "accessTokenId" in kwargs:
             path_params["accessTokenId"] = kwargs["accessTokenId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -86,6 +92,7 @@ class AccessToken(object):
         Parameters:
         *  {string} accessTokenId - ID associated with the accessToken
         *  {hash} accessToken - Object containing new properties of the accessToken (https://api.losant.com/#/definitions/accessTokenPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -107,6 +114,8 @@ class AccessToken(object):
             path_params["accessTokenId"] = kwargs["accessTokenId"]
         if "accessToken" in kwargs:
             body = kwargs["accessToken"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

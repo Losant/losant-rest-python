@@ -20,6 +20,7 @@ class Devices(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {hash} tagFilter - Array of tag pairs to filter by. (https://api.losant.com/#/definitions/deviceTagFilter)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -53,6 +54,8 @@ class Devices(object):
             query_params["filter"] = kwargs["filter"]
         if "tagFilter" in kwargs:
             query_params["tagFilter"] = kwargs["tagFilter"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -71,6 +74,7 @@ class Devices(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} device - New device information (https://api.losant.com/#/definitions/devicePost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -92,6 +96,8 @@ class Devices(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "device" in kwargs:
             body = kwargs["device"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -110,6 +116,7 @@ class Devices(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} multiDeviceCommand - Command to send to the device (https://api.losant.com/#/definitions/multiDeviceCommand)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -131,6 +138,8 @@ class Devices(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "multiDeviceCommand" in kwargs:
             body = kwargs["multiDeviceCommand"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

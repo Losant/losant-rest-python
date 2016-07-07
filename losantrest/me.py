@@ -13,6 +13,7 @@ class Me(object):
 
         Parameters:
         *  {hash} data - Object containing recent item info (https://api.losant.com/#/definitions/recentItem)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -31,6 +32,8 @@ class Me(object):
 
         if "data" in kwargs:
             body = kwargs["data"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -48,6 +51,7 @@ class Me(object):
 
         Parameters:
         *  {hash} credentials - User authentication credentials (https://api.losant.com/#/definitions/userCredentials)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -66,6 +70,8 @@ class Me(object):
 
         if "credentials" in kwargs:
             body = kwargs["credentials"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -83,6 +89,7 @@ class Me(object):
 
         Parameters:
         *  {hash} data - Object containing two factor auth properties (https://api.losant.com/#/definitions/disableTwoFactorAuth)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -101,6 +108,8 @@ class Me(object):
 
         if "data" in kwargs:
             body = kwargs["data"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -117,6 +126,7 @@ class Me(object):
         Disconnects the user from Github
 
         Parameters:
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -133,6 +143,8 @@ class Me(object):
         headers = {}
         body = None
 
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -149,6 +161,7 @@ class Me(object):
         Disconnects the user from Twitter
 
         Parameters:
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -165,6 +178,8 @@ class Me(object):
         headers = {}
         body = None
 
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -182,6 +197,7 @@ class Me(object):
 
         Parameters:
         *  {hash} data - Object containing two factor auth properties (https://api.losant.com/#/definitions/enableTwoFactorAuth)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -200,6 +216,8 @@ class Me(object):
 
         if "data" in kwargs:
             body = kwargs["data"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -218,6 +236,7 @@ class Me(object):
         Parameters:
         *  {string} parentId - Parent id of the recent list
         *  {undefined} itemType - Item type to get the recent list of. Accepted values are: application, device, flow, dashboard
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -238,6 +257,8 @@ class Me(object):
             query_params["parentId"] = kwargs["parentId"]
         if "itemType" in kwargs:
             query_params["itemType"] = kwargs["itemType"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -255,6 +276,7 @@ class Me(object):
 
         Parameters:
         *  {undefined} includeRecent - Should the user include recent app/dashboard info
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -272,6 +294,8 @@ class Me(object):
 
         if "includeRecent" in kwargs:
             query_params["includeRecent"] = kwargs["includeRecent"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -289,6 +313,7 @@ class Me(object):
 
         Parameters:
         *  {hash} user - Object containing new user properties (https://api.losant.com/#/definitions/mePatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -307,6 +332,8 @@ class Me(object):
 
         if "user" in kwargs:
             body = kwargs["user"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -323,6 +350,7 @@ class Me(object):
         Sends an email verification to the user
 
         Parameters:
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -339,6 +367,8 @@ class Me(object):
         headers = {}
         body = None
 
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:

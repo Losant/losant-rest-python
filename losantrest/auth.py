@@ -13,6 +13,7 @@ class Auth(object):
 
         Parameters:
         *  {hash} credentials - Device authentication credentials (https://api.losant.com/#/definitions/deviceCredentials)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -32,6 +33,8 @@ class Auth(object):
 
         if "credentials" in kwargs:
             body = kwargs["credentials"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -49,6 +52,7 @@ class Auth(object):
 
         Parameters:
         *  {hash} credentials - User authentication credentials (https://api.losant.com/#/definitions/userCredentials)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -68,6 +72,8 @@ class Auth(object):
 
         if "credentials" in kwargs:
             body = kwargs["credentials"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
@@ -85,6 +91,7 @@ class Auth(object):
 
         Parameters:
         *  {hash} oauth - User authentication credentials (access token) (https://api.losant.com/#/definitions/githubLogin)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
@@ -104,6 +111,8 @@ class Auth(object):
 
         if "oauth" in kwargs:
             body = kwargs["oauth"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
             query_params["_actions"] = kwargs["_actions"]
         if "_links" in kwargs:
