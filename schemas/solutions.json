@@ -5,11 +5,15 @@
     "items": {
       "type": "array",
       "items": {
-        "title": "Organization",
-        "description": "Schema for a single Organization",
+        "title": "Solution",
+        "description": "Schema for a single Solution",
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "solutionId": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
@@ -34,55 +38,41 @@
             "type": "string",
             "maxLength": 32767
           },
-          "solutionsEnabled": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[0-9a-z_-]{1,255}$"
+          },
+          "allowSelfDeletion": {
             "type": "boolean"
           },
-          "members": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "userId": {
-                  "type": "string",
-                  "pattern": "^[A-Fa-f\\d]{24}$"
-                },
-                "firstName": {
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 1024
-                },
-                "lastName": {
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 1024
-                },
-                "email": {
-                  "type": "string",
-                  "format": "email",
-                  "maxLength": 1024
-                },
-                "avatarUrl": {
-                  "type": "string",
-                  "format": "url"
-                },
-                "role": {
-                  "type": "string",
-                  "enum": [
-                    "admin",
-                    "edit",
-                    "view"
-                  ]
-                }
+          "allowSelfEmailChange": {
+            "type": "boolean"
+          },
+          "passwordReset": {
+            "type": "object",
+            "properties": {
+              "allowPasswordReset": {
+                "type": "boolean"
+              },
+              "emailSubject": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "emailBody": {
+                "type": "string",
+                "maxLength": 32767
+              },
+              "emailFrom": {
+                "type": "string",
+                "format": "email",
+                "maxLength": 1024
               }
             }
           },
           "summary": {
             "type": "object",
             "properties": {
-              "appCount": {
-                "type": "number"
-              },
-              "dashCount": {
+              "solutionUserCount": {
                 "type": "number"
               }
             }
@@ -117,6 +107,10 @@
         "asc",
         "desc"
       ]
+    },
+    "orgId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
     }
   }
 }

@@ -46,6 +46,45 @@ class Auth(object):
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
+    def authenticate_solution_user(self, **kwargs):
+        """
+        Authenticates a solution user using the provided credentials
+
+        Parameters:
+        *  {hash} credentials - Solution user authentication credentials (https://api.losant.com/#/definitions/solutionUserCredentials)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Successful authentication (https://api.losant.com/#/definitions/authedSolutionUser)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  401 - Unauthorized error if authentication fails (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "credentials" in kwargs:
+            body = kwargs["credentials"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/auth/solutionUser".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
     def authenticate_user(self, **kwargs):
         """
         Authenticates a user using the provided credentials

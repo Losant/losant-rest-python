@@ -25,6 +25,10 @@ from .flows import Flows
 from .me import Me
 from .org import Org
 from .orgs import Orgs
+from .solution import Solution
+from .solution_user import SolutionUser
+from .solution_users import SolutionUsers
+from .solutions import Solutions
 from .webhook import Webhook
 from .webhooks import Webhooks
 from .losant_error import LosantError
@@ -38,7 +42,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.4.0
+    Built For Version 1.4.3
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -65,6 +69,10 @@ class Client(object):
         self.me = Me(self)
         self.org = Org(self)
         self.orgs = Orgs(self)
+        self.solution = Solution(self)
+        self.solution_user = SolutionUser(self)
+        self.solution_users = SolutionUsers(self)
+        self.solutions = Solutions(self)
         self.webhook = Webhook(self)
         self.webhooks = Webhooks(self)
 
@@ -76,7 +84,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.4.0"
+        headers["Accept-Version"] = "^1.4.3"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

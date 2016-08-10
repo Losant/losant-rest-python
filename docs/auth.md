@@ -7,6 +7,7 @@ parameters and the potential responses.
 ##### Contents
 
 *   [Authenticate Device](#authenticate-device)
+*   [Authenticate Solution User](#authenticate-solution-user)
 *   [Authenticate User](#authenticate-user)
 *   [Authenticate User Github](#authenticate-user-github)
 
@@ -33,6 +34,37 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Authenticated Device](_schemas.md#authenticated-device) | Successful authentication |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 401 | [Error](_schemas.md#error) | Unauthorized error if authentication fails |
+
+<br/>
+
+## Authenticate Solution User
+
+Authenticates a solution user using the provided credentials
+
+```python
+result = client.auth.authenticate_solution_user(credentials=my_credentials)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| credentials | [User Credentials](_schemas.md#user-credentials) | Y | Solution user authentication credentials |  | [User Credentials Example](_schemas.md#user-credentials-example) |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Authenticated Solution User](_schemas.md#authenticated-solution-user) | Successful authentication |
 
 #### Error Responses
 
