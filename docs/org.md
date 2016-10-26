@@ -11,6 +11,7 @@ parameters and the potential responses.
 *   [Invite Member](#invite-member)
 *   [Modify Member](#modify-member)
 *   [Patch](#patch)
+*   [Payload Counts](#payload-counts)
 *   [Pending Invites](#pending-invites)
 *   [Remove Member](#remove-member)
 *   [Revoke Invite](#revoke-invite)
@@ -178,6 +179,39 @@ print(result)
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if organization was not found |
+
+<br/>
+
+## Payload Counts
+
+Returns payload counts for the time range specified for all applications this organization owns
+
+```python
+result = client.org.payload_counts(orgId=my_org_id)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| start | string | N | Start of range for payload count query (ms since epoch) | -2592000000 | 0 |
+| end | string | N | End of range for payload count query (ms since epoch) | 0 | 1465790400000 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Payload Counts](_schemas.md#payload-counts) | Payload counts, by type and source |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 

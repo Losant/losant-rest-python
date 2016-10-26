@@ -15,6 +15,7 @@ parameters and the potential responses.
 *   [Fetch Recent Items](#fetch-recent-items)
 *   [Get](#get)
 *   [Patch](#patch)
+*   [Payload Counts](#payload-counts)
 *   [Verify Email](#verify-email)
 
 <br/>
@@ -282,6 +283,38 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
+
+<br/>
+
+## Payload Counts
+
+Returns payload counts for the time range specified for all applications the current user owns
+
+```python
+result = client.me.payload_counts(**optional_params)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| start | string | N | Start of range for payload count query (ms since epoch) | -2592000000 | 0 |
+| end | string | N | End of range for payload count query (ms since epoch) | 0 | 1465790400000 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Payload Counts](_schemas.md#payload-counts) | Payload counts, by type and source |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 

@@ -32,7 +32,7 @@
 *   [Device Recipe Patch](#device-recipe-patch)
 *   [Device Recipe Post](#device-recipe-post)
 *   [Device Recipes](#device-recipes)
-*   [Device State](#device-state)
+*   [Single or Multiple Device States](#single-or-multiple-device-states)
 *   [Device States](#device-states)
 *   [Device Tag Filter](#device-tag-filter)
 *   [Devices](#devices)
@@ -63,6 +63,7 @@
 *   [Organization Patch](#organization-patch)
 *   [Organization Post](#organization-post)
 *   [Organizations](#organizations)
+*   [Payload Counts](#payload-counts)
 *   [Recent Item](#recent-item)
 *   [Recent Item List](#recent-item-list)
 *   [Solution](#solution)
@@ -2903,46 +2904,89 @@ Schema for a collection of Device Recipes
 
 <br/>
 
-## Device State
+## Single or Multiple Device States
 
-Schema for a single Device state
+Schema for a single device state or an array of device states
 
-### <a name="device-state-schema"></a> Schema
+### <a name="single-or-multiple-device-states-schema"></a> Schema
 
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "time": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "relayId": {
-      "type": "string"
-    },
-    "meta": {},
-    "data": {
+  "oneOf": [
+    {
+      "title": "Device State",
+      "description": "Schema for a single Device state",
       "type": "object",
-      "patternProperties": {
-        "^[0-9a-zA-Z_-]{1,255}$": {
-          "type": [
-            "number",
-            "string",
-            "boolean"
-          ]
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "relayId": {
+          "type": "string"
+        },
+        "meta": {},
+        "data": {
+          "type": "object",
+          "patternProperties": {
+            "^[0-9a-zA-Z_-]{1,255}$": {
+              "type": [
+                "number",
+                "string",
+                "boolean"
+              ]
+            }
+          },
+          "additionalProperties": false
         }
       },
+      "required": [
+        "data"
+      ],
       "additionalProperties": false
+    },
+    {
+      "title": "Device States",
+      "description": "Schema for an array of Device states",
+      "type": "array",
+      "items": {
+        "title": "Device State",
+        "description": "Schema for a single Device state",
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "relayId": {
+            "type": "string"
+          },
+          "meta": {},
+          "data": {
+            "type": "object",
+            "patternProperties": {
+              "^[0-9a-zA-Z_-]{1,255}$": {
+                "type": [
+                  "number",
+                  "string",
+                  "boolean"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "additionalProperties": false
+      }
     }
-  },
-  "required": [
-    "data"
-  ],
-  "additionalProperties": false
+  ]
 }
 ```
-### <a name="device-state-example"></a> Example
+### <a name="single-or-multiple-device-states-example"></a> Example
 
 ```json
 {
@@ -3003,6 +3047,12 @@ Schema for an array of Device states
 
 ```json
 [
+  {
+    "time": "2016-06-13T04:00:00.000Z",
+    "data": {
+      "voltage": 22.4
+    }
+  },
   {
     "time": "2016-06-13T04:00:00.000Z",
     "data": {
@@ -4870,7 +4920,25 @@ Schema for information about the currently authenticated user
       "application": {
         "type": "number"
       },
+      "applicationkey": {
+        "type": "number"
+      },
       "dashboard": {
+        "type": "number"
+      },
+      "device": {
+        "type": "number"
+      },
+      "devicerecipe": {
+        "type": "number"
+      },
+      "flow": {
+        "type": "number"
+      },
+      "webhook": {
+        "type": "number"
+      },
+      "dataTTL": {
         "type": "number"
       }
     },
@@ -4948,7 +5016,6 @@ Schema for information about the currently authenticated user
         }
       }
     },
-    "defaults": {},
     "summary": {
       "type": "object",
       "properties": {
@@ -4959,6 +5026,24 @@ Schema for information about the currently authenticated user
           "type": "number"
         },
         "orgCount": {
+          "type": "number"
+        },
+        "deviceCount": {
+          "type": "number"
+        },
+        "flowCount": {
+          "type": "number"
+        },
+        "webhookCount": {
+          "type": "number"
+        },
+        "keyCount": {
+          "type": "number"
+        },
+        "eventCount": {
+          "type": "number"
+        },
+        "deviceRecipeCount": {
           "type": "number"
         }
       }
@@ -4986,7 +5071,12 @@ Schema for information about the currently authenticated user
   "summary": {
     "appCount": 8,
     "dashCount": 5,
-    "orgCount": 2
+    "orgCount": 2,
+    "deviceCount": 12,
+    "flowCount": 3,
+    "webhookCount": 0,
+    "keyCount": 2,
+    "deviceRecipeCount": 0
   }
 }
 ```
@@ -5214,6 +5304,35 @@ Schema for a single Organization
         }
       }
     },
+    "limits": {
+      "application": {
+        "type": "number"
+      },
+      "applicationkey": {
+        "type": "number"
+      },
+      "dashboard": {
+        "type": "number"
+      },
+      "device": {
+        "type": "number"
+      },
+      "devicerecipe": {
+        "type": "number"
+      },
+      "flow": {
+        "type": "number"
+      },
+      "solution": {
+        "type": "number"
+      },
+      "webhook": {
+        "type": "number"
+      },
+      "dataTTL": {
+        "type": "number"
+      }
+    },
     "summary": {
       "type": "object",
       "properties": {
@@ -5221,6 +5340,27 @@ Schema for a single Organization
           "type": "number"
         },
         "dashCount": {
+          "type": "number"
+        },
+        "solutionCount": {
+          "type": "number"
+        },
+        "deviceCount": {
+          "type": "number"
+        },
+        "flowCount": {
+          "type": "number"
+        },
+        "webhookCount": {
+          "type": "number"
+        },
+        "keyCount": {
+          "type": "number"
+        },
+        "eventCount": {
+          "type": "number"
+        },
+        "deviceRecipeCount": {
           "type": "number"
         }
       }
@@ -5256,7 +5396,13 @@ Schema for a single Organization
   ],
   "summary": {
     "appCount": 2,
-    "dashCount": 1
+    "dashCount": 1,
+    "solutionCount": 0,
+    "deviceCount": 12,
+    "flowCount": 3,
+    "webhookCount": 0,
+    "keyCount": 2,
+    "deviceRecipeCount": 0
   }
 }
 ```
@@ -5567,6 +5713,35 @@ Schema for a collection of Organizations
               }
             }
           },
+          "limits": {
+            "application": {
+              "type": "number"
+            },
+            "applicationkey": {
+              "type": "number"
+            },
+            "dashboard": {
+              "type": "number"
+            },
+            "device": {
+              "type": "number"
+            },
+            "devicerecipe": {
+              "type": "number"
+            },
+            "flow": {
+              "type": "number"
+            },
+            "solution": {
+              "type": "number"
+            },
+            "webhook": {
+              "type": "number"
+            },
+            "dataTTL": {
+              "type": "number"
+            }
+          },
           "summary": {
             "type": "object",
             "properties": {
@@ -5574,6 +5749,27 @@ Schema for a collection of Organizations
                 "type": "number"
               },
               "dashCount": {
+                "type": "number"
+              },
+              "solutionCount": {
+                "type": "number"
+              },
+              "deviceCount": {
+                "type": "number"
+              },
+              "flowCount": {
+                "type": "number"
+              },
+              "webhookCount": {
+                "type": "number"
+              },
+              "keyCount": {
+                "type": "number"
+              },
+              "eventCount": {
+                "type": "number"
+              },
+              "deviceRecipeCount": {
                 "type": "number"
               }
             }
@@ -5642,7 +5838,13 @@ Schema for a collection of Organizations
       ],
       "summary": {
         "appCount": 2,
-        "dashCount": 1
+        "dashCount": 1,
+        "solutionCount": 0,
+        "deviceCount": 12,
+        "flowCount": 3,
+        "webhookCount": 0,
+        "keyCount": 2,
+        "deviceRecipeCount": 0
       }
     }
   ],
@@ -5652,6 +5854,128 @@ Schema for a collection of Organizations
   "page": 0,
   "sortField": "name",
   "sortDirection": "asc"
+}
+```
+
+<br/>
+
+## Payload Counts
+
+Schema the result of a payload count request
+
+### <a name="payload-counts-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "mqttOut": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "mqttIn": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "deviceState": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "deviceCommand": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "webhook": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "timer": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "virtualButton": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "deviceConnect": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "deviceDisconnect": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
+```
+### <a name="payload-counts-example"></a> Example
+
+```json
+{
+  "timer": {
+    "timer.flow": 19772
+  },
+  "deviceState": {
+    "flow.flow": 5215,
+    "device.mqtt": 1244049
+  },
+  "mqttOut": {
+    "device.mqtt": 12
+  },
+  "webhook": {
+    "public.rest": 1713284
+  },
+  "deviceConnect": {
+    "device.mqtt": 1016
+  },
+  "deviceDisconnect": {
+    "device.mqtt": 1016
+  }
 }
 ```
 

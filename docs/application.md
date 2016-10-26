@@ -9,6 +9,7 @@ parameters and the potential responses.
 *   [Delete](#delete)
 *   [Get](#get)
 *   [Patch](#patch)
+*   [Payload Counts](#payload-counts)
 
 <br/>
 
@@ -98,6 +99,39 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Application](_schemas.md#application) | Updated application information |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Payload Counts
+
+Returns payload counts for the time range specified for this application
+
+```python
+result = client.application.payload_counts(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| start | string | N | Start of range for payload count query (ms since epoch) | -2592000000 | 0 |
+| end | string | N | End of range for payload count query (ms since epoch) | 0 | 1465790400000 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Payload Counts](_schemas.md#payload-counts) | Payload counts, by type and source |
 
 #### Error Responses
 
