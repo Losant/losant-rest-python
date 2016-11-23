@@ -142,7 +142,7 @@ print(result)
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
 | limit | string | N | Max command entries to return (ordered by time descending) | 1 | 10 |
-| since | string | N | Look for command entries since this time (ms since epoch) | 0 | 1465790400000 |
+| since | string | N | Look for command entries since this time (ms since epoch) |  | 1465790400000 |
 
 #### Successful Responses
 
@@ -178,7 +178,7 @@ print(result)
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
 | limit | string | N | Max log entries to return (ordered by time descending) | 1 | 10 |
-| since | string | N | Look for log entries since this time (ms since epoch) | 0 | 1465790400000 |
+| since | string | N | Look for log entries since this time (ms since epoch) |  | 1465790400000 |
 
 #### Successful Responses
 
@@ -214,7 +214,7 @@ print(result)
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
 | limit | string | N | Max state entries to return (ordered by time descending) | 1 | 10 |
-| since | string | N | Look for state entries since this time (ms since epoch) | 0 | 1465790400000 |
+| since | string | N | Look for state entries since this time (ms since epoch) |  | 1465790400000 |
 
 #### Successful Responses
 
