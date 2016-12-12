@@ -15,6 +15,7 @@
 *   [Authenticated Device](#authenticated-device)
 *   [Authenticated Solution User](#authenticated-solution-user)
 *   [Authenticated User](#authenticated-user)
+*   [Composite Device State](#composite-device-state)
 *   [Dashboard](#dashboard)
 *   [Dashboard Patch](#dashboard-patch)
 *   [Dashboard Post](#dashboard-post)
@@ -66,6 +67,7 @@
 *   [Payload Counts](#payload-counts)
 *   [Recent Item](#recent-item)
 *   [Recent Item List](#recent-item-list)
+*   [Resource Transfer](#resource-transfer)
 *   [Solution](#solution)
 *   [Solution Patch](#solution-patch)
 *   [Solution Post](#solution-post)
@@ -1136,6 +1138,75 @@ Schema for the sucessful response when authenticating a User
 {
   "userId": "575ed70c7ae143cd83dc4aa9",
   "token": "token_to_use_for_authenticating_subsequent_requests"
+}
+```
+
+<br/>
+
+## Composite Device State
+
+Schema for a composite Device state
+
+### <a name="composite-device-state-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "patternProperties": {
+    "^[0-9a-zA-Z_-]{1,255}$": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "boolean"
+          ]
+        },
+        "time": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "$date": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "$date"
+              ]
+            }
+          ]
+        },
+        "relayId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="composite-device-state-example"></a> Example
+
+```json
+{
+  "voltage": {
+    "time": "2016-06-13T04:00:00.000Z",
+    "value": 22.4
+  },
+  "loaded": {
+    "time": "2016-06-13T03:00:00.000Z",
+    "value": false
+  }
 }
 ```
 
@@ -5030,6 +5101,9 @@ Schema for information about the currently authenticated user
       },
       "dataTTL": {
         "type": "number"
+      },
+      "payload": {
+        "type": "number"
       }
     },
     "recentDashboards": {
@@ -5043,7 +5117,8 @@ Schema for information about the currently authenticated user
             "application",
             "device",
             "flow",
-            "dashboard"
+            "dashboard",
+            "organization"
           ]
         },
         "parentId": {
@@ -5080,7 +5155,46 @@ Schema for information about the currently authenticated user
             "application",
             "device",
             "flow",
-            "dashboard"
+            "dashboard",
+            "organization"
+          ]
+        },
+        "parentId": {
+          "type": "string",
+          "pattern": "^[A-Fa-f\\d]{24}$"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              }
+            }
+          }
+        }
+      }
+    },
+    "recentOrganizations": {
+      "title": "Recent Item List",
+      "description": "Schema for an array of recent items",
+      "type": "object",
+      "properties": {
+        "itemType": {
+          "type": "string",
+          "enum": [
+            "application",
+            "device",
+            "flow",
+            "dashboard",
+            "organization"
           ]
         },
         "parentId": {
@@ -5130,13 +5244,105 @@ Schema for information about the currently authenticated user
         "keyCount": {
           "type": "number"
         },
-        "eventCount": {
-          "type": "number"
-        },
         "deviceRecipeCount": {
           "type": "number"
+        },
+        "payloadCount": {
+          "title": "Payload Counts",
+          "description": "Schema the result of a payload count request",
+          "type": "object",
+          "properties": {
+            "mqttOut": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "mqttIn": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceState": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceCommand": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "webhook": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "timer": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "event": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "virtualButton": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceConnect": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceDisconnect": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            }
+          }
         }
       }
+    },
+    "currentPeriodStart": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "currentPeriodEnd": {
+      "type": "string",
+      "format": "date-time"
     }
   }
 }
@@ -5439,6 +5645,12 @@ Schema for a single Organization
       },
       "dataTTL": {
         "type": "number"
+      },
+      "member": {
+        "type": "number"
+      },
+      "payload": {
+        "type": "number"
       }
     },
     "summary": {
@@ -5465,13 +5677,136 @@ Schema for a single Organization
         "keyCount": {
           "type": "number"
         },
-        "eventCount": {
+        "deviceRecipeCount": {
           "type": "number"
         },
-        "deviceRecipeCount": {
+        "payloadCount": {
+          "title": "Payload Counts",
+          "description": "Schema the result of a payload count request",
+          "type": "object",
+          "properties": {
+            "mqttOut": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "mqttIn": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceState": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceCommand": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "webhook": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "timer": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "event": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "virtualButton": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceConnect": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            },
+            "deviceDisconnect": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "pendingInviteCount": {
+          "type": "number"
+        },
+        "memberCount": {
           "type": "number"
         }
       }
+    },
+    "planId": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "billingEmail": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "subscriptionStatus": {
+      "type": "string",
+      "enum": [
+        "trialing",
+        "active",
+        "past_due",
+        "canceled",
+        "unpaid"
+      ]
+    },
+    "currentPeriodStart": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "currentPeriodEnd": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "isEnterprise": {
+      "type": "boolean"
+    },
+    "iconColor": {
+      "type": "string"
     }
   }
 }
@@ -5682,6 +6017,22 @@ Schema for the body of an Organization modification request
     "description": {
       "type": "string",
       "maxLength": 32767
+    },
+    "planId": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "billingEmail": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "cardToken": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "iconColor": {
+      "type": "string"
     }
   },
   "additionalProperties": false
@@ -5717,6 +6068,22 @@ Schema for the body of an Organization creation request
     "description": {
       "type": "string",
       "maxLength": 32767
+    },
+    "planId": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "billingEmail": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "cardToken": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "iconColor": {
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -5848,6 +6215,12 @@ Schema for a collection of Organizations
             },
             "dataTTL": {
               "type": "number"
+            },
+            "member": {
+              "type": "number"
+            },
+            "payload": {
+              "type": "number"
             }
           },
           "summary": {
@@ -5874,13 +6247,136 @@ Schema for a collection of Organizations
               "keyCount": {
                 "type": "number"
               },
-              "eventCount": {
+              "deviceRecipeCount": {
                 "type": "number"
               },
-              "deviceRecipeCount": {
+              "payloadCount": {
+                "title": "Payload Counts",
+                "description": "Schema the result of a payload count request",
+                "type": "object",
+                "properties": {
+                  "mqttOut": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "mqttIn": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "deviceState": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "deviceCommand": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "webhook": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "timer": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "event": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "virtualButton": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "deviceConnect": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "deviceDisconnect": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "pendingInviteCount": {
+                "type": "number"
+              },
+              "memberCount": {
                 "type": "number"
               }
             }
+          },
+          "planId": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "billingEmail": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 1024
+          },
+          "subscriptionStatus": {
+            "type": "string",
+            "enum": [
+              "trialing",
+              "active",
+              "past_due",
+              "canceled",
+              "unpaid"
+            ]
+          },
+          "currentPeriodStart": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "currentPeriodEnd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isEnterprise": {
+            "type": "boolean"
+          },
+          "iconColor": {
+            "type": "string"
           }
         }
       }
@@ -6106,7 +6602,8 @@ Schema for the body of a request to add a recent item
         "application",
         "device",
         "flow",
-        "dashboard"
+        "dashboard",
+        "organization"
       ]
     },
     "parentId": {
@@ -6153,7 +6650,8 @@ Schema for an array of recent items
         "application",
         "device",
         "flow",
-        "dashboard"
+        "dashboard",
+        "organization"
       ]
     },
     "parentId": {
@@ -6194,6 +6692,74 @@ Schema for an array of recent items
       "id": "575efbcc7ae143cd83dc4aae",
       "name": "My Other Application"
     }
+  ]
+}
+```
+
+<br/>
+
+## Resource Transfer
+
+Schema for the body of a resource transfer request
+
+### <a name="resource-transfer-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "destinationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "destinationType": {
+      "type": "string",
+      "enum": [
+        "user",
+        "organization"
+      ]
+    },
+    "applicationIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      }
+    },
+    "dashboardIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      }
+    },
+    "solutionIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      }
+    },
+    "strict": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "destinationId",
+    "destinationType"
+  ]
+}
+```
+### <a name="resource-transfer-example"></a> Example
+
+```json
+{
+  "destinationId": "575ed6e87ae143cd83dc4aa8",
+  "destinationType": "organization",
+  "applicationIds": [
+    "575ec8687ae143cd83dc4a97"
   ]
 }
 ```
@@ -7392,6 +7958,9 @@ Schema for the body of a time series query request
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
       }
+    },
+    "limit": {
+      "type": "number"
     }
   },
   "additionalProperties": false

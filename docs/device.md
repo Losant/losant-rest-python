@@ -10,6 +10,7 @@ parameters and the potential responses.
 *   [Export](#export)
 *   [Get](#get)
 *   [Get Command](#get-command)
+*   [Get Composite State](#get-composite-state)
 *   [Get Log Entries](#get-log-entries)
 *   [Get State](#get-state)
 *   [Patch](#patch)
@@ -55,7 +56,7 @@ print(result)
 
 ## Export
 
-Creates a device data export (to be emailed to the requestor). Defaults to all data.
+Creates a device data export. Defaults to all data.
 
 ```python
 result = client.device.export(
@@ -73,6 +74,8 @@ print(result)
 | deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
 | start | string | N | Start time of export (ms since epoch - 0 means now, negative is relative to now) | 1 | 1465790400000 |
 | end | string | N | End time of export (ms since epoch - 0 means now, negative is relative to now) | 0 | 1465790400000 |
+| email | string | N | Email address to send export to.  Defaults to current user&#x27;s email. |  | email@example.com |
+| callbackUrl | string | N | Callback URL to call with export result. |  | https://example.com/cburl |
 
 #### Successful Responses
 
@@ -149,6 +152,42 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Device Commands](_schemas.md#device-commands) | Recent device commands |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if device was not found |
+
+<br/>
+
+## Get Composite State
+
+Retrieve the composite last complete state of the device
+
+```python
+result = client.device.get_composite_state(
+    applicationId=my_application_id,
+    deviceId=my_device_id)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deviceId | string | Y | ID associated with the device |  | 575ecf887ae143cd83dc4aa2 |
+| start | string | N | Start of time range to look at to build composite state | 1 | 1465790400000 |
+| end | string | N | End of time range to look at to build composite state | 0 | 1465790400000 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Composite Device State](_schemas.md#composite-device-state) | Composite last state of the device |
 
 #### Error Responses
 

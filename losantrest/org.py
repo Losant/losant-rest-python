@@ -229,7 +229,7 @@ class Org(object):
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -378,4 +378,46 @@ class Org(object):
         path = "/orgs/{orgId}/invites".format(**path_params)
 
         return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
+
+    def transfer_resources(self, **kwargs):
+        """
+        Moves resources to a new owner
+
+        Parameters:
+        *  {string} orgId - ID associated with the organization
+        *  {hash} transfer - Object containing properties of the transfer (https://api.losant.com/#/definitions/resourceTransfer)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If resource transfer was successful (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "orgId" in kwargs:
+            path_params["orgId"] = kwargs["orgId"]
+        if "transfer" in kwargs:
+            body = kwargs["transfer"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/orgs/{orgId}/transferResources".format(**path_params)
+
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
 

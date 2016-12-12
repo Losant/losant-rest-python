@@ -16,6 +16,7 @@ parameters and the potential responses.
 *   [Get](#get)
 *   [Patch](#patch)
 *   [Payload Counts](#payload-counts)
+*   [Transfer Resources](#transfer-resources)
 *   [Verify Email](#verify-email)
 
 <br/>
@@ -211,7 +212,7 @@ print(result)
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | parentId | string | N | Parent id of the recent list |  | 575ec8687ae143cd83dc4a97 |
-| itemType | undefined | Y | Item type to get the recent list of. Accepted values are: application, device, flow, dashboard |  | application |
+| itemType | undefined | Y | Item type to get the recent list of. Accepted values are: application, device, flow, dashboard, organization |  | application |
 
 #### Successful Responses
 
@@ -300,8 +301,8 @@ print(result)
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
-| start | string | N | Start of range for payload count query (ms since epoch) | -2592000000 | 0 |
-| end | string | N | End of range for payload count query (ms since epoch) | 0 | 1465790400000 |
+| start | string | N | Start of range for payload count query (ms since epoch) |  | 0 |
+| end | string | N | End of range for payload count query (ms since epoch) |  | 1465790400000 |
 
 #### Successful Responses
 
@@ -314,7 +315,36 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Transfer Resources
+
+Moves resources to a new owner
+
+```python
+result = client.me.transfer_resources(transfer=my_transfer)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| transfer | [Resource Transfer](_schemas.md#resource-transfer) | Y | Object containing properties of the transfer |  | [Resource Transfer Example](_schemas.md#resource-transfer-example) |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If resource transfer was successful |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
 
 <br/>
 

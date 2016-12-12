@@ -15,6 +15,7 @@ parameters and the potential responses.
 *   [Pending Invites](#pending-invites)
 *   [Remove Member](#remove-member)
 *   [Revoke Invite](#revoke-invite)
+*   [Transfer Resources](#transfer-resources)
 
 <br/>
 
@@ -197,8 +198,8 @@ print(result)
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
-| start | string | N | Start of range for payload count query (ms since epoch) | -2592000000 | 0 |
-| end | string | N | End of range for payload count query (ms since epoch) | 0 | 1465790400000 |
+| start | string | N | Start of range for payload count query (ms since epoch) |  | 0 |
+| end | string | N | End of range for payload count query (ms since epoch) |  | 1465790400000 |
 
 #### Successful Responses
 
@@ -211,7 +212,7 @@ print(result)
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if application was not found |
+| 404 | [Error](_schemas.md#error) | Error if organization was not found |
 
 <br/>
 
@@ -311,3 +312,37 @@ print(result)
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if organization not found |
+
+<br/>
+
+## Transfer Resources
+
+Moves resources to a new owner
+
+```python
+result = client.org.transfer_resources(
+    orgId=my_org_id,
+    transfer=my_transfer)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| transfer | [Resource Transfer](_schemas.md#resource-transfer) | Y | Object containing properties of the transfer |  | [Resource Transfer Example](_schemas.md#resource-transfer-example) |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If resource transfer was successful |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if organization was not found |

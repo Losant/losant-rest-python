@@ -235,7 +235,7 @@ class Me(object):
 
         Parameters:
         *  {string} parentId - Parent id of the recent list
-        *  {undefined} itemType - Item type to get the recent list of. Accepted values are: application, device, flow, dashboard
+        *  {undefined} itemType - Item type to get the recent list of. Accepted values are: application, device, flow, dashboard, organization
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -362,7 +362,6 @@ class Me(object):
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -386,6 +385,44 @@ class Me(object):
         path = "/me/payloadCounts".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
+    def transfer_resources(self, **kwargs):
+        """
+        Moves resources to a new owner
+
+        Parameters:
+        *  {hash} transfer - Object containing properties of the transfer (https://api.losant.com/#/definitions/resourceTransfer)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If resource transfer was successful (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "transfer" in kwargs:
+            body = kwargs["transfer"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/me/transferResources".format(**path_params)
+
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
 
     def verify_email(self, **kwargs):
         """

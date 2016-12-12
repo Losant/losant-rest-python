@@ -51,13 +51,15 @@ class Device(object):
 
     def export(self, **kwargs):
         """
-        Creates a device data export (to be emailed to the requestor). Defaults to all data.
+        Creates a device data export. Defaults to all data.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
         *  {string} start - Start time of export (ms since epoch - 0 means now, negative is relative to now)
         *  {string} end - End time of export (ms since epoch - 0 means now, negative is relative to now)
+        *  {string} email - Email address to send export to.  Defaults to current user&#x27;s email.
+        *  {string} callbackUrl - Callback URL to call with export result.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +86,10 @@ class Device(object):
             query_params["start"] = kwargs["start"]
         if "end" in kwargs:
             query_params["end"] = kwargs["end"]
+        if "email" in kwargs:
+            query_params["email"] = kwargs["email"]
+        if "callbackUrl" in kwargs:
+            query_params["callbackUrl"] = kwargs["callbackUrl"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -184,6 +190,54 @@ class Device(object):
             query_params["_embedded"] = kwargs["_embedded"]
 
         path = "/applications/{applicationId}/devices/{deviceId}/command".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
+    def get_composite_state(self, **kwargs):
+        """
+        Retrieve the composite last complete state of the device
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} deviceId - ID associated with the device
+        *  {string} start - Start of time range to look at to build composite state
+        *  {string} end - End of time range to look at to build composite state
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Composite last state of the device (https://api.losant.com/#/definitions/compositeDeviceState)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if device was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "deviceId" in kwargs:
+            path_params["deviceId"] = kwargs["deviceId"]
+        if "start" in kwargs:
+            query_params["start"] = kwargs["start"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/devices/{deviceId}/compositeState".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
