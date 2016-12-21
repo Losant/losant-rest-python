@@ -38,7 +38,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [Device Recipe Bulk Create](_schemas.md#device-recipe-bulk-create) | If devices were sucessfully created |
+| 201 | [Device Recipe Bulk Create](_schemas.md#device-recipe-bulk-create) | If devices were successfully created |
 
 #### Error Responses
 

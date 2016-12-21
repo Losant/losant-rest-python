@@ -49,7 +49,7 @@ print(result)
 
 ## Post
 
-Create a new dasboard
+Create a new dashboard
 
 ```python
 result = client.dashboards.post(dashboard=my_dashboard)

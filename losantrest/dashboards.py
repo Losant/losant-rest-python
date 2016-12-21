@@ -65,7 +65,7 @@ class Dashboards(object):
 
     def post(self, **kwargs):
         """
-        Create a new dasboard
+        Create a new dashboard
 
         Parameters:
         *  {hash} dashboard - New dashboard information (https://api.losant.com/#/definitions/dashboardPost)

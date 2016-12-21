@@ -6,9 +6,43 @@ parameters and the potential responses.
 
 ##### Contents
 
+*   [Export](#export)
 *   [Get](#get)
 *   [Post](#post)
 *   [Send Command](#send-command)
+
+<br/>
+
+## Export
+
+Creates an export of all device metadata.
+
+```python
+result = client.devices.export(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| email | string | N | Email address to send export to.  Defaults to current user&#x27;s email. |  | email@example.com |
+| callbackUrl | string | N | Callback URL to call with export result. |  | https://example.com/cburl |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If generation of export was successfully started |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 

@@ -21,7 +21,7 @@ class DeviceRecipe(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - If devices were sucessfully created (https://api.losant.com/#/definitions/deviceRecipeBulkCreate)
+        *  201 - If devices were successfully created (https://api.losant.com/#/definitions/deviceRecipeBulkCreate)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
