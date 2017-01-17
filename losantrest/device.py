@@ -82,7 +82,7 @@ class Device(object):
         *  {string} deviceId - ID associated with the device
         *  {string} start - Start time of export (ms since epoch - 0 means now, negative is relative to now)
         *  {string} end - End time of export (ms since epoch - 0 means now, negative is relative to now)
-        *  {string} email - Email address to send export to.  Defaults to current user's email.
+        *  {string} email - Email address to send export to. Defaults to current user's email.
         *  {string} callbackUrl - Callback URL to call with export result.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response

@@ -321,7 +321,7 @@ class Org(object):
 
     def remove_member(self, **kwargs):
         """
-        Modifies a current org member's role
+        Removes a member from the org
 
         Parameters:
         *  {string} orgId - ID associated with the organization

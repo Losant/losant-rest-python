@@ -34,6 +34,8 @@ from .application import Application
 from .application_key import ApplicationKey
 from .application_keys import ApplicationKeys
 from .applications import Applications
+from .audit_log import AuditLog
+from .audit_logs import AuditLogs
 from .auth import Auth
 from .dashboard import Dashboard
 from .dashboards import Dashboards
@@ -48,6 +50,7 @@ from .flow import Flow
 from .flows import Flows
 from .me import Me
 from .org import Org
+from .org_invites import OrgInvites
 from .orgs import Orgs
 from .solution import Solution
 from .solution_user import SolutionUser
@@ -66,7 +69,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.5.1
+    Built For Version 1.5.2
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -78,6 +81,8 @@ class Client(object):
         self.application_key = ApplicationKey(self)
         self.application_keys = ApplicationKeys(self)
         self.applications = Applications(self)
+        self.audit_log = AuditLog(self)
+        self.audit_logs = AuditLogs(self)
         self.auth = Auth(self)
         self.dashboard = Dashboard(self)
         self.dashboards = Dashboards(self)
@@ -92,6 +97,7 @@ class Client(object):
         self.flows = Flows(self)
         self.me = Me(self)
         self.org = Org(self)
+        self.org_invites = OrgInvites(self)
         self.orgs = Orgs(self)
         self.solution = Solution(self)
         self.solution_user = SolutionUser(self)
@@ -108,7 +114,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.5.1"
+        headers["Accept-Version"] = "^1.5.2"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

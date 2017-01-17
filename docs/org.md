@@ -249,7 +249,7 @@ print(result)
 
 ## Remove Member
 
-Modifies a current org member&#x27;s role
+Removes a member from the org
 
 ```python
 result = client.org.remove_member(

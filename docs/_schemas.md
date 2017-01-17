@@ -12,6 +12,9 @@
 *   [Application Patch](#application-patch)
 *   [Application Post](#application-post)
 *   [Applications](#applications)
+*   [Audit Log](#audit-log)
+*   [Audit Log Filter](#audit-log-filter)
+*   [Audit Logs](#audit-logs)
 *   [Authenticated Device](#authenticated-device)
 *   [Authenticated Solution User](#authenticated-solution-user)
 *   [Authenticated User](#authenticated-user)
@@ -58,7 +61,10 @@
 *   [Me Patch](#me-patch)
 *   [Multi Device Command](#multi-device-command)
 *   [Organization](#organization)
+*   [Organization Invitation Action](#organization-invitation-action)
+*   [Organization Invitation Information](#organization-invitation-information)
 *   [Organization Invitation Post](#organization-invitation-post)
+*   [Organization Invitation Result](#organization-invitation-result)
 *   [Organization Invitations](#organization-invitations)
 *   [Organization Member Patch](#organization-member-patch)
 *   [Organization Patch](#organization-patch)
@@ -1014,6 +1020,479 @@ Schema for a collection of Applications
 
 <br/>
 
+## Audit Log
+
+Schema for a single Audit Log entry
+
+### <a name="audit-log-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "auditLogId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "orgId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "primaryTargetId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "primaryTargetType": {
+      "type": "string",
+      "enum": [
+        "Application",
+        "Dashboard",
+        "Solution",
+        "OrgInvite"
+      ]
+    },
+    "primaryTargetName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "secondaryTargetId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "secondaryTargetType": {
+      "type": "string",
+      "enum": [
+        "ApplicationKey",
+        "Device",
+        "DeviceRecipe",
+        "Event",
+        "Flow",
+        "SolutionUser",
+        "Webhook"
+      ]
+    },
+    "secondaryTargetName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "actorId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "actorType": {
+      "type": "string",
+      "enum": [
+        "Application",
+        "Device",
+        "Flow",
+        "SolutionUser",
+        "User"
+      ]
+    },
+    "actorName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "requestResource": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "requestAction": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "requestQueryParams": {
+      "type": "object"
+    },
+    "requestBody": {
+      "type": "object"
+    },
+    "requestPathParams": {
+      "type": "object"
+    },
+    "responseBody": {
+      "type": "object"
+    },
+    "responseStatus": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 599
+    }
+  }
+}
+```
+### <a name="audit-log-example"></a> Example
+
+```json
+{
+  "id": "586e9d5151265cb9d72f6ec6",
+  "auditLogId": "586e9d5151265cb9d72f6ec6",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "orgId": "575ed6e87ae143cd83dc4aa8",
+  "primaryTargetId": "575ec8687ae143cd83dc4a97",
+  "primaryTargetType": "Application",
+  "primaryTargetName": "My Application",
+  "actorId": "575ed70c7ae143cd83dc4aa9",
+  "actorType": "User",
+  "actorName": "example@losant.com",
+  "requestResource": "application",
+  "requestAction": "delete",
+  "requestQueryParams": {},
+  "requestBody": {},
+  "requestPathParams": {
+    "applicationId": "575ec8687ae143cd83dc4a97"
+  },
+  "responseBody": {
+    "success": true
+  },
+  "responseStatus": 200
+}
+```
+
+<br/>
+
+## Audit Log Filter
+
+Schema for the filter of an audit log query
+
+### <a name="audit-log-filter-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "primaryTarget": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Application",
+              "Dashboard",
+              "Solution",
+              "OrgInvite"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "secondaryTarget": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ApplicationKey",
+              "Device",
+              "DeviceRecipe",
+              "Event",
+              "Flow",
+              "SolutionUser",
+              "Webhook"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "actor": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Application",
+              "Device",
+              "Flow",
+              "SolutionUser",
+              "User"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "request": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "action": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "responseCode": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 100,
+        "maximum": 599
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="audit-log-filter-example"></a> Example
+
+```json
+{
+  "primaryTarget": [
+    {
+      "type": "Dashboard"
+    },
+    {
+      "type": "Application",
+      "id": "575ec8687ae143cd83dc4a97"
+    }
+  ],
+  "actor": [
+    {
+      "type": "User",
+      "id": "575ed70c7ae143cd83dc4aa9"
+    }
+  ]
+}
+```
+
+<br/>
+
+## Audit Logs
+
+Schema for a collection of Audit Logs
+
+### <a name="audit-logs-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "title": "Audit Log",
+        "description": "Schema for a single Audit Log entry",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "auditLogId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "orgId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "primaryTargetId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "primaryTargetType": {
+            "type": "string",
+            "enum": [
+              "Application",
+              "Dashboard",
+              "Solution",
+              "OrgInvite"
+            ]
+          },
+          "primaryTargetName": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "secondaryTargetId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "secondaryTargetType": {
+            "type": "string",
+            "enum": [
+              "ApplicationKey",
+              "Device",
+              "DeviceRecipe",
+              "Event",
+              "Flow",
+              "SolutionUser",
+              "Webhook"
+            ]
+          },
+          "secondaryTargetName": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "actorId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "actorType": {
+            "type": "string",
+            "enum": [
+              "Application",
+              "Device",
+              "Flow",
+              "SolutionUser",
+              "User"
+            ]
+          },
+          "actorName": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "requestResource": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "requestAction": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "requestQueryParams": {
+            "type": "object"
+          },
+          "requestBody": {
+            "type": "object"
+          },
+          "requestPathParams": {
+            "type": "object"
+          },
+          "responseBody": {
+            "type": "object"
+          },
+          "responseStatus": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 599
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "orgId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="audit-logs-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "586e9d5151265cb9d72f6ec6",
+      "auditLogId": "586e9d5151265cb9d72f6ec6",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "orgId": "575ed6e87ae143cd83dc4aa8",
+      "primaryTargetId": "575ec8687ae143cd83dc4a97",
+      "primaryTargetType": "Application",
+      "primaryTargetName": "My Application",
+      "actorId": "575ed70c7ae143cd83dc4aa9",
+      "actorType": "User",
+      "actorName": "example@losant.com",
+      "requestResource": "application",
+      "requestAction": "delete",
+      "requestQueryParams": {},
+      "requestBody": {},
+      "requestPathParams": {
+        "applicationId": "575ec8687ae143cd83dc4a97"
+      },
+      "responseBody": {
+        "success": true
+      },
+      "responseStatus": 200
+    }
+  ],
+  "count": 1,
+  "totalCount": 4,
+  "perPage": 1,
+  "page": 0,
+  "sortField": "creationDate",
+  "sortDirection": "desc",
+  "orgId": "575ed6e87ae143cd83dc4aa8"
+}
+```
+
+<br/>
+
 ## Authenticated Device
 
 Schema for the successful response when authenticating a Device
@@ -1306,13 +1785,13 @@ Schema for a single Dashboard
           }
         },
         "required": [
-          "id",
           "blockType",
           "startX",
           "startY",
           "width",
           "height"
-        ]
+        ],
+        "additionalProperties": false
       }
     }
   }
@@ -1390,13 +1869,13 @@ Schema for the body of a Dashboard modification request
           }
         },
         "required": [
-          "id",
           "blockType",
           "startX",
           "startY",
           "width",
           "height"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "description": {
@@ -1490,13 +1969,13 @@ Schema for the body of a Dashboard creation request
           }
         },
         "required": [
-          "id",
           "blockType",
           "startX",
           "startY",
           "width",
           "height"
-        ]
+        ],
+        "additionalProperties": false
       }
     },
     "description": {
@@ -1636,13 +2115,13 @@ Schema for a collection of Dashboards
                 }
               },
               "required": [
-                "id",
                 "blockType",
                 "startX",
                 "startY",
                 "width",
                 "height"
-              ]
+              ],
+              "additionalProperties": false
             }
           }
         }
@@ -4143,7 +4622,6 @@ Schema for a single Workflow
         },
         "additionalProperties": false,
         "required": [
-          "id",
           "type"
         ]
       }
@@ -4385,7 +4863,6 @@ Schema for the body of a Workflow modification request
         },
         "additionalProperties": false,
         "required": [
-          "id",
           "type"
         ]
       }
@@ -4512,7 +4989,6 @@ Schema for the body of a Workflow creation request
         },
         "additionalProperties": false,
         "required": [
-          "id",
           "type"
         ]
       }
@@ -4733,7 +5209,6 @@ Schema for a collection of Workflows
               },
               "additionalProperties": false,
               "required": [
-                "id",
                 "type"
               ]
             }
@@ -5852,6 +6327,103 @@ Schema for a single Organization
 
 <br/>
 
+## Organization Invitation Action
+
+Schema for the body of a request to accept or reject an invitation
+
+### <a name="organization-invitation-action-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "token": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accept": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "email",
+    "token",
+    "accept"
+  ]
+}
+```
+### <a name="organization-invitation-action-example"></a> Example
+
+```json
+{
+  "email": "invitedUser@losant.com",
+  "token": "the_invitation_token",
+  "accept": true
+}
+```
+
+<br/>
+
+## Organization Invitation Information
+
+Schema for information about an invitation
+
+### <a name="organization-invitation-information-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "orgName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "view"
+      ]
+    },
+    "inviteDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ttl": {
+      "type": "number"
+    }
+  }
+}
+```
+### <a name="organization-invitation-information-example"></a> Example
+
+```json
+{
+  "orgName": "My Organization",
+  "email": "invitedUser@losant.com",
+  "role": "edit",
+  "inviteDate": "2016-05-13T04:00:00.000Z",
+  "ttl": 4233600000
+}
+```
+
+<br/>
+
 ## Organization Invitation Post
 
 Schema for the body of a request to send an invitation
@@ -5890,6 +6462,38 @@ Schema for the body of a request to send an invitation
 {
   "email": "invitedUser@losant.com",
   "role": "edit"
+}
+```
+
+<br/>
+
+## Organization Invitation Result
+
+Schema for the result of accepting/rejecting an invitation
+
+### <a name="organization-invitation-result-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "accepted": {
+      "type": "boolean"
+    },
+    "orgId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="organization-invitation-result-example"></a> Example
+
+```json
+{
+  "accepted": true,
+  "orgId": "575ed6e87ae143cd83dc4aa8"
 }
 ```
 
