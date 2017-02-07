@@ -26,6 +26,11 @@ result = client.device_recipe.bulk_create(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, deviceRecipe.*, or deviceRecipe.bulkCreate.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -61,6 +66,11 @@ result = client.device_recipe.delete(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, deviceRecipe.*, or deviceRecipe.delete.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -94,6 +104,11 @@ result = client.device_recipe.get(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, deviceRecipe.*, or deviceRecipe.get.
 
 #### Available Parameters
 
@@ -129,6 +144,11 @@ result = client.device_recipe.patch(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, deviceRecipe.*, or deviceRecipe.patch.
 
 #### Available Parameters
 

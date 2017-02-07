@@ -15,13 +15,16 @@ parameters and the potential responses.
 
 ## Authenticate Device
 
-Authenticates a device using the provided credentials
+Authenticates a device using the provided credentials.
 
 ```python
 result = client.auth.authenticate_device(credentials=my_credentials)
 
 print(result)
 ```
+
+#### Authentication
+No api access token is required to call this action.
 
 #### Available Parameters
 
@@ -33,7 +36,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Authenticated Device](_schemas.md#authenticated-device) | Successful authentication |
+| 200 | [Authenticated Device](_schemas.md#authenticated-device) | Successful authentication. The included api access token has the scope &#x27;all.Device&#x27;. |
 
 #### Error Responses
 
@@ -46,7 +49,7 @@ print(result)
 
 ## Authenticate Solution User
 
-Authenticates a solution user using the provided credentials
+Authenticates a solution user using the provided credentials.
 
 ```python
 result = client.auth.authenticate_solution_user(credentials=my_credentials)
@@ -54,11 +57,14 @@ result = client.auth.authenticate_solution_user(credentials=my_credentials)
 print(result)
 ```
 
+#### Authentication
+No api access token is required to call this action.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
-| credentials | [User Credentials](_schemas.md#user-credentials) | Y | Solution user authentication credentials |  | [User Credentials Example](_schemas.md#user-credentials-example) |
+| credentials | [User Credentials](_schemas.md#user-credentials) | Y | Solution user authentication credentials. The included api access token has the scope &#x27;all.SolutionUser&#x27;. |  | [User Credentials Example](_schemas.md#user-credentials-example) |
 
 #### Successful Responses
 
@@ -77,13 +83,16 @@ print(result)
 
 ## Authenticate User
 
-Authenticates a user using the provided credentials
+Authenticates a user using the provided credentials.
 
 ```python
 result = client.auth.authenticate_user(credentials=my_credentials)
 
 print(result)
 ```
+
+#### Authentication
+No api access token is required to call this action.
 
 #### Available Parameters
 
@@ -95,7 +104,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Authenticated User](_schemas.md#authenticated-user) | Successful authentication |
+| 200 | [Authenticated User](_schemas.md#authenticated-user) | Successful authentication. The included api access token has the scope &#x27;all.User&#x27;. |
 
 #### Error Responses
 
@@ -108,13 +117,16 @@ print(result)
 
 ## Authenticate User Github
 
-Authenticates a user via GitHub OAuth
+Authenticates a user via GitHub OAuth.
 
 ```python
 result = client.auth.authenticate_user_github(oauth=my_oauth)
 
 print(result)
 ```
+
+#### Authentication
+No api access token is required to call this action.
 
 #### Available Parameters
 
@@ -126,7 +138,7 @@ print(result)
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Authenticated User](_schemas.md#authenticated-user) | Successful authentication |
+| 200 | [Authenticated User](_schemas.md#authenticated-user) | Successful authentication. The included api access token has the scope &#x27;all.User&#x27;. |
 
 #### Error Responses
 

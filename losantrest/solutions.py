@@ -35,6 +35,12 @@ class Solutions(object):
         """
         Returns the solutions for the organization
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, solutions.*, or solutions.get.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
@@ -90,6 +96,12 @@ class Solutions(object):
     def post(self, **kwargs):
         """
         Create a new solution
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, solutions.*, or solutions.post.
 
         Parameters:
         *  {string} orgId - ID associated with the organization

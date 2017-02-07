@@ -35,6 +35,12 @@ class Applications(object):
         """
         Returns the applications the current user has permission to see
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, applications.*, or applications.get.
+
         Parameters:
         *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, ownerId
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
@@ -90,6 +96,12 @@ class Applications(object):
     def post(self, **kwargs):
         """
         Create a new application
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, applications.*, or applications.post.
 
         Parameters:
         *  {hash} application - New application information (https://api.losant.com/#/definitions/applicationPost)

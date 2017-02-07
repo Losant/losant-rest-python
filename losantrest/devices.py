@@ -35,6 +35,12 @@ class Devices(object):
         """
         Creates an export of all device metadata.
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.export.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} email - Email address to send export to. Defaults to current user's email.
@@ -79,6 +85,12 @@ class Devices(object):
     def get(self, **kwargs):
         """
         Returns the devices for an application
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -140,6 +152,12 @@ class Devices(object):
         """
         Create a new device for an application
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, devices.*, or devices.post.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} device - New device information (https://api.losant.com/#/definitions/devicePost)
@@ -181,6 +199,12 @@ class Devices(object):
     def send_command(self, **kwargs):
         """
         Send a command to multiple devices
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Device, all.Organization, all.User, devices.*, or devices.sendCommand.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

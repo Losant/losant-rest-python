@@ -23,6 +23,11 @@ result = client.devices.export(applicationId=my_application_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.export.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -55,6 +60,11 @@ result = client.devices.get(applicationId=my_application_id)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.get.
 
 #### Available Parameters
 
@@ -96,6 +106,11 @@ result = client.devices.post(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, devices.*, or devices.post.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -129,6 +144,11 @@ result = client.devices.send_command(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Device, all.Organization, all.User, devices.*, or devices.sendCommand.
 
 #### Available Parameters
 

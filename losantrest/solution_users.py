@@ -35,6 +35,12 @@ class SolutionUsers(object):
         """
         Returns the users for the solution
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, solutionUsers.*, or solutionUsers.get.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} solutionId - ID associated with the solution
@@ -93,6 +99,12 @@ class SolutionUsers(object):
     def post(self, **kwargs):
         """
         Create a new solution user
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, solutionUsers.*, or solutionUsers.post.
 
         Parameters:
         *  {string} orgId - ID associated with the organization

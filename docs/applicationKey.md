@@ -24,6 +24,11 @@ result = client.application_key.delete(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, applicationKey.*, or applicationKey.delete.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -57,6 +62,11 @@ result = client.application_key.get(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, applicationKey.*, or applicationKey.get.
 
 #### Available Parameters
 
@@ -92,6 +102,11 @@ result = client.application_key.patch(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, applicationKey.*, or applicationKey.patch.
 
 #### Available Parameters
 

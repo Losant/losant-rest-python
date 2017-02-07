@@ -29,6 +29,11 @@ result = client.org.delete(orgId=my_org_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.delete.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -60,11 +65,17 @@ result = client.org.get(orgId=my_org_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| summaryExclude | string | N | List of summary fields to exclude from org summary |  | payloadCount |
 
 #### Successful Responses
 
@@ -92,6 +103,11 @@ result = client.org.invite_member(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.inviteMember.
 
 #### Available Parameters
 
@@ -127,6 +143,11 @@ result = client.org.modify_member(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.modifyMember.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -161,6 +182,11 @@ result = client.org.patch(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.patch.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -192,6 +218,11 @@ result = client.org.payload_counts(orgId=my_org_id)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.payloadCounts.
 
 #### Available Parameters
 
@@ -226,6 +257,11 @@ result = client.org.pending_invites(orgId=my_org_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.pendingInvites.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -258,6 +294,11 @@ result = client.org.remove_member(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.removeMember.
 
 #### Available Parameters
 
@@ -293,6 +334,11 @@ result = client.org.revoke_invite(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.revokeInvite.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -326,6 +372,11 @@ result = client.org.transfer_resources(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, org.*, or org.transferResources.
 
 #### Available Parameters
 

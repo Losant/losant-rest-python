@@ -35,6 +35,12 @@ class AuditLogs(object):
         """
         Returns the audit logs for the organization
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, auditLogs.*, or auditLogs.get.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} sortField - Field to sort the results by. Accepted values are: creationDate, responseStatus, actorName

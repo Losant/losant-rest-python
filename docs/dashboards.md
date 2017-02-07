@@ -21,6 +21,11 @@ result = client.dashboards.get(**optional_params)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.SolutionUser, all.SolutionUser.read, all.User, dashboards.*, or dashboards.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -56,6 +61,11 @@ result = client.dashboards.post(dashboard=my_dashboard)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, dashboards.*, or dashboards.post.
 
 #### Available Parameters
 

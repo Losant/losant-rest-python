@@ -35,6 +35,12 @@ class Webhook(object):
         """
         Deletes a webhook
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, webhook.*, or webhook.delete.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} webhookId - ID associated with the webhook
@@ -77,6 +83,12 @@ class Webhook(object):
         """
         Retrieves information on a webhook
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, webhook.*, or webhook.get.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} webhookId - ID associated with the webhook
@@ -118,6 +130,12 @@ class Webhook(object):
     def patch(self, **kwargs):
         """
         Updates information about a webhook
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, webhook.*, or webhook.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

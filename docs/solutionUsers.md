@@ -23,6 +23,11 @@ result = client.solution_users.get(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.Organization.read, all.User, all.User.read, solutionUsers.*, or solutionUsers.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -62,6 +67,11 @@ result = client.solution_users.post(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, solutionUsers.*, or solutionUsers.post.
 
 #### Available Parameters
 

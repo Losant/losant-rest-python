@@ -23,6 +23,9 @@ result = client.org_invites.get(
 print(result)
 ```
 
+#### Authentication
+No api access token is required to call this action.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -55,6 +58,9 @@ result = client.org_invites.post(invite=my_invite)
 
 print(result)
 ```
+
+#### Authentication
+No api access token is required to call this action.
 
 #### Available Parameters
 

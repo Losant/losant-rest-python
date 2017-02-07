@@ -21,6 +21,11 @@ result = client.orgs.get(**optional_params)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.User, all.User.read, orgs.*, or orgs.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -31,6 +36,7 @@ print(result)
 | perPage | string | N | How many items to return per page | 1000 | 10 |
 | filterField | string | N | Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name |  | name |
 | filter | string | N | Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering. |  | my*org |
+| summaryExclude | string | N | List of summary fields to exclude from org summaries |  | payloadCount |
 
 #### Successful Responses
 
@@ -55,6 +61,11 @@ result = client.orgs.post(organization=my_organization)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.User, orgs.*, or orgs.post.
 
 #### Available Parameters
 

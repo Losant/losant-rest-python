@@ -35,6 +35,12 @@ class SolutionUser(object):
         """
         Deletes a solution user
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, solutionUser.*, or solutionUser.delete.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} solutionId - ID associated with the solution
@@ -80,6 +86,12 @@ class SolutionUser(object):
         """
         Retrieves information on a solution user
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, solutionUser.*, or solutionUser.get.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} solutionId - ID associated with the solution
@@ -124,6 +136,12 @@ class SolutionUser(object):
     def patch(self, **kwargs):
         """
         Updates information about a solution user
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, solutionUser.*, or solutionUser.patch.
 
         Parameters:
         *  {string} orgId - ID associated with the organization

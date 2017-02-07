@@ -35,6 +35,12 @@ class Dashboard(object):
         """
         Deletes a dashboard
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, dashboard.*, or dashboard.delete.
+
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -73,6 +79,9 @@ class Dashboard(object):
     def get(self, **kwargs):
         """
         Retrieves information on a dashboard
+
+        Authentication:
+        No api access token is required to call this action.
 
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard
@@ -115,6 +124,12 @@ class Dashboard(object):
     def patch(self, **kwargs):
         """
         Updates information about a dashboard
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, dashboard.*, or dashboard.patch.
 
         Parameters:
         *  {string} dashboardId - ID of the associated dashboard

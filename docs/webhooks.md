@@ -21,6 +21,11 @@ result = client.webhooks.get(applicationId=my_application_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, webhooks.*, or webhooks.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -59,6 +64,11 @@ result = client.webhooks.post(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, webhooks.*, or webhooks.post.
 
 #### Available Parameters
 

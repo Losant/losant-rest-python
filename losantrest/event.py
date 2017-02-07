@@ -35,6 +35,12 @@ class Event(object):
         """
         Deletes an event
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, event.*, or event.delete.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} eventId - ID associated with the event
@@ -77,6 +83,12 @@ class Event(object):
         """
         Retrieves information on an event
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, event.*, or event.get.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} eventId - ID associated with the event
@@ -118,6 +130,12 @@ class Event(object):
     def patch(self, **kwargs):
         """
         Updates information about an event
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, event.*, or event.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

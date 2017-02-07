@@ -35,6 +35,12 @@ class Dashboards(object):
         """
         Returns the dashboards the current user has permission to see
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.SolutionUser, all.SolutionUser.read, all.User, dashboards.*, or dashboards.get.
+
         Parameters:
         *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, ownerId
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
@@ -90,6 +96,12 @@ class Dashboards(object):
     def post(self, **kwargs):
         """
         Create a new dashboard
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, dashboards.*, or dashboards.post.
 
         Parameters:
         *  {hash} dashboard - New dashboard information (https://api.losant.com/#/definitions/dashboardPost)

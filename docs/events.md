@@ -23,6 +23,11 @@ result = client.events.get(applicationId=my_application_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, events.*, or events.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -61,6 +66,11 @@ result = client.events.most_recent_by_severity(applicationId=my_application_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, events.*, or events.mostRecentBySeverity.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -93,6 +103,11 @@ result = client.events.patch(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, events.*, or events.patch.
 
 #### Available Parameters
 
@@ -130,6 +145,11 @@ result = client.events.post(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, events.*, or events.post.
 
 #### Available Parameters
 

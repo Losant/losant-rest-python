@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='losant-rest',
-    version='1.0.9',
+    version='1.1.0',
     description='A REST client for the Losant API',
     long_description=long_description,
     url='https://github.com/Losant/losant-rest-python',
@@ -35,6 +35,6 @@ setup(
     include_package_data=True,
     keywords=['REST', 'Losant', 'IoT'],
     test_suite='tests',
-    install_requires=['requests>=2.4.2,<2.11'],
+    install_requires=['requests>=2.13'],
     tests_require=['requests-mock'],
 )

@@ -32,6 +32,11 @@ result = client.device.delete(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, device.*, or device.delete.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -65,6 +70,11 @@ result = client.device.export(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, device.*, or device.export.
 
 #### Available Parameters
 
@@ -104,6 +114,11 @@ result = client.device.get(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, device.*, or device.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -137,6 +152,11 @@ result = client.device.get_command(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, device.*, or device.getCommand.
 
 #### Available Parameters
 
@@ -174,6 +194,11 @@ result = client.device.get_composite_state(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, device.*, or device.getCompositeState.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -210,6 +235,11 @@ result = client.device.get_log_entries(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, device.*, or device.getLogEntries.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -245,6 +275,11 @@ result = client.device.get_state(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, device.*, or device.getState.
 
 #### Available Parameters
 
@@ -283,6 +318,11 @@ result = client.device.patch(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, device.*, or device.patch.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -317,6 +357,11 @@ result = client.device.remove_data(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, device.*, or device.removeData.
 
 #### Available Parameters
 
@@ -355,6 +400,11 @@ result = client.device.send_command(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Device, all.Organization, all.User, device.*, or device.sendCommand.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -390,6 +440,11 @@ result = client.device.send_state(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Device, all.Organization, all.User, device.*, or device.sendState.
 
 #### Available Parameters
 

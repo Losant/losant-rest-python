@@ -35,6 +35,9 @@ class OrgInvites(object):
         """
         Gets information about an invite
 
+        Authentication:
+        No api access token is required to call this action.
+
         Parameters:
         *  {string} token - The token associated with the invite
         *  {string} email - The email associated with the invite
@@ -77,6 +80,9 @@ class OrgInvites(object):
     def post(self, **kwargs):
         """
         Accepts/Rejects an invite
+
+        Authentication:
+        No api access token is required to call this action.
 
         Parameters:
         *  {hash} invite - Invite info and acceptance (https://api.losant.com/#/definitions/orgInviteAction)

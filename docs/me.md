@@ -31,6 +31,11 @@ result = client.me.add_recent_item(data=my_data)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.addRecentItem.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -60,6 +65,11 @@ result = client.me.delete(credentials=my_credentials)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.delete.
 
 #### Available Parameters
 
@@ -91,6 +101,11 @@ result = client.me.disable_two_factor_auth(data=my_data)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.disableTwoFactorAuth.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -121,6 +136,11 @@ result = client.me.disconnect_github(**optional_params)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.disconnectGithub.
+
 #### Available Parameters
 
 No parameters needed for this call.
@@ -149,6 +169,11 @@ result = client.me.disconnect_twitter(**optional_params)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.disconnectTwitter.
+
 #### Available Parameters
 
 No parameters needed for this call.
@@ -176,6 +201,11 @@ result = client.me.enable_two_factor_auth(data=my_data)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.enableTwoFactorAuth.
 
 #### Available Parameters
 
@@ -206,6 +236,11 @@ result = client.me.fetch_recent_items(itemType=my_item_type)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.fetchRecentItems.
 
 #### Available Parameters
 
@@ -238,11 +273,17 @@ result = client.me.get(**optional_params)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.get.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | includeRecent | undefined | N | Should the user include recent app/dashboard info |  | true |
+| summaryExclude | string | N | List of summary fields to exclude from user summary |  | payloadCount |
 
 #### Successful Responses
 
@@ -266,6 +307,11 @@ result = client.me.patch(user=my_user)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.patch.
 
 #### Available Parameters
 
@@ -296,6 +342,11 @@ result = client.me.payload_counts(**optional_params)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, all.User.read, me.*, or me.payloadCounts.
 
 #### Available Parameters
 
@@ -328,6 +379,11 @@ result = client.me.transfer_resources(transfer=my_transfer)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.transferResources.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -357,6 +413,11 @@ result = client.me.verify_email(**optional_params)
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.SolutionUser, all.User, me.*, or me.verifyEmail.
 
 #### Available Parameters
 

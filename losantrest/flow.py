@@ -35,6 +35,12 @@ class Flow(object):
         """
         Deletes a flow
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, flow.*, or flow.delete.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
@@ -77,6 +83,12 @@ class Flow(object):
         """
         Retrieves information on a flow
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flow.*, or flow.get.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
@@ -118,6 +130,12 @@ class Flow(object):
     def get_log_entries(self, **kwargs):
         """
         Retrieve the recent log entries about the flows
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flow.*, or flow.log.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -167,6 +185,12 @@ class Flow(object):
         """
         Gets the current values in persistent storage
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flow.*, or flow.getStorageEntries.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
@@ -208,6 +232,12 @@ class Flow(object):
     def patch(self, **kwargs):
         """
         Updates information about a flow
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, flow.*, or flow.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -254,6 +284,12 @@ class Flow(object):
         """
         Presses the specified virtual button on the flow
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, flow.*, or flow.pressVirtualButton.
+
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
@@ -298,6 +334,12 @@ class Flow(object):
     def set_storage_entry(self, **kwargs):
         """
         Sets a storage value
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, flow.*, or flow.setStorageEntry.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

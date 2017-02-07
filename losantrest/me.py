@@ -35,6 +35,12 @@ class Me(object):
         """
         Adds an item to a recent item list
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.addRecentItem.
+
         Parameters:
         *  {hash} data - Object containing recent item info (https://api.losant.com/#/definitions/recentItem)
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -72,6 +78,12 @@ class Me(object):
     def delete(self, **kwargs):
         """
         Deletes the current user
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.delete.
 
         Parameters:
         *  {hash} credentials - User authentication credentials (https://api.losant.com/#/definitions/userCredentials)
@@ -111,6 +123,12 @@ class Me(object):
         """
         Disables two factor auth for the current user
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.disableTwoFactorAuth.
+
         Parameters:
         *  {hash} data - Object containing two factor auth properties (https://api.losant.com/#/definitions/disableTwoFactorAuth)
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -149,6 +167,12 @@ class Me(object):
         """
         Disconnects the user from Github
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.disconnectGithub.
+
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -184,6 +208,12 @@ class Me(object):
         """
         Disconnects the user from Twitter
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.disconnectTwitter.
+
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -218,6 +248,12 @@ class Me(object):
     def enable_two_factor_auth(self, **kwargs):
         """
         Enables two factor auth for the current user
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.enableTwoFactorAuth.
 
         Parameters:
         *  {hash} data - Object containing two factor auth properties (https://api.losant.com/#/definitions/enableTwoFactorAuth)
@@ -256,6 +292,12 @@ class Me(object):
     def fetch_recent_items(self, **kwargs):
         """
         Gets a recent item list
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.fetchRecentItems.
 
         Parameters:
         *  {string} parentId - Parent id of the recent list
@@ -298,8 +340,15 @@ class Me(object):
         """
         Retrieves information on the current user
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.get.
+
         Parameters:
         *  {undefined} includeRecent - Should the user include recent app/dashboard info
+        *  {string} summaryExclude - List of summary fields to exclude from user summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -318,6 +367,8 @@ class Me(object):
 
         if "includeRecent" in kwargs:
             query_params["includeRecent"] = kwargs["includeRecent"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -334,6 +385,12 @@ class Me(object):
     def patch(self, **kwargs):
         """
         Updates information about the current user
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.patch.
 
         Parameters:
         *  {hash} user - Object containing new user properties (https://api.losant.com/#/definitions/mePatch)
@@ -372,6 +429,12 @@ class Me(object):
     def payload_counts(self, **kwargs):
         """
         Returns payload counts for the time range specified for all applications the current user owns
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, all.User.read, me.*, or me.payloadCounts.
 
         Parameters:
         *  {string} start - Start of range for payload count query (ms since epoch)
@@ -414,6 +477,12 @@ class Me(object):
         """
         Moves resources to a new owner
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.transferResources.
+
         Parameters:
         *  {hash} transfer - Object containing properties of the transfer (https://api.losant.com/#/definitions/resourceTransfer)
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -451,6 +520,12 @@ class Me(object):
     def verify_email(self, **kwargs):
         """
         Sends an email verification to the user
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.verifyEmail.
 
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)

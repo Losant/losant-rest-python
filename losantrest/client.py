@@ -28,9 +28,9 @@ SOFTWARE.
 import requests
 import collections
 import sys
-from .access_token import AccessToken
-from .access_tokens import AccessTokens
 from .application import Application
+from .application_api_token import ApplicationApiToken
+from .application_api_tokens import ApplicationApiTokens
 from .application_key import ApplicationKey
 from .application_keys import ApplicationKeys
 from .applications import Applications
@@ -69,15 +69,15 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.5.2
+    Built For Version 1.5.3
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
         self.url = url
         self.auth_token = auth_token
-        self.access_token = AccessToken(self)
-        self.access_tokens = AccessTokens(self)
         self.application = Application(self)
+        self.application_api_token = ApplicationApiToken(self)
+        self.application_api_tokens = ApplicationApiTokens(self)
         self.application_key = ApplicationKey(self)
         self.application_keys = ApplicationKeys(self)
         self.applications = Applications(self)
@@ -114,7 +114,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.5.2"
+        headers["Accept-Version"] = "^1.5.3"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

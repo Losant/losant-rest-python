@@ -22,6 +22,11 @@ result = client.dashboard.delete(dashboardId=my_dashboard_id)
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, dashboard.*, or dashboard.delete.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -52,6 +57,9 @@ result = client.dashboard.get(dashboardId=my_dashboard_id)
 
 print(result)
 ```
+
+#### Authentication
+No api access token is required to call this action.
 
 #### Available Parameters
 
@@ -86,6 +94,11 @@ result = client.dashboard.patch(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, dashboard.*, or dashboard.patch.
 
 #### Available Parameters
 

@@ -35,6 +35,12 @@ class Org(object):
         """
         Deletes an organization
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.delete.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -74,8 +80,15 @@ class Org(object):
         """
         Retrieves information on an organization
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.get.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
+        *  {string} summaryExclude - List of summary fields to exclude from org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -96,6 +109,8 @@ class Org(object):
 
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -112,6 +127,12 @@ class Org(object):
     def invite_member(self, **kwargs):
         """
         Invites a person to an organization
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.inviteMember.
 
         Parameters:
         *  {string} orgId - ID associated with the organization
@@ -155,6 +176,12 @@ class Org(object):
         """
         Modifies a current org member's role
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.modifyMember.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} member - Object containing new member pair (https://api.losant.com/#/definitions/orgMemberPatch)
@@ -197,6 +224,12 @@ class Org(object):
         """
         Updates information about an organization
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.patch.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} organization - Object containing new organization properties (https://api.losant.com/#/definitions/orgPatch)
@@ -238,6 +271,12 @@ class Org(object):
     def payload_counts(self, **kwargs):
         """
         Returns payload counts for the time range specified for all applications this organization owns
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.payloadCounts.
 
         Parameters:
         *  {string} orgId - ID associated with the organization
@@ -284,6 +323,12 @@ class Org(object):
         """
         Gets the current pending invites
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.pendingInvites.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -322,6 +367,12 @@ class Org(object):
     def remove_member(self, **kwargs):
         """
         Removes a member from the org
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.removeMember.
 
         Parameters:
         *  {string} orgId - ID associated with the organization
@@ -365,6 +416,12 @@ class Org(object):
         """
         Revokes an existing invite
 
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.revokeInvite.
+
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} inviteId - Id of invite to revoke
@@ -406,6 +463,12 @@ class Org(object):
     def transfer_resources(self, **kwargs):
         """
         Moves resources to a new owner
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.User, org.*, or org.transferResources.
 
         Parameters:
         *  {string} orgId - ID associated with the organization

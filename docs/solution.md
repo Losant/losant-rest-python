@@ -24,6 +24,11 @@ result = client.solution.delete(
 print(result)
 ```
 
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, solution.*, or solution.delete.
+
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
@@ -57,6 +62,11 @@ result = client.solution.get(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.Organization.read, all.User, all.User.read, solution.*, or solution.get.
 
 #### Available Parameters
 
@@ -92,6 +102,11 @@ result = client.solution.patch(
 
 print(result)
 ```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, solution.*, or solution.patch.
 
 #### Available Parameters
 

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Losant/losant-rest-python.svg?branch=master)](https://travis-ci.org/Losant/losant-rest-python) [![PyPI version](https://badge.fury.io/py/losant-rest.svg)](https://badge.fury.io/py/losant-rest)
 
 The [Losant](https://www.losant.com) REST API client provides a simple way to
-use the comprehensive Losant API.  You can authenticate either as a Losant
+use the comprehensive Losant API. You can authenticate either as a Losant
 device or with your user account, and have access to all the functionality
 of the Losant platform.
 
@@ -58,7 +58,7 @@ print(response)
 
 ### Client
 
-A client is a single api instance.  By default, it is unauthenticated,
+A client is a single api instance. By default, it is unauthenticated,
 but can be given an access token to perform authenticated requests.
 
 #### Constructor
@@ -70,9 +70,10 @@ Client(auth_token=None, url="https://api.losant.com")
 The ``Client()`` constructor takes the following arguments:
 
 *   auth_token  
-The access token to be used for authentication - by default there is no access
-token.  An access token can be acquired through either of
-the [Auth](docs/auth.md) methods.
+The access token to be used for authentication - by default there is no
+access token. An access token can be acquired through any of the
+[Auth](docs/auth.md) methods, or can be created for a particular application
+through [application_api_tokens](docs/applicationApiTokens.md).
 
 *   url  
 The url of the Losant API - by default <https://api.losant.com>.
@@ -80,7 +81,7 @@ The url of the Losant API - by default <https://api.losant.com>.
 #### Properties
 
 *   auth_token  
-The auth token can be accessed or changed after Client creation
+The access token can be accessed or changed after Client creation
 through this property.
 
 *   url  
@@ -90,8 +91,18 @@ through this property.
 #### Resources
 
 Each of the following is a property on the client object, and returns
-a wrapper for the actions against that particular resource.  See each
+a wrapper for the actions against that particular resource. See each
 resource documentation file for more information.
+
+*   [application_api_token](docs/applicationApiToken.md)  
+Contains all the actions that can be performed against a single
+Api Token beloging to an application - for instance, getting info
+on a single token or revoking a token.
+
+*   [application_api_tokens](docs/applicationApiTokens.md)  
+Contains all of the actions that can be performed against the
+collection of Api Tokens belonging to an Application - such
+as listing all tokens or creating a new token.
 
 *   [application_key](docs/applicationKey.md)  
 Contains all the actions that can be performed against a single
@@ -117,7 +128,7 @@ listing the applications or creating a new application.
 
 *   [auth](docs/auth.md)  
 Contains the actions used for authenticating against the api, either as a
-user or as a device.  The result of authentication calls contain the auth_token
+user or as a device. The result of authentication calls contain the auth_token
 needed for authenticated calls - see the examples for more details.
 
 *   [dashboard](docs/dashboard.md)  
