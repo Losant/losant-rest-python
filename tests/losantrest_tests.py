@@ -30,7 +30,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(request.headers["Accept"], "application/json")
         self.assertEqual(request.headers["Content-Type"], "application/json")
         self.assertNotIn("Authorization", request.headers)
-        self.assertEqual(json.loads(request.body), creds)
+        self.assertEqual(json.loads(request.text), creds)
 
     @requests_mock.Mocker()
     def test_basic_call_with_auth(self, mock):
@@ -68,7 +68,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(parsed_url.path, "/auth/user")
         self.assertEqual(request.headers["Accept"], "application/json")
         self.assertNotIn("Authorization", request.headers)
-        self.assertEqual(json.loads(request.body), creds)
+        self.assertEqual(json.loads(request.text), creds)
 
     @requests_mock.Mocker()
     def test_nested_query_param_call(self, mock):
