@@ -169,3 +169,48 @@ class Dashboard(object):
 
         return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
 
+    def validate_context(self, **kwargs):
+        """
+        Validates a context object against the dashboard's context configuration
+
+        Authentication:
+        No api access token is required to call this action.
+
+        Parameters:
+        *  {string} dashboardId - ID of the associated dashboard
+        *  {hash} ctx - The context object to validate (https://api.losant.com/#/definitions/dashboardContextInstance)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If context is valid (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if context is invalid (https://api.losant.com/#/definitions/error)
+        *  404 - Error if dashboard or application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "dashboardId" in kwargs:
+            path_params["dashboardId"] = kwargs["dashboardId"]
+        if "ctx" in kwargs:
+            body = kwargs["ctx"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/dashboards/{dashboardId}/validateContext".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
