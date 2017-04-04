@@ -47,12 +47,26 @@
 *   [Event Patch](#event-patch)
 *   [Event Post](#event-post)
 *   [Events](#events)
+*   [Experience Endpoint](#experience-endpoint)
+*   [Experience Endpoint Patch](#experience-endpoint-patch)
+*   [Experience Endpoint Post](#experience-endpoint-post)
+*   [Experience Endpoint Stats](#experience-endpoint-stats)
+*   [Experience Endpoints](#experience-endpoints)
+*   [Experience Group](#experience-group)
+*   [Experience Group Patch](#experience-group-patch)
+*   [Experience Group Post](#experience-group-post)
+*   [Experience Groups](#experience-groups)
+*   [Experience User](#experience-user)
+*   [Experience User Patch](#experience-user-patch)
+*   [Experience User Post](#experience-user-post)
+*   [Experience Users](#experience-users)
 *   [Workflow](#workflow)
 *   [Workflow Log](#workflow-log)
 *   [Workflow Patch](#workflow-patch)
 *   [Workflow Post](#workflow-post)
 *   [Workflow Storage Entries](#workflow-storage-entries)
 *   [Workflow Storage Entry](#workflow-storage-entry)
+*   [Workflow Trigger Filter](#workflow-trigger-filter)
 *   [Workflows](#workflows)
 *   [Github Login](#github-login)
 *   [Last Value Data](#last-value-data)
@@ -78,7 +92,7 @@
 *   [Solution Patch](#solution-patch)
 *   [Solution Post](#solution-post)
 *   [Solution User](#solution-user)
-*   [User Credentials](#user-credentials)
+*   [Solution User Credentials](#solution-user-credentials)
 *   [Solution User Patch](#solution-user-patch)
 *   [Solution User Post](#solution-user-post)
 *   [Solution Users](#solution-users)
@@ -294,25 +308,50 @@ Schema for a single Application
       "type": "string",
       "maxLength": 32767
     },
+    "endpointSlug": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 255,
+      "pattern": "^[0-9a-z_-]*$"
+    },
+    "expUserTokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endpointDefaultCors": {
+      "type": "boolean"
+    },
     "summary": {
       "type": "object",
       "properties": {
+        "apiTokenCount": {
+          "type": "number"
+        },
+        "keyCount": {
+          "type": "number"
+        },
         "deviceCount": {
+          "type": "number"
+        },
+        "deviceRecipeCount": {
+          "type": "number"
+        },
+        "eventCount": {
+          "type": "number"
+        },
+        "experienceEndpointCount": {
+          "type": "number"
+        },
+        "experienceGroupCount": {
+          "type": "number"
+        },
+        "experienceUserCount": {
           "type": "number"
         },
         "flowCount": {
           "type": "number"
         },
         "webhookCount": {
-          "type": "number"
-        },
-        "eventCount": {
-          "type": "number"
-        },
-        "keyCount": {
-          "type": "number"
-        },
-        "deviceRecipeCount": {
           "type": "number"
         }
       }
@@ -390,6 +429,12 @@ Schema for the body of an Application API Token creation request
           "devices.*",
           "event.*",
           "events.*",
+          "experienceEndpoint.*",
+          "experienceEndpoints.*",
+          "experienceGroup.*",
+          "experienceGroups.*",
+          "experienceUser.*",
+          "experienceUsers.*",
           "flow.*",
           "flows.*",
           "webhook.*",
@@ -438,6 +483,22 @@ Schema for the body of an Application API Token creation request
           "events.mostRecentBySeverity",
           "events.patch",
           "events.post",
+          "experienceEndpoint.delete",
+          "experienceEndpoint.get",
+          "experienceEndpoint.patch",
+          "experienceEndpoints.get",
+          "experienceEndpoints.post",
+          "experienceEndpoints.stats",
+          "experienceGroup.delete",
+          "experienceGroup.get",
+          "experienceGroup.patch",
+          "experienceGroups.get",
+          "experienceGroups.post",
+          "experienceUser.delete",
+          "experienceUser.get",
+          "experienceUser.patch",
+          "experienceUsers.get",
+          "experienceUsers.post",
           "flow.delete",
           "flow.get",
           "flow.getStorageEntries",
@@ -533,7 +594,8 @@ Schema for a single Application Key
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     },
     "deviceTags": {
       "type": "array",
@@ -551,7 +613,8 @@ Schema for a single Application Key
           }
         },
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "description": {
       "type": "string",
@@ -630,7 +693,8 @@ Schema for the body of an Application Key creation request
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     },
     "deviceTags": {
       "type": "array",
@@ -648,7 +712,8 @@ Schema for the body of an Application Key creation request
           }
         },
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "description": {
       "type": "string",
@@ -724,7 +789,8 @@ Schema for a collection of Application Keys
             "items": {
               "type": "string",
               "pattern": "^[A-Fa-f\\d]{24}$"
-            }
+            },
+            "maxItems": 1000
           },
           "deviceTags": {
             "type": "array",
@@ -742,7 +808,8 @@ Schema for a collection of Application Keys
                 }
               },
               "additionalProperties": false
-            }
+            },
+            "maxItems": 100
           },
           "description": {
             "type": "string",
@@ -833,6 +900,19 @@ Schema for the body of an Application modification request
     "description": {
       "type": "string",
       "maxLength": 32767
+    },
+    "endpointSlug": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 255,
+      "pattern": "^[0-9a-z_-]*$"
+    },
+    "expUserTokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endpointDefaultCors": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false
@@ -872,6 +952,19 @@ Schema for the body of an Application creation request
     "description": {
       "type": "string",
       "maxLength": 32767
+    },
+    "endpointSlug": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 255,
+      "pattern": "^[0-9a-z_-]*$"
+    },
+    "expUserTokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endpointDefaultCors": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false,
@@ -945,25 +1038,50 @@ Schema for a collection of Applications
             "type": "string",
             "maxLength": 32767
           },
+          "endpointSlug": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 255,
+            "pattern": "^[0-9a-z_-]*$"
+          },
+          "expUserTokenCutoff": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endpointDefaultCors": {
+            "type": "boolean"
+          },
           "summary": {
             "type": "object",
             "properties": {
+              "apiTokenCount": {
+                "type": "number"
+              },
+              "keyCount": {
+                "type": "number"
+              },
               "deviceCount": {
+                "type": "number"
+              },
+              "deviceRecipeCount": {
+                "type": "number"
+              },
+              "eventCount": {
+                "type": "number"
+              },
+              "experienceEndpointCount": {
+                "type": "number"
+              },
+              "experienceGroupCount": {
+                "type": "number"
+              },
+              "experienceUserCount": {
                 "type": "number"
               },
               "flowCount": {
                 "type": "number"
               },
               "webhookCount": {
-                "type": "number"
-              },
-              "eventCount": {
-                "type": "number"
-              },
-              "keyCount": {
-                "type": "number"
-              },
-              "deviceRecipeCount": {
                 "type": "number"
               }
             }
@@ -1093,6 +1211,9 @@ Schema for a single Audit Log entry
         "Device",
         "DeviceRecipe",
         "Event",
+        "ExperienceEndpoint",
+        "ExperienceGroup",
+        "ExperienceUser",
         "Flow",
         "SolutionUser",
         "Webhook"
@@ -1233,6 +1354,9 @@ Schema for the filter of an audit log query
               "Device",
               "DeviceRecipe",
               "Event",
+              "ExperienceEndpoint",
+              "ExperienceGroup",
+              "ExperienceUser",
               "Flow",
               "SolutionUser",
               "Webhook"
@@ -1390,6 +1514,9 @@ Schema for a collection of Audit Logs
               "Device",
               "DeviceRecipe",
               "Event",
+              "ExperienceEndpoint",
+              "ExperienceGroup",
+              "ExperienceUser",
               "Flow",
               "SolutionUser",
               "Webhook"
@@ -1541,8 +1668,7 @@ Schema for the successful response when authenticating a Device
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "token": {
@@ -1873,7 +1999,8 @@ Schema for a single Dashboard
                 "items": {
                   "type": "string",
                   "pattern": "^[A-Fa-f\\d]{24}$"
-                }
+                },
+                "maxItems": 1000
               },
               "deviceTags": {
                 "type": "array",
@@ -1891,7 +2018,8 @@ Schema for a single Dashboard
                     }
                   },
                   "additionalProperties": false
-                }
+                },
+                "maxItems": 100
               }
             },
             "additionalProperties": false
@@ -2095,7 +2223,8 @@ Schema for the body of a Dashboard modification request
                 "items": {
                   "type": "string",
                   "pattern": "^[A-Fa-f\\d]{24}$"
-                }
+                },
+                "maxItems": 1000
               },
               "deviceTags": {
                 "type": "array",
@@ -2113,7 +2242,8 @@ Schema for the body of a Dashboard modification request
                     }
                   },
                   "additionalProperties": false
-                }
+                },
+                "maxItems": 100
               }
             },
             "additionalProperties": false
@@ -2283,7 +2413,8 @@ Schema for the body of a Dashboard creation request
                 "items": {
                   "type": "string",
                   "pattern": "^[A-Fa-f\\d]{24}$"
-                }
+                },
+                "maxItems": 1000
               },
               "deviceTags": {
                 "type": "array",
@@ -2301,7 +2432,8 @@ Schema for the body of a Dashboard creation request
                     }
                   },
                   "additionalProperties": false
-                }
+                },
+                "maxItems": 100
               }
             },
             "additionalProperties": false
@@ -2499,7 +2631,8 @@ Schema for a collection of Dashboards
                       "items": {
                         "type": "string",
                         "pattern": "^[A-Fa-f\\d]{24}$"
-                      }
+                      },
+                      "maxItems": 1000
                     },
                     "deviceTags": {
                       "type": "array",
@@ -2517,7 +2650,8 @@ Schema for a collection of Dashboards
                           }
                         },
                         "additionalProperties": false
-                      }
+                      },
+                      "maxItems": 100
                     }
                   },
                   "additionalProperties": false
@@ -2655,7 +2789,8 @@ Schema for a single Device
           "value"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "attributes": {
       "type": "array",
@@ -2681,7 +2816,8 @@ Schema for a single Device
           "dataType"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceClass": {
       "type": "string",
@@ -2689,8 +2825,7 @@ Schema for a single Device
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "gatewayId": {
@@ -3052,7 +3187,8 @@ Schema for the body of a Device modification request
           "value"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "attributes": {
       "type": "array",
@@ -3078,7 +3214,8 @@ Schema for the body of a Device modification request
           "dataType"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceClass": {
       "type": "string",
@@ -3086,8 +3223,7 @@ Schema for the body of a Device modification request
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "gatewayId": {
@@ -3162,7 +3298,8 @@ Schema for the body of a Device creation request
           "value"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "attributes": {
       "type": "array",
@@ -3188,7 +3325,8 @@ Schema for the body of a Device creation request
           "dataType"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceClass": {
       "type": "string",
@@ -3196,8 +3334,7 @@ Schema for the body of a Device creation request
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "gatewayId": {
@@ -3304,7 +3441,8 @@ Schema for a single Device Recipe
           "value"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "attributes": {
       "type": "array",
@@ -3330,7 +3468,8 @@ Schema for a single Device Recipe
           "dataType"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceClass": {
       "type": "string",
@@ -3338,8 +3477,7 @@ Schema for a single Device Recipe
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "gatewayId": {
@@ -3503,7 +3641,8 @@ Schema for the body of a Device Recipe modification request
           "value"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "attributes": {
       "type": "array",
@@ -3529,7 +3668,8 @@ Schema for the body of a Device Recipe modification request
           "dataType"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceClass": {
       "type": "string",
@@ -3537,8 +3677,7 @@ Schema for the body of a Device Recipe modification request
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "gatewayId": {
@@ -3624,7 +3763,8 @@ Schema for the body of a Device Recipe creation request
           "value"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "attributes": {
       "type": "array",
@@ -3650,7 +3790,8 @@ Schema for the body of a Device Recipe creation request
           "dataType"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceClass": {
       "type": "string",
@@ -3658,8 +3799,7 @@ Schema for the body of a Device Recipe creation request
         "standalone",
         "gateway",
         "peripheral",
-        "floating",
-        "virtual"
+        "floating"
       ]
     },
     "gatewayId": {
@@ -3775,7 +3915,8 @@ Schema for a collection of Device Recipes
                 "value"
               ],
               "additionalProperties": false
-            }
+            },
+            "maxItems": 100
           },
           "attributes": {
             "type": "array",
@@ -3801,7 +3942,8 @@ Schema for a collection of Device Recipes
                 "dataType"
               ],
               "additionalProperties": false
-            }
+            },
+            "maxItems": 100
           },
           "deviceClass": {
             "type": "string",
@@ -3809,8 +3951,7 @@ Schema for a collection of Device Recipes
               "standalone",
               "gateway",
               "peripheral",
-              "floating",
-              "virtual"
+              "floating"
             ]
           },
           "gatewayId": {
@@ -4135,7 +4276,8 @@ Array of Tags for filtering devices. Tag keys and tag values are optional.
       }
     },
     "additionalProperties": false
-  }
+  },
+  "maxItems": 100
 }
 ```
 ### <a name="device-tag-filter-example"></a> Example
@@ -4221,7 +4363,8 @@ Schema for a collection of Devices
                 "value"
               ],
               "additionalProperties": false
-            }
+            },
+            "maxItems": 100
           },
           "attributes": {
             "type": "array",
@@ -4247,7 +4390,8 @@ Schema for a collection of Devices
                 "dataType"
               ],
               "additionalProperties": false
-            }
+            },
+            "maxItems": 100
           },
           "deviceClass": {
             "type": "string",
@@ -4255,8 +4399,7 @@ Schema for a collection of Devices
               "standalone",
               "gateway",
               "peripheral",
-              "floating",
-              "virtual"
+              "floating"
             ]
           },
           "gatewayId": {
@@ -4928,6 +5071,1161 @@ Schema for a collection of Events
 
 <br/>
 
+## Experience Endpoint
+
+Schema for a single Experience Endpoint
+
+### <a name="experience-endpoint-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "experienceEndpointId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "delete",
+        "get",
+        "options",
+        "patch",
+        "post",
+        "put"
+      ]
+    },
+    "access": {
+      "type": "string",
+      "enum": [
+        "public",
+        "authenticated",
+        "group"
+      ]
+    },
+    "experienceGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          }
+        }
+      }
+    }
+  }
+}
+```
+### <a name="experience-endpoint-example"></a> Example
+
+```json
+{
+  "id": "58c1de6c8f812590d8e82980",
+  "experienceEndpointId": "58c1de6c8f812590d8e82980",
+  "applicationId": "575ec8687ae143cd83dc4a97",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z",
+  "route": "/my/route/{id}",
+  "enabled": true,
+  "method": "get",
+  "access": "group",
+  "experienceGroups": [
+    {
+      "name": "myGroup",
+      "id": "58b9d794cbfafe1be675744f"
+    }
+  ]
+}
+```
+
+<br/>
+
+## Experience Endpoint Patch
+
+Schema for the body of an Experience Endpoint modification request
+
+### <a name="experience-endpoint-patch-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "delete",
+        "get",
+        "options",
+        "patch",
+        "post",
+        "put"
+      ]
+    },
+    "access": {
+      "type": "string",
+      "enum": [
+        "public",
+        "authenticated",
+        "group"
+      ]
+    },
+    "experienceGroupIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="experience-endpoint-patch-example"></a> Example
+
+```json
+{
+  "access": "group",
+  "experienceGroupIds": [
+    "58c1de6f8f812590d8e82983"
+  ]
+}
+```
+
+<br/>
+
+## Experience Endpoint Post
+
+Schema for the body of an Experience Endpoint creation request
+
+### <a name="experience-endpoint-post-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "delete",
+        "get",
+        "options",
+        "patch",
+        "post",
+        "put"
+      ]
+    },
+    "access": {
+      "type": "string",
+      "enum": [
+        "public",
+        "authenticated",
+        "group"
+      ]
+    },
+    "experienceGroupIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "route",
+    "method"
+  ]
+}
+```
+### <a name="experience-endpoint-post-example"></a> Example
+
+```json
+{
+  "route": "/my/route/{id}",
+  "method": "get",
+  "access": "public"
+}
+```
+
+<br/>
+
+## Experience Endpoint Stats
+
+Schema for stats for an experience&#x27;s endpoints
+
+### <a name="experience-endpoint-stats-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "patternProperties": {
+    ".*": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "count": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
+```
+### <a name="experience-endpoint-stats-example"></a> Example
+
+```json
+{
+  "58cae95a0f5fcd000138ed0d": [
+    {
+      "time": "2017-03-21T20:00:00.000Z",
+      "count": 10
+    },
+    {
+      "time": "2017-03-21T21:00:00.000Z",
+      "count": 1
+    }
+  ],
+  "NotFound": [
+    {
+      "time": "2017-03-21T20:00:00.000Z",
+      "count": 1
+    },
+    {
+      "time": "2017-03-21T21:00:00.000Z",
+      "count": 4
+    }
+  ]
+}
+```
+
+<br/>
+
+## Experience Endpoints
+
+Schema for a collection of Experience Endpoints
+
+### <a name="experience-endpoints-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/experienceEndpoints"
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "filterField": {
+      "type": "string"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "experienceGroupId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "notFoundRequestCount": {
+      "type": "number"
+    }
+  }
+}
+```
+### <a name="experience-endpoints-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "58c1de6c8f812590d8e82980",
+      "experienceEndpointId": "58c1de6c8f812590d8e82980",
+      "applicationId": "575ec8687ae143cd83dc4a97",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "lastUpdated": "2016-06-13T04:00:00.000Z",
+      "route": "/my/route/{id}",
+      "enabled": true,
+      "method": "get",
+      "access": "group",
+      "experienceGroups": [
+        {
+          "name": "myGroup",
+          "id": "58b9d794cbfafe1be675744f"
+        }
+      ]
+    }
+  ],
+  "count": 1,
+  "totalCount": 4,
+  "perPage": 1,
+  "page": 0,
+  "sortField": "name",
+  "sortDirection": "asc",
+  "applicationId": "575ec8687ae143cd83dc4a97"
+}
+```
+
+<br/>
+
+## Experience Group
+
+Schema for a single Experience Group
+
+### <a name="experience-group-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "experienceGroupId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "experienceUserIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    },
+    "experienceEndpointIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  }
+}
+```
+### <a name="experience-group-example"></a> Example
+
+```json
+{
+  "id": "58b9d794cbfafe1be675744f",
+  "experienceGroupId": "58b9d794cbfafe1be675744f",
+  "applicationId": "575ec8687ae143cd83dc4a97",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z",
+  "name": "My Group",
+  "experienceUserIds": [
+    "58b9d782cbfafe1be675744d",
+    "58b9d787cbfafe1be675744e"
+  ],
+  "experienceEndpointIds": [
+    "58b9d743cbfafe1be675744b",
+    "58b9d743cbfafe1be675744c"
+  ]
+}
+```
+
+<br/>
+
+## Experience Group Patch
+
+Schema for the body of an Experience Group modification request
+
+### <a name="experience-group-patch-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "experienceUserIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    },
+    "experienceEndpointIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="experience-group-patch-example"></a> Example
+
+```json
+{
+  "name": "My New Group Name",
+  "experienceUserIds": [
+    "575ed70c7ae143cd83dc4aa9",
+    "675ed70c7ae143cd83dc4aa9"
+  ],
+  "experienceEndpointIds": [
+    "58b9d743cbfafe1be675744b",
+    "58b9d743cbfafe1be675744c"
+  ]
+}
+```
+
+<br/>
+
+## Experience Group Post
+
+Schema for the body of an Experience Group creation request
+
+### <a name="experience-group-post-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "experienceUserIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    },
+    "experienceEndpointIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ]
+}
+```
+### <a name="experience-group-post-example"></a> Example
+
+```json
+{
+  "name": "My Group",
+  "experienceUserIds": [
+    "575ed70c7ae143cd83dc4aa9",
+    "675ed70c7ae143cd83dc4aa9"
+  ],
+  "experienceEndpointIds": [
+    "58b9d743cbfafe1be675744b",
+    "58b9d743cbfafe1be675744c"
+  ]
+}
+```
+
+<br/>
+
+## Experience Groups
+
+Schema for a collection of Experience Groups
+
+### <a name="experience-groups-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "title": "Experience Group",
+        "description": "Schema for a single Experience Group",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "experienceGroupId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "applicationId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 32767
+          },
+          "experienceUserIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Fa-f\\d]{24}$"
+            },
+            "maxItems": 1000
+          },
+          "experienceEndpointIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Fa-f\\d]{24}$"
+            },
+            "maxItems": 1000
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "filterField": {
+      "type": "string"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="experience-groups-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "58b9d794cbfafe1be675744f",
+      "experienceGroupId": "58b9d794cbfafe1be675744f",
+      "applicationId": "575ec8687ae143cd83dc4a97",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "lastUpdated": "2016-06-13T04:00:00.000Z",
+      "name": "My Group",
+      "experienceUserIds": [
+        "58b9d782cbfafe1be675744d",
+        "58b9d787cbfafe1be675744e"
+      ],
+      "experienceEndpointIds": [
+        "58b9d743cbfafe1be675744b",
+        "58b9d743cbfafe1be675744c"
+      ]
+    }
+  ],
+  "count": 1,
+  "totalCount": 4,
+  "perPage": 1,
+  "page": 0,
+  "sortField": "name",
+  "sortDirection": "asc",
+  "applicationId": "575ec8687ae143cd83dc4a97"
+}
+```
+
+<br/>
+
+## Experience User
+
+Schema for a single Experience User
+
+### <a name="experience-user-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "experienceUserId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "passwordLastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastLogin": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "avatarUrl": {
+      "type": "string",
+      "format": "url"
+    },
+    "tokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "userTags": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9a-zA-Z_-]{1,255}$": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "experienceGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          }
+        }
+      }
+    }
+  }
+}
+```
+### <a name="experience-user-example"></a> Example
+
+```json
+{
+  "id": "58b9d782cbfafe1be675744d",
+  "experienceUserId": "58b9d782cbfafe1be675744d",
+  "applicationId": "575ec8687ae143cd83dc4a97",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z",
+  "passwordLastUpdated": "2016-06-13T04:00:00.000Z",
+  "lastLogin": "2016-06-13T04:00:00.000Z",
+  "email": "example@experienceuser.com",
+  "firstName": "Example",
+  "lastName": "Name",
+  "avatarUrl": "https://example.avatar.url/is_here.png",
+  "userTags": {
+    "customKey": "customValue"
+  }
+}
+```
+
+<br/>
+
+## Experience User Patch
+
+Schema for the body of an Experience User modification request
+
+### <a name="experience-user-patch-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 2048
+    },
+    "tokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "userTags": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9a-zA-Z_-]{1,255}$": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "experienceGroupIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="experience-user-patch-example"></a> Example
+
+```json
+{
+  "password": "aNewPassword",
+  "userTags": {
+    "customKey": "newCustomValue"
+  }
+}
+```
+
+<br/>
+
+## Experience User Post
+
+Schema for the body of an Experience User creation request
+
+### <a name="experience-user-post-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "firstName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "lastName": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 2048
+    },
+    "tokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "userTags": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9a-zA-Z_-]{1,255}$": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "experienceGroupIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "email",
+    "password"
+  ]
+}
+```
+### <a name="experience-user-post-example"></a> Example
+
+```json
+{
+  "email": "example@experienceuser.com",
+  "firstName": "Example",
+  "lastName": "Name",
+  "password": "aUserPassword",
+  "userTags": {
+    "customKey": "customValue"
+  }
+}
+```
+
+<br/>
+
+## Experience Users
+
+Schema for a collection of Experience Users
+
+### <a name="experience-users-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "title": "Experience User",
+        "description": "Schema for a single Experience User",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "experienceUserId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "applicationId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "passwordLastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastLogin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 1024
+          },
+          "firstName": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "tokenCutoff": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userTags": {
+            "type": "object",
+            "patternProperties": {
+              "^[0-9a-zA-Z_-]{1,255}$": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              }
+            },
+            "additionalProperties": false
+          },
+          "experienceGroups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 255
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "filterField": {
+      "type": "string"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "experienceGroupId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="experience-users-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "58b9d782cbfafe1be675744d",
+      "experienceUserId": "58b9d782cbfafe1be675744d",
+      "applicationId": "575ec8687ae143cd83dc4a97",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "lastUpdated": "2016-06-13T04:00:00.000Z",
+      "passwordLastUpdated": "2016-06-13T04:00:00.000Z",
+      "lastLogin": "2016-06-13T04:00:00.000Z",
+      "email": "example@experienceuser.com",
+      "firstName": "Example",
+      "lastName": "Name",
+      "avatarUrl": "https://example.avatar.url/is_here.png",
+      "userTags": {
+        "customKey": "customValue"
+      }
+    }
+  ],
+  "count": 1,
+  "totalCount": 4,
+  "perPage": 1,
+  "page": 0,
+  "sortField": "name",
+  "sortDirection": "asc",
+  "applicationId": "575ec8687ae143cd83dc4a97"
+}
+```
+
+<br/>
+
 ## Workflow
 
 Schema for a single Workflow
@@ -4977,10 +6275,25 @@ Schema for a single Workflow
         "type": "object",
         "properties": {
           "key": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "deviceId",
+              "deviceTag",
+              "mqttTopic",
+              "webhook",
+              "timer",
+              "event",
+              "virtualButton",
+              "endpoint",
+              "deviceIdConnect",
+              "deviceIdDisconnect",
+              "deviceTagConnect",
+              "deviceTagDisconnect"
+            ]
           },
           "config": {
             "type": "object"
@@ -4993,9 +6306,12 @@ Schema for a single Workflow
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -5010,10 +6326,13 @@ Schema for a single Workflow
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "config": {
             "type": "object"
@@ -5026,9 +6345,12 @@ Schema for a single Workflow
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -5098,7 +6420,7 @@ Schema for a single Workflow
 
 ## Workflow Log
 
-Log of workflow run information
+Log of aggregated workflow run information
 
 ### <a name="workflow-log-schema"></a> Schema
 
@@ -5113,34 +6435,17 @@ Log of workflow run information
         "type": "string",
         "format": "date-time"
       },
-      "errorCount": {
+      "pathsFailed": {
         "type": "number"
       },
       "pathsCompleted": {
         "type": "number"
       },
-      "totalCount": {
-        "type": "number"
-      },
-      "totalTime": {
+      "runCount": {
         "type": "number"
       },
       "wallTime": {
         "type": "number"
-      },
-      "nodes": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "time": {
-              "type": "number"
-            },
-            "count": {
-              "type": "number"
-            }
-          }
-        }
       },
       "errors": {
         "type": "array",
@@ -5218,10 +6523,25 @@ Schema for the body of a Workflow modification request
         "type": "object",
         "properties": {
           "key": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "deviceId",
+              "deviceTag",
+              "mqttTopic",
+              "webhook",
+              "timer",
+              "event",
+              "virtualButton",
+              "endpoint",
+              "deviceIdConnect",
+              "deviceIdDisconnect",
+              "deviceTagConnect",
+              "deviceTagDisconnect"
+            ]
           },
           "config": {
             "type": "object"
@@ -5234,9 +6554,12 @@ Schema for the body of a Workflow modification request
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -5251,10 +6574,13 @@ Schema for the body of a Workflow modification request
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "config": {
             "type": "object"
@@ -5267,9 +6593,12 @@ Schema for the body of a Workflow modification request
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -5344,10 +6673,25 @@ Schema for the body of a Workflow creation request
         "type": "object",
         "properties": {
           "key": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "deviceId",
+              "deviceTag",
+              "mqttTopic",
+              "webhook",
+              "timer",
+              "event",
+              "virtualButton",
+              "endpoint",
+              "deviceIdConnect",
+              "deviceIdDisconnect",
+              "deviceTagConnect",
+              "deviceTagDisconnect"
+            ]
           },
           "config": {
             "type": "object"
@@ -5360,9 +6704,12 @@ Schema for the body of a Workflow creation request
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -5377,10 +6724,13 @@ Schema for the body of a Workflow creation request
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "config": {
             "type": "object"
@@ -5393,9 +6743,12 @@ Schema for the body of a Workflow creation request
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -5508,6 +6861,46 @@ Schema for the body of a request to set a Workflow storage entry
 
 <br/>
 
+## Workflow Trigger Filter
+
+Array of triggers for filtering workflows. Trigger keys and trigger types are optional.
+
+### <a name="workflow-trigger-filter-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "maxLength": 1024
+      },
+      "type": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "additionalProperties": false
+  },
+  "maxItems": 100
+}
+```
+### <a name="workflow-trigger-filter-example"></a> Example
+
+```json
+[
+  {
+    "type": "webhook",
+    "key": "575ed78e7ae143cd83dc4aab"
+  }
+]
+```
+
+<br/>
+
 ## Workflows
 
 Schema for a collection of Workflows
@@ -5564,10 +6957,25 @@ Schema for a collection of Workflows
               "type": "object",
               "properties": {
                 "key": {
-                  "type": "string"
+                  "type": "string",
+                  "maxLength": 1024
                 },
                 "type": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "deviceId",
+                    "deviceTag",
+                    "mqttTopic",
+                    "webhook",
+                    "timer",
+                    "event",
+                    "virtualButton",
+                    "endpoint",
+                    "deviceIdConnect",
+                    "deviceIdDisconnect",
+                    "deviceTagConnect",
+                    "deviceTagDisconnect"
+                  ]
                 },
                 "config": {
                   "type": "object"
@@ -5580,9 +6988,12 @@ Schema for a collection of Workflows
                   "items": {
                     "type": "array",
                     "items": {
-                      "type": "string"
-                    }
-                  }
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "maxItems": 100
+                  },
+                  "maxItems": 100
                 }
               },
               "additionalProperties": false,
@@ -5597,10 +7008,13 @@ Schema for a collection of Workflows
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "string",
+                  "maxLength": 1024
                 },
                 "type": {
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
                 },
                 "config": {
                   "type": "object"
@@ -5613,9 +7027,12 @@ Schema for a collection of Workflows
                   "items": {
                     "type": "array",
                     "items": {
-                      "type": "string"
-                    }
-                  }
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "maxItems": 100
+                  },
+                  "maxItems": 100
                 }
               },
               "additionalProperties": false,
@@ -5855,14 +7272,16 @@ Schema for the body of a last value query request
           }
         },
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceIds": {
       "type": "array",
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     }
   },
   "additionalProperties": false
@@ -5964,6 +7383,9 @@ Schema for information about the currently authenticated user
       "format": "url"
     },
     "limits": {
+      "apitoken": {
+        "type": "number"
+      },
       "application": {
         "type": "number"
       },
@@ -5977,6 +7399,15 @@ Schema for information about the currently authenticated user
         "type": "number"
       },
       "devicerecipe": {
+        "type": "number"
+      },
+      "experienceendpoint": {
+        "type": "number"
+      },
+      "experiencegroup": {
+        "type": "number"
+      },
+      "experienceuser": {
         "type": "number"
       },
       "flow": {
@@ -6109,33 +7540,42 @@ Schema for information about the currently authenticated user
     "summary": {
       "type": "object",
       "properties": {
+        "apiTokenCount": {
+          "type": "number"
+        },
         "appCount": {
-          "type": "number"
-        },
-        "dashCount": {
-          "type": "number"
-        },
-        "orgCount": {
-          "type": "number"
-        },
-        "deviceCount": {
-          "type": "number"
-        },
-        "flowCount": {
-          "type": "number"
-        },
-        "webhookCount": {
           "type": "number"
         },
         "keyCount": {
           "type": "number"
         },
+        "dashCount": {
+          "type": "number"
+        },
+        "deviceCount": {
+          "type": "number"
+        },
         "deviceRecipeCount": {
+          "type": "number"
+        },
+        "experienceEndpointCount": {
+          "type": "number"
+        },
+        "experienceGroupCount": {
+          "type": "number"
+        },
+        "experienceUserCount": {
+          "type": "number"
+        },
+        "flowCount": {
+          "type": "number"
+        },
+        "orgCount": {
           "type": "number"
         },
         "payloadCount": {
           "title": "Payload Counts",
-          "description": "Schema the result of a payload count request",
+          "description": "Schema for the result of a payload count request",
           "type": "object",
           "properties": {
             "mqttOut": {
@@ -6217,8 +7657,19 @@ Schema for information about the currently authenticated user
                   "type": "number"
                 }
               }
+            },
+            "endpoint": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
             }
           }
+        },
+        "webhookCount": {
+          "type": "number"
         }
       }
     },
@@ -6386,14 +7837,16 @@ Schema for the body of a request to send a command to multiple Devices
           }
         },
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceIds": {
       "type": "array",
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     }
   },
   "required": [
@@ -6505,6 +7958,9 @@ Schema for a single Organization
       }
     },
     "limits": {
+      "apitoken": {
+        "type": "number"
+      },
       "application": {
         "type": "number"
       },
@@ -6518,6 +7974,15 @@ Schema for a single Organization
         "type": "number"
       },
       "devicerecipe": {
+        "type": "number"
+      },
+      "experienceendpoint": {
+        "type": "number"
+      },
+      "experiencegroup": {
+        "type": "number"
+      },
+      "experienceuser": {
         "type": "number"
       },
       "flow": {
@@ -6542,33 +8007,45 @@ Schema for a single Organization
     "summary": {
       "type": "object",
       "properties": {
+        "apiTokenCount": {
+          "type": "number"
+        },
         "appCount": {
-          "type": "number"
-        },
-        "dashCount": {
-          "type": "number"
-        },
-        "solutionCount": {
-          "type": "number"
-        },
-        "deviceCount": {
-          "type": "number"
-        },
-        "flowCount": {
-          "type": "number"
-        },
-        "webhookCount": {
           "type": "number"
         },
         "keyCount": {
           "type": "number"
         },
+        "dashCount": {
+          "type": "number"
+        },
+        "deviceCount": {
+          "type": "number"
+        },
         "deviceRecipeCount": {
+          "type": "number"
+        },
+        "experienceEndpointCount": {
+          "type": "number"
+        },
+        "experienceGroupCount": {
+          "type": "number"
+        },
+        "experienceUserCount": {
+          "type": "number"
+        },
+        "flowCount": {
+          "type": "number"
+        },
+        "memberCount": {
+          "type": "number"
+        },
+        "pendingInviteCount": {
           "type": "number"
         },
         "payloadCount": {
           "title": "Payload Counts",
-          "description": "Schema the result of a payload count request",
+          "description": "Schema for the result of a payload count request",
           "type": "object",
           "properties": {
             "mqttOut": {
@@ -6650,13 +8127,21 @@ Schema for a single Organization
                   "type": "number"
                 }
               }
+            },
+            "endpoint": {
+              "type": "object",
+              "patternProperties": {
+                ".*": {
+                  "type": "number"
+                }
+              }
             }
           }
         },
-        "pendingInviteCount": {
+        "solutionCount": {
           "type": "number"
         },
-        "memberCount": {
+        "webhookCount": {
           "type": "number"
         }
       }
@@ -7204,6 +8689,9 @@ Schema for a collection of Organizations
             }
           },
           "limits": {
+            "apitoken": {
+              "type": "number"
+            },
             "application": {
               "type": "number"
             },
@@ -7217,6 +8705,15 @@ Schema for a collection of Organizations
               "type": "number"
             },
             "devicerecipe": {
+              "type": "number"
+            },
+            "experienceendpoint": {
+              "type": "number"
+            },
+            "experiencegroup": {
+              "type": "number"
+            },
+            "experienceuser": {
               "type": "number"
             },
             "flow": {
@@ -7241,33 +8738,45 @@ Schema for a collection of Organizations
           "summary": {
             "type": "object",
             "properties": {
+              "apiTokenCount": {
+                "type": "number"
+              },
               "appCount": {
-                "type": "number"
-              },
-              "dashCount": {
-                "type": "number"
-              },
-              "solutionCount": {
-                "type": "number"
-              },
-              "deviceCount": {
-                "type": "number"
-              },
-              "flowCount": {
-                "type": "number"
-              },
-              "webhookCount": {
                 "type": "number"
               },
               "keyCount": {
                 "type": "number"
               },
+              "dashCount": {
+                "type": "number"
+              },
+              "deviceCount": {
+                "type": "number"
+              },
               "deviceRecipeCount": {
+                "type": "number"
+              },
+              "experienceEndpointCount": {
+                "type": "number"
+              },
+              "experienceGroupCount": {
+                "type": "number"
+              },
+              "experienceUserCount": {
+                "type": "number"
+              },
+              "flowCount": {
+                "type": "number"
+              },
+              "memberCount": {
+                "type": "number"
+              },
+              "pendingInviteCount": {
                 "type": "number"
               },
               "payloadCount": {
                 "title": "Payload Counts",
-                "description": "Schema the result of a payload count request",
+                "description": "Schema for the result of a payload count request",
                 "type": "object",
                 "properties": {
                   "mqttOut": {
@@ -7349,13 +8858,21 @@ Schema for a collection of Organizations
                         "type": "number"
                       }
                     }
+                  },
+                  "endpoint": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
                   }
                 }
               },
-              "pendingInviteCount": {
+              "solutionCount": {
                 "type": "number"
               },
-              "memberCount": {
+              "webhookCount": {
                 "type": "number"
               }
             }
@@ -7480,7 +8997,7 @@ Schema for a collection of Organizations
 
 ## Payload Counts
 
-Schema the result of a payload count request
+Schema for the result of a payload count request
 
 ### <a name="payload-counts-schema"></a> Schema
 
@@ -7562,6 +9079,14 @@ Schema the result of a payload count request
       }
     },
     "deviceDisconnect": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
+    },
+    "endpoint": {
       "type": "object",
       "patternProperties": {
         ".*": {
@@ -7740,21 +9265,24 @@ Schema for the body of a resource transfer request
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     },
     "dashboardIds": {
       "type": "array",
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     },
     "solutionIds": {
       "type": "array",
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     },
     "strict": {
       "type": "boolean"
@@ -7823,7 +9351,9 @@ Schema for a single Solution
     },
     "slug": {
       "type": "string",
-      "pattern": "^[0-9a-z_-]{1,255}$"
+      "minLength": 4,
+      "maxLength": 255,
+      "pattern": "^[0-9a-z_-]*$"
     },
     "allowSelfDeletion": {
       "type": "boolean"
@@ -8117,7 +9647,8 @@ Schema for a single Solution User
           "items": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
-          }
+          },
+          "maxItems": 1000
         }
       }
     }
@@ -8154,11 +9685,11 @@ Schema for a single Solution User
 
 <br/>
 
-## User Credentials
+## Solution User Credentials
 
 Schema for the body of a Solution User authentication request
 
-### <a name="user-credentials-schema"></a> Schema
+### <a name="solution-user-credentials-schema"></a> Schema
 
 ```json
 {
@@ -8192,7 +9723,7 @@ Schema for the body of a Solution User authentication request
   "additionalProperties": false
 }
 ```
-### <a name="user-credentials-example"></a> Example
+### <a name="solution-user-credentials-example"></a> Example
 
 ```json
 {
@@ -8267,7 +9798,8 @@ Schema for the body of a Solution User modification request
           "items": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
-          }
+          },
+          "maxItems": 1000
         },
         "additionalProperties": false
       }
@@ -8350,7 +9882,8 @@ Schema for the body of a Solution User creation request
           "items": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
-          }
+          },
+          "maxItems": 1000
         },
         "additionalProperties": false
       }
@@ -8486,7 +10019,8 @@ Schema for a collection of Solution Users
                 "items": {
                   "type": "string",
                   "pattern": "^[A-Fa-f\\d]{24}$"
-                }
+                },
+                "maxItems": 1000
               }
             }
           }
@@ -8623,7 +10157,9 @@ Schema for a collection of Solutions
           },
           "slug": {
             "type": "string",
-            "pattern": "^[0-9a-z_-]{1,255}$"
+            "minLength": 4,
+            "maxLength": 255,
+            "pattern": "^[0-9a-z_-]*$"
           },
           "allowSelfDeletion": {
             "type": "boolean"
@@ -8965,14 +10501,16 @@ Schema for the body of a time series query request
           }
         },
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     },
     "deviceIds": {
       "type": "array",
       "items": {
         "type": "string",
         "pattern": "^[A-Fa-f\\d]{24}$"
-      }
+      },
+      "maxItems": 1000
     },
     "limit": {
       "type": "number"

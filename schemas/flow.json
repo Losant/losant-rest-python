@@ -40,10 +40,25 @@
         "type": "object",
         "properties": {
           "key": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "deviceId",
+              "deviceTag",
+              "mqttTopic",
+              "webhook",
+              "timer",
+              "event",
+              "virtualButton",
+              "endpoint",
+              "deviceIdConnect",
+              "deviceIdDisconnect",
+              "deviceTagConnect",
+              "deviceTagDisconnect"
+            ]
           },
           "config": {
             "type": "object"
@@ -56,9 +71,12 @@
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,
@@ -73,10 +91,13 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 1024
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
           },
           "config": {
             "type": "object"
@@ -89,9 +110,12 @@
             "items": {
               "type": "array",
               "items": {
-                "type": "string"
-              }
-            }
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
           }
         },
         "additionalProperties": false,

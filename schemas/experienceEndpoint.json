@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "experienceEndpointId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "delete",
+        "get",
+        "options",
+        "patch",
+        "post",
+        "put"
+      ]
+    },
+    "access": {
+      "type": "string",
+      "enum": [
+        "public",
+        "authenticated",
+        "group"
+      ]
+    },
+    "experienceGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          }
+        }
+      }
+    }
+  }
+}

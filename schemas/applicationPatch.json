@@ -10,6 +10,19 @@
     "description": {
       "type": "string",
       "maxLength": 32767
+    },
+    "endpointSlug": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 255,
+      "pattern": "^[0-9a-z_-]*$"
+    },
+    "expUserTokenCutoff": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endpointDefaultCors": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false

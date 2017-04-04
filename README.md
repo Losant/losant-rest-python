@@ -180,6 +180,35 @@ Contains all the actions that can be performed against the collection of
 [Events](https://docs.losant.com/events/overview/) belonging
 to an Application - such as listing open events or creating a new event.
 
+*   [experience_endpoint](docs/experienceEndpoint.md)  
+Contains all the actions that can be performed against a single
+[Experience Endpoint](https://docs.losant.com/experiences/endpoints/), such as updating route
+information.
+
+*   [experience_endpoints](docs/experienceEndpoints.md)  
+Contains all the actions that can be performed against the collection of
+[Experience Endpoints](https://docs.losant.com/experiences/endpoints/) belonging
+to an Application - such as listing endpoints or creating a new endpoint.
+
+*   [experience_group](docs/experienceGroup.md)  
+Contains all the actions that can be performed against a single
+[Experience Group](https://docs.losant.com/experiences/groups/), such as updating member information.
+
+*   [experience_groups](docs/experienceGroups.md)  
+Contains all the actions that can be performed against the collection of
+[Experience Groups](https://docs.losant.com/experiences/groups/) belonging
+to an Application - such as listing groups or creating a new group.
+
+*   [experience_user](docs/experienceUser.md)  
+Contains all the actions that can be performed against a single
+[Experience User](https://docs.losant.com/experiences/users/), such as changing their email
+or password.
+
+*   [experience_users](docs/experienceUsers.md)  
+Contains all the actions that can be performed against the collection of
+[Experience Users](https://docs.losant.com/experiences/users/) belonging
+to an Application - such as listing users or creating a new user.
+
 *   [flow](docs/flow.md)  
 Contains all the actions that can be performed against a single
 [Workflow](https://docs.losant.com/workflows/overview/), such as enabling or
