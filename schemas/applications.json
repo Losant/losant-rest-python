@@ -88,6 +88,9 @@
               "flowCount": {
                 "type": "number"
               },
+              "integrationCount": {
+                "type": "number"
+              },
               "webhookCount": {
                 "type": "number"
               }

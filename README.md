@@ -219,6 +219,16 @@ Contains all the actions that can be performed against the collection of
 [Workflows](https://docs.losant.com/workflows/overview/) belonging
 to an Application - such as listing the workflows or creating a new workflow.
 
+*   [integration](docs/integration.md)  
+Contains all the actions that can be performed against a single
+[Integration](https://docs.losant.com/applications/integrations/), which
+include things like removing an integration or updating integration configuration.
+
+*   [integrations](docs/integrations.md)  
+Contains all the actions that can be performed against the collection of
+[Integrations](https://docs.losant.com/applications/integrations/) belonging
+to an Application - such as listing integrations or creating a new integration.
+
 *   [me](docs/me.md)  
 Contains the actions for operating against the currently authenticated
 [User](https://docs.losant.com/user-accounts/overview/) such as changing

@@ -22,45 +22,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-""" Module for Losant API Flows wrapper class """
+""" Module for Losant API Integration wrapper class """
 # pylint: disable=C0301
 
-class Flows(object):
-    """ Class containing all the actions for the Flows Resource """
+class Integration(object):
+    """ Class containing all the actions for the Integration Resource """
 
     def __init__(self, client):
         self.client = client
 
-    def get(self, **kwargs):
+    def delete(self, **kwargs):
         """
-        Returns the flows for an application
+        Deletes an integration
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flows.*, or flows.get.
+        all.Application, all.Organization, all.User, integration.*, or integration.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
-        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
-        *  {string} page - Which page of results to return
-        *  {string} perPage - How many items to return per page
-        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
-        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {hash} triggerFilter - Array of triggers to filter by. (https://api.losant.com/#/definitions/flowTriggerFilter)
+        *  {string} integrationId - ID associated with the integration
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of flows (https://api.losant.com/#/definitions/flows)
+        *  200 - If integration was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if integration was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -70,20 +64,8 @@ class Flows(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "sortField" in kwargs:
-            query_params["sortField"] = kwargs["sortField"]
-        if "sortDirection" in kwargs:
-            query_params["sortDirection"] = kwargs["sortDirection"]
-        if "page" in kwargs:
-            query_params["page"] = kwargs["page"]
-        if "perPage" in kwargs:
-            query_params["perPage"] = kwargs["perPage"]
-        if "filterField" in kwargs:
-            query_params["filterField"] = kwargs["filterField"]
-        if "filter" in kwargs:
-            query_params["filter"] = kwargs["filter"]
-        if "triggerFilter" in kwargs:
-            query_params["triggerFilter"] = kwargs["triggerFilter"]
+        if "integrationId" in kwargs:
+            path_params["integrationId"] = kwargs["integrationId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -93,34 +75,83 @@ class Flows(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/flows".format(**path_params)
+        path = "/applications/{applicationId}/integrations/{integrationId}".format(**path_params)
+
+        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
+
+    def get(self, **kwargs):
+        """
+        Retrieves information on an integration
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, integration.*, or integration.get.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} integrationId - ID associated with the integration
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - integration information (https://api.losant.com/#/definitions/integration)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if integration was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "integrationId" in kwargs:
+            path_params["integrationId"] = kwargs["integrationId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/integrations/{integrationId}".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
-    def post(self, **kwargs):
+    def patch(self, **kwargs):
         """
-        Create a new flow for an application
+        Updates information about an integration
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, flows.*, or flows.post.
+        all.Application, all.Organization, all.User, integration.*, or integration.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} flow - New flow information (https://api.losant.com/#/definitions/flowPost)
+        *  {string} integrationId - ID associated with the integration
+        *  {hash} integration - Object containing new properties of the integration (https://api.losant.com/#/definitions/integrationPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created flow (https://api.losant.com/#/definitions/flow)
+        *  200 - Updated integration information (https://api.losant.com/#/definitions/integration)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if integration was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -130,8 +161,10 @@ class Flows(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "flow" in kwargs:
-            body = kwargs["flow"]
+        if "integrationId" in kwargs:
+            path_params["integrationId"] = kwargs["integrationId"]
+        if "integration" in kwargs:
+            body = kwargs["integration"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -141,7 +174,7 @@ class Flows(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/flows".format(**path_params)
+        path = "/applications/{applicationId}/integrations/{integrationId}".format(**path_params)
 
-        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
 

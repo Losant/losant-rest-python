@@ -54,6 +54,8 @@ from .experience_user import ExperienceUser
 from .experience_users import ExperienceUsers
 from .flow import Flow
 from .flows import Flows
+from .integration import Integration
+from .integrations import Integrations
 from .me import Me
 from .org import Org
 from .org_invites import OrgInvites
@@ -75,7 +77,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.5.7
+    Built For Version 1.6.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -107,6 +109,8 @@ class Client(object):
         self.experience_users = ExperienceUsers(self)
         self.flow = Flow(self)
         self.flows = Flows(self)
+        self.integration = Integration(self)
+        self.integrations = Integrations(self)
         self.me = Me(self)
         self.org = Org(self)
         self.org_invites = OrgInvites(self)
@@ -126,7 +130,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.5.7"
+        headers["Accept-Version"] = "^1.6.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

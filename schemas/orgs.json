@@ -110,6 +110,9 @@
             "solution": {
               "type": "number"
             },
+            "integration": {
+              "type": "number"
+            },
             "webhook": {
               "type": "number"
             },
@@ -254,10 +257,21 @@
                         "type": "number"
                       }
                     }
+                  },
+                  "integration": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".*": {
+                        "type": "number"
+                      }
+                    }
                   }
                 }
               },
               "solutionCount": {
+                "type": "number"
+              },
+              "integrationCount": {
                 "type": "number"
               },
               "webhookCount": {

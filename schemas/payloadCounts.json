@@ -89,6 +89,14 @@
           "type": "number"
         }
       }
+    },
+    "integration": {
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "number"
+        }
+      }
     }
   }
 }

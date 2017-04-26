@@ -1,7 +1,7 @@
-# Flows Actions
+# Integrations Actions
 
 Details on the various actions that can be performed on the
-Flows resource, including the expected
+Integrations resource, including the expected
 parameters and the potential responses.
 
 ##### Contents
@@ -13,10 +13,10 @@ parameters and the potential responses.
 
 ## Get
 
-Returns the flows for an application
+Returns the integrations for an application
 
 ```python
-result = client.flows.get(applicationId=my_application_id)
+result = client.integrations.get(applicationId=my_application_id)
 
 print(result)
 ```
@@ -24,26 +24,25 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flows.*, or flows.get.
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, integrations.*, or integrations.get.
 
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| sortField | string | N | Field to sort the results by. Accepted values are: name, id, creationDate | name | name |
+| sortField | string | N | Field to sort the results by. Accepted values are: name, id, creationDate, integrationType | name | name |
 | sortDirection | string | N | Direction to sort the results by. Accepted values are: asc, desc | asc | asc |
 | page | string | N | Which page of results to return | 0 | 0 |
 | perPage | string | N | How many items to return per page | 1000 | 10 |
-| filterField | string | N | Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name |  | name |
-| filter | string | N | Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering. |  | my*flow |
-| triggerFilter | [Workflow Trigger Filter](_schemas.md#workflow-trigger-filter) | N | Array of triggers to filter by. |  | [Workflow Trigger Filter Example](_schemas.md#workflow-trigger-filter-example) |
+| filterField | string | N | Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name, integrationType |  | integrationType |
+| filter | string | N | Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering. |  | my*integration |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Workflows](_schemas.md#workflows) | Collection of flows |
+| 200 | [Integrations](_schemas.md#integrations) | Collection of integrations |
 
 #### Error Responses
 
@@ -56,12 +55,12 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 ## Post
 
-Create a new flow for an application
+Create a new integration for an application
 
 ```python
-result = client.flows.post(
+result = client.integrations.post(
     applicationId=my_application_id,
-    flow=my_flow)
+    integration=my_integration)
 
 print(result)
 ```
@@ -69,20 +68,20 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, flows.*, or flows.post.
+all.Application, all.Organization, all.User, integrations.*, or integrations.post.
 
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| flow | [Workflow Post](_schemas.md#workflow-post) | Y | New flow information |  | [Workflow Post Example](_schemas.md#workflow-post-example) |
+| integration | [Integrations Post](_schemas.md#integrations-post) | Y | New integration information |  | [Integrations Post Example](_schemas.md#integrations-post-example) |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [Workflow](_schemas.md#workflow) | Successfully created flow |
+| 201 | [Integrations](_schemas.md#integrations) | Successfully created integration |
 
 #### Error Responses
 
