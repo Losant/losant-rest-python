@@ -219,6 +219,16 @@ Contains all the actions that can be performed against the collection of
 [Workflows](https://docs.losant.com/workflows/overview/) belonging
 to an Application - such as listing the workflows or creating a new workflow.
 
+*   [flow_version](docs/flowVersion.md)  
+Contains all the actions that can be performed against a single
+[Workflow Version](https://docs.losant.com/workflows/versioning/), such as enabling or
+disabling a workflow version, or updating the version notes.
+
+*   [flow_versions](docs/flowVersions.md)  
+Contains all the actions that can be performed against the collection of
+[Workflow Versions](https://docs.losant.com/workflows/versioning/) belonging
+to a Workflow - such as listing the versions or creating a new version.
+
 *   [integration](docs/integration.md)  
 Contains all the actions that can be performed against a single
 [Integration](https://docs.losant.com/applications/integrations/), which

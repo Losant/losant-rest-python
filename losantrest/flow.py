@@ -129,7 +129,7 @@ class Flow(object):
 
     def get_log_entries(self, **kwargs):
         """
-        Retrieve the recent log entries about the flows
+        Retrieve the recent log entries about runs of this workflow
 
         Authentication:
         The client must be configured with a valid api

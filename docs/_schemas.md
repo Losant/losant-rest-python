@@ -67,6 +67,10 @@
 *   [Workflow Storage Entries](#workflow-storage-entries)
 *   [Workflow Storage Entry](#workflow-storage-entry)
 *   [Workflow Trigger Filter](#workflow-trigger-filter)
+*   [Workflow Version](#workflow-version)
+*   [Workflow Version Patch](#workflow-version-patch)
+*   [Workflow Version Post](#workflow-version-post)
+*   [Workflow Versions](#workflow-versions)
 *   [Workflows](#workflows)
 *   [Github Login](#github-login)
 *   [Integrations](#integrations)
@@ -446,6 +450,8 @@ Schema for the body of an Application API Token creation request
           "integrations.*",
           "flow.*",
           "flows.*",
+          "flowVersion.*",
+          "flowVersions.*",
           "webhook.*",
           "webhooks.*",
           "application.delete",
@@ -517,6 +523,12 @@ Schema for the body of an Application API Token creation request
           "flow.setStorageEntry",
           "flows.get",
           "flows.post",
+          "flowVersion.delete",
+          "flowVersion.get",
+          "flowVersion.log",
+          "flowVersion.patch",
+          "flowVersions.get",
+          "flowVersions.post",
           "integration.delete",
           "integration.get",
           "integration.patch",
@@ -1938,16 +1950,16 @@ Schema for a single Dashboard
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "startX": {
-            "type": "integer"
+            "type": "number"
           },
           "startY": {
-            "type": "integer"
+            "type": "number"
           },
           "width": {
-            "type": "integer"
+            "type": "number"
           },
           "height": {
-            "type": "integer"
+            "type": "number"
           },
           "config": {
             "type": "object"
@@ -2144,16 +2156,16 @@ Schema for the body of a Dashboard modification request
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "startX": {
-            "type": "integer"
+            "type": "number"
           },
           "startY": {
-            "type": "integer"
+            "type": "number"
           },
           "width": {
-            "type": "integer"
+            "type": "number"
           },
           "height": {
-            "type": "integer"
+            "type": "number"
           },
           "config": {
             "type": "object"
@@ -2334,16 +2346,16 @@ Schema for the body of a Dashboard creation request
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "startX": {
-            "type": "integer"
+            "type": "number"
           },
           "startY": {
-            "type": "integer"
+            "type": "number"
           },
           "width": {
-            "type": "integer"
+            "type": "number"
           },
           "height": {
-            "type": "integer"
+            "type": "number"
           },
           "config": {
             "type": "object"
@@ -2570,16 +2582,16 @@ Schema for a collection of Dashboards
                   "pattern": "^[A-Fa-f\\d]{24}$"
                 },
                 "startX": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "startY": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "width": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "height": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "config": {
                   "type": "object"
@@ -4111,6 +4123,11 @@ Schema for a single device state or an array of device states
             }
           },
           "additionalProperties": false
+        },
+        "flowVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
         }
       },
       "required": [
@@ -4165,6 +4182,11 @@ Schema for a single device state or an array of device states
               }
             },
             "additionalProperties": false
+          },
+          "flowVersion": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
           }
         },
         "required": [
@@ -4242,6 +4264,11 @@ Schema for an array of Device states
           }
         },
         "additionalProperties": false
+      },
+      "flowVersion": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 255
       }
     },
     "required": [
@@ -6289,6 +6316,10 @@ Schema for a single Workflow
     "enabled": {
       "type": "boolean"
     },
+    "defaultVersionId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
     "triggers": {
       "type": "array",
       "items": {
@@ -6409,6 +6440,22 @@ Schema for a single Workflow
         },
         "errorCount": {
           "type": "number"
+        },
+        "byVersion": {
+          "type": "object",
+          "patternProperties": {
+            ".*": {
+              "type": "object",
+              "properties": {
+                "runCount": {
+                  "type": "number"
+                },
+                "errorCount": {
+                  "type": "number"
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -6452,6 +6499,9 @@ Log of aggregated workflow run information
   "items": {
     "type": "object",
     "properties": {
+      "flowVersionId": {
+        "type": "string"
+      },
       "time": {
         "type": "string",
         "format": "date-time"
@@ -6537,6 +6587,17 @@ Schema for the body of a Workflow modification request
     },
     "enabled": {
       "type": "boolean"
+    },
+    "defaultVersionId": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Fa-f\\d]{24}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "triggers": {
       "type": "array",
@@ -6924,6 +6985,617 @@ Array of triggers for filtering workflows. Trigger keys and trigger types are op
 
 <br/>
 
+## Workflow Version
+
+Schema for a single Workflow Version
+
+### <a name="workflow-version-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "flowVersionId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "flowId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "deviceId",
+              "deviceIdConnect",
+              "deviceIdDisconnect",
+              "deviceTag",
+              "deviceTagConnect",
+              "deviceTagDisconnect",
+              "endpoint",
+              "event",
+              "mqttTopic",
+              "integration",
+              "timer",
+              "virtualButton",
+              "webhook"
+            ]
+          },
+          "config": {
+            "type": "object"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "outputIds": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "config": {
+            "type": "object"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "outputIds": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      }
+    },
+    "globals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+          },
+          "json": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "json"
+        ]
+      }
+    }
+  }
+}
+```
+### <a name="workflow-version-example"></a> Example
+
+```json
+{
+  "id": "675ed18f7ae143cd83dc4bb7",
+  "flowVersionId": "675ed18f7ae143cd83dc4bb7",
+  "flowId": "575ed18f7ae143cd83dc4aa6",
+  "applicationId": "575ec8687ae143cd83dc4a97",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z",
+  "version": "v1.2.3",
+  "notes": "Description of my workflow version",
+  "enabled": true,
+  "triggers": [],
+  "nodes": [],
+  "globals": []
+}
+```
+
+<br/>
+
+## Workflow Version Patch
+
+Schema for the body of a Workflow Version modification request
+
+### <a name="workflow-version-patch-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "notes": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "enabled": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="workflow-version-patch-example"></a> Example
+
+```json
+{
+  "notes": "Updated workflow version notes",
+  "enabled": false
+}
+```
+
+<br/>
+
+## Workflow Version Post
+
+Schema for the body of a Workflow Version creation request
+
+### <a name="workflow-version-post-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "deviceId",
+              "deviceIdConnect",
+              "deviceIdDisconnect",
+              "deviceTag",
+              "deviceTagConnect",
+              "deviceTagDisconnect",
+              "endpoint",
+              "event",
+              "mqttTopic",
+              "integration",
+              "timer",
+              "virtualButton",
+              "webhook"
+            ]
+          },
+          "config": {
+            "type": "object"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "outputIds": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "config": {
+            "type": "object"
+          },
+          "meta": {
+            "type": "object"
+          },
+          "outputIds": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 255
+              },
+              "maxItems": 100
+            },
+            "maxItems": 100
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      }
+    },
+    "globals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+          },
+          "json": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "json"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "version"
+  ]
+}
+```
+### <a name="workflow-version-post-example"></a> Example
+
+```json
+{
+  "version": "v1.2.3",
+  "notes": "Notes about my new workflow version",
+  "enabled": false
+}
+```
+
+<br/>
+
+## Workflow Versions
+
+Schema for a collection of Workflow Versions
+
+### <a name="workflow-versions-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "title": "Workflow Version",
+        "description": "Schema for a single Workflow Version",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "flowVersionId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "flowId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "applicationId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 32767
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "triggers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "deviceId",
+                    "deviceIdConnect",
+                    "deviceIdDisconnect",
+                    "deviceTag",
+                    "deviceTagConnect",
+                    "deviceTagDisconnect",
+                    "endpoint",
+                    "event",
+                    "mqttTopic",
+                    "integration",
+                    "timer",
+                    "virtualButton",
+                    "webhook"
+                  ]
+                },
+                "config": {
+                  "type": "object"
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "outputIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "maxItems": 100
+                  },
+                  "maxItems": 100
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "type"
+              ]
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                },
+                "config": {
+                  "type": "object"
+                },
+                "meta": {
+                  "type": "object"
+                },
+                "outputIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "maxItems": 100
+                  },
+                  "maxItems": 100
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "type"
+              ]
+            }
+          },
+          "globals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                },
+                "json": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "key",
+                "json"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "filterField": {
+      "type": "string"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "flowId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="workflow-versions-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "675ed18f7ae143cd83dc4bb7",
+      "flowVersionId": "675ed18f7ae143cd83dc4bb7",
+      "flowId": "575ed18f7ae143cd83dc4aa6",
+      "applicationId": "575ec8687ae143cd83dc4a97",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "lastUpdated": "2016-06-13T04:00:00.000Z",
+      "version": "v1.2.3",
+      "notes": "Description of my workflow version",
+      "enabled": true,
+      "triggers": [],
+      "nodes": [],
+      "globals": []
+    }
+  ],
+  "count": 1,
+  "totalCount": 4,
+  "perPage": 1,
+  "page": 0,
+  "sortField": "version",
+  "sortDirection": "asc",
+  "applicationId": "575ec8687ae143cd83dc4a97",
+  "flowId": "575ed18f7ae143cd83dc4aa6"
+}
+```
+
+<br/>
+
 ## Workflows
 
 Schema for a collection of Workflows
@@ -6973,6 +7645,10 @@ Schema for a collection of Workflows
           },
           "enabled": {
             "type": "boolean"
+          },
+          "defaultVersionId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "triggers": {
             "type": "array",
@@ -7094,6 +7770,22 @@ Schema for a collection of Workflows
               },
               "errorCount": {
                 "type": "number"
+              },
+              "byVersion": {
+                "type": "object",
+                "patternProperties": {
+                  ".*": {
+                    "type": "object",
+                    "properties": {
+                      "runCount": {
+                        "type": "number"
+                      },
+                      "errorCount": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -7242,7 +7934,8 @@ Schema for a single Integrations
       "type": "string",
       "enum": [
         "mqtt",
-        "googlePubSub"
+        "googlePubSub",
+        "particle"
       ]
     },
     "enabled": {
@@ -7337,6 +8030,35 @@ Schema for a single Integrations
         "port",
         "protocol",
         "host"
+      ]
+    },
+    "particleConfig": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "productSlugOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "orgSlugOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "deviceNameOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "accessToken"
       ]
     },
     "status": {
@@ -7437,7 +8159,8 @@ Schema for the body of an Integrations modification request
       "type": "string",
       "enum": [
         "mqtt",
-        "googlePubSub"
+        "googlePubSub",
+        "particle"
       ]
     },
     "enabled": {
@@ -7532,6 +8255,35 @@ Schema for the body of an Integrations modification request
         "port",
         "protocol",
         "host"
+      ]
+    },
+    "particleConfig": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "productSlugOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "orgSlugOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "deviceNameOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "accessToken"
       ]
     }
   },
@@ -7570,7 +8322,8 @@ Schema for the body of an Integrations creation request
       "type": "string",
       "enum": [
         "mqtt",
-        "googlePubSub"
+        "googlePubSub",
+        "particle"
       ]
     },
     "enabled": {
@@ -7665,6 +8418,35 @@ Schema for the body of an Integrations creation request
         "port",
         "protocol",
         "host"
+      ]
+    },
+    "particleConfig": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "productSlugOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "orgSlugOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "deviceNameOrId": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "accessToken"
       ]
     }
   },
@@ -7744,7 +8526,8 @@ Schema for a collection of Integrations
             "type": "string",
             "enum": [
               "mqtt",
-              "googlePubSub"
+              "googlePubSub",
+              "particle"
             ]
           },
           "enabled": {
@@ -7839,6 +8622,35 @@ Schema for a collection of Integrations
               "port",
               "protocol",
               "host"
+            ]
+          },
+          "particleConfig": {
+            "type": "object",
+            "properties": {
+              "accessToken": {
+                "type": "string",
+                "maxLength": 1024,
+                "minLength": 1
+              },
+              "productSlugOrId": {
+                "type": "string",
+                "maxLength": 1024,
+                "minLength": 1
+              },
+              "orgSlugOrId": {
+                "type": "string",
+                "maxLength": 1024,
+                "minLength": 1
+              },
+              "deviceNameOrId": {
+                "type": "string",
+                "maxLength": 1024,
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "accessToken"
             ]
           },
           "status": {
@@ -11415,7 +12227,12 @@ Schema for the body of a request to press a Workflow virtual button
       "type": "string"
     },
     "payload": {},
-    "meta": {}
+    "meta": {},
+    "flowVersion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    }
   },
   "required": [
     "key"

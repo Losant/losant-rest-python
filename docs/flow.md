@@ -96,7 +96,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 ## Get Log Entries
 
-Retrieve the recent log entries about the flows
+Retrieve the recent log entries about runs of this workflow
 
 ```python
 result = client.flow.get_log_entries(
