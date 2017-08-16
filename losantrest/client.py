@@ -40,6 +40,10 @@ from .auth import Auth
 from .dashboard import Dashboard
 from .dashboards import Dashboards
 from .data import Data
+from .data_table import DataTable
+from .data_table_row import DataTableRow
+from .data_table_rows import DataTableRows
+from .data_tables import DataTables
 from .device import Device
 from .device_recipe import DeviceRecipe
 from .device_recipes import DeviceRecipes
@@ -79,7 +83,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.6.4
+    Built For Version 1.7.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -97,6 +101,10 @@ class Client(object):
         self.dashboard = Dashboard(self)
         self.dashboards = Dashboards(self)
         self.data = Data(self)
+        self.data_table = DataTable(self)
+        self.data_table_row = DataTableRow(self)
+        self.data_table_rows = DataTableRows(self)
+        self.data_tables = DataTables(self)
         self.device = Device(self)
         self.device_recipe = DeviceRecipe(self)
         self.device_recipes = DeviceRecipes(self)
@@ -134,7 +142,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.6.4"
+        headers["Accept-Version"] = "^1.7.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

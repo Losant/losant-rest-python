@@ -31,6 +31,54 @@ class Flow(object):
     def __init__(self, client):
         self.client = client
 
+    def clear_storage_entries(self, **kwargs):
+        """
+        Clear all storage entries
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, flow.*, or flow.clearStorageEntries.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} flowId - ID associated with the flow
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - The current storage entries (https://api.losant.com/#/definitions/flowStorageEntries)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if flow was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "flowId" in kwargs:
+            path_params["flowId"] = kwargs["flowId"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/flows/{flowId}/storage".format(**path_params)
+
+        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
+
     def delete(self, **kwargs):
         """
         Deletes a flow
@@ -200,7 +248,7 @@ class Flow(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - The stored values (https://api.losant.com/#/definitions/flowStorageEntries)
+        *  200 - The current storage entries (https://api.losant.com/#/definitions/flowStorageEntries)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
