@@ -113,7 +113,7 @@ class ApplicationKeys(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created applicationKey (https://api.losant.com/#/definitions/applicationKey)
+        *  201 - Successfully created applicationKey (https://api.losant.com/#/definitions/applicationKeyPostResponse)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
