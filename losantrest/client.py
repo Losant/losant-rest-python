@@ -54,6 +54,8 @@ from .experience_endpoint import ExperienceEndpoint
 from .experience_endpoints import ExperienceEndpoints
 from .experience_group import ExperienceGroup
 from .experience_groups import ExperienceGroups
+from .experience_template import ExperienceTemplate
+from .experience_templates import ExperienceTemplates
 from .experience_user import ExperienceUser
 from .experience_users import ExperienceUsers
 from .flow import Flow
@@ -83,7 +85,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.7.2
+    Built For Version 1.8.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -115,6 +117,8 @@ class Client(object):
         self.experience_endpoints = ExperienceEndpoints(self)
         self.experience_group = ExperienceGroup(self)
         self.experience_groups = ExperienceGroups(self)
+        self.experience_template = ExperienceTemplate(self)
+        self.experience_templates = ExperienceTemplates(self)
         self.experience_user = ExperienceUser(self)
         self.experience_users = ExperienceUsers(self)
         self.flow = Flow(self)
@@ -142,7 +146,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.7.2"
+        headers["Accept-Version"] = "^1.8.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

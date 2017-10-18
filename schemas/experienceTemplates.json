@@ -5,15 +5,15 @@
     "items": {
       "type": "array",
       "items": {
-        "title": "Experience Endpoint",
-        "description": "Schema for a single Experience Endpoint",
+        "title": "Experience Template",
+        "description": "Schema for a single Experience Template",
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
-          "experienceEndpointId": {
+          "experienceTemplateId": {
             "type": "string",
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
@@ -29,53 +29,45 @@
             "type": "string",
             "format": "date-time"
           },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
           "description": {
             "type": "string",
             "maxLength": 32767
           },
-          "route": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 1024
-          },
-          "enabled": {
-            "type": "boolean"
-          },
-          "method": {
+          "templateType": {
             "type": "string",
             "enum": [
-              "delete",
-              "get",
-              "options",
-              "patch",
-              "post",
-              "put"
+              "layout",
+              "page",
+              "component"
             ]
           },
-          "access": {
+          "layoutId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "body": {
             "type": "string",
-            "enum": [
-              "public",
-              "authenticated",
-              "group"
-            ]
+            "maxLength": 131072,
+            "minLength": 1
           },
-          "experienceGroups": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 255
-                },
-                "id": {
-                  "type": "string",
-                  "pattern": "^[A-Fa-f\\d]{24}$"
-                }
+          "templateTags": {
+            "type": "object",
+            "patternProperties": {
+              "^[0-9a-zA-Z_-]{1,255}$": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
               }
-            }
+            },
+            "additionalProperties": false
           }
         }
       }
@@ -84,6 +76,12 @@
       "type": "integer"
     },
     "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
       "type": "integer"
     },
     "filter": {
@@ -106,12 +104,13 @@
       "type": "string",
       "pattern": "^[A-Fa-f\\d]{24}$"
     },
-    "experienceGroupId": {
+    "templateType": {
       "type": "string",
-      "pattern": "^[A-Fa-f\\d]{24}$"
-    },
-    "notFoundRequestCount": {
-      "type": "number"
+      "enum": [
+        "layout",
+        "page",
+        "component"
+      ]
     }
   }
 }
