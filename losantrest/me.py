@@ -75,6 +75,50 @@ class Me(object):
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
+    def change_password(self, **kwargs):
+        """
+        Changes the current user's password and optionally logs out all other sessions
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, me.*, or me.changePassword.
+
+        Parameters:
+        *  {hash} data - Object containing the password change info (https://api.losant.com/#/definitions/changePassword)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - A new, valid, auth token (potentially all previous tokens are now invalid) (https://api.losant.com/#/definitions/authedUser)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "data" in kwargs:
+            body = kwargs["data"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/me/changePassword".format(**path_params)
+
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
+
     def delete(self, **kwargs):
         """
         Deletes the current user

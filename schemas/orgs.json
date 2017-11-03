@@ -98,16 +98,19 @@
             "devicerecipe": {
               "type": "number"
             },
+            "experiencedomain": {
+              "type": "number"
+            },
             "experienceendpoint": {
               "type": "number"
             },
             "experiencegroup": {
               "type": "number"
             },
-            "experiencetemplate": {
+            "experienceuser": {
               "type": "number"
             },
-            "experienceuser": {
+            "experienceview": {
               "type": "number"
             },
             "flow": {
@@ -156,16 +159,19 @@
               "deviceRecipeCount": {
                 "type": "number"
               },
+              "experienceDomainCount": {
+                "type": "number"
+              },
               "experienceEndpointCount": {
                 "type": "number"
               },
               "experienceGroupCount": {
                 "type": "number"
               },
-              "experienceTemplateCount": {
+              "experienceUserCount": {
                 "type": "number"
               },
-              "experienceUserCount": {
+              "experienceViewCount": {
                 "type": "number"
               },
               "flowCount": {

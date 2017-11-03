@@ -22,41 +22,41 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-""" Module for Losant API ExperienceTemplates wrapper class """
+""" Module for Losant API ExperienceViews wrapper class """
 # pylint: disable=C0301
 
-class ExperienceTemplates(object):
-    """ Class containing all the actions for the Experience Templates Resource """
+class ExperienceViews(object):
+    """ Class containing all the actions for the Experience Views Resource """
 
     def __init__(self, client):
         self.client = client
 
     def get(self, **kwargs):
         """
-        Returns the experience templates for an application
+        Returns the experience views for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceTemplates.*, or experienceTemplates.get.
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceViews.*, or experienceViews.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: id, creationDate, name
+        *  {string} sortField - Field to sort the results by. Accepted values are: id, creationDate, name, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} templateType - Filter templates to those only of the given type. Accepted values are: page, layout, component
+        *  {string} viewType - Filter views to those only of the given type. Accepted values are: page, layout, component
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of experience templates (https://api.losant.com/#/definitions/experienceTemplates)
+        *  200 - Collection of experience views (https://api.losant.com/#/definitions/experienceViews)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -82,8 +82,8 @@ class ExperienceTemplates(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
-        if "templateType" in kwargs:
-            query_params["templateType"] = kwargs["templateType"]
+        if "viewType" in kwargs:
+            query_params["viewType"] = kwargs["viewType"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -93,30 +93,30 @@ class ExperienceTemplates(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/templates".format(**path_params)
+        path = "/applications/{applicationId}/experience/views".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def post(self, **kwargs):
         """
-        Create a new experience template for an application
+        Create a new experience view for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceTemplates.*, or experienceTemplates.post.
+        all.Application, all.Organization, all.User, experienceViews.*, or experienceViews.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} experienceTemplate - New experience template information (https://api.losant.com/#/definitions/experienceTemplatePost)
+        *  {hash} experienceView - New experience view information (https://api.losant.com/#/definitions/experienceViewPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created experience template (https://api.losant.com/#/definitions/experienceTemplate)
+        *  201 - Successfully created experience view (https://api.losant.com/#/definitions/experienceView)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -130,8 +130,8 @@ class ExperienceTemplates(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "experienceTemplate" in kwargs:
-            body = kwargs["experienceTemplate"]
+        if "experienceView" in kwargs:
+            body = kwargs["experienceView"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -141,7 +141,7 @@ class ExperienceTemplates(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/templates".format(**path_params)
+        path = "/applications/{applicationId}/experience/views".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

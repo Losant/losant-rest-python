@@ -50,14 +50,16 @@ from .device_recipes import DeviceRecipes
 from .devices import Devices
 from .event import Event
 from .events import Events
+from .experience_domain import ExperienceDomain
+from .experience_domains import ExperienceDomains
 from .experience_endpoint import ExperienceEndpoint
 from .experience_endpoints import ExperienceEndpoints
 from .experience_group import ExperienceGroup
 from .experience_groups import ExperienceGroups
-from .experience_template import ExperienceTemplate
-from .experience_templates import ExperienceTemplates
 from .experience_user import ExperienceUser
 from .experience_users import ExperienceUsers
+from .experience_view import ExperienceView
+from .experience_views import ExperienceViews
 from .flow import Flow
 from .flow_version import FlowVersion
 from .flow_versions import FlowVersions
@@ -85,7 +87,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.8.0
+    Built For Version 1.9.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -113,14 +115,16 @@ class Client(object):
         self.devices = Devices(self)
         self.event = Event(self)
         self.events = Events(self)
+        self.experience_domain = ExperienceDomain(self)
+        self.experience_domains = ExperienceDomains(self)
         self.experience_endpoint = ExperienceEndpoint(self)
         self.experience_endpoints = ExperienceEndpoints(self)
         self.experience_group = ExperienceGroup(self)
         self.experience_groups = ExperienceGroups(self)
-        self.experience_template = ExperienceTemplate(self)
-        self.experience_templates = ExperienceTemplates(self)
         self.experience_user = ExperienceUser(self)
         self.experience_users = ExperienceUsers(self)
+        self.experience_view = ExperienceView(self)
+        self.experience_views = ExperienceViews(self)
         self.flow = Flow(self)
         self.flow_version = FlowVersion(self)
         self.flow_versions = FlowVersions(self)
@@ -146,7 +150,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.8.0"
+        headers["Accept-Version"] = "^1.9.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

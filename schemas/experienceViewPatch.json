@@ -11,14 +11,6 @@
       "type": "string",
       "maxLength": 32767
     },
-    "templateType": {
-      "type": "string",
-      "enum": [
-        "layout",
-        "page",
-        "component"
-      ]
-    },
     "layoutId": {
       "type": [
         "string",
@@ -31,7 +23,7 @@
       "maxLength": 131072,
       "minLength": 1
     },
-    "templateTags": {
+    "viewTags": {
       "type": "object",
       "patternProperties": {
         "^[0-9a-zA-Z_-]{1,255}$": {
@@ -43,10 +35,5 @@
       "additionalProperties": false
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "name",
-    "templateType",
-    "body"
-  ]
+  "additionalProperties": false
 }
