@@ -6,10 +6,53 @@ parameters and the potential responses.
 
 ##### Contents
 
+*   [Delete](#delete)
 *   [Export](#export)
 *   [Get](#get)
 *   [Post](#post)
 *   [Query](#query)
+*   [Truncate](#truncate)
+
+<br/>
+
+## Delete
+
+Delete rows from a data table
+
+```python
+result = client.data_table_rows.delete(
+    applicationId=my_application_id,
+    dataTableId=my_data_table_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, dataTableRows.*, or dataTableRows.delete.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| dataTableId | string | Y | ID associated with the data table |  | 575ed78e7ae143cd83dc4aab |
+| query | [Data Table Query](_schemas.md#data-table-query) | N | Query to apply to filter the data table |  | [Data Table Query Example](_schemas.md#data-table-query-example) |
+| limit | string | N | Limit number of rows to delete from data table | 1000 | 10 |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Data Table Rows Delete](_schemas.md#data-table-rows-delete) | If request successfully deletes a set of Data Table rows |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if data table was not found |
 
 <br/>
 
@@ -28,7 +71,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, dataTableRows.*, or dataTableRows.export.
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, dataTableRows.*, or dataTableRows.export.
 
 #### Available Parameters
 
@@ -171,6 +214,45 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Data Table Rows](_schemas.md#data-table-rows) | Collection of data table rows |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if data table was not found |
+
+<br/>
+
+## Truncate
+
+Delete all data in the data table
+
+```python
+result = client.data_table_rows.truncate(
+    applicationId=my_application_id,
+    dataTableId=my_data_table_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, dataTableRows.*, or dataTableRows.truncate.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| dataTableId | string | Y | ID associated with the data table |  | 575ed78e7ae143cd83dc4aab |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If request successfully deleted **all** rows in the data table, this will **not** send workflow data table deletion triggers |
 
 #### Error Responses
 

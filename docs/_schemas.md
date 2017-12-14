@@ -33,6 +33,7 @@
 *   [Data Table Row](#data-table-row)
 *   [Data Table Row Insert/Update](#data-table-row-insert/update)
 *   [Data Table Rows](#data-table-rows)
+*   [Data Table Rows Delete](#data-table-rows-delete)
 *   [Data Table Export](#data-table-export)
 *   [Data Tables](#data-tables)
 *   [Device](#device)
@@ -363,7 +364,7 @@ Schema for a single Application
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -448,6 +449,87 @@ Schema for a single Application
         "additionalProperties": false
       },
       "maxItems": 100
+    },
+    "archiveConfig": {
+      "type": "object",
+      "properties": {
+        "directory": {
+          "type": "string",
+          "max": 255
+        },
+        "whiteList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "max": 100
+        },
+        "blackList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "max": 100
+        },
+        "s3": {
+          "type": "object",
+          "properties": {
+            "bucket": {
+              "type": "string",
+              "max": 255
+            },
+            "accessKeyId": {
+              "type": "string",
+              "min": 16,
+              "max": 128
+            },
+            "secretAccessKey": {
+              "type": "string",
+              "min": 16,
+              "max": 128
+            },
+            "region": {
+              "type": "string",
+              "max": 128
+            }
+          },
+          "required": [
+            "bucket",
+            "accessKeyId",
+            "secretAccessKey",
+            "region"
+          ],
+          "additionalProperties": false
+        },
+        "gcs": {
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "keyJson": {
+              "type": "string",
+              "maxLength": 32767,
+              "minLength": 50
+            },
+            "bucket": {
+              "type": "string",
+              "max": 255
+            }
+          },
+          "required": [
+            "projectId",
+            "keyJson",
+            "bucket"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
@@ -471,6 +553,18 @@ Schema for a single Application
     "eventCount": 0,
     "keyCount": 1,
     "deviceRecipeCount": 0
+  },
+  "archiveConfig": {
+    "s3": {
+      "bucket": "bucketName",
+      "accessKeyId": "awsAccessKey",
+      "accessSecretKey": "awsSecretKey",
+      "region": "us-west-1"
+    },
+    "blackList": [
+      "575ec8687ae143cd83dc4a95",
+      "575ec8687ae143cd83dc4a91"
+    ]
   }
 }
 ```
@@ -569,6 +663,9 @@ Schema for the body of an Application API Token creation request
           "dataTableRows.get",
           "dataTableRows.post",
           "dataTableRows.query",
+          "dataTableRows.export",
+          "dataTableRows.delete",
+          "dataTableRows.truncate",
           "dataTables.get",
           "dataTables.post",
           "device.delete",
@@ -1155,7 +1252,7 @@ Schema for the body of an Application modification request
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -1193,6 +1290,87 @@ Schema for the body of an Application modification request
         "additionalProperties": false
       },
       "maxItems": 100
+    },
+    "archiveConfig": {
+      "type": "object",
+      "properties": {
+        "directory": {
+          "type": "string",
+          "max": 255
+        },
+        "whiteList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "max": 100
+        },
+        "blackList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "max": 100
+        },
+        "s3": {
+          "type": "object",
+          "properties": {
+            "bucket": {
+              "type": "string",
+              "max": 255
+            },
+            "accessKeyId": {
+              "type": "string",
+              "min": 16,
+              "max": 128
+            },
+            "secretAccessKey": {
+              "type": "string",
+              "min": 16,
+              "max": 128
+            },
+            "region": {
+              "type": "string",
+              "max": 128
+            }
+          },
+          "required": [
+            "bucket",
+            "accessKeyId",
+            "secretAccessKey",
+            "region"
+          ],
+          "additionalProperties": false
+        },
+        "gcs": {
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "keyJson": {
+              "type": "string",
+              "maxLength": 32767,
+              "minLength": 50
+            },
+            "bucket": {
+              "type": "string",
+              "max": 255
+            }
+          },
+          "required": [
+            "projectId",
+            "keyJson",
+            "bucket"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -1259,7 +1437,7 @@ Schema for the body of an Application creation request
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -1268,6 +1446,87 @@ Schema for the body of an Application creation request
           "json"
         ]
       }
+    },
+    "archiveConfig": {
+      "type": "object",
+      "properties": {
+        "directory": {
+          "type": "string",
+          "max": 255
+        },
+        "whiteList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "max": 100
+        },
+        "blackList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "max": 100
+        },
+        "s3": {
+          "type": "object",
+          "properties": {
+            "bucket": {
+              "type": "string",
+              "max": 255
+            },
+            "accessKeyId": {
+              "type": "string",
+              "min": 16,
+              "max": 128
+            },
+            "secretAccessKey": {
+              "type": "string",
+              "min": 16,
+              "max": 128
+            },
+            "region": {
+              "type": "string",
+              "max": 128
+            }
+          },
+          "required": [
+            "bucket",
+            "accessKeyId",
+            "secretAccessKey",
+            "region"
+          ],
+          "additionalProperties": false
+        },
+        "gcs": {
+          "type": "object",
+          "properties": {
+            "projectId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "keyJson": {
+              "type": "string",
+              "maxLength": 32767,
+              "minLength": 50
+            },
+            "bucket": {
+              "type": "string",
+              "max": 255
+            }
+          },
+          "required": [
+            "projectId",
+            "keyJson",
+            "bucket"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
@@ -1367,7 +1626,7 @@ Schema for a collection of Applications
                 "json": {
                   "type": "string",
                   "minLength": 1,
-                  "maxLength": 2048
+                  "maxLength": 32767
                 }
               },
               "additionalProperties": false,
@@ -1452,6 +1711,87 @@ Schema for a collection of Applications
               "additionalProperties": false
             },
             "maxItems": 100
+          },
+          "archiveConfig": {
+            "type": "object",
+            "properties": {
+              "directory": {
+                "type": "string",
+                "max": 255
+              },
+              "whiteList": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "max": 100
+              },
+              "blackList": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "max": 100
+              },
+              "s3": {
+                "type": "object",
+                "properties": {
+                  "bucket": {
+                    "type": "string",
+                    "max": 255
+                  },
+                  "accessKeyId": {
+                    "type": "string",
+                    "min": 16,
+                    "max": 128
+                  },
+                  "secretAccessKey": {
+                    "type": "string",
+                    "min": 16,
+                    "max": 128
+                  },
+                  "region": {
+                    "type": "string",
+                    "max": 128
+                  }
+                },
+                "required": [
+                  "bucket",
+                  "accessKeyId",
+                  "secretAccessKey",
+                  "region"
+                ],
+                "additionalProperties": false
+              },
+              "gcs": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "keyJson": {
+                    "type": "string",
+                    "maxLength": 32767,
+                    "minLength": 50
+                  },
+                  "bucket": {
+                    "type": "string",
+                    "max": 255
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "keyJson",
+                  "bucket"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
           }
         }
       }
@@ -1508,6 +1848,18 @@ Schema for a collection of Applications
         "eventCount": 0,
         "keyCount": 1,
         "deviceRecipeCount": 0
+      },
+      "archiveConfig": {
+        "s3": {
+          "bucket": "bucketName",
+          "accessKeyId": "awsAccessKey",
+          "accessSecretKey": "awsSecretKey",
+          "region": "us-west-1"
+        },
+        "blackList": [
+          "575ec8687ae143cd83dc4a95",
+          "575ec8687ae143cd83dc4a91"
+        ]
       }
     }
   ],
@@ -3958,6 +4310,33 @@ Schema for a collection of Data Table Rows
   "sortDirection": "asc",
   "dataTableId": "596e6ce831761df4231708f1",
   "applicationId": "575ec8687ae143cd83dc4a97"
+}
+```
+
+<br/>
+
+## Data Table Rows Delete
+
+Schema for response to data table rows removal
+
+### <a name="data-table-rows-delete-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "removed": {
+      "type": "Number"
+    }
+  }
+}
+```
+### <a name="data-table-rows-delete-example"></a> Example
+
+```json
+{
+  "removed": 100
 }
 ```
 
@@ -6662,19 +7041,40 @@ Schema for the body of an Experience Domain modification request
   "type": "object",
   "properties": {
     "sslKey": {
-      "type": "string",
-      "maxLength": 32767,
-      "minLength": 50
+      "$oneOf": [
+        {
+          "type": "string",
+          "maxLength": 32767,
+          "minLength": 50
+        },
+        {
+          "type": null
+        }
+      ]
     },
     "sslCert": {
-      "type": "string",
-      "maxLength": 32767,
-      "minLength": 50
+      "$oneOf": [
+        {
+          "type": "string",
+          "maxLength": 32767,
+          "minLength": 50
+        },
+        {
+          "type": null
+        }
+      ]
     },
     "sslBundle": {
-      "type": "string",
-      "maxLength": 32767,
-      "minLength": 50
+      "$oneOf": [
+        {
+          "type": "string",
+          "maxLength": 32767,
+          "minLength": 50
+        },
+        {
+          "type": null
+        }
+      ]
     },
     "domainName": {
       "type": "string",
@@ -8704,7 +9104,7 @@ Schema for a single Workflow
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -8988,7 +9388,7 @@ Schema for the body of a Workflow modification request
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -9144,7 +9544,7 @@ Schema for the body of a Workflow creation request
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -9431,7 +9831,7 @@ Schema for a single Workflow Version
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -9628,7 +10028,7 @@ Schema for the body of a Workflow Version creation request
           "json": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -9818,7 +10218,7 @@ Schema for a collection of Workflow Versions
                 "json": {
                   "type": "string",
                   "minLength": 1,
-                  "maxLength": 2048
+                  "maxLength": 32767
                 }
               },
               "additionalProperties": false,
@@ -10064,7 +10464,7 @@ Schema for a collection of Workflows
                 "json": {
                   "type": "string",
                   "minLength": 1,
-                  "maxLength": 2048
+                  "maxLength": 32767
                 }
               },
               "additionalProperties": false,
@@ -14718,7 +15118,8 @@ Schema for a single Webhook
         "facebook",
         "fitbit",
         "none",
-        "twilio"
+        "twilio",
+        "alexa"
       ]
     },
     "verificationCode": {
@@ -14783,7 +15184,8 @@ Schema for the body of a Webhook modification request
         "facebook",
         "fitbit",
         "none",
-        "twilio"
+        "twilio",
+        "alexa"
       ]
     },
     "verificationCode": {
@@ -14843,7 +15245,8 @@ Schema for the body of a Webhook creation request
         "facebook",
         "fitbit",
         "none",
-        "twilio"
+        "twilio",
+        "alexa"
       ]
     },
     "verificationCode": {
@@ -14936,7 +15339,8 @@ Schema for a collection of Webhooks
               "facebook",
               "fitbit",
               "none",
-              "twilio"
+              "twilio",
+              "alexa"
             ]
           },
           "verificationCode": {
