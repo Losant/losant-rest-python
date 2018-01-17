@@ -87,7 +87,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.9.2
+    Built For Version 1.9.3
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -150,7 +150,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.9.2"
+        headers["Accept-Version"] = "^1.9.3"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
