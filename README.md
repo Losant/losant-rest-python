@@ -133,6 +133,9 @@ Each of the following is a property on the client object, and returns a wrapper 
 * [device_recipes](docs/deviceRecipes.md)  
   Contains all the actions that can be performed against the collection of [Device Recipes](https://docs.losant.com/devices/device-recipes/) belonging to an Application - such as listing recipes or creating a new recipe.
 
+* [edge_deployments](docs/edgeDeployments.md)  
+  Contains all the actions that can be performed against the collection of [Edge Deployments](https://docs.losant.com/edge-compute/edge-deployments/) belonging to an Application - such as listing deployments or creating a new deployment.
+
 * [event](docs/event.md)  
   Contains all the actions that can be performed against a single [Event](https://docs.losant.com/events/overview/), such as commenting on or changing the state of an event.
 

@@ -22,93 +22,42 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-""" Module for Losant API Devices wrapper class """
+""" Module for Losant API EdgeDeployments wrapper class """
 # pylint: disable=C0301
 
-class Devices(object):
-    """ Class containing all the actions for the Devices Resource """
+class EdgeDeployments(object):
+    """ Class containing all the actions for the Edge Deployments Resource """
 
     def __init__(self, client):
         self.client = client
 
-    def export(self, **kwargs):
-        """
-        Creates an export of all device metadata.
-
-        Authentication:
-        The client must be configured with a valid api
-        access token to call this action. The token
-        must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.export.
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} email - Email address to send export to. Defaults to current user's email.
-        *  {string} callbackUrl - Callback URL to call with export result.
-        *  {string} losantdomain - Domain scope of request (rarely needed)
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - If generation of export was successfully started (https://api.losant.com/#/definitions/success)
-
-        Errors:
-        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "email" in kwargs:
-            query_params["email"] = kwargs["email"]
-        if "callbackUrl" in kwargs:
-            query_params["callbackUrl"] = kwargs["callbackUrl"]
-        if "losantdomain" in kwargs:
-            headers["losantdomain"] = kwargs["losantdomain"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/devices/export".format(**path_params)
-
-        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
-
     def get(self, **kwargs):
         """
-        Returns the devices for an application
+        Returns the edge deployments for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.get.
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, edgeDeployments.*, or edgeDeployments.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
+        *  {string} sortField - Field to sort the results by. Accepted values are: id, deviceId, flowId, desiredVersion, currentVersion, creationDate, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
-        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
-        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} deviceClass - Filter the devices by the given device class. Accepted values are: standalone, gateway, peripheral, floating, edgeCompute
-        *  {hash} tagFilter - Array of tag pairs to filter by. (https://api.losant.com/#/definitions/deviceTagFilter)
+        *  {string} deviceId - Filter deployments to the given Device ID
+        *  {string} version - Filter deployments to the given Workflow Version (matches against both current and desired)
+        *  {undefined} filterEmpty - Filter out deployments where both the current and desired version are null.
+        *  {string} flowId - Filter deployments to the given Workflow ID
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of devices (https://api.losant.com/#/definitions/devices)
+        *  200 - Collection of edge deployments (https://api.losant.com/#/definitions/edgeDeployments)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -130,14 +79,14 @@ class Devices(object):
             query_params["page"] = kwargs["page"]
         if "perPage" in kwargs:
             query_params["perPage"] = kwargs["perPage"]
-        if "filterField" in kwargs:
-            query_params["filterField"] = kwargs["filterField"]
-        if "filter" in kwargs:
-            query_params["filter"] = kwargs["filter"]
-        if "deviceClass" in kwargs:
-            query_params["deviceClass"] = kwargs["deviceClass"]
-        if "tagFilter" in kwargs:
-            query_params["tagFilter"] = kwargs["tagFilter"]
+        if "deviceId" in kwargs:
+            query_params["deviceId"] = kwargs["deviceId"]
+        if "version" in kwargs:
+            query_params["version"] = kwargs["version"]
+        if "filterEmpty" in kwargs:
+            query_params["filterEmpty"] = kwargs["filterEmpty"]
+        if "flowId" in kwargs:
+            query_params["flowId"] = kwargs["flowId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -147,30 +96,30 @@ class Devices(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/devices".format(**path_params)
+        path = "/applications/{applicationId}/edge/deployments".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
-    def post(self, **kwargs):
+    def release(self, **kwargs):
         """
-        Create a new device for an application
+        Deploy an edge workflow version to one or more edge devices. Version can be blank, if removal is desired.
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, devices.*, or devices.post.
+        all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.release.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} device - New device information (https://api.losant.com/#/definitions/devicePost)
+        *  {hash} deployment - Deployment release information (https://api.losant.com/#/definitions/edgeDeploymentRelease)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created device (https://api.losant.com/#/definitions/device)
+        *  201 - If deployment release has been initiated successfully (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -184,8 +133,8 @@ class Devices(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "device" in kwargs:
-            body = kwargs["device"]
+        if "deployment" in kwargs:
+            body = kwargs["deployment"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -195,30 +144,30 @@ class Devices(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/devices".format(**path_params)
+        path = "/applications/{applicationId}/edge/deployments/release".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
-    def send_command(self, **kwargs):
+    def remove(self, **kwargs):
         """
-        Send a command to multiple devices
+        Remove all edge deployments from a device, remove all edge deployments of a workflow, or remove a specific workflow from a specific device
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Device, all.Organization, all.User, devices.*, or devices.sendCommand.
+        all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.remove.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} multiDeviceCommand - Command to send to the device (https://api.losant.com/#/definitions/multiDeviceCommand)
+        *  {hash} deployment - Deployment removal information (https://api.losant.com/#/definitions/edgeDeploymentRemove)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If command was successfully sent (https://api.losant.com/#/definitions/success)
+        *  201 - If deployment removal has been initiated successfully (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -232,8 +181,8 @@ class Devices(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "multiDeviceCommand" in kwargs:
-            body = kwargs["multiDeviceCommand"]
+        if "deployment" in kwargs:
+            body = kwargs["deployment"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -243,7 +192,55 @@ class Devices(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/devices/command".format(**path_params)
+        path = "/applications/{applicationId}/edge/deployments/remove".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
+    def replace(self, **kwargs):
+        """
+        Replace deployments of an edge workflow version with a new version. New version can be blank, if removal is desired.
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.replace.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {hash} deployment - Deployment replacement information (https://api.losant.com/#/definitions/edgeDeploymentReplace)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  201 - If deployment replacement has been initiated successfully (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "deployment" in kwargs:
+            body = kwargs["deployment"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/edge/deployments/replace".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

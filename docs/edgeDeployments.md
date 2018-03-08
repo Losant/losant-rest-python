@@ -1,62 +1,24 @@
-# Devices Actions
+# Edge Deployments Actions
 
 Details on the various actions that can be performed on the
-Devices resource, including the expected
+Edge Deployments resource, including the expected
 parameters and the potential responses.
 
 ##### Contents
 
-*   [Export](#export)
 *   [Get](#get)
-*   [Post](#post)
-*   [Send Command](#send-command)
-
-<br/>
-
-## Export
-
-Creates an export of all device metadata.
-
-```python
-result = client.devices.export(applicationId=my_application_id)
-
-print(result)
-```
-
-#### Authentication
-The client must be configured with a valid api access token to call this
-action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.export.
-
-#### Available Parameters
-
-| Name | Type | Required | Description | Default | Example |
-| ---- | ---- | -------- | ----------- | ------- | ------- |
-| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| email | string | N | Email address to send export to. Defaults to current user&#x27;s email. |  | email@example.com |
-| callbackUrl | string | N | Callback URL to call with export result. |  | https://example.com/cburl |
-
-#### Successful Responses
-
-| Code | Type | Description |
-| ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If generation of export was successfully started |
-
-#### Error Responses
-
-| Code | Type | Description |
-| ---- | ---- | ----------- |
-| 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if application was not found |
+*   [Release](#release)
+*   [Remove](#remove)
+*   [Replace](#replace)
 
 <br/>
 
 ## Get
 
-Returns the devices for an application
+Returns the edge deployments for an application
 
 ```python
-result = client.devices.get(applicationId=my_application_id)
+result = client.edge_deployments.get(applicationId=my_application_id)
 
 print(result)
 ```
@@ -64,27 +26,27 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.get.
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, edgeDeployments.*, or edgeDeployments.get.
 
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| sortField | string | N | Field to sort the results by. Accepted values are: name, id, creationDate | name | name |
+| sortField | string | N | Field to sort the results by. Accepted values are: id, deviceId, flowId, desiredVersion, currentVersion, creationDate, lastUpdated | lastUpdated | creationDate |
 | sortDirection | string | N | Direction to sort the results by. Accepted values are: asc, desc | asc | asc |
 | page | string | N | Which page of results to return | 0 | 0 |
 | perPage | string | N | How many items to return per page | 1000 | 10 |
-| filterField | string | N | Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name |  | name |
-| filter | string | N | Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering. |  | my * device |
-| deviceClass | string | N | Filter the devices by the given device class. Accepted values are: standalone, gateway, peripheral, floating, edgeCompute |  | standalone |
-| tagFilter | [Device Tag Filter](_schemas.md#device-tag-filter) | N | Array of tag pairs to filter by. |  | [Device Tag Filter Example](_schemas.md#device-tag-filter-example) |
+| deviceId | string | N | Filter deployments to the given Device ID |  | 575ecf887ae143cd83dc4aa2 |
+| version | string | N | Filter deployments to the given Workflow Version (matches against both current and desired) |  | myFlowVersion |
+| filterEmpty | undefined | N | Filter out deployments where both the current and desired version are null. |  | true |
+| flowId | string | N | Filter deployments to the given Workflow ID |  | 575ed18f7ae143cd83dc4aa6 |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Devices](_schemas.md#devices) | Collection of devices |
+| 200 | [Edge Deployments](_schemas.md#edge-deployments) | Collection of edge deployments |
 
 #### Error Responses
 
@@ -95,14 +57,14 @@ all.Application, all.Application.read, all.Device, all.Device.read, all.Organiza
 
 <br/>
 
-## Post
+## Release
 
-Create a new device for an application
+Deploy an edge workflow version to one or more edge devices. Version can be blank, if removal is desired.
 
 ```python
-result = client.devices.post(
+result = client.edge_deployments.release(
     applicationId=my_application_id,
-    device=my_device)
+    deployment=my_deployment)
 
 print(result)
 ```
@@ -110,20 +72,20 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, devices.*, or devices.post.
+all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.release.
 
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| device | [Device Post](_schemas.md#device-post) | Y | New device information |  | [Device Post Example](_schemas.md#device-post-example) |
+| deployment | [Edge Deployment Release](_schemas.md#edge-deployment-release) | Y | Deployment release information |  | [Edge Deployment Release Example](_schemas.md#edge-deployment-release-example) |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [Device](_schemas.md#device) | Successfully created device |
+| 201 | [Success](_schemas.md#success) | If deployment release has been initiated successfully |
 
 #### Error Responses
 
@@ -134,14 +96,14 @@ all.Application, all.Organization, all.User, devices.*, or devices.post.
 
 <br/>
 
-## Send Command
+## Remove
 
-Send a command to multiple devices
+Remove all edge deployments from a device, remove all edge deployments of a workflow, or remove a specific workflow from a specific device
 
 ```python
-result = client.devices.send_command(
+result = client.edge_deployments.remove(
     applicationId=my_application_id,
-    multiDeviceCommand=my_multi_device_command)
+    deployment=my_deployment)
 
 print(result)
 ```
@@ -149,20 +111,59 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Device, all.Organization, all.User, devices.*, or devices.sendCommand.
+all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.remove.
 
 #### Available Parameters
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| multiDeviceCommand | [Multi Device Command](_schemas.md#multi-device-command) | Y | Command to send to the device |  | [Multi Device Command Example](_schemas.md#multi-device-command-example) |
+| deployment | [Edge Deployment Remove](_schemas.md#edge-deployment-remove) | Y | Deployment removal information |  | [Edge Deployment Remove Example](_schemas.md#edge-deployment-remove-example) |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If command was successfully sent |
+| 201 | [Success](_schemas.md#success) | If deployment removal has been initiated successfully |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Replace
+
+Replace deployments of an edge workflow version with a new version. New version can be blank, if removal is desired.
+
+```python
+result = client.edge_deployments.replace(
+    applicationId=my_application_id,
+    deployment=my_deployment)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.replace.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| deployment | [Edge Deployment Replace](_schemas.md#edge-deployment-replace) | Y | Deployment replacement information |  | [Edge Deployment Replace Example](_schemas.md#edge-deployment-replace-example) |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 201 | [Success](_schemas.md#success) | If deployment replacement has been initiated successfully |
 
 #### Error Responses
 
