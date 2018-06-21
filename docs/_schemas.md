@@ -423,6 +423,9 @@ Schema for a single Application
         "experienceViewCount": {
           "type": "number"
         },
+        "fileCount": {
+          "type": "number"
+        },
         "flowCount": {
           "type": "number"
         },
@@ -1770,6 +1773,9 @@ Schema for a collection of Applications
               "experienceViewCount": {
                 "type": "number"
               },
+              "fileCount": {
+                "type": "number"
+              },
               "flowCount": {
                 "type": "number"
               },
@@ -2908,10 +2914,11 @@ Schema for a single Dashboard
           "type": {
             "type": "string",
             "enum": [
-              "deviceId",
               "deviceAttribute",
-              "string",
-              "number"
+              "deviceId",
+              "deviceTag",
+              "number",
+              "string"
             ]
           },
           "applicationId": {
@@ -2919,9 +2926,29 @@ Schema for a single Dashboard
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "defaultValue": {
-            "type": [
-              "string",
-              "number"
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 32767
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                  },
+                  "value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                },
+                "additionalProperties": false
+              }
             ]
           },
           "validationEnabled": {
@@ -2945,7 +2972,8 @@ Schema for a single Dashboard
                 "items": {
                   "type": "string",
                   "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-                }
+                },
+                "maxItems": 100
               },
               "deviceIds": {
                 "type": "array",
@@ -2984,7 +3012,8 @@ Schema for a single Dashboard
           "defaultValue"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     }
   }
 }
@@ -3031,9 +3060,29 @@ Schema for a dashboard context instance
   "type": "object",
   "patternProperties": {
     "^[0-9a-zA-Z_-]{1,255}$": {
-      "type": [
-        "string",
-        "number"
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 32767
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            }
+          },
+          "additionalProperties": false
+        }
       ]
     }
   },
@@ -3196,10 +3245,11 @@ Schema for the body of a Dashboard modification request
           "type": {
             "type": "string",
             "enum": [
-              "deviceId",
               "deviceAttribute",
-              "string",
-              "number"
+              "deviceId",
+              "deviceTag",
+              "number",
+              "string"
             ]
           },
           "applicationId": {
@@ -3207,9 +3257,29 @@ Schema for the body of a Dashboard modification request
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "defaultValue": {
-            "type": [
-              "string",
-              "number"
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 32767
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                  },
+                  "value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                },
+                "additionalProperties": false
+              }
             ]
           },
           "validationEnabled": {
@@ -3233,7 +3303,8 @@ Schema for the body of a Dashboard modification request
                 "items": {
                   "type": "string",
                   "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-                }
+                },
+                "maxItems": 100
               },
               "deviceIds": {
                 "type": "array",
@@ -3272,7 +3343,8 @@ Schema for the body of a Dashboard modification request
           "defaultValue"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     }
   },
   "additionalProperties": false
@@ -3440,10 +3512,11 @@ Schema for the body of a Dashboard creation request
           "type": {
             "type": "string",
             "enum": [
-              "deviceId",
               "deviceAttribute",
-              "string",
-              "number"
+              "deviceId",
+              "deviceTag",
+              "number",
+              "string"
             ]
           },
           "applicationId": {
@@ -3451,9 +3524,29 @@ Schema for the body of a Dashboard creation request
             "pattern": "^[A-Fa-f\\d]{24}$"
           },
           "defaultValue": {
-            "type": [
-              "string",
-              "number"
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 32767
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                  },
+                  "value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                },
+                "additionalProperties": false
+              }
             ]
           },
           "validationEnabled": {
@@ -3477,7 +3570,8 @@ Schema for the body of a Dashboard creation request
                 "items": {
                   "type": "string",
                   "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-                }
+                },
+                "maxItems": 100
               },
               "deviceIds": {
                 "type": "array",
@@ -3516,7 +3610,8 @@ Schema for the body of a Dashboard creation request
           "defaultValue"
         ],
         "additionalProperties": false
-      }
+      },
+      "maxItems": 100
     }
   },
   "additionalProperties": false,
@@ -3712,10 +3807,11 @@ Schema for a collection of Dashboards
                 "type": {
                   "type": "string",
                   "enum": [
-                    "deviceId",
                     "deviceAttribute",
-                    "string",
-                    "number"
+                    "deviceId",
+                    "deviceTag",
+                    "number",
+                    "string"
                   ]
                 },
                 "applicationId": {
@@ -3723,9 +3819,29 @@ Schema for a collection of Dashboards
                   "pattern": "^[A-Fa-f\\d]{24}$"
                 },
                 "defaultValue": {
-                  "type": [
-                    "string",
-                    "number"
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 32767
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                        },
+                        "value": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255
+                        }
+                      },
+                      "additionalProperties": false
+                    }
                   ]
                 },
                 "validationEnabled": {
@@ -3749,7 +3865,8 @@ Schema for a collection of Dashboards
                       "items": {
                         "type": "string",
                         "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-                      }
+                      },
+                      "maxItems": 100
                     },
                     "deviceIds": {
                       "type": "array",
@@ -3788,7 +3905,8 @@ Schema for a collection of Dashboards
                 "defaultValue"
               ],
               "additionalProperties": false
-            }
+            },
+            "maxItems": 100
           }
         }
       }
@@ -9633,11 +9751,11 @@ Schema for a single file
     "name": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 2048
+      "maxLength": 1024
     },
     "parentDirectory": {
       "type": "string",
-      "maxLength": 2048
+      "maxLength": 1024
     },
     "type": {
       "type": "string",
@@ -9663,6 +9781,13 @@ Schema for a single file
           "type": "number"
         }
       }
+    },
+    "moveIntoId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "url": {
+      "type": "string"
     }
   }
 }
@@ -9749,11 +9874,11 @@ Schema to create a single file or directory
     "name": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 2048
+      "maxLength": 1024
     },
     "parentDirectory": {
       "type": "string",
-      "maxLength": 2048
+      "maxLength": 1024
     },
     "type": {
       "type": "string",
@@ -9849,11 +9974,11 @@ Schema to upload the file to s3
     "name": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 2048
+      "maxLength": 1024
     },
     "parentDirectory": {
       "type": "string",
-      "maxLength": 2048
+      "maxLength": 1024
     },
     "type": {
       "type": "string",
@@ -10006,11 +10131,11 @@ Schema for a collection of files
           "name": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2048
+            "maxLength": 1024
           },
           "parentDirectory": {
             "type": "string",
-            "maxLength": 2048
+            "maxLength": 1024
           },
           "type": {
             "type": "string",
@@ -10036,6 +10161,13 @@ Schema for a collection of files
                 "type": "number"
               }
             }
+          },
+          "moveIntoId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "url": {
+            "type": "string"
           }
         }
       }
@@ -10197,6 +10329,7 @@ Schema for a single Workflow
               "mqttTopic",
               "request",
               "timer",
+              "udp",
               "virtualButton",
               "webhook"
             ]
@@ -10471,6 +10604,7 @@ Schema for the body of a Workflow modification request
               "mqttTopic",
               "request",
               "timer",
+              "udp",
               "virtualButton",
               "webhook"
             ]
@@ -10633,6 +10767,7 @@ Schema for the body of a Workflow creation request
               "mqttTopic",
               "request",
               "timer",
+              "udp",
               "virtualButton",
               "webhook"
             ]
@@ -10933,6 +11068,7 @@ Schema for a single Workflow Version
               "mqttTopic",
               "request",
               "timer",
+              "udp",
               "virtualButton",
               "webhook"
             ]
@@ -11136,6 +11272,7 @@ Schema for the body of a Workflow Version creation request
               "mqttTopic",
               "request",
               "timer",
+              "udp",
               "virtualButton",
               "webhook"
             ]
@@ -11332,6 +11469,7 @@ Schema for a collection of Workflow Versions
                     "mqttTopic",
                     "request",
                     "timer",
+                    "udp",
                     "virtualButton",
                     "webhook"
                   ]
@@ -11595,6 +11733,7 @@ Schema for a collection of Workflows
                     "mqttTopic",
                     "request",
                     "timer",
+                    "udp",
                     "virtualButton",
                     "webhook"
                   ]
@@ -13037,6 +13176,9 @@ Schema for information about the currently authenticated user
       "experienceview": {
         "type": "number"
       },
+      "file": {
+        "type": "number"
+      },
       "flow": {
         "type": "number"
       },
@@ -13204,6 +13346,9 @@ Schema for information about the currently authenticated user
           "type": "number"
         },
         "experienceViewCount": {
+          "type": "number"
+        },
+        "fileCount": {
           "type": "number"
         },
         "flowCount": {
@@ -13661,6 +13806,9 @@ Schema for a single Organization
       "experienceview": {
         "type": "number"
       },
+      "file": {
+        "type": "number"
+      },
       "flow": {
         "type": "number"
       },
@@ -13720,6 +13868,9 @@ Schema for a single Organization
           "type": "number"
         },
         "experienceViewCount": {
+          "type": "number"
+        },
+        "fileCount": {
           "type": "number"
         },
         "flowCount": {
@@ -14432,6 +14583,9 @@ Schema for a collection of Organizations
             "experienceview": {
               "type": "number"
             },
+            "file": {
+              "type": "number"
+            },
             "flow": {
               "type": "number"
             },
@@ -14491,6 +14645,9 @@ Schema for a collection of Organizations
                 "type": "number"
               },
               "experienceViewCount": {
+                "type": "number"
+              },
+              "fileCount": {
                 "type": "number"
               },
               "flowCount": {
@@ -16313,6 +16470,14 @@ Schema for the body of a time series query request
     },
     "limit": {
       "type": "number"
+    },
+    "order": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "default": "asc"
     }
   },
   "additionalProperties": false
