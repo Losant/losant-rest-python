@@ -43,7 +43,7 @@ class ExperienceEndpoints(object):
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: order, method, route, id, creationDate, requestCount
+        *  {string} sortField - Field to sort the results by. Accepted values are: order, method, route, id, creationDate, requestCount, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: method, route
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.

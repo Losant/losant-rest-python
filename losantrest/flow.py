@@ -140,6 +140,7 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
+        *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -162,6 +163,8 @@ class Flow(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "flowId" in kwargs:
             path_params["flowId"] = kwargs["flowId"]
+        if "includeCustomNodes" in kwargs:
+            query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -290,6 +293,7 @@ class Flow(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
+        *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {hash} flow - Object containing new properties of the flow (https://api.losant.com/#/definitions/flowPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -313,6 +317,8 @@ class Flow(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "flowId" in kwargs:
             path_params["flowId"] = kwargs["flowId"]
+        if "includeCustomNodes" in kwargs:
+            query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "flow" in kwargs:
             body = kwargs["flow"]
         if "losantdomain" in kwargs:

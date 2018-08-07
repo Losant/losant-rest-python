@@ -44,7 +44,7 @@ class FlowVersion(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {string} flowVersionId - ID associated with the flow version
+        *  {string} flowVersionId - Version ID or version name associated with the flow version
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -95,7 +95,8 @@ class FlowVersion(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {string} flowVersionId - ID associated with the flow version
+        *  {string} flowVersionId - Version ID or version name associated with the flow version
+        *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -120,6 +121,8 @@ class FlowVersion(object):
             path_params["flowId"] = kwargs["flowId"]
         if "flowVersionId" in kwargs:
             path_params["flowVersionId"] = kwargs["flowVersionId"]
+        if "includeCustomNodes" in kwargs:
+            query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -146,7 +149,7 @@ class FlowVersion(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {string} flowVersionId - ID associated with the flow version
+        *  {string} flowVersionId - Version ID or version name associated with the flow version
         *  {string} limit - Max log entries to return (ordered by time descending)
         *  {string} since - Look for log entries since this time (ms since epoch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -203,7 +206,8 @@ class FlowVersion(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {string} flowVersionId - ID associated with the flow version
+        *  {string} flowVersionId - Version ID or version name associated with the flow version
+        *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {hash} flowVersion - Object containing new properties of the flow version (https://api.losant.com/#/definitions/flowVersionPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -229,6 +233,8 @@ class FlowVersion(object):
             path_params["flowId"] = kwargs["flowId"]
         if "flowVersionId" in kwargs:
             path_params["flowVersionId"] = kwargs["flowVersionId"]
+        if "includeCustomNodes" in kwargs:
+            query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "flowVersion" in kwargs:
             body = kwargs["flowVersion"]
         if "losantdomain" in kwargs:

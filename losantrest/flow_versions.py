@@ -44,12 +44,13 @@ class FlowVersions(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
-        *  {string} sortField - Field to sort the results by. Accepted values are: version, id, creationDate
+        *  {string} sortField - Field to sort the results by. Accepted values are: version, id, creationDate, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: version
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +85,8 @@ class FlowVersions(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "includeCustomNodes" in kwargs:
+            query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -111,7 +114,8 @@ class FlowVersions(object):
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
         *  {hash} flowVersion - New flow version information (https://api.losant.com/#/definitions/flowVersionPost)
-        *  {undefined} allowReplacement - Allow replacement of an existing flow version with same version name
+        *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
+        *  {string} allowReplacement - Allow replacement of an existing flow version with same version name
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -136,6 +140,8 @@ class FlowVersions(object):
             path_params["flowId"] = kwargs["flowId"]
         if "flowVersion" in kwargs:
             body = kwargs["flowVersion"]
+        if "includeCustomNodes" in kwargs:
+            query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "allowReplacement" in kwargs:
             query_params["allowReplacement"] = kwargs["allowReplacement"]
         if "losantdomain" in kwargs:

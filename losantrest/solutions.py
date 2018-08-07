@@ -43,7 +43,7 @@ class Solutions(object):
 
         Parameters:
         *  {string} orgId - ID associated with the organization
-        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
