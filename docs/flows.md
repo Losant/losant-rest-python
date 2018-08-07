@@ -62,7 +62,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 Import a set of flows and flow versions
 
 ```python
-result = client.flows.import(
+result = client.flows.api_import(
     applicationId=my_application_id,
     importData=my_import_data)
 

@@ -103,7 +103,7 @@ class Flows(object):
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
-    def import(self, **kwargs):
+    def api_import(self, **kwargs):
         """
         Import a set of flows and flow versions
 
