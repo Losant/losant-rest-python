@@ -102,6 +102,7 @@ class Devices(object):
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} deviceClass - Filter the devices by the given device class. Accepted values are: standalone, gateway, peripheral, floating, edgeCompute
         *  {hash} tagFilter - Array of tag pairs to filter by. (https://api.losant.com/#/definitions/deviceTagFilter)
+        *  {string} excludeConnectionInfo - If set, do not return connection info
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -138,6 +139,8 @@ class Devices(object):
             query_params["deviceClass"] = kwargs["deviceClass"]
         if "tagFilter" in kwargs:
             query_params["tagFilter"] = kwargs["tagFilter"]
+        if "excludeConnectionInfo" in kwargs:
+            query_params["excludeConnectionInfo"] = kwargs["excludeConnectionInfo"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

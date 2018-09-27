@@ -152,6 +152,7 @@ class Device(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
+        *  {string} excludeConnectionInfo - If set, do not return connection info
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -174,6 +175,8 @@ class Device(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "deviceId" in kwargs:
             path_params["deviceId"] = kwargs["deviceId"]
+        if "excludeConnectionInfo" in kwargs:
+            query_params["excludeConnectionInfo"] = kwargs["excludeConnectionInfo"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
