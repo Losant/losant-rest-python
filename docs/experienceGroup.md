@@ -35,6 +35,7 @@ all.Application, all.Organization, all.User, experienceGroup.*, or experienceGro
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | experienceGroupId | string | Y | ID associated with the experience group |  | 575ed78e7ae143cd83dc4aab |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -74,6 +75,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | experienceGroupId | string | Y | ID associated with the experience group |  | 575ed78e7ae143cd83dc4aab |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -115,6 +117,7 @@ all.Application, all.Organization, all.User, experienceGroup.*, or experienceGro
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | experienceGroupId | string | Y | ID associated with the experience group |  | 575ed78e7ae143cd83dc4aab |
 | experienceGroup | [Experience Group Patch](_schemas.md#experience-group-patch) | Y | Object containing new properties of the experience group |  | [Experience Group Patch Example](_schemas.md#experience-group-patch-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 

@@ -10,6 +10,7 @@ parameters and the potential responses.
 *   [Backfill Archive Data](#backfill-archive-data)
 *   [Delete](#delete)
 *   [Get](#get)
+*   [Mqtt Publish Message](#mqtt-publish-message)
 *   [Patch](#patch)
 *   [Payload Counts](#payload-counts)
 
@@ -38,6 +39,7 @@ all.Application, all.Organization, all.User, application.*, or application.archi
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
 | date | string | Y | The date to archive data (ms since epoch), it must be within the archive time range older than 31 days and newer than the organizations dataTTL |  | 1518556791829 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -74,6 +76,7 @@ all.Application, all.Organization, all.User, application.*, or application.backf
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -110,6 +113,7 @@ all.Application, all.Organization, all.User, application.*, or application.delet
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -146,12 +150,53 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Application](_schemas.md#application) | Application information |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Mqtt Publish Message
+
+Publishes the given message to the given MQTT topic
+
+```python
+result = client.application.mqtt_publish_message(
+    applicationId=my_application_id,
+    payload=my_payload)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, application.*, or application.mqttPublishMessage.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| payload | [MQTT Publish Body](_schemas.md#mqtt-publish-body) | Y | Object containing topic and message |  | [MQTT Publish Body Example](_schemas.md#mqtt-publish-body-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | Message successfully published |
 
 #### Error Responses
 
@@ -185,6 +230,7 @@ all.Application, all.Organization, all.User, application.*, or application.patch
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
 | application | [Application Patch](_schemas.md#application-patch) | Y | Object containing new application properties |  | [Application Patch Example](_schemas.md#application-patch-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -223,6 +269,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
 | start | string | N | Start of range for payload count query (ms since epoch) | -2592000000 | 0 |
 | end | string | N | End of range for payload count query (ms since epoch) | 0 | 1465790400000 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 

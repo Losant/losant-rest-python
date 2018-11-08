@@ -58,8 +58,12 @@ from .experience_endpoint import ExperienceEndpoint
 from .experience_endpoints import ExperienceEndpoints
 from .experience_group import ExperienceGroup
 from .experience_groups import ExperienceGroups
+from .experience_slug import ExperienceSlug
+from .experience_slugs import ExperienceSlugs
 from .experience_user import ExperienceUser
 from .experience_users import ExperienceUsers
+from .experience_version import ExperienceVersion
+from .experience_versions import ExperienceVersions
 from .experience_view import ExperienceView
 from .experience_views import ExperienceViews
 from .file import File
@@ -91,7 +95,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.12.2
+    Built For Version 1.13.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -127,8 +131,12 @@ class Client(object):
         self.experience_endpoints = ExperienceEndpoints(self)
         self.experience_group = ExperienceGroup(self)
         self.experience_groups = ExperienceGroups(self)
+        self.experience_slug = ExperienceSlug(self)
+        self.experience_slugs = ExperienceSlugs(self)
         self.experience_user = ExperienceUser(self)
         self.experience_users = ExperienceUsers(self)
+        self.experience_version = ExperienceVersion(self)
+        self.experience_versions = ExperienceVersions(self)
         self.experience_view = ExperienceView(self)
         self.experience_views = ExperienceViews(self)
         self.file = File(self)
@@ -158,7 +166,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.12.2"
+        headers["Accept-Version"] = "^1.13.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

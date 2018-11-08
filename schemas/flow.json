@@ -52,6 +52,7 @@
       "enum": [
         "cloud",
         "edge",
+        "experience",
         "customNode"
       ]
     },
@@ -79,6 +80,7 @@
               "deviceTagInactivity",
               "endpoint",
               "event",
+              "fileWatch",
               "integration",
               "mqttTopic",
               "request",
@@ -501,6 +503,9 @@
           "json"
         ]
       }
+    },
+    "deletedInDevelop": {
+      "type": "boolean"
     },
     "stats": {
       "type": "object",

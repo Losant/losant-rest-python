@@ -198,7 +198,7 @@ class DataTableRows(object):
 
     def post(self, **kwargs):
         """
-        Inserts a new row into a data table
+        Inserts a new row(s) into a data table
 
         Authentication:
         The client must be configured with a valid api
@@ -209,14 +209,14 @@ class DataTableRows(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} dataTableId - ID associated with the data table
-        *  {hash} dataTableRow - The row to insert (https://api.losant.com/#/definitions/dataTableRowInsertUpdate)
+        *  {hash} dataTableRow - The row(s) to insert (https://api.losant.com/#/definitions/dataTableRowInsert)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created data table row (https://api.losant.com/#/definitions/dataTableRow)
+        *  201 - Successfully created data table row, or bulk insert count (https://api.losant.com/#/definitions/dataTableRowInsertResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

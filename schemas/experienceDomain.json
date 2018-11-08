@@ -36,6 +36,11 @@
       "type": "string",
       "maxLength": 1024,
       "minLength": 3
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
     }
   }
 }

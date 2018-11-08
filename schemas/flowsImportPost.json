@@ -57,6 +57,7 @@
                     "deviceTagInactivity",
                     "endpoint",
                     "event",
+                    "fileWatch",
                     "integration",
                     "mqttTopic",
                     "request",
@@ -159,6 +160,7 @@
             "enum": [
               "cloud",
               "edge",
+              "experience",
               "customNode"
             ]
           },
@@ -564,6 +566,7 @@
                     "deviceTagInactivity",
                     "endpoint",
                     "event",
+                    "fileWatch",
                     "integration",
                     "mqttTopic",
                     "request",

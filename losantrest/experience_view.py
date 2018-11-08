@@ -92,6 +92,7 @@ class ExperienceView(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} experienceViewId - ID associated with the experience view
+        *  {string} version - Version of this experience view to return
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -114,6 +115,8 @@ class ExperienceView(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "experienceViewId" in kwargs:
             path_params["experienceViewId"] = kwargs["experienceViewId"]
+        if "version" in kwargs:
+            query_params["version"] = kwargs["version"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

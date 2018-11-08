@@ -39,6 +39,7 @@ all.Organization, all.User, org.*, or org.delete.
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -76,6 +77,7 @@ all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | summaryExclude | string | N | List of summary fields to exclude from org summary |  | payloadCount |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -115,6 +117,7 @@ all.Organization, all.User, org.*, or org.inviteMember.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | invite | [Organization Invitation Post](_schemas.md#organization-invitation-post) | Y | Object containing new invite info |  | [Organization Invitation Post Example](_schemas.md#organization-invitation-post-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -154,6 +157,7 @@ all.Organization, all.User, org.*, or org.modifyMember.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | member | [Organization Member Patch](_schemas.md#organization-member-patch) | Y | Object containing new member pair |  | [Organization Member Patch Example](_schemas.md#organization-member-patch-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -193,6 +197,7 @@ all.Organization, all.User, org.*, or org.patch.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | organization | [Organization Patch](_schemas.md#organization-patch) | Y | Object containing new organization properties |  | [Organization Patch Example](_schemas.md#organization-patch-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -231,6 +236,7 @@ all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | start | string | N | Start of range for payload count query (ms since epoch) |  | 0 |
 | end | string | N | End of range for payload count query (ms since epoch) |  | 1465790400000 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -267,6 +273,7 @@ all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -306,6 +313,7 @@ all.Organization, all.User, org.*, or org.removeMember.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | userId | string | Y | Id of user to remove |  | 575ed70c7ae143cd83dc4aa9 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -345,6 +353,7 @@ all.Organization, all.User, org.*, or org.revokeInvite.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | inviteId | string | Y | Id of invite to revoke |  | 575ed71e7ae143cd83dc4aaa |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
@@ -384,6 +393,7 @@ all.Organization, all.User, org.*, or org.transferResources.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
 | transfer | [Resource Transfer](_schemas.md#resource-transfer) | Y | Object containing properties of the transfer |  | [Resource Transfer Example](_schemas.md#resource-transfer-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 

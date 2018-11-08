@@ -50,6 +50,7 @@ class ExperienceViews(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} viewType - Filter views to those only of the given type. Accepted values are: page, layout, component
+        *  {string} version - Return the experience views belonging to this version
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +85,8 @@ class ExperienceViews(object):
             query_params["filter"] = kwargs["filter"]
         if "viewType" in kwargs:
             query_params["viewType"] = kwargs["viewType"]
+        if "version" in kwargs:
+            query_params["version"] = kwargs["version"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

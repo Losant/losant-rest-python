@@ -92,6 +92,7 @@ class ExperienceEndpoint(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} experienceEndpointId - ID associated with the experience endpoint
+        *  {string} version - Version of this experience endpoint to return
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -114,6 +115,8 @@ class ExperienceEndpoint(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "experienceEndpointId" in kwargs:
             path_params["experienceEndpointId"] = kwargs["experienceEndpointId"]
+        if "version" in kwargs:
+            query_params["version"] = kwargs["version"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
