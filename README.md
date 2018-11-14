@@ -79,6 +79,12 @@ The ``Client()`` constructor takes the following arguments:
 
 Each of the following is a property on the client object, and returns a wrapper for the actions against that particular resource. See each resource documentation file for more information.
 
+* [application](docs/application.md)  
+  Contains all of the actions that can be performed against a single [Application](https://docs.losant.com/applications/overview/), which include things like getting info on an application or modifying an application.
+
+* [applications](docs/applications.md)  
+  Contains all of the actions that can be performed against the set of [Applications](https://docs.losant.com/applications/overview/) that the currently authenticated user has access to - such as listing the applications or creating a new application.
+
 * [application_api_token](docs/applicationApiToken.md)  
   Contains all the actions that can be performed against a single [Api Token](https://docs.losant.com/applications/application-tokens/) belonging to an application - for instance, getting info on a single token or revoking a token.
 
@@ -90,12 +96,6 @@ Each of the following is a property on the client object, and returns a wrapper 
 
 * [application_keys](docs/applicationKeys.md)  
   Contains all of the actions that can be performed against the collection of [Application Keys](https://docs.losant.com/applications/access-keys/) belonging to an Application - such as listing all keys or creating a new key.
-
-* [application](docs/application.md)  
-  Contains all of the actions that can be performed against a single [Application](https://docs.losant.com/applications/overview/), which include things like getting info on an application or modifying an application.
-
-* [applications](docs/applications.md)  
-  Contains all of the actions that can be performed against the set of [Applications](https://docs.losant.com/applications/overview/) that the currently authenticated user has access to - such as listing the applications or creating a new application.
 
 * [auth](docs/auth.md)  
   Contains the actions used for authenticating against the api, either as a user or as a device. The result of authentication calls contain the auth_token needed for authenticated calls - see the examples for more details.
@@ -142,6 +142,9 @@ Each of the following is a property on the client object, and returns a wrapper 
 * [events](docs/events.md)  
   Contains all the actions that can be performed against the collection of [Events](https://docs.losant.com/events/overview/) belonging to an Application - such as listing open events or creating a new event.
 
+* [experience](docs/experience.md)  
+  Contains all the actions that can be performed against an application [Experience](https://docs.losant.com/experiences/), such as bootstrapping or clearing resources.
+
 * [experience_domain](docs/experienceDomain.md)  
   Contains all the actions that can be performed against a single [Experience Domain](https://docs.losant.com/experiences/domains/), such as updating SSL certificate information.
 
@@ -160,11 +163,23 @@ Each of the following is a property on the client object, and returns a wrapper 
 * [experience_groups](docs/experienceGroups.md)  
   Contains all the actions that can be performed against the collection of [Experience Groups](https://docs.losant.com/experiences/groups/) belonging to an Application - such as listing groups or creating a new group.
 
+* [experience_slug](docs/experienceSlug.md)  
+  Contains all the actions that can be performed against a single [Experience Slug](https://docs.losant.com/experiences/domains/), such as changing the associated version.
+
+* [experience_slugs](docs/experienceSlugs.md)  
+  Contains all the actions that can be performed against the collection of [Experience Slugs](https://docs.losant.com/experiences/domains/) belonging to an Application - such as listing slugs or creating a new slug.
+
 * [experience_user](docs/experienceUser.md)  
   Contains all the actions that can be performed against a single [Experience User](https://docs.losant.com/experiences/users/), such as changing their email or password.
 
 * [experience_users](docs/experienceUsers.md)  
   Contains all the actions that can be performed against the collection of [Experience Users](https://docs.losant.com/experiences/users/) belonging to an Application - such as listing users or creating a new user.
+
+* [experience_version](docs/experienceVersion.md)  
+  Contains all the actions that can be performed against a single [Experience Version](https://docs.losant.com/experiences/), such as modifying the description.
+
+* [experience_versions](docs/experienceVersions.md)  
+  Contains all the actions that can be performed against the collection of [Experience Versions](https://docs.losant.com/experiences/) belonging to an Application - such as listing versions or creating a new versions.
 
 * [experience_view](docs/experienceView.md)  
   Contains all the actions that can be performed against a single [Experience View](https://docs.losant.com/experiences/views/), such as modifying the body template.
