@@ -64,7 +64,8 @@ Request an export of the data table&#x27;s data
 ```python
 result = client.data_table_rows.export(
     applicationId=my_application_id,
-    dataTableId=my_data_table_id)
+    dataTableId=my_data_table_id,
+    exportData=my_export_data)
 
 print(result)
 ```
@@ -80,7 +81,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | dataTableId | string | Y | ID associated with the data table |  | 575ed78e7ae143cd83dc4aab |
-| exportData | [Data Table Export](_schemas.md#data-table-export) | N | Object containing export specifications |  | [Data Table Export Example](_schemas.md#data-table-export-example) |
+| exportData | [Data Table Export](_schemas.md#data-table-export) | Y | Object containing export specifications |  | [Data Table Export Example](_schemas.md#data-table-export-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses

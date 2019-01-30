@@ -42,12 +42,13 @@ class Dashboards(object):
         all.Organization, all.Organization.read, all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, dashboards.*, or dashboards.get.
 
         Parameters:
-        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, ownerId
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, ownerId, applicationId
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {string} applicationId - If not provided, return all dashboards. If provided but blank, only return dashboards that are not linked to applications. If provided and an id, only return dashboards linked to the given application id.
         *  {string} orgId - If not provided, return all dashboards. If provided but blank, only return dashboards belonging to the current user. If provided and an id, only return dashboards belonging to the given organization id.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -78,6 +79,8 @@ class Dashboards(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "applicationId" in kwargs:
+            query_params["applicationId"] = kwargs["applicationId"]
         if "orgId" in kwargs:
             query_params["orgId"] = kwargs["orgId"]
         if "losantdomain" in kwargs:
