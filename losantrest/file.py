@@ -201,7 +201,7 @@ class File(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully updated file and returned a post url to respond with (https://api.losant.com/#/definitions/fileUploadPostResp)
+        *  201 - Successfully updated file and returned a post url to respond with (https://api.losant.com/#/definitions/fileUploadPostResponse)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
