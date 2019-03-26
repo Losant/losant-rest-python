@@ -181,6 +181,8 @@ class Application(object):
 
         Parameters:
         *  {string} applicationId - ID of the associated application
+        *  {string} summaryExclude - Comma seperated list of summary fields to exclude from application summary
+        *  {string} summaryInclude - Comma seperated list of summary fields to include in application summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -201,6 +203,10 @@ class Application(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

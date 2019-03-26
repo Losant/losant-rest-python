@@ -48,7 +48,8 @@ class Orgs(object):
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} summaryExclude - List of summary fields to exclude from org summaries
+        *  {string} summaryExclude - Comma seperated list of summary fields to exclude from org summaries
+        *  {string} summaryInclude - Comma seperated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -80,6 +81,8 @@ class Orgs(object):
             query_params["filter"] = kwargs["filter"]
         if "summaryExclude" in kwargs:
             query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

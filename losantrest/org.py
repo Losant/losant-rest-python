@@ -88,7 +88,8 @@ class Org(object):
 
         Parameters:
         *  {string} orgId - ID associated with the organization
-        *  {string} summaryExclude - List of summary fields to exclude from org summary
+        *  {string} summaryExclude - Comma seperated list of summary fields to exclude from org summary
+        *  {string} summaryInclude - Comma seperated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -111,6 +112,8 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "summaryExclude" in kwargs:
             query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
