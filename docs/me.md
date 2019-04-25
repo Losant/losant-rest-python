@@ -329,8 +329,8 @@ all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.ge
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | includeRecent | undefined | N | Should the user include recent app/dashboard info |  | true |
-| summaryExclude | string | N | Comma seperated list of summary fields to exclude from user summary |  | payloadCount |
-| summaryInclude | string | N | Comma seperated list of summary fields to include in user summary |  | payloadCount |
+| summaryExclude | string | N | Comma-separated list of summary fields to exclude from user summary |  | payloadCount |
+| summaryInclude | string | N | Comma-separated list of summary fields to include in user summary |  | payloadCount |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -366,6 +366,8 @@ all.SolutionUser, all.User, me.*, or me.patch.
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | user | [Me Patch](_schemas.md#me-patch) | Y | Object containing new user properties |  | [Me Patch Example](_schemas.md#me-patch-example) |
+| summaryExclude | string | N | Comma-separated list of summary fields to exclude from user summary |  | payloadCount |
+| summaryInclude | string | N | Comma-separated list of summary fields to include in user summary |  | payloadCount |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses

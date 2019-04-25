@@ -6,8 +6,49 @@ parameters and the potential responses.
 
 ##### Contents
 
+*   [Export](#export)
 *   [Last Value Query](#last-value-query)
 *   [Time Series Query](#time-series-query)
+
+<br/>
+
+## Export
+
+Creates a csv file from a query of devices and attributes over a time range.
+
+```python
+result = client.data.export(
+    applicationId=my_application_id,
+    query=my_query)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, data.*, or data.export.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| query | [Data Export](_schemas.md#data-export) | Y | The query parameters |  | [Data Export Example](_schemas.md#data-export-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Success](_schemas.md#success) | If command was successfully sent |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 

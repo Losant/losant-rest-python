@@ -88,8 +88,8 @@ class Org(object):
 
         Parameters:
         *  {string} orgId - ID associated with the organization
-        *  {string} summaryExclude - Comma seperated list of summary fields to exclude from org summary
-        *  {string} summaryInclude - Comma seperated list of summary fields to include in org summary
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -188,6 +188,8 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} member - Object containing new member pair (https://api.losant.com/#/definitions/orgMemberPatch)
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -210,6 +212,10 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "member" in kwargs:
             body = kwargs["member"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -236,6 +242,8 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {hash} organization - Object containing new organization properties (https://api.losant.com/#/definitions/orgPatch)
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -258,6 +266,10 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "organization" in kwargs:
             body = kwargs["organization"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -380,6 +392,8 @@ class Org(object):
         Parameters:
         *  {string} orgId - ID associated with the organization
         *  {string} userId - Id of user to remove
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -402,6 +416,10 @@ class Org(object):
             path_params["orgId"] = kwargs["orgId"]
         if "userId" in kwargs:
             query_params["userId"] = kwargs["userId"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

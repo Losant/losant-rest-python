@@ -49,8 +49,8 @@ class Applications(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} orgId - If not provided, return all applications. If provided but blank, only return applications belonging to the current user. If provided and an id, only return applications belonging to the given organization id.
-        *  {string} summaryExclude - Comma seperated list of summary fields to exclude from application summary
-        *  {string} summaryInclude - Comma seperated list of summary fields to include in application summary
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from application summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in application summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -111,6 +111,8 @@ class Applications(object):
 
         Parameters:
         *  {hash} application - New application information (https://api.losant.com/#/definitions/applicationPost)
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from application summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in application summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -130,6 +132,10 @@ class Applications(object):
 
         if "application" in kwargs:
             body = kwargs["application"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

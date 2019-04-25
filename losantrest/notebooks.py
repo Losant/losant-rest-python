@@ -22,44 +22,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-""" Module for Losant API Orgs wrapper class """
+""" Module for Losant API Notebooks wrapper class """
 # pylint: disable=C0301
 
-class Orgs(object):
-    """ Class containing all the actions for the Orgs Resource """
+class Notebooks(object):
+    """ Class containing all the actions for the Notebooks Resource """
 
     def __init__(self, client):
         self.client = client
 
     def get(self, **kwargs):
         """
-        Returns the organizations associated with the current user
+        Returns the notebooks for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.User, all.User.read, orgs.*, or orgs.get.
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, notebooks.*, or notebooks.get.
 
         Parameters:
+        *  {string} applicationId - ID associated with the application
         *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summaries
-        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of organizations (https://api.losant.com/#/definitions/orgs)
+        *  200 - Collection of notebooks (https://api.losant.com/#/definitions/notebooks)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -67,6 +67,8 @@ class Orgs(object):
         headers = {}
         body = None
 
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
         if "sortField" in kwargs:
             query_params["sortField"] = kwargs["sortField"]
         if "sortDirection" in kwargs:
@@ -79,10 +81,6 @@ class Orgs(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
-        if "summaryExclude" in kwargs:
-            query_params["summaryExclude"] = kwargs["summaryExclude"]
-        if "summaryInclude" in kwargs:
-            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -92,34 +90,34 @@ class Orgs(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/orgs".format(**path_params)
+        path = "/applications/{applicationId}/notebooks".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def post(self, **kwargs):
         """
-        Create a new organization
+        Create a new notebook for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.User, orgs.*, or orgs.post.
+        all.Application, all.Organization, all.User, notebooks.*, or notebooks.post.
 
         Parameters:
-        *  {hash} organization - New organization information (https://api.losant.com/#/definitions/orgPost)
-        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summary
-        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
+        *  {string} applicationId - ID associated with the application
+        *  {hash} notebook - New notebook information (https://api.losant.com/#/definitions/notebookPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created organization (https://api.losant.com/#/definitions/org)
+        *  201 - Successfully created notebook (https://api.losant.com/#/definitions/notebook)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -127,12 +125,10 @@ class Orgs(object):
         headers = {}
         body = None
 
-        if "organization" in kwargs:
-            body = kwargs["organization"]
-        if "summaryExclude" in kwargs:
-            query_params["summaryExclude"] = kwargs["summaryExclude"]
-        if "summaryInclude" in kwargs:
-            query_params["summaryInclude"] = kwargs["summaryInclude"]
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "notebook" in kwargs:
+            body = kwargs["notebook"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -142,7 +138,7 @@ class Orgs(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/orgs".format(**path_params)
+        path = "/applications/{applicationId}/notebooks".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

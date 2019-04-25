@@ -28,6 +28,7 @@
 *   [Dashboard Post](#dashboard-post)
 *   [Dashboard Send Report](#dashboard-send-report)
 *   [Dashboards](#dashboards)
+*   [Data Export](#data-export)
 *   [Data Table](#data-table)
 *   [Data Table Column](#data-table-column)
 *   [Data Table Patch](#data-table-patch)
@@ -136,6 +137,13 @@
 *   [Me Patch](#me-patch)
 *   [MQTT Publish Body](#mqtt-publish-body)
 *   [Multi Device Command](#multi-device-command)
+*   [Notebook](#notebook)
+*   [Notebook Data Export Options](#notebook-data-export-options)
+*   [Notebook Execution Logs](#notebook-execution-logs)
+*   [Notebook Execution Options](#notebook-execution-options)
+*   [Notebook Patch](#notebook-patch)
+*   [Notebook Post](#notebook-post)
+*   [Notebooks](#notebooks)
 *   [Organization](#organization)
 *   [Organization Invitation Action](#organization-invitation-action)
 *   [Organization Invitation Information](#organization-invitation-information)
@@ -603,13 +611,10 @@ Schema for a single Application
         "apiTokenCount": {
           "type": "number"
         },
-        "keyCount": {
+        "dataTableCount": {
           "type": "number"
         },
         "deviceCount": {
-          "type": "number"
-        },
-        "dataTableCount": {
           "type": "number"
         },
         "deviceRecipeCount": {
@@ -647,6 +652,20 @@ Schema for a single Application
         },
         "integrationCount": {
           "type": "number"
+        },
+        "keyCount": {
+          "type": "number"
+        },
+        "storageStats": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "number"
+            },
+            "size": {
+              "type": "number"
+            }
+          }
         },
         "webhookCount": {
           "type": "number"
@@ -897,6 +916,8 @@ Schema for the body of an Application API Token creation request
           "flows.*",
           "flowVersion.*",
           "flowVersions.*",
+          "notebook.*",
+          "notebooks.*",
           "webhook.*",
           "webhooks.*",
           "application.archiveData",
@@ -919,6 +940,7 @@ Schema for the body of an Application API Token creation request
           "applicationKey.patch",
           "applicationKeys.get",
           "applicationKeys.post",
+          "data.export",
           "data.lastValueQuery",
           "data.timeSeriesQuery",
           "dataTable.addColumn",
@@ -1047,6 +1069,15 @@ Schema for the body of an Application API Token creation request
           "integration.patch",
           "integrations.get",
           "integrations.post",
+          "notebook.delete",
+          "notebook.execute",
+          "notebook.get",
+          "notebook.logs",
+          "notebook.patch",
+          "notebook.requestInputDataExport",
+          "notebook.upload",
+          "notebooks.get",
+          "notebooks.post",
           "webhook.delete",
           "webhook.get",
           "webhook.patch",
@@ -2081,13 +2112,10 @@ Schema for a collection of Applications
               "apiTokenCount": {
                 "type": "number"
               },
-              "keyCount": {
+              "dataTableCount": {
                 "type": "number"
               },
               "deviceCount": {
-                "type": "number"
-              },
-              "dataTableCount": {
                 "type": "number"
               },
               "deviceRecipeCount": {
@@ -2125,6 +2153,20 @@ Schema for a collection of Applications
               },
               "integrationCount": {
                 "type": "number"
+              },
+              "keyCount": {
+                "type": "number"
+              },
+              "storageStats": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "number"
+                  },
+                  "size": {
+                    "type": "number"
+                  }
+                }
               },
               "webhookCount": {
                 "type": "number"
@@ -4762,6 +4804,101 @@ Schema for a collection of Dashboards
 
 <br/>
 
+## Data Export
+
+Schema for exporting data devices query
+
+### <a name="data-export-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "deviceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "maxItems": 1000
+    },
+    "deviceTags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "additionalProperties": false
+      },
+      "maxItems": 100
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+      }
+    },
+    "start": {
+      "type": "number"
+    },
+    "end": {
+      "type": "number"
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "includeDate": {
+          "type": "boolean",
+          "default": true
+        },
+        "includeID": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="data-export-example"></a> Example
+
+```json
+{
+  "email": "example@losant.com",
+  "deviceIds": [
+    "575ecf887ae143cd83dc4aa2",
+    "575ef5c97ae143cd83dc4aac"
+  ],
+  "attributes": [
+    "voltage"
+  ],
+  "end": 0,
+  "options": {
+    "includeDate": false,
+    "includeID": true
+  }
+}
+```
+
+<br/>
+
 ## Data Table
 
 Schema for a single Data Table
@@ -6363,6 +6500,7 @@ Schema for the body of a Device authentication request
         "enum": [
           "all.Device",
           "all.Device.read",
+          "data.export",
           "data.timeSeriesQuery",
           "data.lastValueQuery",
           "device.commandStream",
@@ -8104,7 +8242,8 @@ Schema for a single deployment of an edge workflow to an edge device
               "flow",
               "user",
               "device",
-              "apiToken"
+              "apiToken",
+              "notebook"
             ]
           },
           "sourceId": {
@@ -8431,7 +8570,8 @@ Schema for a collection of Edge Deployments
                     "flow",
                     "user",
                     "device",
-                    "apiToken"
+                    "apiToken",
+                    "notebook"
                   ]
                 },
                 "sourceId": {
@@ -8694,7 +8834,8 @@ Schema for a single Event
         "flow",
         "user",
         "device",
-        "apiToken"
+        "apiToken",
+        "notebook"
       ]
     },
     "sourceId": {
@@ -8739,7 +8880,8 @@ Schema for a single Event
               "flow",
               "user",
               "device",
-              "apiToken"
+              "apiToken",
+              "notebook"
             ]
           },
           "sourceId": {
@@ -8946,7 +9088,8 @@ Schema for a collection of Events
               "flow",
               "user",
               "device",
-              "apiToken"
+              "apiToken",
+              "notebook"
             ]
           },
           "sourceId": {
@@ -8991,7 +9134,8 @@ Schema for a collection of Events
                     "flow",
                     "user",
                     "device",
-                    "apiToken"
+                    "apiToken",
+                    "notebook"
                   ]
                 },
                 "sourceId": {
@@ -12209,7 +12353,8 @@ Schema for a single file
         "flow",
         "user",
         "device",
-        "apiToken"
+        "apiToken",
+        "notebook"
       ]
     },
     "status": {
@@ -12435,7 +12580,8 @@ Schema to upload the file to s3
         "flow",
         "user",
         "device",
-        "apiToken"
+        "apiToken",
+        "notebook"
       ]
     },
     "status": {
@@ -12482,32 +12628,25 @@ Schema to upload the file to s3
       }
     },
     "upload": {
-      "url": {
-        "type": "string"
-      },
-      "fields": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string"
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "patternProperties": {
+            "^.*$": {
+              "type": "string"
+            }
           },
-          "bucket": {
-            "type": "string"
-          },
-          "X-Amz-Algorithm": {
-            "type": "string"
-          },
-          "X-Amz-Credential": {
-            "type": "string"
-          },
-          "X-Amz-Date": {
-            "type": "string"
-          },
-          "Policy": {
-            "type": "string"
-          },
-          "X-Amz-Signature": {
-            "type": "string"
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "bucket": {
+              "type": "string"
+            }
           }
         }
       }
@@ -12592,7 +12731,8 @@ Schema for a collection of files
               "flow",
               "user",
               "device",
-              "apiToken"
+              "apiToken",
+              "notebook"
             ]
           },
           "status": {
@@ -12815,6 +12955,7 @@ Schema for a single Workflow
               "fileWatch",
               "integration",
               "mqttTopic",
+              "notebook",
               "redis",
               "request",
               "serial",
@@ -13435,6 +13576,7 @@ Schema for the body of a Workflow modification request
               "fileWatch",
               "integration",
               "mqttTopic",
+              "notebook",
               "redis",
               "request",
               "serial",
@@ -13928,6 +14070,7 @@ Schema for the body of a Workflow creation request
               "fileWatch",
               "integration",
               "mqttTopic",
+              "notebook",
               "redis",
               "request",
               "serial",
@@ -14561,6 +14704,7 @@ Schema for a single Workflow Version
                   "fileWatch",
                   "integration",
                   "mqttTopic",
+                  "notebook",
                   "redis",
                   "request",
                   "serial",
@@ -15091,6 +15235,7 @@ Schema for a single Workflow Version
                   "fileWatch",
                   "integration",
                   "mqttTopic",
+                  "notebook",
                   "redis",
                   "request",
                   "serial",
@@ -15324,6 +15469,7 @@ Schema for the body of a Workflow Version creation request
               "fileWatch",
               "integration",
               "mqttTopic",
+              "notebook",
               "redis",
               "request",
               "serial",
@@ -15842,6 +15988,7 @@ Schema for a collection of Workflow Versions
                         "fileWatch",
                         "integration",
                         "mqttTopic",
+                        "notebook",
                         "redis",
                         "request",
                         "serial",
@@ -16372,6 +16519,7 @@ Schema for a collection of Workflow Versions
                         "fileWatch",
                         "integration",
                         "mqttTopic",
+                        "notebook",
                         "redis",
                         "request",
                         "serial",
@@ -16672,6 +16820,7 @@ Schema for a collection of Workflows
                     "fileWatch",
                     "integration",
                     "mqttTopic",
+                    "notebook",
                     "redis",
                     "request",
                     "serial",
@@ -17276,6 +17425,7 @@ Schema for the body of a workflow import request
                     "fileWatch",
                     "integration",
                     "mqttTopic",
+                    "notebook",
                     "redis",
                     "request",
                     "serial",
@@ -17787,6 +17937,7 @@ Schema for the body of a workflow import request
                     "fileWatch",
                     "integration",
                     "mqttTopic",
+                    "notebook",
                     "redis",
                     "request",
                     "serial",
@@ -18345,6 +18496,7 @@ Schema for the result of a workflow import request
                     "fileWatch",
                     "integration",
                     "mqttTopic",
+                    "notebook",
                     "redis",
                     "request",
                     "serial",
@@ -18875,6 +19027,7 @@ Schema for the result of a workflow import request
                         "fileWatch",
                         "integration",
                         "mqttTopic",
+                        "notebook",
                         "redis",
                         "request",
                         "serial",
@@ -19405,6 +19558,7 @@ Schema for the result of a workflow import request
                         "fileWatch",
                         "integration",
                         "mqttTopic",
+                        "notebook",
                         "redis",
                         "request",
                         "serial",
@@ -19656,6 +19810,8 @@ Schema for the body of a Github login request
                   "flows.*",
                   "flowVersion.*",
                   "flowVersions.*",
+                  "notebook.*",
+                  "notebooks.*",
                   "webhook.*",
                   "webhooks.*",
                   "application.archiveData",
@@ -19678,6 +19834,7 @@ Schema for the body of a Github login request
                   "applicationKey.patch",
                   "applicationKeys.get",
                   "applicationKeys.post",
+                  "data.export",
                   "data.lastValueQuery",
                   "data.timeSeriesQuery",
                   "dataTable.addColumn",
@@ -19806,6 +19963,15 @@ Schema for the body of a Github login request
                   "integration.patch",
                   "integrations.get",
                   "integrations.post",
+                  "notebook.delete",
+                  "notebook.execute",
+                  "notebook.get",
+                  "notebook.logs",
+                  "notebook.patch",
+                  "notebook.requestInputDataExport",
+                  "notebook.upload",
+                  "notebooks.get",
+                  "notebooks.post",
                   "webhook.delete",
                   "webhook.get",
                   "webhook.patch",
@@ -21170,6 +21336,9 @@ Schema for information about the currently authenticated user
       "integration": {
         "type": "number"
       },
+      "notebook": {
+        "type": "number"
+      },
       "webhook": {
         "type": "number"
       },
@@ -21177,6 +21346,15 @@ Schema for information about the currently authenticated user
         "type": "number"
       },
       "payload": {
+        "type": "number"
+      },
+      "notebookMinutesPerRun": {
+        "type": "number"
+      },
+      "notebookMinutesPerMonth": {
+        "type": "number"
+      },
+      "notebookInParallel": {
         "type": "number"
       }
     },
@@ -21303,9 +21481,6 @@ Schema for information about the currently authenticated user
         "appCount": {
           "type": "number"
         },
-        "keyCount": {
-          "type": "number"
-        },
         "dashCount": {
           "type": "number"
         },
@@ -21316,9 +21491,6 @@ Schema for information about the currently authenticated user
           "type": "number"
         },
         "deviceRecipeCount": {
-          "type": "number"
-        },
-        "experienceDomainCount": {
           "type": "number"
         },
         "experienceEndpointCount": {
@@ -21343,6 +21515,12 @@ Schema for information about the currently authenticated user
           "type": "number"
         },
         "flowCount": {
+          "type": "number"
+        },
+        "integrationCount": {
+          "type": "number"
+        },
+        "keyCount": {
           "type": "number"
         },
         "orgCount": {
@@ -21459,8 +21637,16 @@ Schema for information about the currently authenticated user
             }
           }
         },
-        "integrationCount": {
-          "type": "number"
+        "storageStats": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "number"
+            },
+            "size": {
+              "type": "number"
+            }
+          }
         },
         "webhookCount": {
           "type": "number"
@@ -21721,6 +21907,1844 @@ Schema for the body of a request to send a command to multiple Devices
 
 <br/>
 
+## Notebook
+
+Schema for a single Notebook
+
+### <a name="notebook-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "notebookId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "jupyterFileName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "jupyterFileUrl": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "maxItems": 100,
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "deviceData"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "deviceTags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 100
+              },
+              "deviceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "maxItems": 1000
+              },
+              "attributes": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                }
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "deviceMetadata"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "deviceTags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 100
+              },
+              "deviceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "maxItems": 1000
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "dataTable"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "dataTableId": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "queryJson": {
+                "type": "string",
+                "maxLength": 32767
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "dataTableId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "externalUrl"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "sourceUrl": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "sourceUrl"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "maxItems": 100,
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "dataTable"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "dataTableId": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "createMissingColumns": {
+                "type": "boolean"
+              },
+              "truncateExistingTable": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType",
+              "dataTableId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "file"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "destinationFileNameTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType",
+              "destinationFileNameTemplate"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "executionResult"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "enum": [
+                  "result.html",
+                  "result.pdf",
+                  "result.ipynb",
+                  "result.error.log",
+                  "result.log"
+                ]
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "destinationFileNameTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  }
+}
+```
+### <a name="notebook-example"></a> Example
+
+```json
+{
+  "id": "5c782b8d4f3a8e51c1db42e4",
+  "notebookId": "5c782b8d4f3a8e51c1db42e4",
+  "applicationId": "575ec8687ae143cd83dc4a97",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z",
+  "name": "Example Notebook",
+  "jupyterFileName": "myNotebook.ipynb",
+  "jupyterFileUrl": "https://mystoragedomain.com/myNotebook.ipynb",
+  "inputs": [
+    {
+      "fileName": "deviceDataWithAttributes",
+      "inputType": "deviceData",
+      "attributes": [
+        "aNumber"
+      ],
+      "deviceIds": [
+        "5c926894a111ea00063978ac"
+      ],
+      "deviceTags": [],
+      "start": -10368000000,
+      "end": 0
+    },
+    {
+      "fileName": "dataTableWithQuery",
+      "inputType": "dataTable",
+      "dataTableId": "5c91584211126400069179c1",
+      "queryJson": "{\n  \"$or\": [\n    {\n      \"createdAt\": {\n        \"$gt\": \"12345\"\n      }\n    }\n  ]\n}"
+    },
+    {
+      "fileName": "deviceMetaData",
+      "inputType": "deviceMetadata",
+      "deviceIds": [
+        "5c926894a111ea00063978ac"
+      ],
+      "deviceTags": [
+        {
+          "key": "aTag",
+          "value": "and value"
+        }
+      ]
+    },
+    {
+      "fileName": "deviceDataAllAttributes",
+      "inputType": "deviceData",
+      "attributes": [],
+      "deviceIds": [],
+      "deviceTags": [
+        {
+          "value": "and value"
+        }
+      ],
+      "start": -43200000,
+      "end": 0
+    },
+    {
+      "fileName": "anExternalUrl",
+      "inputType": "externalUrl",
+      "sourceUrl": "https://foo.com"
+    }
+  ],
+  "outputs": [
+    {
+      "fileName": "result.html",
+      "outputType": "executionResult",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+      "destinationFileNameTemplate": "result.html"
+    },
+    {
+      "fileName": "result.pdf",
+      "outputType": "executionResult",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+      "destinationFileNameTemplate": "result.pdf"
+    },
+    {
+      "fileName": "result.ipynb",
+      "outputType": "executionResult",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+      "destinationFileNameTemplate": "result.ipynb"
+    },
+    {
+      "fileName": "result.error.log",
+      "outputType": "executionResult",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+      "destinationFileNameTemplate": "result.error.log"
+    },
+    {
+      "fileName": "result.log",
+      "outputType": "executionResult",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+      "destinationFileNameTemplate": "result.log"
+    },
+    {
+      "fileName": "myDataTableFile.csv",
+      "outputType": "dataTable",
+      "dataTableId": "5c925132a111ea00063978a7",
+      "createMissingColumns": true,
+      "truncateExistingTable": false
+    },
+    {
+      "fileName": "myDataTableFileTwo.csv",
+      "outputType": "dataTable",
+      "dataTableId": "5c91584211126400069179c1",
+      "createMissingColumns": false,
+      "truncateExistingTable": true
+    },
+    {
+      "fileName": "myApplicationFile.png",
+      "outputType": "file",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+      "destinationFileNameTemplate": "myApplicationFile.png"
+    }
+  ]
+}
+```
+
+<br/>
+
+## Notebook Data Export Options
+
+Schema for the options for a Notebook data export request
+
+### <a name="notebook-data-export-options-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    },
+    "relativeTo": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$date": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "$date"
+          ]
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="notebook-data-export-options-example"></a> Example
+
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+<br/>
+
+## Notebook Execution Logs
+
+Schema for a set of Notebook execution logs
+
+### <a name="notebook-execution-logs-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "notebookExecutionId": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "notebookId": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "applicationId": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "inProgress",
+          "completed",
+          "errored",
+          "timeout"
+        ]
+      },
+      "executionRelativeTo": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "maxAllowedRunMinutes": {
+        "type": "number"
+      },
+      "sourceType": {
+        "type": "string",
+        "enum": [
+          "flow",
+          "user",
+          "device",
+          "apiToken",
+          "notebook"
+        ]
+      },
+      "sourceId": {
+        "type": "string",
+        "pattern": "^[A-Fa-f\\d]{24}$"
+      },
+      "runQueuedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "runStartedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "inputsCompletedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "notebookCompletedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "outputsCompletedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "inputInfo": {
+        "type": "object",
+        "patternProperties": {
+          ".*": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "outputInfo": {
+        "type": "object",
+        "patternProperties": {
+          ".*": {
+            "type": "object",
+            "properties": {
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "contentType": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "executionErrors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+### <a name="notebook-execution-logs-example"></a> Example
+
+```json
+[
+  {
+    "id": "5c7d3f9cd32c87a49f04c260",
+    "notebookExecutionId": "5c7d3f9cd32c87a49f04c260",
+    "notebookId": "5c782b8d4f3a8e51c1db42e4",
+    "applicationId": "575ec8687ae143cd83dc4a97",
+    "runStartedAt": "2016-06-13T04:00:00.000Z",
+    "runQueuedAt": "2016-06-13T03:59:00.000Z",
+    "sourceId": "575ed70c7ae143cd83dc4aa9",
+    "sourceType": "user",
+    "status": "inProgress",
+    "maxAllowedRunMinutes": 5,
+    "inputInfo": {},
+    "outputInfo": {},
+    "executionErrors": []
+  }
+]
+```
+
+<br/>
+
+## Notebook Execution Options
+
+Schema for the options for a Notebook execution request
+
+### <a name="notebook-execution-options-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "relativeTo": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$date": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "$date"
+          ]
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="notebook-execution-options-example"></a> Example
+
+```json
+{}
+```
+
+<br/>
+
+## Notebook Patch
+
+Schema for the body of a Notebook modification request
+
+### <a name="notebook-patch-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "maxItems": 100,
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "deviceData"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "deviceTags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 100
+              },
+              "deviceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "maxItems": 1000
+              },
+              "attributes": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                }
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "deviceMetadata"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "deviceTags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 100
+              },
+              "deviceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "maxItems": 1000
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "dataTable"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "dataTableId": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "queryJson": {
+                "type": "string",
+                "maxLength": 32767
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "dataTableId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "externalUrl"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "sourceUrl": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "sourceUrl"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "maxItems": 100,
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "dataTable"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "dataTableId": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "createMissingColumns": {
+                "type": "boolean"
+              },
+              "truncateExistingTable": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType",
+              "dataTableId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "file"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "destinationFileNameTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType",
+              "destinationFileNameTemplate"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "executionResult"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "enum": [
+                  "result.html",
+                  "result.pdf",
+                  "result.ipynb",
+                  "result.error.log",
+                  "result.log"
+                ]
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "destinationFileNameTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="notebook-patch-example"></a> Example
+
+```json
+{
+  "name": "New Notebook Name"
+}
+```
+
+<br/>
+
+## Notebook Post
+
+Schema for the body of an Notebook creation request
+
+### <a name="notebook-post-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "maxItems": 100,
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "deviceData"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "deviceTags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 100
+              },
+              "deviceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "maxItems": 1000
+              },
+              "attributes": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                }
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "deviceMetadata"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "deviceTags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 100
+              },
+              "deviceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "maxItems": 1000
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "dataTable"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "dataTableId": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "queryJson": {
+                "type": "string",
+                "maxLength": 32767
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "dataTableId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "inputType": {
+                "type": "string",
+                "enum": [
+                  "externalUrl"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "sourceUrl": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "inputType",
+              "fileName",
+              "sourceUrl"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "maxItems": 100,
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "dataTable"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "dataTableId": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "createMissingColumns": {
+                "type": "boolean"
+              },
+              "truncateExistingTable": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType",
+              "dataTableId"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "file"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "destinationFileNameTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType",
+              "destinationFileNameTemplate"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "executionResult"
+                ]
+              },
+              "fileName": {
+                "type": "string",
+                "enum": [
+                  "result.html",
+                  "result.pdf",
+                  "result.ipynb",
+                  "result.error.log",
+                  "result.log"
+                ]
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              },
+              "destinationFileNameTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "fileName",
+              "outputType"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ]
+}
+```
+### <a name="notebook-post-example"></a> Example
+
+```json
+{
+  "name": "Example Notebook"
+}
+```
+
+<br/>
+
+## Notebooks
+
+Schema for a collection of Notebooks
+
+### <a name="notebooks-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "title": "Notebook",
+        "description": "Schema for a single Notebook",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "notebookId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "applicationId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 32767
+          },
+          "jupyterFileName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "jupyterFileUrl": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "maxItems": 100,
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "inputType": {
+                      "type": "string",
+                      "enum": [
+                        "deviceData"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "deviceTags": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                          },
+                          "value": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "maxItems": 100
+                    },
+                    "deviceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "maxItems": 1000
+                    },
+                    "attributes": {
+                      "type": "array",
+                      "maxItems": 100,
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                      }
+                    },
+                    "start": {
+                      "type": "number"
+                    },
+                    "end": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "inputType",
+                    "fileName",
+                    "start",
+                    "end"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "inputType": {
+                      "type": "string",
+                      "enum": [
+                        "deviceMetadata"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "deviceTags": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                          },
+                          "value": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "maxItems": 100
+                    },
+                    "deviceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "maxItems": 1000
+                    }
+                  },
+                  "required": [
+                    "inputType",
+                    "fileName"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "inputType": {
+                      "type": "string",
+                      "enum": [
+                        "dataTable"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "dataTableId": {
+                      "type": "string",
+                      "pattern": "^[A-Fa-f\\d]{24}$"
+                    },
+                    "queryJson": {
+                      "type": "string",
+                      "maxLength": 32767
+                    }
+                  },
+                  "required": [
+                    "inputType",
+                    "fileName",
+                    "dataTableId"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "inputType": {
+                      "type": "string",
+                      "enum": [
+                        "externalUrl"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "sourceUrl": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1024
+                    }
+                  },
+                  "required": [
+                    "inputType",
+                    "fileName",
+                    "sourceUrl"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "maxItems": 100,
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "outputType": {
+                      "type": "string",
+                      "enum": [
+                        "dataTable"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "dataTableId": {
+                      "type": "string",
+                      "pattern": "^[A-Fa-f\\d]{24}$"
+                    },
+                    "createMissingColumns": {
+                      "type": "boolean"
+                    },
+                    "truncateExistingTable": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "fileName",
+                    "outputType",
+                    "dataTableId"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "outputType": {
+                      "type": "string",
+                      "enum": [
+                        "file"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "destinationDirectoryTemplate": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1024
+                    },
+                    "destinationFileNameTemplate": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1024
+                    }
+                  },
+                  "required": [
+                    "fileName",
+                    "outputType",
+                    "destinationFileNameTemplate"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "outputType": {
+                      "type": "string",
+                      "enum": [
+                        "executionResult"
+                      ]
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "enum": [
+                        "result.html",
+                        "result.pdf",
+                        "result.ipynb",
+                        "result.error.log",
+                        "result.log"
+                      ]
+                    },
+                    "destinationDirectoryTemplate": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1024
+                    },
+                    "destinationFileNameTemplate": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1024
+                    }
+                  },
+                  "required": [
+                    "fileName",
+                    "outputType"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "filterField": {
+      "type": "string"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    "applicationId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="notebooks-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "5c782b8d4f3a8e51c1db42e4",
+      "notebookId": "5c782b8d4f3a8e51c1db42e4",
+      "applicationId": "575ec8687ae143cd83dc4a97",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "lastUpdated": "2016-06-13T04:00:00.000Z",
+      "name": "Example Notebook",
+      "jupyterFileName": "myNotebook.ipynb",
+      "jupyterFileUrl": "https://mystoragedomain.com/myNotebook.ipynb",
+      "inputs": [
+        {
+          "fileName": "deviceDataWithAttributes",
+          "inputType": "deviceData",
+          "attributes": [
+            "aNumber"
+          ],
+          "deviceIds": [
+            "5c926894a111ea00063978ac"
+          ],
+          "deviceTags": [],
+          "start": -10368000000,
+          "end": 0
+        },
+        {
+          "fileName": "dataTableWithQuery",
+          "inputType": "dataTable",
+          "dataTableId": "5c91584211126400069179c1",
+          "queryJson": "{\n  \"$or\": [\n    {\n      \"createdAt\": {\n        \"$gt\": \"12345\"\n      }\n    }\n  ]\n}"
+        },
+        {
+          "fileName": "deviceMetaData",
+          "inputType": "deviceMetadata",
+          "deviceIds": [
+            "5c926894a111ea00063978ac"
+          ],
+          "deviceTags": [
+            {
+              "key": "aTag",
+              "value": "and value"
+            }
+          ]
+        },
+        {
+          "fileName": "deviceDataAllAttributes",
+          "inputType": "deviceData",
+          "attributes": [],
+          "deviceIds": [],
+          "deviceTags": [
+            {
+              "value": "and value"
+            }
+          ],
+          "start": -43200000,
+          "end": 0
+        },
+        {
+          "fileName": "anExternalUrl",
+          "inputType": "externalUrl",
+          "sourceUrl": "https://foo.com"
+        }
+      ],
+      "outputs": [
+        {
+          "fileName": "result.html",
+          "outputType": "executionResult",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+          "destinationFileNameTemplate": "result.html"
+        },
+        {
+          "fileName": "result.pdf",
+          "outputType": "executionResult",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+          "destinationFileNameTemplate": "result.pdf"
+        },
+        {
+          "fileName": "result.ipynb",
+          "outputType": "executionResult",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+          "destinationFileNameTemplate": "result.ipynb"
+        },
+        {
+          "fileName": "result.error.log",
+          "outputType": "executionResult",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+          "destinationFileNameTemplate": "result.error.log"
+        },
+        {
+          "fileName": "result.log",
+          "outputType": "executionResult",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+          "destinationFileNameTemplate": "result.log"
+        },
+        {
+          "fileName": "myDataTableFile.csv",
+          "outputType": "dataTable",
+          "dataTableId": "5c925132a111ea00063978a7",
+          "createMissingColumns": true,
+          "truncateExistingTable": false
+        },
+        {
+          "fileName": "myDataTableFileTwo.csv",
+          "outputType": "dataTable",
+          "dataTableId": "5c91584211126400069179c1",
+          "createMissingColumns": false,
+          "truncateExistingTable": true
+        },
+        {
+          "fileName": "myApplicationFile.png",
+          "outputType": "file",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
+          "destinationFileNameTemplate": "myApplicationFile.png"
+        }
+      ]
+    }
+  ],
+  "count": 1,
+  "totalCount": 4,
+  "perPage": 1,
+  "page": 0,
+  "sortField": "name",
+  "sortDirection": "asc",
+  "applicationId": "575ec8687ae143cd83dc4a97"
+}
+```
+
+<br/>
+
 ## Organization
 
 Schema for a single Organization
@@ -21902,10 +23926,10 @@ Schema for a single Organization
       "flow": {
         "type": "number"
       },
-      "solution": {
+      "integration": {
         "type": "number"
       },
-      "integration": {
+      "notebook": {
         "type": "number"
       },
       "webhook": {
@@ -21919,6 +23943,15 @@ Schema for a single Organization
       },
       "payload": {
         "type": "number"
+      },
+      "notebookMinutesPerRun": {
+        "type": "number"
+      },
+      "notebookMinutesPerMonth": {
+        "type": "number"
+      },
+      "notebookInParallel": {
+        "type": "number"
       }
     },
     "summary": {
@@ -21928,9 +23961,6 @@ Schema for a single Organization
           "type": "number"
         },
         "appCount": {
-          "type": "number"
-        },
-        "keyCount": {
           "type": "number"
         },
         "dashCount": {
@@ -21972,10 +24002,13 @@ Schema for a single Organization
         "flowCount": {
           "type": "number"
         },
-        "memberCount": {
+        "integrationCount": {
           "type": "number"
         },
-        "pendingInviteCount": {
+        "keyCount": {
+          "type": "number"
+        },
+        "memberCount": {
           "type": "number"
         },
         "payloadCount": {
@@ -22089,11 +24122,19 @@ Schema for a single Organization
             }
           }
         },
-        "solutionCount": {
+        "pendingInviteCount": {
           "type": "number"
         },
-        "integrationCount": {
-          "type": "number"
+        "storageStats": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "number"
+            },
+            "size": {
+              "type": "number"
+            }
+          }
         },
         "webhookCount": {
           "type": "number"
@@ -22908,10 +24949,10 @@ Schema for a collection of Organizations
             "flow": {
               "type": "number"
             },
-            "solution": {
+            "integration": {
               "type": "number"
             },
-            "integration": {
+            "notebook": {
               "type": "number"
             },
             "webhook": {
@@ -22925,6 +24966,15 @@ Schema for a collection of Organizations
             },
             "payload": {
               "type": "number"
+            },
+            "notebookMinutesPerRun": {
+              "type": "number"
+            },
+            "notebookMinutesPerMonth": {
+              "type": "number"
+            },
+            "notebookInParallel": {
+              "type": "number"
             }
           },
           "summary": {
@@ -22934,9 +24984,6 @@ Schema for a collection of Organizations
                 "type": "number"
               },
               "appCount": {
-                "type": "number"
-              },
-              "keyCount": {
                 "type": "number"
               },
               "dashCount": {
@@ -22978,10 +25025,13 @@ Schema for a collection of Organizations
               "flowCount": {
                 "type": "number"
               },
-              "memberCount": {
+              "integrationCount": {
                 "type": "number"
               },
-              "pendingInviteCount": {
+              "keyCount": {
+                "type": "number"
+              },
+              "memberCount": {
                 "type": "number"
               },
               "payloadCount": {
@@ -23095,11 +25145,19 @@ Schema for a collection of Organizations
                   }
                 }
               },
-              "solutionCount": {
+              "pendingInviteCount": {
                 "type": "number"
               },
-              "integrationCount": {
-                "type": "number"
+              "storageStats": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "number"
+                  },
+                  "size": {
+                    "type": "number"
+                  }
+                }
               },
               "webhookCount": {
                 "type": "number"
@@ -25227,6 +27285,8 @@ Schema for the body of a User authentication request
                   "flows.*",
                   "flowVersion.*",
                   "flowVersions.*",
+                  "notebook.*",
+                  "notebooks.*",
                   "webhook.*",
                   "webhooks.*",
                   "application.archiveData",
@@ -25249,6 +27309,7 @@ Schema for the body of a User authentication request
                   "applicationKey.patch",
                   "applicationKeys.get",
                   "applicationKeys.post",
+                  "data.export",
                   "data.lastValueQuery",
                   "data.timeSeriesQuery",
                   "dataTable.addColumn",
@@ -25377,6 +27438,15 @@ Schema for the body of a User authentication request
                   "integration.patch",
                   "integrations.get",
                   "integrations.post",
+                  "notebook.delete",
+                  "notebook.execute",
+                  "notebook.get",
+                  "notebook.logs",
+                  "notebook.patch",
+                  "notebook.requestInputDataExport",
+                  "notebook.upload",
+                  "notebooks.get",
+                  "notebooks.post",
                   "webhook.delete",
                   "webhook.get",
                   "webhook.patch",
@@ -25622,6 +27692,8 @@ Schema for the body of a User creation request
                   "flows.*",
                   "flowVersion.*",
                   "flowVersions.*",
+                  "notebook.*",
+                  "notebooks.*",
                   "webhook.*",
                   "webhooks.*",
                   "application.archiveData",
@@ -25644,6 +27716,7 @@ Schema for the body of a User creation request
                   "applicationKey.patch",
                   "applicationKeys.get",
                   "applicationKeys.post",
+                  "data.export",
                   "data.lastValueQuery",
                   "data.timeSeriesQuery",
                   "dataTable.addColumn",
@@ -25772,6 +27845,15 @@ Schema for the body of a User creation request
                   "integration.patch",
                   "integrations.get",
                   "integrations.post",
+                  "notebook.delete",
+                  "notebook.execute",
+                  "notebook.get",
+                  "notebook.logs",
+                  "notebook.patch",
+                  "notebook.requestInputDataExport",
+                  "notebook.upload",
+                  "notebooks.get",
+                  "notebooks.post",
                   "webhook.delete",
                   "webhook.get",
                   "webhook.patch",
