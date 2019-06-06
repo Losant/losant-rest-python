@@ -12,6 +12,7 @@ setup(
     name='losant-rest',
     version='1.8.7',
     description='A REST client for the Losant API',
+    long_description_content_type='text/markdown',
     long_description=long_description,
     url='https://github.com/Losant/losant-rest-python',
     author='Losant',
