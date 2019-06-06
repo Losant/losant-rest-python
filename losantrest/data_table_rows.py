@@ -153,6 +153,7 @@ class DataTableRows(object):
         *  {string} sortDirection - Direction to sort the rows by. Accepted values are: asc, desc
         *  {string} limit - How many rows to return
         *  {string} offset - How many rows to skip
+        *  {string} includeFields - Comma-separated list of fields to include in resulting rows. When not provided, returns all fields.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -183,6 +184,8 @@ class DataTableRows(object):
             query_params["limit"] = kwargs["limit"]
         if "offset" in kwargs:
             query_params["offset"] = kwargs["offset"]
+        if "includeFields" in kwargs:
+            query_params["includeFields"] = kwargs["includeFields"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -264,6 +267,7 @@ class DataTableRows(object):
         *  {string} sortDirection - Direction to sort the rows by. Accepted values are: asc, desc
         *  {string} limit - How many rows to return
         *  {string} offset - How many rows to skip
+        *  {string} includeFields - Comma-separated list of fields to include in resulting rows. When not provided, returns all fields.
         *  {hash} query - Query to apply to filter the data table (https://api.losant.com/#/definitions/dataTableQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -295,6 +299,8 @@ class DataTableRows(object):
             query_params["limit"] = kwargs["limit"]
         if "offset" in kwargs:
             query_params["offset"] = kwargs["offset"]
+        if "includeFields" in kwargs:
+            query_params["includeFields"] = kwargs["includeFields"]
         if "query" in kwargs:
             body = kwargs["query"]
         if "losantdomain" in kwargs:

@@ -22,42 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-""" Module for Losant API ExperienceUsers wrapper class """
+""" Module for Losant API ApplicationCertificateAuthorities wrapper class """
 # pylint: disable=C0301
 
-class ExperienceUsers(object):
-    """ Class containing all the actions for the Experience Users Resource """
+class ApplicationCertificateAuthorities(object):
+    """ Class containing all the actions for the Application Certificate Authorities Resource """
 
     def __init__(self, client):
         self.client = client
 
     def get(self, **kwargs):
         """
-        Returns the experience users for an application
+        Returns the application certificate authorities for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceUsers.*, or experienceUsers.get.
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, applicationCertificateAuthorities.*, or applicationCertificateAuthorities.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: firstName, lastName, email, id, creationDate, lastLogin, lastUpdated
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, status, id, creationDate, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
-        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: firstName, lastName, email
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name, status
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} experienceGroupId - Filter users to those only in the specified group, special experienceGroupIds of 'any' which will give users who are in at least one group and 'none' will give you users who are not in any groups.
-        *  {string} includeAncestorGroups - If set will include members from ancestors of the specified experienceGroupId
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of experience users (https://api.losant.com/#/definitions/experienceUsers)
+        *  200 - Collection of application certificate authorities (https://api.losant.com/#/definitions/applicationCertificateAuthorities)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -83,10 +81,6 @@ class ExperienceUsers(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
-        if "experienceGroupId" in kwargs:
-            query_params["experienceGroupId"] = kwargs["experienceGroupId"]
-        if "includeAncestorGroups" in kwargs:
-            query_params["includeAncestorGroups"] = kwargs["includeAncestorGroups"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -96,30 +90,30 @@ class ExperienceUsers(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/users".format(**path_params)
+        path = "/applications/{applicationId}/certificate-authorities".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def post(self, **kwargs):
         """
-        Create a new experience user for an application
+        Create a new application certificate authority for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceUsers.*, or experienceUsers.post.
+        all.Application, all.Organization, all.User, applicationCertificateAuthorities.*, or applicationCertificateAuthorities.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} experienceUser - New experience user information (https://api.losant.com/#/definitions/experienceUserPost)
+        *  {hash} applicationCertificateAuthority - Application certificate authority information (https://api.losant.com/#/definitions/applicationCertificateAuthorityPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created experience user (https://api.losant.com/#/definitions/experienceUser)
+        *  201 - Successfully created application certificate authority (https://api.losant.com/#/definitions/applicationCertificateAuthority)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -133,8 +127,8 @@ class ExperienceUsers(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "experienceUser" in kwargs:
-            body = kwargs["experienceUser"]
+        if "applicationCertificateAuthority" in kwargs:
+            body = kwargs["applicationCertificateAuthority"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -144,7 +138,7 @@ class ExperienceUsers(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/users".format(**path_params)
+        path = "/applications/{applicationId}/certificate-authorities".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

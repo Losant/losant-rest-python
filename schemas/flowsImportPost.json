@@ -62,6 +62,7 @@
                     "integration",
                     "mqttTopic",
                     "notebook",
+                    "opcua",
                     "redis",
                     "request",
                     "serial",
@@ -168,13 +169,13 @@
             ]
           },
           "defaultVersionId": {
-            "oneOf": [
+            "$oneOf": [
               {
                 "type": "string",
                 "pattern": "^[A-Fa-f\\d]{24}$"
               },
               {
-                "type": "null"
+                "type": null
               }
             ]
           },
@@ -574,6 +575,7 @@
                     "integration",
                     "mqttTopic",
                     "notebook",
+                    "opcua",
                     "redis",
                     "request",
                     "serial",

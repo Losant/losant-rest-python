@@ -46,7 +46,7 @@ class Auth(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Successful authentication. The included api access token has the scope 'all.Device'. (https://api.losant.com/#/definitions/authedDevice)
+        *  200 - Successful authentication. The included api access token by default has the scope 'all.Device'. (https://api.losant.com/#/definitions/authedDevice)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
