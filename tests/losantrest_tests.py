@@ -97,3 +97,26 @@ class TestClient(unittest.TestCase):
         self.assertEqual(request.headers["Accept"], "application/json")
         self.assertEqual(request.headers["Authorization"], "Bearer a token")
         self.assertIsNone(request.body)
+
+    @requests_mock.Mocker()
+    def test_json_query_param_call(self, mock):
+        expected_body = {"count": 0, "items": []}
+        expected_qs = {
+            "_links": ["true"],
+            "_actions": ["false"],
+            "_embedded": ["true"],
+            "query": ['{"$and": [{"level": "info"}, {"state": "new"}]}']
+        }
+        mock.get("https://api.losant.com/applications/anapp/events", json=expected_body)
+
+        resp = Client("a token").events.get(applicationId="anapp", query={
+            "$and": [{ "level": "info" }, { "state": "new" }]
+        })
+        self.assertEqual(resp, expected_body)
+        request = mock.request_history[0]
+        parsed_url = urlparse(request.url)
+        self.assertEqual(expected_qs, parse_qs(parsed_url.query))
+        self.assertEqual(parsed_url.path, "/applications/anapp/events")
+        self.assertEqual(request.headers["Accept"], "application/json")
+        self.assertEqual(request.headers["Authorization"], "Bearer a token")
+        self.assertIsNone(request.body)

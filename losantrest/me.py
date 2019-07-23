@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+
+import json
+
 """ Module for Losant API Me wrapper class """
 # pylint: disable=C0301
 
@@ -523,6 +526,48 @@ class Me(object):
             query_params["_embedded"] = kwargs["_embedded"]
 
         path = "/me/payloadCounts".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
+    def refresh_token(self, **kwargs):
+        """
+        Returns a new auth token based on the current auth token
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.SolutionUser, all.User, or me.*.
+
+        Parameters:
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Successful token regeneration (https://api.losant.com/#/definitions/authedUser)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  401 - Unauthorized error if authentication fails (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/me/refreshToken".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 

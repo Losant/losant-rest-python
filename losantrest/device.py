@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+
+import json
+
 """ Module for Losant API Device wrapper class """
 # pylint: disable=C0301
 
@@ -259,6 +262,7 @@ class Device(object):
         *  {string} deviceId - ID associated with the device
         *  {string} start - Start of time range to look at to build composite state
         *  {string} end - End of time range to look at to build composite state
+        *  {string} attributes - Comma-separated list of attributes to include. When not provided, returns all attributes.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -285,6 +289,8 @@ class Device(object):
             query_params["start"] = kwargs["start"]
         if "end" in kwargs:
             query_params["end"] = kwargs["end"]
+        if "attributes" in kwargs:
+            query_params["attributes"] = kwargs["attributes"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

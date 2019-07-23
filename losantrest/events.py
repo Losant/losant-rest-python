@@ -22,6 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+
+import json
+
 """ Module for Losant API Events wrapper class """
 # pylint: disable=C0301
 
@@ -30,6 +33,102 @@ class Events(object):
 
     def __init__(self, client):
         self.client = client
+
+    def delete(self, **kwargs):
+        """
+        Delete events
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, events.*, or events.delete.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {hash} query - Query to apply to filter the events (https://api.losant.com/#/definitions/advancedQuery)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If request successfully deletes a set of Events (https://api.losant.com/#/definitions/eventsDeleted)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if events were not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "query" in kwargs:
+            body = kwargs["query"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/events/delete".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
+    def export(self, **kwargs):
+        """
+        Request an export of an application's event data
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, events.*, or events.export.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {hash} exportData - Export options for events (https://api.losant.com/#/definitions/eventsExport)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - If generation of export was successfully started (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "exportData" in kwargs:
+            body = kwargs["exportData"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/events/export".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
     def get(self, **kwargs):
         """
@@ -50,6 +149,7 @@ class Events(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: subject
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} state - If provided, return events only in the given state. Accepted values are: new, acknowledged, resolved
+        *  {hash} query - Event filter JSON object which overides the filterField, filter, and state parameters. (https://api.losant.com/#/definitions/advancedQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +184,8 @@ class Events(object):
             query_params["filter"] = kwargs["filter"]
         if "state" in kwargs:
             query_params["state"] = kwargs["state"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -110,6 +212,7 @@ class Events(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} filter - Filter to apply against event subjects. Supports globbing. Blank or not provided means no filtering.
+        *  {hash} query - Event filter JSON object which overides the filter parameter. (https://api.losant.com/#/definitions/advancedQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -131,6 +234,8 @@ class Events(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -159,6 +264,7 @@ class Events(object):
         *  {string} filterField - Field to filter the events to act on by. Blank or not provided means no filtering. Accepted values are: subject
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} state - If provided, act on events only in the given state. Accepted values are: new, acknowledged, resolved
+        *  {hash} query - Event filter JSON object which overides the filterField, filter, and state parameters. (https://api.losant.com/#/definitions/advancedQuery)
         *  {hash} updates - Object containing updated information for the events (https://api.losant.com/#/definitions/eventPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -186,6 +292,8 @@ class Events(object):
             query_params["filter"] = kwargs["filter"]
         if "state" in kwargs:
             query_params["state"] = kwargs["state"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "updates" in kwargs:
             body = kwargs["updates"]
         if "losantdomain" in kwargs:

@@ -97,6 +97,34 @@
           },
           "maxItems": 100
         },
+        "includeDevices": {
+          "type": "boolean",
+          "default": true
+        },
+        "includeEvents": {
+          "type": "boolean",
+          "default": false
+        },
+        "includeDataTables": {
+          "type": "boolean",
+          "default": false
+        },
+        "dataTablesMode": {
+          "type": "string",
+          "enum": [
+            "all",
+            "whitelist",
+            "blacklist"
+          ]
+        },
+        "dataTableIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "maxItems": 1000
+        },
         "s3": {
           "type": "object",
           "properties": {
