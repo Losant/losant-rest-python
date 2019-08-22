@@ -42,7 +42,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.addRecentItem.
+        all.User, me.*, or me.addRecentItem.
 
         Parameters:
         *  {hash} data - Object containing recent item info (https://api.losant.com/#/definitions/recentItem)
@@ -86,7 +86,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.changePassword.
+        all.User, me.*, or me.changePassword.
 
         Parameters:
         *  {hash} data - Object containing the password change info (https://api.losant.com/#/definitions/changePassword)
@@ -130,7 +130,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.delete.
+        all.User, me.*, or me.delete.
 
         Parameters:
         *  {hash} credentials - User authentication credentials (https://api.losant.com/#/definitions/userCredentials)
@@ -174,7 +174,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.disableTwoFactorAuth.
+        all.User, me.*, or me.disableTwoFactorAuth.
 
         Parameters:
         *  {hash} data - Object containing two factor auth properties (https://api.losant.com/#/definitions/disableTwoFactorAuth)
@@ -218,7 +218,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.disconnectGithub.
+        all.User, me.*, or me.disconnectGithub.
 
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -259,7 +259,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.disconnectTwitter.
+        all.User, me.*, or me.disconnectTwitter.
 
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -300,7 +300,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.enableTwoFactorAuth.
+        all.User, me.*, or me.enableTwoFactorAuth.
 
         Parameters:
         *  {hash} data - Object containing two factor auth properties (https://api.losant.com/#/definitions/enableTwoFactorAuth)
@@ -344,7 +344,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.fetchRecentItems.
+        all.User, all.User.read, me.*, or me.fetchRecentItems.
 
         Parameters:
         *  {string} parentId - Parent id of the recent list
@@ -391,7 +391,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.SolutionUser.read, all.User, all.User.read, me.*, or me.get.
+        all.User, all.User.read, me.*, or me.get.
 
         Parameters:
         *  {undefined} includeRecent - Should the user include recent app/dashboard info
@@ -440,7 +440,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.patch.
+        all.User, me.*, or me.patch.
 
         Parameters:
         *  {hash} user - Object containing new user properties (https://api.losant.com/#/definitions/mePatch)
@@ -490,7 +490,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, all.User.read, me.*, or me.payloadCounts.
+        all.User, all.User.read, me.*, or me.payloadCounts.
 
         Parameters:
         *  {string} start - Start of range for payload count query (ms since epoch)
@@ -537,7 +537,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, or me.*.
+        all.User, or me.*.
 
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -579,7 +579,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.transferResources.
+        all.User, me.*, or me.transferResources.
 
         Parameters:
         *  {hash} transfer - Object containing properties of the transfer (https://api.losant.com/#/definitions/resourceTransfer)
@@ -623,7 +623,7 @@ class Me(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.SolutionUser, all.User, me.*, or me.verifyEmail.
+        all.User, me.*, or me.verifyEmail.
 
         Parameters:
         *  {string} losantdomain - Domain scope of request (rarely needed)
