@@ -36,7 +36,7 @@ class Devices(object):
 
     def export(self, **kwargs):
         """
-        Creates an export of all device metadata.
+        Creates an export of all device metadata
 
         Authentication:
         The client must be configured with a valid api
@@ -47,7 +47,7 @@ class Devices(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} email - Email address to send export to. Defaults to current user's email.
-        *  {string} callbackUrl - Callback URL to call with export result.
+        *  {string} callbackUrl - Callback URL to call with export result
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -103,9 +103,10 @@ class Devices(object):
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} deviceClass - Filter the devices by the given device class. Accepted values are: standalone, gateway, peripheral, floating, edgeCompute
-        *  {hash} tagFilter - Array of tag pairs to filter by. (https://api.losant.com/#/definitions/deviceTagFilter)
+        *  {hash} deviceClass - Filter the devices by the given device class or classes (https://api.losant.com/#/definitions/deviceClassFilter)
+        *  {hash} tagFilter - Array of tag pairs to filter by (https://api.losant.com/#/definitions/deviceTagFilter)
         *  {string} excludeConnectionInfo - If set, do not return connection info
+        *  {string} parentId - Filter devices as children of a given system id
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -144,6 +145,8 @@ class Devices(object):
             query_params["tagFilter"] = kwargs["tagFilter"]
         if "excludeConnectionInfo" in kwargs:
             query_params["excludeConnectionInfo"] = kwargs["excludeConnectionInfo"]
+        if "parentId" in kwargs:
+            query_params["parentId"] = kwargs["parentId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -156,6 +159,54 @@ class Devices(object):
         path = "/applications/{applicationId}/devices".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
+    def patch(self, **kwargs):
+        """
+        Update the fields of one or more devices
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, devices.*, or devices.patch.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {hash} patchInfo - Object containing device filter fields and updated properties (https://api.losant.com/#/definitions/devicesPatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  201 - Successfully queued bulk update job (https://api.losant.com/#/definitions/success)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "patchInfo" in kwargs:
+            body = kwargs["patchInfo"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/devices".format(**path_params)
+
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
 
     def post(self, **kwargs):
         """
