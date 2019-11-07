@@ -15,6 +15,10 @@
 *   [Application Certificate Patch](#application-certificate-patch)
 *   [Application Certificate Post](#application-certificate-post)
 *   [Application Certificates](#application-certificates)
+*   [Success Dry Run](#success-dry-run)
+*   [Application Clone Enqueue](#application-clone-enqueue)
+*   [Application Clone Post Schema](#application-clone-post-schema)
+*   [Application Clone](#application-clone)
 *   [Application Key](#application-key)
 *   [Application Key Patch](#application-key-patch)
 *   [Application Key Post](#application-key-post)
@@ -182,6 +186,7 @@
 *   [User Post](#user-post)
 *   [Validate Context Error](#validate-context-error)
 *   [Validate Context Success](#validate-context-success)
+*   [Validation Clone Error](#validation-clone-error)
 *   [Virtual Button Press](#virtual-button-press)
 *   [Webhook](#webhook)
 *   [Webhook Patch](#webhook-patch)
@@ -1574,6 +1579,10 @@ Schema for a single Application
           "cloudOnly": {
             "type": "boolean",
             "default": false
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -1957,6 +1966,7 @@ Schema for the body of an Application API Token creation request
           "webhooks.*",
           "application.archiveData",
           "application.backfillArchiveData",
+          "application.clone",
           "application.fullEventsArchive",
           "application.fullDataTablesArchive",
           "application.debug",
@@ -2979,6 +2989,556 @@ Schema for a collection of Application Certificates
 
 <br/>
 
+## Success Dry Run
+
+Schema for reporting a successful dry run of clone application
+
+### <a name="success-dry-run-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "enum": [
+        true
+      ]
+    },
+    "requiresJob": {
+      "type": "boolean"
+    }
+  }
+}
+```
+### <a name="success-dry-run-example"></a> Example
+
+```json
+{
+  "success": true,
+  "jobRequired": false
+}
+```
+
+<br/>
+
+## Application Clone Enqueue
+
+Schema for the result of an application clone request when creating more than 1000 resources
+
+### <a name="application-clone-enqueue-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "jobQueued": {
+      "type": "boolean"
+    }
+  }
+}
+```
+### <a name="application-clone-enqueue-example"></a> Example
+
+```json
+{
+  "jobQueued": true
+}
+```
+
+<br/>
+
+## Application Clone Post Schema
+
+Schema for the body of an application clone request
+
+### <a name="application-clone-post-schema-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "dryRun": {
+      "type": "boolean",
+      "default": false
+    },
+    "includeFiles": {
+      "type": "boolean",
+      "default": false
+    },
+    "includeDataTableRows": {
+      "type": "boolean",
+      "default": false
+    },
+    "includeDevices": {
+      "type": "boolean",
+      "default": false
+    },
+    "ownerId": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Fa-f\\d]{24}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ownerType": {
+      "type": "string",
+      "enum": [
+        "user",
+        "organization"
+      ]
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 1024
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="application-clone-post-schema-example"></a> Example
+
+```json
+{
+  "options": {
+    "includeFiles": true,
+    "includeDevices": true,
+    "ownerType": "organization",
+    "ownerId": "575ec8687ae143cd83dc4a98"
+  }
+}
+```
+
+<br/>
+
+## Application Clone
+
+Schema for the result of an application clone request
+
+### <a name="application-clone-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "application": {
+      "title": "Application",
+      "description": "Schema for a single Application",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Fa-f\\d]{24}$"
+        },
+        "applicationId": {
+          "type": "string",
+          "pattern": "^[A-Fa-f\\d]{24}$"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ownerId": {
+          "type": "string",
+          "pattern": "^[A-Fa-f\\d]{24}$"
+        },
+        "ownerType": {
+          "type": "string",
+          "enum": [
+            "user",
+            "organization"
+          ]
+        },
+        "organizationName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "organizationIconColor": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 32767
+        },
+        "endpointSlug": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 63,
+          "pattern": "^[0-9a-z-]*$"
+        },
+        "expUserTokenCutoff": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endpointDefaultCors": {
+          "type": "boolean"
+        },
+        "globals": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+              },
+              "json": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 32767
+              },
+              "cloudOnly": {
+                "type": "boolean",
+                "default": false
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 32767
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "json"
+            ]
+          }
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "apiTokenCount": {
+              "type": "number"
+            },
+            "dataTableCount": {
+              "type": "number"
+            },
+            "deviceCount": {
+              "type": "number"
+            },
+            "deviceRecipeCount": {
+              "type": "number"
+            },
+            "eventCount": {
+              "type": "number"
+            },
+            "experienceDomainCount": {
+              "type": "number"
+            },
+            "experienceEndpointCount": {
+              "type": "number"
+            },
+            "experienceGroupCount": {
+              "type": "number"
+            },
+            "experienceSlugCount": {
+              "type": "number"
+            },
+            "experienceUserCount": {
+              "type": "number"
+            },
+            "experienceVersionCount": {
+              "type": "number"
+            },
+            "experienceViewCount": {
+              "type": "number"
+            },
+            "fileCount": {
+              "type": "number"
+            },
+            "flowCount": {
+              "type": "number"
+            },
+            "integrationCount": {
+              "type": "number"
+            },
+            "keyCount": {
+              "type": "number"
+            },
+            "storageStats": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "number"
+                },
+                "size": {
+                  "type": "number"
+                }
+              }
+            },
+            "webhookCount": {
+              "type": "number"
+            }
+          }
+        },
+        "ftueTracking": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+              },
+              "version": {
+                "type": "number"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "skipped",
+                  "completed"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "version",
+              "status"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 100
+        },
+        "archiveConfig": {
+          "type": "object",
+          "properties": {
+            "directory": {
+              "type": "string",
+              "max": 255
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "all",
+                "whitelist",
+                "blacklist"
+              ]
+            },
+            "deviceIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "maxItems": 1000
+            },
+            "deviceTags": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[0-9a-zA-Z_-]{1,255}$"
+                  },
+                  "value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 100
+            },
+            "includeDevices": {
+              "type": "boolean",
+              "default": true
+            },
+            "includeEvents": {
+              "type": "boolean",
+              "default": false
+            },
+            "includeDataTables": {
+              "type": "boolean",
+              "default": false
+            },
+            "dataTablesMode": {
+              "type": "string",
+              "enum": [
+                "all",
+                "whitelist",
+                "blacklist"
+              ]
+            },
+            "dataTableIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              "maxItems": 1000
+            },
+            "s3": {
+              "type": "object",
+              "properties": {
+                "bucket": {
+                  "type": "string",
+                  "max": 255
+                },
+                "accessKeyId": {
+                  "type": "string",
+                  "min": 16,
+                  "max": 128
+                },
+                "secretAccessKey": {
+                  "type": "string",
+                  "min": 16,
+                  "max": 128
+                },
+                "region": {
+                  "type": "string",
+                  "max": 128
+                }
+              },
+              "required": [
+                "bucket",
+                "accessKeyId",
+                "secretAccessKey",
+                "region"
+              ],
+              "additionalProperties": false
+            },
+            "gcs": {
+              "type": "object",
+              "properties": {
+                "projectId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                },
+                "keyJson": {
+                  "type": "string",
+                  "maxLength": 32767,
+                  "minLength": 50
+                },
+                "bucket": {
+                  "type": "string",
+                  "max": 255
+                }
+              },
+              "required": [
+                "projectId",
+                "keyJson",
+                "bucket"
+              ],
+              "additionalProperties": false
+            },
+            "azure": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "type": "string",
+                  "min": 3,
+                  "max": 24
+                },
+                "accountKey": {
+                  "type": "string",
+                  "max": 255
+                },
+                "bucket": {
+                  "type": "string",
+                  "min": 3,
+                  "max": 63
+                }
+              },
+              "required": [
+                "account",
+                "accountKey",
+                "bucket"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "validationErrors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+```
+### <a name="application-clone-example"></a> Example
+
+```json
+{
+  "application": {
+    "id": "575ec8687ae143cd83dc4a98",
+    "applicationId": "575ec8687ae143cd83dc4a97",
+    "creationDate": "2016-06-13T04:00:00.000Z",
+    "lastUpdated": "2016-06-13T04:00:00.000Z",
+    "ownerId": "575ed70c7ae143cd83dc4aa9",
+    "ownerType": "user",
+    "name": "My Application Cloned",
+    "description": "The is the best application description",
+    "summary": {
+      "deviceCount": 5,
+      "flowCount": 2,
+      "webhookCount": 0,
+      "eventCount": 0,
+      "keyCount": 1,
+      "deviceRecipeCount": 0
+    },
+    "archiveConfig": {
+      "s3": {
+        "bucket": "bucketName",
+        "accessKeyId": "awsAccessKey",
+        "accessSecretKey": "awsSecretKey",
+        "region": "us-west-1"
+      },
+      "mode": "all",
+      "deviceIds": [
+        "575ec8687ae143cd83dc4a95",
+        "575ec8687ae143cd83dc4a91"
+      ]
+    }
+  }
+}
+```
+
+<br/>
+
 ## Application Key
 
 Schema for a single Application Key
@@ -3459,6 +4019,10 @@ Schema for the body of an Application modification request
           "cloudOnly": {
             "type": "boolean",
             "default": false
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -3720,6 +4284,10 @@ Schema for the body of an Application creation request
           "cloudOnly": {
             "type": "boolean",
             "default": false
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 32767
           }
         },
         "additionalProperties": false,
@@ -4071,6 +4639,10 @@ Schema for a collection of Applications
                 "cloudOnly": {
                   "type": "boolean",
                   "default": false
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 32767
                 }
               },
               "additionalProperties": false,
@@ -5760,6 +6332,15 @@ Schema for a single Dashboard
                         }
                       ]
                     }
+                  },
+                  "vegaVersion": {
+                    "type": "string",
+                    "enum": [
+                      "vegaLite2",
+                      "vegaLite3",
+                      "vega4",
+                      "vega5"
+                    ]
                   }
                 },
                 "additionalProperties": false
@@ -10260,6 +10841,15 @@ Schema for the body of a Dashboard modification request
                         }
                       ]
                     }
+                  },
+                  "vegaVersion": {
+                    "type": "string",
+                    "enum": [
+                      "vegaLite2",
+                      "vegaLite3",
+                      "vega4",
+                      "vega5"
+                    ]
                   }
                 },
                 "additionalProperties": false
@@ -14689,6 +15279,15 @@ Schema for the body of a Dashboard creation request
                         }
                       ]
                     }
+                  },
+                  "vegaVersion": {
+                    "type": "string",
+                    "enum": [
+                      "vegaLite2",
+                      "vegaLite3",
+                      "vega4",
+                      "vega5"
+                    ]
                   }
                 },
                 "additionalProperties": false
@@ -19373,6 +19972,15 @@ Schema for a collection of Dashboards
                               }
                             ]
                           }
+                        },
+                        "vegaVersion": {
+                          "type": "string",
+                          "enum": [
+                            "vegaLite2",
+                            "vegaLite3",
+                            "vega4",
+                            "vega5"
+                          ]
                         }
                       },
                       "additionalProperties": false
@@ -34691,6 +35299,7 @@ Schema for a single Workflow
                       "deviceCommand",
                       "deviceIdsTagsConnect",
                       "deviceIdsTagsDisconnect",
+                      "flowError",
                       "googlePubSub",
                       "meridian",
                       "mqtt",
@@ -35456,6 +36065,96 @@ Schema for a single Workflow
                     "type": "string",
                     "enum": [
                       "fileWatch"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "uiId": {
+                    "type": "string",
+                    "maxLength": 48
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 32767
+                  },
+                  "icon": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "color": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "inputCount": {
+                    "type": "number"
+                  },
+                  "outputCount": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string",
+                    "maxLength": 48
+                  }
+                },
+                "additionalProperties": false
+              },
+              "outputIds": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "maxItems": 100
+                },
+                "maxItems": 100
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "flowError"
+                ]
+              },
+              "config": {
+                "type": "object",
+                "additionalProperties": false
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "trigger"
+                    ]
+                  },
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "flowError"
                     ]
                   },
                   "label": {
@@ -36754,6 +37453,7 @@ Schema for the body of a Workflow modification request
                       "deviceCommand",
                       "deviceIdsTagsConnect",
                       "deviceIdsTagsDisconnect",
+                      "flowError",
                       "googlePubSub",
                       "meridian",
                       "mqtt",
@@ -37519,6 +38219,96 @@ Schema for the body of a Workflow modification request
                     "type": "string",
                     "enum": [
                       "fileWatch"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "uiId": {
+                    "type": "string",
+                    "maxLength": 48
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 32767
+                  },
+                  "icon": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "color": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "inputCount": {
+                    "type": "number"
+                  },
+                  "outputCount": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string",
+                    "maxLength": 48
+                  }
+                },
+                "additionalProperties": false
+              },
+              "outputIds": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "maxItems": 100
+                },
+                "maxItems": 100
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "flowError"
+                ]
+              },
+              "config": {
+                "type": "object",
+                "additionalProperties": false
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "trigger"
+                    ]
+                  },
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "flowError"
                     ]
                   },
                   "label": {
@@ -38690,6 +39480,7 @@ Schema for the body of a Workflow creation request
                       "deviceCommand",
                       "deviceIdsTagsConnect",
                       "deviceIdsTagsDisconnect",
+                      "flowError",
                       "googlePubSub",
                       "meridian",
                       "mqtt",
@@ -39455,6 +40246,96 @@ Schema for the body of a Workflow creation request
                     "type": "string",
                     "enum": [
                       "fileWatch"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "uiId": {
+                    "type": "string",
+                    "maxLength": 48
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 32767
+                  },
+                  "icon": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "color": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "inputCount": {
+                    "type": "number"
+                  },
+                  "outputCount": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string",
+                    "maxLength": 48
+                  }
+                },
+                "additionalProperties": false
+              },
+              "outputIds": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "maxItems": 100
+                },
+                "maxItems": 100
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "flowError"
+                ]
+              },
+              "config": {
+                "type": "object",
+                "additionalProperties": false
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "trigger"
+                    ]
+                  },
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "flowError"
                     ]
                   },
                   "label": {
@@ -40766,6 +41647,7 @@ Schema for a single Workflow Version
                           "deviceCommand",
                           "deviceIdsTagsConnect",
                           "deviceIdsTagsDisconnect",
+                          "flowError",
                           "googlePubSub",
                           "meridian",
                           "mqtt",
@@ -41531,6 +42413,96 @@ Schema for a single Workflow Version
                         "type": "string",
                         "enum": [
                           "fileWatch"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 255
+                      },
+                      "x": {
+                        "type": "number"
+                      },
+                      "y": {
+                        "type": "number"
+                      },
+                      "uiId": {
+                        "type": "string",
+                        "maxLength": 48
+                      },
+                      "description": {
+                        "type": "string",
+                        "maxLength": 32767
+                      },
+                      "icon": {
+                        "type": "string",
+                        "maxLength": 1024
+                      },
+                      "color": {
+                        "type": "string",
+                        "maxLength": 1024
+                      },
+                      "inputCount": {
+                        "type": "number"
+                      },
+                      "outputCount": {
+                        "type": "number"
+                      },
+                      "id": {
+                        "type": "string",
+                        "maxLength": 48
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "outputIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 255
+                      },
+                      "maxItems": 100
+                    },
+                    "maxItems": 100
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "flowError"
+                    ]
+                  },
+                  "config": {
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "meta": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "trigger"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "enum": [
+                          "flowError"
                         ]
                       },
                       "label": {
@@ -42739,6 +43711,7 @@ Schema for a single Workflow Version
                           "deviceCommand",
                           "deviceIdsTagsConnect",
                           "deviceIdsTagsDisconnect",
+                          "flowError",
                           "googlePubSub",
                           "meridian",
                           "mqtt",
@@ -43504,6 +44477,96 @@ Schema for a single Workflow Version
                         "type": "string",
                         "enum": [
                           "fileWatch"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 255
+                      },
+                      "x": {
+                        "type": "number"
+                      },
+                      "y": {
+                        "type": "number"
+                      },
+                      "uiId": {
+                        "type": "string",
+                        "maxLength": 48
+                      },
+                      "description": {
+                        "type": "string",
+                        "maxLength": 32767
+                      },
+                      "icon": {
+                        "type": "string",
+                        "maxLength": 1024
+                      },
+                      "color": {
+                        "type": "string",
+                        "maxLength": 1024
+                      },
+                      "inputCount": {
+                        "type": "number"
+                      },
+                      "outputCount": {
+                        "type": "number"
+                      },
+                      "id": {
+                        "type": "string",
+                        "maxLength": 48
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "outputIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 255
+                      },
+                      "maxItems": 100
+                    },
+                    "maxItems": 100
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "flowError"
+                    ]
+                  },
+                  "config": {
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "meta": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "enum": [
+                          "trigger"
+                        ]
+                      },
+                      "name": {
+                        "type": "string",
+                        "enum": [
+                          "flowError"
                         ]
                       },
                       "label": {
@@ -44415,6 +45478,7 @@ Schema for the body of a Workflow Version creation request
                       "deviceCommand",
                       "deviceIdsTagsConnect",
                       "deviceIdsTagsDisconnect",
+                      "flowError",
                       "googlePubSub",
                       "meridian",
                       "mqtt",
@@ -45180,6 +46244,96 @@ Schema for the body of a Workflow Version creation request
                     "type": "string",
                     "enum": [
                       "fileWatch"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "uiId": {
+                    "type": "string",
+                    "maxLength": 48
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 32767
+                  },
+                  "icon": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "color": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "inputCount": {
+                    "type": "number"
+                  },
+                  "outputCount": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string",
+                    "maxLength": 48
+                  }
+                },
+                "additionalProperties": false
+              },
+              "outputIds": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "maxItems": 100
+                },
+                "maxItems": 100
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "maxLength": 1024
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "flowError"
+                ]
+              },
+              "config": {
+                "type": "object",
+                "additionalProperties": false
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "trigger"
+                    ]
+                  },
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "flowError"
                     ]
                   },
                   "label": {
@@ -46376,6 +47530,7 @@ Schema for a collection of Workflow Versions
                                 "deviceCommand",
                                 "deviceIdsTagsConnect",
                                 "deviceIdsTagsDisconnect",
+                                "flowError",
                                 "googlePubSub",
                                 "meridian",
                                 "mqtt",
@@ -47141,6 +48296,96 @@ Schema for a collection of Workflow Versions
                               "type": "string",
                               "enum": [
                                 "fileWatch"
+                              ]
+                            },
+                            "label": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 255
+                            },
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "uiId": {
+                              "type": "string",
+                              "maxLength": 48
+                            },
+                            "description": {
+                              "type": "string",
+                              "maxLength": 32767
+                            },
+                            "icon": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "color": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "inputCount": {
+                              "type": "number"
+                            },
+                            "outputCount": {
+                              "type": "number"
+                            },
+                            "id": {
+                              "type": "string",
+                              "maxLength": 48
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "outputIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "maxLength": 255
+                            },
+                            "maxItems": 100
+                          },
+                          "maxItems": 100
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "additionalProperties": false
+                        },
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "category": {
+                              "type": "string",
+                              "enum": [
+                                "trigger"
+                              ]
+                            },
+                            "name": {
+                              "type": "string",
+                              "enum": [
+                                "flowError"
                               ]
                             },
                             "label": {
@@ -48349,6 +49594,7 @@ Schema for a collection of Workflow Versions
                                 "deviceCommand",
                                 "deviceIdsTagsConnect",
                                 "deviceIdsTagsDisconnect",
+                                "flowError",
                                 "googlePubSub",
                                 "meridian",
                                 "mqtt",
@@ -49114,6 +50360,96 @@ Schema for a collection of Workflow Versions
                               "type": "string",
                               "enum": [
                                 "fileWatch"
+                              ]
+                            },
+                            "label": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 255
+                            },
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "uiId": {
+                              "type": "string",
+                              "maxLength": 48
+                            },
+                            "description": {
+                              "type": "string",
+                              "maxLength": 32767
+                            },
+                            "icon": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "color": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "inputCount": {
+                              "type": "number"
+                            },
+                            "outputCount": {
+                              "type": "number"
+                            },
+                            "id": {
+                              "type": "string",
+                              "maxLength": 48
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "outputIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "maxLength": 255
+                            },
+                            "maxItems": 100
+                          },
+                          "maxItems": 100
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "additionalProperties": false
+                        },
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "category": {
+                              "type": "string",
+                              "enum": [
+                                "trigger"
+                              ]
+                            },
+                            "name": {
+                              "type": "string",
+                              "enum": [
+                                "flowError"
                               ]
                             },
                             "label": {
@@ -50095,6 +51431,7 @@ Schema for a collection of Workflows
                             "deviceCommand",
                             "deviceIdsTagsConnect",
                             "deviceIdsTagsDisconnect",
+                            "flowError",
                             "googlePubSub",
                             "meridian",
                             "mqtt",
@@ -50860,6 +52197,96 @@ Schema for a collection of Workflows
                           "type": "string",
                           "enum": [
                             "fileWatch"
+                          ]
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255
+                        },
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        },
+                        "uiId": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "description": {
+                          "type": "string",
+                          "maxLength": 32767
+                        },
+                        "icon": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "color": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "inputCount": {
+                          "type": "number"
+                        },
+                        "outputCount": {
+                          "type": "number"
+                        },
+                        "id": {
+                          "type": "string",
+                          "maxLength": 48
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "outputIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "maxLength": 255
+                        },
+                        "maxItems": 100
+                      },
+                      "maxItems": 100
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "flowError"
+                      ]
+                    },
+                    "config": {
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string",
+                          "enum": [
+                            "trigger"
+                          ]
+                        },
+                        "name": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
                           ]
                         },
                         "label": {
@@ -52145,6 +53572,7 @@ Schema for the body of a workflow import request
                             "deviceCommand",
                             "deviceIdsTagsConnect",
                             "deviceIdsTagsDisconnect",
+                            "flowError",
                             "googlePubSub",
                             "meridian",
                             "mqtt",
@@ -52910,6 +54338,96 @@ Schema for the body of a workflow import request
                           "type": "string",
                           "enum": [
                             "fileWatch"
+                          ]
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255
+                        },
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        },
+                        "uiId": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "description": {
+                          "type": "string",
+                          "maxLength": 32767
+                        },
+                        "icon": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "color": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "inputCount": {
+                          "type": "number"
+                        },
+                        "outputCount": {
+                          "type": "number"
+                        },
+                        "id": {
+                          "type": "string",
+                          "maxLength": 48
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "outputIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "maxLength": 255
+                        },
+                        "maxItems": 100
+                      },
+                      "maxItems": 100
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "flowError"
+                      ]
+                    },
+                    "config": {
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string",
+                          "enum": [
+                            "trigger"
+                          ]
+                        },
+                        "name": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
                           ]
                         },
                         "label": {
@@ -54099,6 +55617,7 @@ Schema for the body of a workflow import request
                             "deviceCommand",
                             "deviceIdsTagsConnect",
                             "deviceIdsTagsDisconnect",
+                            "flowError",
                             "googlePubSub",
                             "meridian",
                             "mqtt",
@@ -54864,6 +56383,96 @@ Schema for the body of a workflow import request
                           "type": "string",
                           "enum": [
                             "fileWatch"
+                          ]
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255
+                        },
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        },
+                        "uiId": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "description": {
+                          "type": "string",
+                          "maxLength": 32767
+                        },
+                        "icon": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "color": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "inputCount": {
+                          "type": "number"
+                        },
+                        "outputCount": {
+                          "type": "number"
+                        },
+                        "id": {
+                          "type": "string",
+                          "maxLength": 48
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "outputIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "maxLength": 255
+                        },
+                        "maxItems": 100
+                      },
+                      "maxItems": 100
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "flowError"
+                      ]
+                    },
+                    "config": {
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string",
+                          "enum": [
+                            "trigger"
+                          ]
+                        },
+                        "name": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
                           ]
                         },
                         "label": {
@@ -56100,6 +57709,7 @@ Schema for the result of a workflow import request
                             "deviceCommand",
                             "deviceIdsTagsConnect",
                             "deviceIdsTagsDisconnect",
+                            "flowError",
                             "googlePubSub",
                             "meridian",
                             "mqtt",
@@ -56865,6 +58475,96 @@ Schema for the result of a workflow import request
                           "type": "string",
                           "enum": [
                             "fileWatch"
+                          ]
+                        },
+                        "label": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255
+                        },
+                        "x": {
+                          "type": "number"
+                        },
+                        "y": {
+                          "type": "number"
+                        },
+                        "uiId": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "description": {
+                          "type": "string",
+                          "maxLength": 32767
+                        },
+                        "icon": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "color": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "inputCount": {
+                          "type": "number"
+                        },
+                        "outputCount": {
+                          "type": "number"
+                        },
+                        "id": {
+                          "type": "string",
+                          "maxLength": 48
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "outputIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "maxLength": 255
+                        },
+                        "maxItems": 100
+                      },
+                      "maxItems": 100
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "flowError"
+                      ]
+                    },
+                    "config": {
+                      "type": "object",
+                      "additionalProperties": false
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "category": {
+                          "type": "string",
+                          "enum": [
+                            "trigger"
+                          ]
+                        },
+                        "name": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
                           ]
                         },
                         "label": {
@@ -58073,6 +59773,7 @@ Schema for the result of a workflow import request
                                 "deviceCommand",
                                 "deviceIdsTagsConnect",
                                 "deviceIdsTagsDisconnect",
+                                "flowError",
                                 "googlePubSub",
                                 "meridian",
                                 "mqtt",
@@ -58838,6 +60539,96 @@ Schema for the result of a workflow import request
                               "type": "string",
                               "enum": [
                                 "fileWatch"
+                              ]
+                            },
+                            "label": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 255
+                            },
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "uiId": {
+                              "type": "string",
+                              "maxLength": 48
+                            },
+                            "description": {
+                              "type": "string",
+                              "maxLength": 32767
+                            },
+                            "icon": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "color": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "inputCount": {
+                              "type": "number"
+                            },
+                            "outputCount": {
+                              "type": "number"
+                            },
+                            "id": {
+                              "type": "string",
+                              "maxLength": 48
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "outputIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "maxLength": 255
+                            },
+                            "maxItems": 100
+                          },
+                          "maxItems": 100
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "additionalProperties": false
+                        },
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "category": {
+                              "type": "string",
+                              "enum": [
+                                "trigger"
+                              ]
+                            },
+                            "name": {
+                              "type": "string",
+                              "enum": [
+                                "flowError"
                               ]
                             },
                             "label": {
@@ -60046,6 +61837,7 @@ Schema for the result of a workflow import request
                                 "deviceCommand",
                                 "deviceIdsTagsConnect",
                                 "deviceIdsTagsDisconnect",
+                                "flowError",
                                 "googlePubSub",
                                 "meridian",
                                 "mqtt",
@@ -60811,6 +62603,96 @@ Schema for the result of a workflow import request
                               "type": "string",
                               "enum": [
                                 "fileWatch"
+                              ]
+                            },
+                            "label": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 255
+                            },
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "uiId": {
+                              "type": "string",
+                              "maxLength": 48
+                            },
+                            "description": {
+                              "type": "string",
+                              "maxLength": 32767
+                            },
+                            "icon": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "color": {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            "inputCount": {
+                              "type": "number"
+                            },
+                            "outputCount": {
+                              "type": "number"
+                            },
+                            "id": {
+                              "type": "string",
+                              "maxLength": 48
+                            }
+                          },
+                          "additionalProperties": false
+                        },
+                        "outputIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "maxLength": 255
+                            },
+                            "maxItems": 100
+                          },
+                          "maxItems": 100
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "maxLength": 1024
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "flowError"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "additionalProperties": false
+                        },
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "category": {
+                              "type": "string",
+                              "enum": [
+                                "trigger"
+                              ]
+                            },
+                            "name": {
+                              "type": "string",
+                              "enum": [
+                                "flowError"
                               ]
                             },
                             "label": {
@@ -61727,6 +63609,7 @@ Schema for the body of a Github login request
                   "webhooks.*",
                   "application.archiveData",
                   "application.backfillArchiveData",
+                  "application.clone",
                   "application.fullEventsArchive",
                   "application.fullDataTablesArchive",
                   "application.debug",
@@ -64117,6 +66000,32 @@ Schema for a single Notebook
               "outputType": {
                 "type": "string",
                 "enum": [
+                  "directory"
+                ]
+              },
+              "directoryName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "directoryName",
+              "outputType",
+              "destinationDirectoryTemplate"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
                   "executionResult"
                 ]
               },
@@ -64267,6 +66176,11 @@ Schema for a single Notebook
       "outputType": "file",
       "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
       "destinationFileNameTemplate": "myApplicationFile.png"
+    },
+    {
+      "directoryName": "myApplicationFolder",
+      "outputType": "directory",
+      "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}"
     }
   ]
 }
@@ -64523,7 +66437,9 @@ Schema for the options for a Notebook execution request
 ### <a name="notebook-execution-options-example"></a> Example
 
 ```json
-{}
+{
+  "relativeTo": 1570549199451
+}
 ```
 
 <br/>
@@ -64785,6 +66701,32 @@ Schema for the body of a Notebook modification request
               "fileName",
               "outputType",
               "destinationFileNameTemplate"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "directory"
+                ]
+              },
+              "directoryName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "directoryName",
+              "outputType",
+              "destinationDirectoryTemplate"
             ],
             "additionalProperties": false
           },
@@ -65098,6 +67040,32 @@ Schema for the body of an Notebook creation request
               "fileName",
               "outputType",
               "destinationFileNameTemplate"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outputType": {
+                "type": "string",
+                "enum": [
+                  "directory"
+                ]
+              },
+              "directoryName": {
+                "type": "string",
+                "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+              },
+              "destinationDirectoryTemplate": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024
+              }
+            },
+            "required": [
+              "directoryName",
+              "outputType",
+              "destinationDirectoryTemplate"
             ],
             "additionalProperties": false
           },
@@ -65458,6 +67426,32 @@ Schema for a collection of Notebooks
                     "outputType": {
                       "type": "string",
                       "enum": [
+                        "directory"
+                      ]
+                    },
+                    "directoryName": {
+                      "type": "string",
+                      "pattern": "^[0-9a-zA-Z_.-]{1,255}$"
+                    },
+                    "destinationDirectoryTemplate": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1024
+                    }
+                  },
+                  "required": [
+                    "directoryName",
+                    "outputType",
+                    "destinationDirectoryTemplate"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "outputType": {
+                      "type": "string",
+                      "enum": [
                         "executionResult"
                       ]
                     },
@@ -65648,6 +67642,11 @@ Schema for a collection of Notebooks
           "outputType": "file",
           "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}",
           "destinationFileNameTemplate": "myApplicationFile.png"
+        },
+        {
+          "directoryName": "myApplicationFolder",
+          "outputType": "directory",
+          "destinationDirectoryTemplate": "/{{notebook.name}}/{{execution.runStartedAt}}"
         }
       ]
     }
@@ -68016,6 +70015,7 @@ Schema for the body of a User authentication request
                   "webhooks.*",
                   "application.archiveData",
                   "application.backfillArchiveData",
+                  "application.clone",
                   "application.fullEventsArchive",
                   "application.fullDataTablesArchive",
                   "application.debug",
@@ -68429,6 +70429,7 @@ Schema for the body of a User creation request
                   "webhooks.*",
                   "application.archiveData",
                   "application.backfillArchiveData",
+                  "application.clone",
                   "application.fullEventsArchive",
                   "application.fullDataTablesArchive",
                   "application.debug",
@@ -68960,6 +70961,66 @@ Schema for the result of a successful validateContext call
       "value": "Weather Station"
     }
   }
+}
+```
+
+<br/>
+
+## Validation Clone Error
+
+Schema for validation errors returned by the API
+
+### <a name="validation-clone-error-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "validationErrors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+```
+### <a name="validation-clone-error-example"></a> Example
+
+```json
+{
+  "type": "Validation",
+  "message": "Too many validation errors occurred during clone.",
+  "validationErrors": [
+    {
+      "type": "Notebook",
+      "id": "575ec8687ae143cd83dc4a97",
+      "name": "myNote",
+      "message": "Specified Data Table ID for data table output does not exist"
+    }
+  ]
 }
 ```
 
