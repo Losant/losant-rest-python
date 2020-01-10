@@ -20,8 +20,15 @@
             "type": "string"
           },
           "id": {
-            "type": "string",
-            "pattern": "^[A-Fa-f\\d]{24}$"
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string"
+              }
+            ]
           },
           "message": {
             "type": "string"

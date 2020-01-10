@@ -7,6 +7,7 @@ parameters and the potential responses.
 ##### Contents
 
 *   [Get](#get)
+*   [Import](#import)
 *   [Post](#post)
 
 <br/>
@@ -52,6 +53,51 @@ all.Organization, all.Organization.read, all.User, all.User.read, applications.*
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
+
+<br/>
+
+## Import
+
+Create a new application from an import bundle
+
+```python
+result = client.applications.api_import(importBundle=my_import_bundle)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Organization, all.User, applications.*, or applications.import.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| importBundle | file | Y | The zip file containing the application to import and all of its resources |  | undefined |
+| ownerId | string | N | The owner id of the new application, defaults to the id of the user making the request |  | 575ed6e87ae143cd83dc4aa8 |
+| ownerType | string | N | The type of the owner id. Accepted values are: user, organization | user | user |
+| includeDevices | string | N | If set, import devices from the import bundle |  | true |
+| includeDataTableRows | string | N | If set, import data table rows from import bundle |  | true |
+| includeFiles | string | N | If set, import files from import bundle |  | true |
+| email | string | N | Email address to notify the user when the job to import the application has completed or errored, defaults to the email address of the user making the request |  | email@example.com |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 201 | [Application Creation By Template Result](_schemas.md#application-creation-by-template-result) | Successfully created application |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If application was enqueued to be imported |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application is not found |
+| 422 | [Validation Error](_schemas.md#validation-error) | Error if too many validation errors occurred on other resources |
 
 <br/>
 

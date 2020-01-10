@@ -10,6 +10,7 @@ parameters and the potential responses.
 *   [Backfill Archive Data](#backfill-archive-data)
 *   [Clone](#clone)
 *   [Delete](#delete)
+*   [Export](#export)
 *   [Full Data Tables Archive](#full-data-tables-archive)
 *   [Full Events Archive](#full-events-archive)
 *   [Get](#get)
@@ -125,8 +126,8 @@ all.Application, all.Organization, all.User, application.*, or application.clone
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Success Dry Run](_schemas.md#success-dry-run) | if dryRun is set and successful, then return success |
-| 201 | [Application Clone](_schemas.md#application-clone) | If application was successfully cloned |
-| 202 | [Application Clone Enqueue](_schemas.md#application-clone-enqueue) | If application was enqueued to be cloned |
+| 201 | [Application Creation By Template Result](_schemas.md#application-creation-by-template-result) | If application was successfully cloned |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If application was enqueued to be cloned |
 
 #### Error Responses
 
@@ -134,7 +135,7 @@ all.Application, all.Organization, all.User, application.*, or application.clone
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if application is not found |
-| 422 | [Validation Clone Error](_schemas.md#validation-clone-error) | Error if too many validation errors occurred on other resources |
+| 422 | [Validation Error](_schemas.md#validation-error) | Error if too many validation errors occurred on other resources |
 
 <br/>
 
@@ -172,6 +173,47 @@ all.Application, all.Organization, all.User, application.*, or application.delet
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Export
+
+Export an application and all of it&#x27;s resources
+
+```python
+result = client.application.export(
+    applicationId=my_application_id,
+    options=my_options)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, application.*, or application.export.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| options | [Application Export Post Schema](_schemas.md#application-export-post-schema) | Y | Object containing export application options |  | [Application Export Post Schema Example](_schemas.md#application-export-post-schema-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Application Export Result](_schemas.md#application-export-result) | a url to download the zip of exported resources |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If application was enqueued to be exported |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application is not found |
 
 <br/>
 
