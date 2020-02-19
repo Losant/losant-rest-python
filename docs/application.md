@@ -17,6 +17,8 @@ parameters and the potential responses.
 *   [Mqtt Publish Message](#mqtt-publish-message)
 *   [Patch](#patch)
 *   [Payload Counts](#payload-counts)
+*   [Readme](#readme)
+*   [Readme Patch](#readme-patch)
 *   [Search](#search)
 
 <br/>
@@ -63,7 +65,7 @@ all.Application, all.Organization, all.User, application.*, or application.archi
 
 ## Backfill Archive Data
 
-Returns success when a job has been enqueued to backfill all current data to it&#x27;s archive
+Returns success when a job has been enqueued to backfill all current data to its archive
 
 ```python
 result = client.application.backfill_archive_data(applicationId=my_application_id)
@@ -178,7 +180,7 @@ all.Application, all.Organization, all.User, application.*, or application.delet
 
 ## Export
 
-Export an application and all of it&#x27;s resources
+Export an application and all of its resources
 
 ```python
 result = client.application.export(
@@ -441,6 +443,83 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Payload Counts](_schemas.md#payload-counts) | Payload counts, by type and source |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Readme
+
+Get the current application readme information
+
+```python
+result = client.application.readme(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, application.*, or application.get.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Application Readme](_schemas.md#application-readme) | The application readme information |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Readme Patch
+
+Update the current application readme information
+
+```python
+result = client.application.readme_patch(
+    applicationId=my_application_id,
+    readme=my_readme)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, application.*, or application.patch.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| readme | [Application Readme Patch](_schemas.md#application-readme-patch) | Y | Object containing new readme information |  | [Application Readme Patch Example](_schemas.md#application-readme-patch-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Application Readme](_schemas.md#application-readme) | Updated readme information |
 
 #### Error Responses
 

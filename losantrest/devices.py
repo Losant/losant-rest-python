@@ -107,6 +107,7 @@ class Devices(object):
         *  {hash} tagFilter - Array of tag pairs to filter by (https://api.losant.com/#/definitions/deviceTagFilter)
         *  {string} excludeConnectionInfo - If set, do not return connection info
         *  {string} parentId - Filter devices as children of a given system id
+        *  {hash} query - Device filter JSON object which overides the filterField, filter, deviceClass, tagFilter, and parentId parameters. (https://api.losant.com/#/definitions/advancedDeviceQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -147,6 +148,8 @@ class Devices(object):
             query_params["excludeConnectionInfo"] = kwargs["excludeConnectionInfo"]
         if "parentId" in kwargs:
             query_params["parentId"] = kwargs["parentId"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
