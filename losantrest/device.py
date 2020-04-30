@@ -99,6 +99,7 @@ class Device(object):
         *  {string} end - End time of export (ms since epoch - 0 means now, negative is relative to now)
         *  {string} email - Email address to send export to. Defaults to current user's email.
         *  {string} callbackUrl - Callback URL to call with export result
+        *  {string} includeBlobData - If set will export any blob attributes in base64 form, otherwise they will be downloadable links which will expire.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -129,6 +130,8 @@ class Device(object):
             query_params["email"] = kwargs["email"]
         if "callbackUrl" in kwargs:
             query_params["callbackUrl"] = kwargs["callbackUrl"]
+        if "includeBlobData" in kwargs:
+            query_params["includeBlobData"] = kwargs["includeBlobData"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
