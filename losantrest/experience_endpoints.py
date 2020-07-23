@@ -162,6 +162,7 @@ class ExperienceEndpoints(object):
         *  {string} applicationId - ID associated with the application
         *  {string} statGrouping - Field to group the statistics by. Accepted values are: statusCode, endpointId, version, domain
         *  {string} duration - Duration in milliseconds
+        *  {string} end - End of time range in milliseconds since epoch
         *  {string} resolution - Resolution in milliseconds
         *  {string} versionFilter - Filters the stats to a particular experience version
         *  {string} domainFilter - Filters the stats to a particular experience domain or slug
@@ -191,6 +192,8 @@ class ExperienceEndpoints(object):
             query_params["statGrouping"] = kwargs["statGrouping"]
         if "duration" in kwargs:
             query_params["duration"] = kwargs["duration"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
         if "resolution" in kwargs:
             query_params["resolution"] = kwargs["resolution"]
         if "versionFilter" in kwargs:

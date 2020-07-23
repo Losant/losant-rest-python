@@ -150,7 +150,9 @@ all.Application, all.Application.read, all.Device, all.Device.read, all.Organiza
 Update the fields of one or more devices
 
 ```python
-result = client.devices.patch(applicationId=my_application_id)
+result = client.devices.patch(
+    applicationId=my_application_id,
+    patchInfo=my_patch_info)
 
 print(result)
 ```
@@ -165,7 +167,7 @@ all.Application, all.Organization, all.User, devices.*, or devices.patch.
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| patchInfo | [Devices Patch](_schemas.md#devices-patch) | N | Object containing device query or IDs and update operations |  | [Devices Patch Example](_schemas.md#devices-patch-example) |
+| patchInfo | [Devices Patch](_schemas.md#devices-patch) | Y | Object containing device query or IDs and update operations |  | [Devices Patch Example](_schemas.md#devices-patch-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -261,7 +263,7 @@ all.Application, all.Organization, all.User, devices.*, or devices.removeData.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if device was not found |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 

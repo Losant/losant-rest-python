@@ -50,7 +50,7 @@ all.Application, all.Organization, all.User, file.*, or file.delete.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if event was not found |
+| 404 | [Error](_schemas.md#error) | Error if file was not found |
 
 <br/>
 
@@ -132,7 +132,7 @@ all.Application, all.Organization, all.User, file.*, or file.move.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if application was not found |
+| 404 | [Error](_schemas.md#error) | Error if file was not found |
 
 <br/>
 
@@ -174,7 +174,7 @@ all.Application, all.Organization, all.User, file.*, or file.patch.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if application was not found |
+| 404 | [Error](_schemas.md#error) | Error if file was not found |
 
 <br/>
 
@@ -216,4 +216,4 @@ all.Application, all.Organization, all.User, file.*, or file.upload.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if application was not found |
+| 404 | [Error](_schemas.md#error) | Error if file was not found |
