@@ -209,8 +209,9 @@ class Device(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
-        *  {string} limit - Max command entries to return (ordered by time descending)
+        *  {string} limit - Maximum number of command entries to return
         *  {string} since - Look for command entries since this time (ms since epoch)
+        *  {string} sortDirection - Direction to sort the command entries (by time). Accepted values are: asc, desc
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -237,6 +238,8 @@ class Device(object):
             query_params["limit"] = kwargs["limit"]
         if "since" in kwargs:
             query_params["since"] = kwargs["since"]
+        if "sortDirection" in kwargs:
+            query_params["sortDirection"] = kwargs["sortDirection"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -320,8 +323,9 @@ class Device(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
-        *  {string} limit - Max log entries to return (ordered by time descending)
+        *  {string} limit - Maximum number of log entries to return
         *  {string} since - Look for log entries since this time (ms since epoch)
+        *  {string} sortDirection - Direction to sort the log entries (by time). Accepted values are: asc, desc
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -348,6 +352,8 @@ class Device(object):
             query_params["limit"] = kwargs["limit"]
         if "since" in kwargs:
             query_params["since"] = kwargs["since"]
+        if "sortDirection" in kwargs:
+            query_params["sortDirection"] = kwargs["sortDirection"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -374,8 +380,9 @@ class Device(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
-        *  {string} limit - Max state entries to return (ordered by time descending)
+        *  {string} limit - Maximum number of state entries to return
         *  {string} since - Look for state entries since this time (ms since epoch)
+        *  {string} sortDirection - Direction to sort the state entries (by time). Accepted values are: asc, desc
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -402,6 +409,8 @@ class Device(object):
             query_params["limit"] = kwargs["limit"]
         if "since" in kwargs:
             query_params["since"] = kwargs["since"]
+        if "sortDirection" in kwargs:
+            query_params["sortDirection"] = kwargs["sortDirection"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

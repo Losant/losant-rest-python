@@ -6,6 +6,7 @@ parameters and the potential responses.
 
 ##### Contents
 
+*   [Apply Template](#apply-template)
 *   [Archive Data](#archive-data)
 *   [Backfill Archive Data](#backfill-archive-data)
 *   [Clone](#clone)
@@ -21,6 +22,47 @@ parameters and the potential responses.
 *   [Readme](#readme)
 *   [Readme Patch](#readme-patch)
 *   [Search](#search)
+
+<br/>
+
+## Apply Template
+
+Add resources to an application via an application template
+
+```python
+result = client.application.apply_template(
+    applicationId=my_application_id,
+    options=my_options)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Organization, all.User, application.*, or application.applyTemplate.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| options | [Application Apply Template Patch Schema](_schemas.md#application-apply-template-patch-schema) | Y | Object containing template import options |  | [Application Apply Template Patch Schema Example](_schemas.md#application-apply-template-patch-schema-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Application](_schemas.md#application) | Updated application information |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If a job was enqueued for the resources to be imported into the application |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application is not found |
 
 <br/>
 

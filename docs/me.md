@@ -11,7 +11,6 @@ parameters and the potential responses.
 *   [Delete](#delete)
 *   [Disable Two Factor Auth](#disable-two-factor-auth)
 *   [Disconnect Github](#disconnect-github)
-*   [Disconnect Twitter](#disconnect-twitter)
 *   [Enable Two Factor Auth](#enable-two-factor-auth)
 *   [Fetch Recent Items](#fetch-recent-items)
 *   [Get](#get)
@@ -181,41 +180,6 @@ print(result)
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
 all.User, me.*, or me.disconnectGithub.
-
-#### Available Parameters
-
-| Name | Type | Required | Description | Default | Example |
-| ---- | ---- | -------- | ----------- | ------- | ------- |
-| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
-
-#### Successful Responses
-
-| Code | Type | Description |
-| ---- | ---- | ----------- |
-| 200 | [Me](_schemas.md#me) | Updated user information |
-
-#### Error Responses
-
-| Code | Type | Description |
-| ---- | ---- | ----------- |
-| 400 | [Error](_schemas.md#error) | Error if malformed request |
-
-<br/>
-
-## Disconnect Twitter
-
-Disconnects the user from Twitter
-
-```python
-result = client.me.disconnect_twitter(**optional_params)
-
-print(result)
-```
-
-#### Authentication
-The client must be configured with a valid api access token to call this
-action. The token must include at least one of the following scopes:
-all.User, me.*, or me.disconnectTwitter.
 
 #### Available Parameters
 

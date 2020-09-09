@@ -37,6 +37,7 @@ from .application_certificate_authority import ApplicationCertificateAuthority
 from .application_certificates import ApplicationCertificates
 from .application_key import ApplicationKey
 from .application_keys import ApplicationKeys
+from .application_template import ApplicationTemplate
 from .application_templates import ApplicationTemplates
 from .applications import Applications
 from .audit_log import AuditLog
@@ -98,7 +99,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.17.3
+    Built For Version 1.17.4
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -113,6 +114,7 @@ class Client(object):
         self.application_certificates = ApplicationCertificates(self)
         self.application_key = ApplicationKey(self)
         self.application_keys = ApplicationKeys(self)
+        self.application_template = ApplicationTemplate(self)
         self.application_templates = ApplicationTemplates(self)
         self.applications = Applications(self)
         self.audit_log = AuditLog(self)
@@ -172,7 +174,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.17.3"
+        headers["Accept-Version"] = "^1.17.4"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
