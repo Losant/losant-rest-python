@@ -1,6 +1,6 @@
 # Losant Python REST API Client
 
-[![Build Status](https://travis-ci.org/Losant/losant-rest-python.svg?branch=master)](https://travis-ci.org/Losant/losant-rest-python) [![PyPI version](https://badge.fury.io/py/losant-rest.svg)](https://badge.fury.io/py/losant-rest)
+[![Build Status](https://travis-ci.com/Losant/losant-rest-python.svg?branch=master)](https://travis-ci.com/Losant/losant-rest-python) [![PyPI version](https://badge.fury.io/py/losant-rest.svg)](https://badge.fury.io/py/losant-rest)
 
 The [Losant](https://www.losant.com) REST API client provides a simple way to use the comprehensive Losant API. You can authenticate either as a Losant device or with your user account, and have access to all the functionality of the Losant platform.
 
