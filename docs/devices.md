@@ -6,6 +6,7 @@ parameters and the potential responses.
 
 ##### Contents
 
+*   [Attribute Names](#attribute-names)
 *   [Delete](#delete)
 *   [Export](#export)
 *   [Get](#get)
@@ -13,6 +14,48 @@ parameters and the potential responses.
 *   [Post](#post)
 *   [Remove Data](#remove-data)
 *   [Send Command](#send-command)
+*   [Tag Keys](#tag-keys)
+*   [Tag Values](#tag-values)
+
+<br/>
+
+## Attribute Names
+
+Gets the attribute names that match the given query. Maximum 1K returned.
+
+```python
+result = client.devices.attribute_names(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.attributeNames.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| query | [Advanced Device Query](_schemas.md#advanced-device-query) | N | Device filter JSON object |  | [Advanced Device Query Example](_schemas.md#advanced-device-query-example) |
+| dataType | [Device Attribute Data Type Filter](_schemas.md#device-attribute-data-type-filter) | N | Filter the devices by the given attribute data type or types |  | [Device Attribute Data Type Filter Example](_schemas.md#device-attribute-data-type-filter-example) |
+| startsWith | string | N | Filter attributes down to those that have names starting with the given string. Case insensitive. |  | temper |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Attribute Names Response](_schemas.md#attribute-names-response) | The matching attribute names |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 
@@ -297,6 +340,87 @@ all.Application, all.Device, all.Organization, all.User, devices.*, or devices.s
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Success](_schemas.md#success) | If command was successfully sent |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Tag Keys
+
+Gets the unique tag keys for devices that match the given query. Maximum 1K returned.
+
+```python
+result = client.devices.tag_keys(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.tagKeys.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| query | [Advanced Device Query](_schemas.md#advanced-device-query) | N | Device filter JSON object |  | [Advanced Device Query Example](_schemas.md#advanced-device-query-example) |
+| startsWith | string | N | Filter keys down to those that start with the given string. Case insensitive. |  | temper |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Tag Keys Response](_schemas.md#tag-keys-response) | The matching tag keys |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Tag Values
+
+Gets the unique tag values for the given key for devices that match the given query. Maximum 1K returned.
+
+```python
+result = client.devices.tag_values(
+    applicationId=my_application_id,
+    key=my_key)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.tagValues.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| query | [Advanced Device Query](_schemas.md#advanced-device-query) | N | Device filter JSON object |  | [Advanced Device Query Example](_schemas.md#advanced-device-query-example) |
+| key | string | Y | The tag key to get the values for |  | myKey |
+| startsWith | string | N | Filter values down to those that start with the given string. Case insensitive. |  | temper |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Tag Values Response](_schemas.md#tag-values-response) | The matching tag values |
 
 #### Error Responses
 

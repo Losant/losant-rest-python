@@ -55,6 +55,7 @@ class Flows(object):
         *  {string} flowClass - Filter the workflows by the given flow class. Accepted values are: edge, cloud, customNode, experience
         *  {hash} triggerFilter - Array of triggers to filter by - always filters against default flow version. (https://api.losant.com/#/definitions/flowTriggerFilter)
         *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
+        *  {hash} query - Workflow filter JSON object which overrides the filterField, filter, triggerFilter, and flowClass parameters. (https://api.losant.com/#/definitions/advancedFlowQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -93,6 +94,8 @@ class Flows(object):
             query_params["triggerFilter"] = kwargs["triggerFilter"]
         if "includeCustomNodes" in kwargs:
             query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -128,6 +131,7 @@ class Flows(object):
         *  {string} version - Return the workflow versions for the given version.
         *  {hash} triggerFilter - Array of triggers to filter by - always filters against default flow version. (https://api.losant.com/#/definitions/flowTriggerFilter)
         *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
+        *  {hash} query - Workflow filter JSON object which overrides the filterField, filter, triggerFilter, and flowClass parameters. (https://api.losant.com/#/definitions/advancedFlowByVersionQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -168,6 +172,8 @@ class Flows(object):
             query_params["triggerFilter"] = kwargs["triggerFilter"]
         if "includeCustomNodes" in kwargs:
             query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

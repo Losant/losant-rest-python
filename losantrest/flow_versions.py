@@ -54,6 +54,7 @@ class FlowVersions(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: version
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
+        *  {hash} query - Workflow filter JSON object which overrides the filterField and filter parameters. (https://api.losant.com/#/definitions/advancedFlowVersionQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -90,6 +91,8 @@ class FlowVersions(object):
             query_params["filter"] = kwargs["filter"]
         if "includeCustomNodes" in kwargs:
             query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
