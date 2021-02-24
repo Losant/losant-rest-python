@@ -43,6 +43,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | triggerFilter | [Workflow Trigger Filter](_schemas.md#workflow-trigger-filter) | N | Array of triggers to filter by - always filters against default flow version. |  | [Workflow Trigger Filter Example](_schemas.md#workflow-trigger-filter-example) |
 | includeCustomNodes | string | N | If the result of the request should also include the details of any custom nodes referenced by the returned workflows | false | true |
 | query | [Advanced Workflow Query](_schemas.md#advanced-workflow-query) | N | Workflow filter JSON object which overrides the filterField, filter, triggerFilter, and flowClass parameters. |  | [Advanced Workflow Query Example](_schemas.md#advanced-workflow-query-example) |
+| allVersions | string | N | If the request should also return flows with matching versions. Only applicable for requests with an advanced query. | false | true |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses

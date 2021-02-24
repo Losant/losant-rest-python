@@ -56,6 +56,7 @@ class Flows(object):
         *  {hash} triggerFilter - Array of triggers to filter by - always filters against default flow version. (https://api.losant.com/#/definitions/flowTriggerFilter)
         *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {hash} query - Workflow filter JSON object which overrides the filterField, filter, triggerFilter, and flowClass parameters. (https://api.losant.com/#/definitions/advancedFlowQuery)
+        *  {string} allVersions - If the request should also return flows with matching versions. Only applicable for requests with an advanced query.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -96,6 +97,8 @@ class Flows(object):
             query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "query" in kwargs:
             query_params["query"] = json.dumps(kwargs["query"])
+        if "allVersions" in kwargs:
+            query_params["allVersions"] = kwargs["allVersions"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

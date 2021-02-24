@@ -25,90 +25,44 @@ SOFTWARE.
 
 import json
 
-""" Module for Losant API Webhook wrapper class """
+""" Module for Losant API ApplicationDashboards wrapper class """
 # pylint: disable=C0301
 
-class Webhook(object):
-    """ Class containing all the actions for the Webhook Resource """
+class ApplicationDashboards(object):
+    """ Class containing all the actions for the Application Dashboards Resource """
 
     def __init__(self, client):
         self.client = client
 
-    def delete(self, **kwargs):
-        """
-        Deletes a webhook
-
-        Authentication:
-        The client must be configured with a valid api
-        access token to call this action. The token
-        must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, webhook.*, or webhook.delete.
-
-        Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} webhookId - ID associated with the webhook
-        *  {string} includeWorkflows - If the workflows that utilize this webhook should also be deleted.
-        *  {string} losantdomain - Domain scope of request (rarely needed)
-        *  {boolean} _actions - Return resource actions in response
-        *  {boolean} _links - Return resource link in response
-        *  {boolean} _embedded - Return embedded resources in response
-
-        Responses:
-        *  200 - If webhook was successfully deleted (https://api.losant.com/#/definitions/success)
-
-        Errors:
-        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if webhook was not found (https://api.losant.com/#/definitions/error)
-        """
-
-        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
-        path_params = {}
-        headers = {}
-        body = None
-
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "webhookId" in kwargs:
-            path_params["webhookId"] = kwargs["webhookId"]
-        if "includeWorkflows" in kwargs:
-            query_params["includeWorkflows"] = kwargs["includeWorkflows"]
-        if "losantdomain" in kwargs:
-            headers["losantdomain"] = kwargs["losantdomain"]
-        if "_actions" in kwargs:
-            query_params["_actions"] = kwargs["_actions"]
-        if "_links" in kwargs:
-            query_params["_links"] = kwargs["_links"]
-        if "_embedded" in kwargs:
-            query_params["_embedded"] = kwargs["_embedded"]
-
-        path = "/applications/{applicationId}/webhooks/{webhookId}".format(**path_params)
-
-        return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
-
     def get(self, **kwargs):
         """
-        Retrieves information on a webhook
+        Returns all dashboards scoped to the given application.
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, webhook.*, or webhook.get.
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, applicationDashboards.*, or applicationDashboards.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} webhookId - ID associated with the webhook
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
+        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Webhook information (https://api.losant.com/#/definitions/webhook)
+        *  200 - Collection of dashboards (https://api.losant.com/#/definitions/dashboards)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if webhook was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -118,8 +72,18 @@ class Webhook(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "webhookId" in kwargs:
-            path_params["webhookId"] = kwargs["webhookId"]
+        if "sortField" in kwargs:
+            query_params["sortField"] = kwargs["sortField"]
+        if "sortDirection" in kwargs:
+            query_params["sortDirection"] = kwargs["sortDirection"]
+        if "page" in kwargs:
+            query_params["page"] = kwargs["page"]
+        if "perPage" in kwargs:
+            query_params["perPage"] = kwargs["perPage"]
+        if "filterField" in kwargs:
+            query_params["filterField"] = kwargs["filterField"]
+        if "filter" in kwargs:
+            query_params["filter"] = kwargs["filter"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -129,35 +93,34 @@ class Webhook(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/webhooks/{webhookId}".format(**path_params)
+        path = "/applications/{applicationId}/dashboards".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
-    def patch(self, **kwargs):
+    def post(self, **kwargs):
         """
-        Updates information about a webhook
+        Create a new dashboard
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, webhook.*, or webhook.patch.
+        all.Application, all.Organization, all.User, applicationDashboards.*, or applicationDashboards.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} webhookId - ID associated with the webhook
-        *  {hash} webhook - Object containing new properties of the webhook (https://api.losant.com/#/definitions/webhookPatch)
+        *  {hash} dashboard - New dashboard information (https://api.losant.com/#/definitions/applicationDashboardPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Updated webhook information (https://api.losant.com/#/definitions/webhook)
+        *  201 - Successfully created dashboard (https://api.losant.com/#/definitions/dashboard)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if webhook was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -167,10 +130,8 @@ class Webhook(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "webhookId" in kwargs:
-            path_params["webhookId"] = kwargs["webhookId"]
-        if "webhook" in kwargs:
-            body = kwargs["webhook"]
+        if "dashboard" in kwargs:
+            body = kwargs["dashboard"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -180,7 +141,7 @@ class Webhook(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/webhooks/{webhookId}".format(**path_params)
+        path = "/applications/{applicationId}/dashboards".format(**path_params)
 
-        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

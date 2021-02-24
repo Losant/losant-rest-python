@@ -47,6 +47,7 @@ class Integration(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} integrationId - ID associated with the integration
+        *  {string} includeWorkflows - If the workflows that utilize this integration should also be deleted.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -69,6 +70,8 @@ class Integration(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "integrationId" in kwargs:
             path_params["integrationId"] = kwargs["integrationId"]
+        if "includeWorkflows" in kwargs:
+            query_params["includeWorkflows"] = kwargs["includeWorkflows"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

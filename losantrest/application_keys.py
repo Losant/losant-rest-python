@@ -52,6 +52,7 @@ class ApplicationKeys(object):
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: key, status
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {hash} query - Application key filter JSON object which overrides the filterField and filter parameters. (https://api.losant.com/#/definitions/advancedApplicationKeyQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +85,8 @@ class ApplicationKeys(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

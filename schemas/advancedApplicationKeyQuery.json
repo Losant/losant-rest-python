@@ -5,126 +5,23 @@
     "$and": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/advancedFlowQuery"
+        "$ref": "#/definitions/advancedApplicationKeyQuery"
       },
       "maxItems": 100
     },
     "$or": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/advancedFlowQuery"
+        "$ref": "#/definitions/advancedApplicationKeyQuery"
       },
       "maxItems": 100
     },
     "$nor": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/advancedFlowQuery"
+        "$ref": "#/definitions/advancedApplicationKeyQuery"
       },
       "maxItems": 100
-    },
-    "name": {
-      "oneOf": [
-        {
-          "type": [
-            "string",
-            "number",
-            "boolean",
-            "null"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "$eq": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$ne": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$gt": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$lt": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$gte": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$lte": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$startsWith": {
-              "type": "string",
-              "minLength": 1
-            },
-            "$endsWith": {
-              "type": "string",
-              "minLength": 1
-            },
-            "$contains": {
-              "type": "string",
-              "minLength": 1
-            },
-            "$ci": {
-              "type": "boolean"
-            },
-            "$in": {
-              "type": "array",
-              "maxItems": 100,
-              "items": {
-                "type": [
-                  "string",
-                  "number",
-                  "boolean"
-                ]
-              }
-            },
-            "$nin": {
-              "type": "array",
-              "maxItems": 100,
-              "items": {
-                "type": [
-                  "string",
-                  "number",
-                  "boolean"
-                ]
-              }
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
     },
     "id": {
       "oneOf": [
@@ -393,7 +290,7 @@
         }
       ]
     },
-    "flowClass": {
+    "status": {
       "oneOf": [
         {
           "type": [
@@ -496,110 +393,7 @@
         }
       ]
     },
-    "enabled": {
-      "oneOf": [
-        {
-          "type": [
-            "string",
-            "number",
-            "boolean",
-            "null"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "$eq": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$ne": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$gt": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$lt": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$gte": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$lte": {
-              "type": [
-                "string",
-                "number",
-                "boolean",
-                "null"
-              ]
-            },
-            "$startsWith": {
-              "type": "string",
-              "minLength": 1
-            },
-            "$endsWith": {
-              "type": "string",
-              "minLength": 1
-            },
-            "$contains": {
-              "type": "string",
-              "minLength": 1
-            },
-            "$ci": {
-              "type": "boolean"
-            },
-            "$in": {
-              "type": "array",
-              "maxItems": 100,
-              "items": {
-                "type": [
-                  "string",
-                  "number",
-                  "boolean"
-                ]
-              }
-            },
-            "$nin": {
-              "type": "array",
-              "maxItems": 100,
-              "items": {
-                "type": [
-                  "string",
-                  "number",
-                  "boolean"
-                ]
-              }
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-    "defaultVersion": {
+    "deviceIds": {
       "oneOf": [
         {
           "oneOf": [
@@ -660,72 +454,68 @@
         }
       ]
     },
-    "triggers": {
+    "deviceTags": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "maxLength": 255
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "$tagKey": {
+                  "type": "string",
+                  "maxLength": 255
+                },
+                "$tagValue": {
+                  "type": "string",
+                  "maxLength": 255
+                }
+              },
+              "additionalProperties": false,
+              "minProperties": 1
             },
-            "key": {
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-            },
-            "config": {
+            {
               "type": "object",
               "patternProperties": {
-                "^[0-9a-zA-Z_-]{1,255}$": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean",
-                    "null"
-                  ],
-                  "maxLength": 1024
+                "^[0-9a-zA-Z_-]{1,255}": {
+                  "type": "string",
+                  "maxLength": 255
                 }
-              }
+              },
+              "additionalProperties": false
             }
-          },
-          "required": [
-            "type"
-          ],
-          "additionalProperties": false
+          ]
         },
         {
           "type": "object",
           "properties": {
             "$eq": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "maxLength": 255
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "$tagKey": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "$tagValue": {
+                      "type": "string",
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1
                 },
-                "key": {
-                  "type": "string",
-                  "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-                },
-                "config": {
+                {
                   "type": "object",
                   "patternProperties": {
-                    "^[0-9a-zA-Z_-]{1,255}$": {
-                      "type": [
-                        "string",
-                        "number",
-                        "boolean",
-                        "null"
-                      ],
-                      "maxLength": 1024
+                    "^[0-9a-zA-Z_-]{1,255}": {
+                      "type": "string",
+                      "maxLength": 255
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
-              },
-              "required": [
-                "type"
-              ],
-              "additionalProperties": false
+              ]
             }
           },
           "required": [
@@ -737,35 +527,33 @@
           "type": "object",
           "properties": {
             "$ne": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "maxLength": 255
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "$tagKey": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "$tagValue": {
+                      "type": "string",
+                      "maxLength": 255
+                    }
+                  },
+                  "additionalProperties": false,
+                  "minProperties": 1
                 },
-                "key": {
-                  "type": "string",
-                  "pattern": "^[0-9a-zA-Z_-]{1,255}$"
-                },
-                "config": {
+                {
                   "type": "object",
                   "patternProperties": {
-                    "^[0-9a-zA-Z_-]{1,255}$": {
-                      "type": [
-                        "string",
-                        "number",
-                        "boolean",
-                        "null"
-                      ],
-                      "maxLength": 1024
+                    "^[0-9a-zA-Z_-]{1,255}": {
+                      "type": "string",
+                      "maxLength": 255
                     }
-                  }
+                  },
+                  "additionalProperties": false
                 }
-              },
-              "required": [
-                "type"
-              ],
-              "additionalProperties": false
+              ]
             }
           },
           "required": [
@@ -775,109 +563,520 @@
         }
       ]
     },
-    "nodes": {
+    "key": {
       "oneOf": [
         {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "maxLength": 255
-            },
-            "config": {
-              "type": "object",
-              "patternProperties": {
-                "^[0-9a-zA-Z_-]{1,255}$": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean",
-                    "null"
-                  ],
-                  "maxLength": 1024
-                }
-              }
-            }
-          },
-          "required": [
-            "type"
-          ],
-          "additionalProperties": false
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
         },
         {
           "type": "object",
           "properties": {
             "$eq": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "maxLength": 255
-                },
-                "config": {
-                  "type": "object",
-                  "patternProperties": {
-                    "^[0-9a-zA-Z_-]{1,255}$": {
-                      "type": [
-                        "string",
-                        "number",
-                        "boolean",
-                        "null"
-                      ],
-                      "maxLength": 1024
-                    }
-                  }
-                }
-              },
-              "required": [
-                "type"
-              ],
-              "additionalProperties": false
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$ne": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$startsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$endsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$contains": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$ci": {
+              "type": "boolean"
+            },
+            "$in": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            },
+            "$nin": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
             }
           },
-          "required": [
-            "$eq"
-          ],
           "additionalProperties": false
+        }
+      ]
+    },
+    "description": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
         },
         {
           "type": "object",
           "properties": {
+            "$eq": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
             "$ne": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "maxLength": 255
-                },
-                "config": {
-                  "type": "object",
-                  "patternProperties": {
-                    "^[0-9a-zA-Z_-]{1,255}$": {
-                      "type": [
-                        "string",
-                        "number",
-                        "boolean",
-                        "null"
-                      ],
-                      "maxLength": 1024
-                    }
-                  }
-                }
-              },
-              "required": [
-                "type"
-              ],
-              "additionalProperties": false
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$startsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$endsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$contains": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$ci": {
+              "type": "boolean"
+            },
+            "$in": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            },
+            "$nin": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
             }
           },
-          "required": [
-            "$ne"
-          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "filterType": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$eq": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$ne": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$startsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$endsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$contains": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$ci": {
+              "type": "boolean"
+            },
+            "$in": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            },
+            "$nin": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "pubTopics": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$eq": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$ne": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$startsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$endsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$contains": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$ci": {
+              "type": "boolean"
+            },
+            "$in": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            },
+            "$nin": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "subTopics": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "$eq": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$ne": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lt": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$gte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$lte": {
+              "type": [
+                "string",
+                "number",
+                "boolean",
+                "null"
+              ]
+            },
+            "$startsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$endsWith": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$contains": {
+              "type": "string",
+              "minLength": 1
+            },
+            "$ci": {
+              "type": "boolean"
+            },
+            "$in": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            },
+            "$nin": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            }
+          },
           "additionalProperties": false
         }
       ]
     }
-  },
-  "additionalProperties": false
+  }
 }
