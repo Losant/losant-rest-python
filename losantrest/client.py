@@ -80,6 +80,14 @@ from .flow import Flow
 from .flow_version import FlowVersion
 from .flow_versions import FlowVersions
 from .flows import Flows
+from .instance import Instance
+from .instance_member import InstanceMember
+from .instance_members import InstanceMembers
+from .instance_org import InstanceOrg
+from .instance_org_member import InstanceOrgMember
+from .instance_org_members import InstanceOrgMembers
+from .instance_orgs import InstanceOrgs
+from .instances import Instances
 from .integration import Integration
 from .integrations import Integrations
 from .me import Me
@@ -101,7 +109,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.19.0
+    Built For Version 1.20.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -159,6 +167,14 @@ class Client(object):
         self.flow_version = FlowVersion(self)
         self.flow_versions = FlowVersions(self)
         self.flows = Flows(self)
+        self.instance = Instance(self)
+        self.instance_member = InstanceMember(self)
+        self.instance_members = InstanceMembers(self)
+        self.instance_org = InstanceOrg(self)
+        self.instance_org_member = InstanceOrgMember(self)
+        self.instance_org_members = InstanceOrgMembers(self)
+        self.instance_orgs = InstanceOrgs(self)
+        self.instances = Instances(self)
         self.integration = Integration(self)
         self.integrations = Integrations(self)
         self.me = Me(self)
@@ -178,7 +194,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.19.0"
+        headers["Accept-Version"] = "^1.20.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

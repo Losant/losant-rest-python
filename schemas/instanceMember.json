@@ -2,31 +2,35 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "name": {
+    "userId": {
       "type": "string",
-      "minLength": 1,
-      "maxLength": 255
+      "pattern": "^[A-Fa-f\\d]{24}$"
     },
-    "description": {
-      "type": "string",
-      "maxLength": 32767
-    },
-    "planId": {
-      "type": "string",
-      "maxLength": 1024
-    },
-    "billingEmail": {
+    "email": {
       "type": "string",
       "format": "email",
       "maxLength": 1024
     },
-    "cardToken": {
+    "firstName": {
       "type": "string",
+      "minLength": 1,
       "maxLength": 1024
     },
-    "iconColor": {
+    "lastName": {
       "type": "string",
-      "maxLength": 64
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "view"
+      ]
+    },
+    "avatarUrl": {
+      "type": "string",
+      "format": "url"
     }
   },
   "additionalProperties": false

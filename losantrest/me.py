@@ -460,7 +460,7 @@ class Me(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Payload counts, by type and source (https://api.losant.com/#/definitions/payloadCounts)
+        *  200 - Payload counts, by type and source (https://api.losant.com/#/definitions/payloadStats)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
