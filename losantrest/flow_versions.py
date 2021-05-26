@@ -34,6 +34,58 @@ class FlowVersions(object):
     def __init__(self, client):
         self.client = client
 
+    def delete(self, **kwargs):
+        """
+        Delete flow versions
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, flowVersions.*, or flowVersions.delete.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} flowId - ID associated with the flow
+        *  {hash} options - Object containing flow version deletion options (https://api.losant.com/#/definitions/flowVersionsDeletePost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Object indicating number of flow versions deleted or failed (https://api.losant.com/#/definitions/bulkDeleteResponse)
+        *  202 - If a job was enqueued for the flow versions to be deleted (https://api.losant.com/#/definitions/jobEnqueuedResult)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "flowId" in kwargs:
+            path_params["flowId"] = kwargs["flowId"]
+        if "options" in kwargs:
+            body = kwargs["options"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/flows/{flowId}/versions/delete".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
     def get(self, **kwargs):
         """
         Returns the flow versions for a flow

@@ -25,39 +25,39 @@ SOFTWARE.
 
 import json
 
-""" Module for Losant API ExperienceVersion wrapper class """
+""" Module for Losant API InstanceApiToken wrapper class """
 # pylint: disable=C0301
 
-class ExperienceVersion(object):
-    """ Class containing all the actions for the Experience Version Resource """
+class InstanceApiToken(object):
+    """ Class containing all the actions for the Instance Api Token Resource """
 
     def __init__(self, client):
         self.client = client
 
     def delete(self, **kwargs):
         """
-        Deletes an experience version
+        Deletes an API Token
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, experienceVersion.*, or experienceVersion.delete.
+        all.Instance, all.User, instanceApiToken.*, or instanceApiToken.delete.
 
         Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} experienceVersionIdOrName - Version ID or version name associated with the experience version
+        *  {string} instanceId - ID associated with the instance
+        *  {string} apiTokenId - ID associated with the API token
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If experience version was successfully deleted (https://api.losant.com/#/definitions/success)
+        *  200 - If API token was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if experience version was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if API token was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -65,10 +65,10 @@ class ExperienceVersion(object):
         headers = {}
         body = None
 
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "experienceVersionIdOrName" in kwargs:
-            path_params["experienceVersionIdOrName"] = kwargs["experienceVersionIdOrName"]
+        if "instanceId" in kwargs:
+            path_params["instanceId"] = kwargs["instanceId"]
+        if "apiTokenId" in kwargs:
+            path_params["apiTokenId"] = kwargs["apiTokenId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -78,34 +78,34 @@ class ExperienceVersion(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/versions/{experienceVersionIdOrName}".format(**path_params)
+        path = "/instances/{instanceId}/tokens/{apiTokenId}".format(**path_params)
 
         return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
 
     def get(self, **kwargs):
         """
-        Retrieves information on an experience version
+        Retrieves information on an API token
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, experienceVersion.*, or experienceVersion.get.
+        all.Instance, all.Instance.read, all.User, all.User.read, instanceApiToken.*, or instanceApiToken.get.
 
         Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} experienceVersionIdOrName - Version ID or version name associated with the experience version
+        *  {string} instanceId - ID associated with the instance
+        *  {string} apiTokenId - ID associated with the API token
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Experience version information (https://api.losant.com/#/definitions/experienceVersion)
+        *  200 - API token information (https://api.losant.com/#/definitions/apiToken)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if experience version was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if API token was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -113,10 +113,10 @@ class ExperienceVersion(object):
         headers = {}
         body = None
 
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "experienceVersionIdOrName" in kwargs:
-            path_params["experienceVersionIdOrName"] = kwargs["experienceVersionIdOrName"]
+        if "instanceId" in kwargs:
+            path_params["instanceId"] = kwargs["instanceId"]
+        if "apiTokenId" in kwargs:
+            path_params["apiTokenId"] = kwargs["apiTokenId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -126,35 +126,35 @@ class ExperienceVersion(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/versions/{experienceVersionIdOrName}".format(**path_params)
+        path = "/instances/{instanceId}/tokens/{apiTokenId}".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def patch(self, **kwargs):
         """
-        Updates information about an experience version
+        Updates information about an API token
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, experienceVersion.*, or experienceVersion.patch.
+        all.Instance, all.User, instanceApiToken.*, or instanceApiToken.patch.
 
         Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {string} experienceVersionIdOrName - Version ID or version name associated with the experience version
-        *  {hash} experienceVersion - Object containing new properties of the experience version (https://api.losant.com/#/definitions/experienceVersionPatch)
+        *  {string} instanceId - ID associated with the instance
+        *  {string} apiTokenId - ID associated with the API token
+        *  {hash} apiToken - Object containing new properties of the API token (https://api.losant.com/#/definitions/apiTokenPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Updated experience version information (https://api.losant.com/#/definitions/experienceVersion)
+        *  200 - Updated API token information (https://api.losant.com/#/definitions/apiToken)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if experience version was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if API token was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -162,12 +162,12 @@ class ExperienceVersion(object):
         headers = {}
         body = None
 
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "experienceVersionIdOrName" in kwargs:
-            path_params["experienceVersionIdOrName"] = kwargs["experienceVersionIdOrName"]
-        if "experienceVersion" in kwargs:
-            body = kwargs["experienceVersion"]
+        if "instanceId" in kwargs:
+            path_params["instanceId"] = kwargs["instanceId"]
+        if "apiTokenId" in kwargs:
+            path_params["apiTokenId"] = kwargs["apiTokenId"]
+        if "apiToken" in kwargs:
+            body = kwargs["apiToken"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -177,7 +177,7 @@ class ExperienceVersion(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/versions/{experienceVersionIdOrName}".format(**path_params)
+        path = "/instances/{instanceId}/tokens/{apiTokenId}".format(**path_params)
 
         return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
 

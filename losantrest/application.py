@@ -419,7 +419,7 @@ class Application(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, application.*, or application.get.
+        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, application.*, or application.get.
 
         Parameters:
         *  {string} applicationId - ID of the associated application
@@ -470,7 +470,7 @@ class Application(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, application.*, or application.patch.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, application.*, or application.patch.
 
         Parameters:
         *  {string} applicationId - ID of the associated application
@@ -566,7 +566,7 @@ class Application(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, application.*, or application.patch.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, application.*, or application.patch.
 
         Parameters:
         *  {string} applicationId - ID of the associated application
@@ -671,7 +671,7 @@ class Application(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, application.*, or application.get.
+        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, application.*, or application.get.
 
         Parameters:
         *  {string} applicationId - ID of the associated application
@@ -716,7 +716,7 @@ class Application(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, application.*, or application.patch.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, application.*, or application.patch.
 
         Parameters:
         *  {string} applicationId - ID of the associated application

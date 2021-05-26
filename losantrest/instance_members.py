@@ -36,7 +36,7 @@ class InstanceMembers(object):
 
     def get(self, **kwargs):
         """
-        Returns an instance member
+        Returns a collection of instance members
 
         Authentication:
         The client must be configured with a valid api

@@ -29,7 +29,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, file.*, or file.delete.
+all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, file.*, or file.delete.
 
 #### Available Parameters
 
@@ -69,7 +69,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, file.*, or file.get.
+all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, file.*, or file.get.
 
 #### Available Parameters
 
@@ -109,7 +109,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, file.*, or file.move.
+all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, file.*, or file.move.
 
 #### Available Parameters
 
@@ -152,7 +152,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, file.*, or file.patch.
+all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, file.*, or file.patch.
 
 #### Available Parameters
 
@@ -194,7 +194,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, file.*, or file.upload.
+all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, file.*, or file.upload.
 
 #### Available Parameters
 

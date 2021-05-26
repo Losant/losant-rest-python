@@ -88,7 +88,7 @@ all.Application, all.Organization, all.User, devices.*, or devices.delete.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Devices Deleted](_schemas.md#devices-deleted) | Object indicating number of devices deleted or failed |
+| 200 | [Bulk Deletion Response](_schemas.md#bulk-deletion-response) | Object indicating number of devices deleted or failed |
 | 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If a job was enqueued for the devices to be deleted |
 
 #### Error Responses
@@ -160,7 +160,7 @@ all.Application, all.Application.read, all.Device, all.Device.read, all.Organiza
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
-| sortField | string | N | Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated | name | name |
+| sortField | string | N | Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated, connectionStatus | name | name |
 | sortDirection | string | N | Direction to sort the results by. Accepted values are: asc, desc | asc | asc |
 | page | string | N | Which page of results to return | 0 | 0 |
 | perPage | string | N | How many items to return per page | 100 | 10 |

@@ -191,3 +191,50 @@ class Instance(object):
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
+    def patch(self, **kwargs):
+        """
+        Updates information about an instance
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Instance, all.User, instance.*, or instance.patch.
+
+        Parameters:
+        *  {string} instanceId - ID associated with the instance
+        *  {hash} instance - Updated instance information (https://api.losant.com/#/definitions/instancePatch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - The updated instance object (https://api.losant.com/#/definitions/instance)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "instanceId" in kwargs:
+            path_params["instanceId"] = kwargs["instanceId"]
+        if "instance" in kwargs:
+            body = kwargs["instance"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/instances/{instanceId}".format(**path_params)
+
+        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
+

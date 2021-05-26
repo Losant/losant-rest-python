@@ -13,7 +13,7 @@ parameters and the potential responses.
 
 ## Get
 
-Returns an instance member
+Returns a collection of instance members
 
 ```python
 result = client.instance_members.get(instanceId=my_instance_id)

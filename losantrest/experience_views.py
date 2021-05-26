@@ -42,7 +42,7 @@ class ExperienceViews(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceViews.*, or experienceViews.get.
+        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, experienceViews.*, or experienceViews.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -111,7 +111,7 @@ class ExperienceViews(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceViews.*, or experienceViews.post.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, experienceViews.*, or experienceViews.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

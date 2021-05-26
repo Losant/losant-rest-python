@@ -95,6 +95,8 @@ class ExperienceGroup(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} experienceGroupId - ID associated with the experience group
+        *  {string} includeDirectDeviceCount - Whether or not to return count of devices associated directly with this group
+        *  {string} includeTotalDeviceCount - Whether or not to return count of devices associated with this group or any of its descendents
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -117,6 +119,10 @@ class ExperienceGroup(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "experienceGroupId" in kwargs:
             path_params["experienceGroupId"] = kwargs["experienceGroupId"]
+        if "includeDirectDeviceCount" in kwargs:
+            query_params["includeDirectDeviceCount"] = kwargs["includeDirectDeviceCount"]
+        if "includeTotalDeviceCount" in kwargs:
+            query_params["includeTotalDeviceCount"] = kwargs["includeTotalDeviceCount"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

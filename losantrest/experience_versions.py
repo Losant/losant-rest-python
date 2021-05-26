@@ -42,7 +42,7 @@ class ExperienceVersions(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceVersions.*, or experienceVersions.get.
+        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, experienceVersions.*, or experienceVersions.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -105,7 +105,7 @@ class ExperienceVersions(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceVersions.*, or experienceVersions.post.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, experienceVersions.*, or experienceVersions.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

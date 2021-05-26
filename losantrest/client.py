@@ -81,6 +81,8 @@ from .flow_version import FlowVersion
 from .flow_versions import FlowVersions
 from .flows import Flows
 from .instance import Instance
+from .instance_api_token import InstanceApiToken
+from .instance_api_tokens import InstanceApiTokens
 from .instance_member import InstanceMember
 from .instance_members import InstanceMembers
 from .instance_org import InstanceOrg
@@ -96,6 +98,8 @@ from .notebooks import Notebooks
 from .org import Org
 from .org_invites import OrgInvites
 from .orgs import Orgs
+from .user_api_token import UserApiToken
+from .user_api_tokens import UserApiTokens
 from .webhook import Webhook
 from .webhooks import Webhooks
 from .losant_error import LosantError
@@ -109,7 +113,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.20.0
+    Built For Version 1.20.1
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -168,6 +172,8 @@ class Client(object):
         self.flow_versions = FlowVersions(self)
         self.flows = Flows(self)
         self.instance = Instance(self)
+        self.instance_api_token = InstanceApiToken(self)
+        self.instance_api_tokens = InstanceApiTokens(self)
         self.instance_member = InstanceMember(self)
         self.instance_members = InstanceMembers(self)
         self.instance_org = InstanceOrg(self)
@@ -183,6 +189,8 @@ class Client(object):
         self.org = Org(self)
         self.org_invites = OrgInvites(self)
         self.orgs = Orgs(self)
+        self.user_api_token = UserApiToken(self)
+        self.user_api_tokens = UserApiTokens(self)
         self.webhook = Webhook(self)
         self.webhooks = Webhooks(self)
 
@@ -194,7 +202,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.20.0"
+        headers["Accept-Version"] = "^1.20.1"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

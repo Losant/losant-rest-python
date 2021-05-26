@@ -36,7 +36,7 @@ class InstanceOrgMembers(object):
 
     def get(self, **kwargs):
         """
-        Returns an instance member
+        Returns a collection of instance organization members
 
         Authentication:
         The client must be configured with a valid api

@@ -25,38 +25,43 @@ SOFTWARE.
 
 import json
 
-""" Module for Losant API ExperienceDomains wrapper class """
+""" Module for Losant API InstanceApiTokens wrapper class """
 # pylint: disable=C0301
 
-class ExperienceDomains(object):
-    """ Class containing all the actions for the Experience Domains Resource """
+class InstanceApiTokens(object):
+    """ Class containing all the actions for the Instance Api Tokens Resource """
 
     def __init__(self, client):
         self.client = client
 
     def get(self, **kwargs):
         """
-        Returns the experience domains for an application
+        Returns the API tokens for an instance
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, experienceDomains.*, or experienceDomains.get.
+        all.Instance, all.Instance.read, all.User, all.User.read, instanceApiTokens.*, or instanceApiTokens.get.
 
         Parameters:
-        *  {string} applicationId - ID associated with the application
+        *  {string} instanceId - ID associated with the instance
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, status, id, creationDate, lastUpdated, expirationDate
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name, status
+        *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of experience domains (https://api.losant.com/#/definitions/experienceDomains)
+        *  200 - Collection of API tokens (https://api.losant.com/#/definitions/apiToken)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -64,8 +69,20 @@ class ExperienceDomains(object):
         headers = {}
         body = None
 
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
+        if "instanceId" in kwargs:
+            path_params["instanceId"] = kwargs["instanceId"]
+        if "sortField" in kwargs:
+            query_params["sortField"] = kwargs["sortField"]
+        if "sortDirection" in kwargs:
+            query_params["sortDirection"] = kwargs["sortDirection"]
+        if "page" in kwargs:
+            query_params["page"] = kwargs["page"]
+        if "perPage" in kwargs:
+            query_params["perPage"] = kwargs["perPage"]
+        if "filterField" in kwargs:
+            query_params["filterField"] = kwargs["filterField"]
+        if "filter" in kwargs:
+            query_params["filter"] = kwargs["filter"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -75,34 +92,33 @@ class ExperienceDomains(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/domains".format(**path_params)
+        path = "/instances/{instanceId}/tokens".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def post(self, **kwargs):
         """
-        Create a new experience domain for an application
+        Create a new API token for an instance
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceDomains.*, or experienceDomains.post.
+        all.Instance, all.User, instanceApiTokens.*, or instanceApiTokens.post.
 
         Parameters:
-        *  {string} applicationId - ID associated with the application
-        *  {hash} experienceDomain - New experience domain information (https://api.losant.com/#/definitions/experienceDomainPost)
+        *  {string} instanceId - ID associated with the instance
+        *  {hash} apiToken - API token information (https://api.losant.com/#/definitions/apiTokenPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created experience domain (https://api.losant.com/#/definitions/experienceDomain)
+        *  201 - The successfully created API token (https://api.losant.com/#/definitions/apiToken)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -110,10 +126,10 @@ class ExperienceDomains(object):
         headers = {}
         body = None
 
-        if "applicationId" in kwargs:
-            path_params["applicationId"] = kwargs["applicationId"]
-        if "experienceDomain" in kwargs:
-            body = kwargs["experienceDomain"]
+        if "instanceId" in kwargs:
+            path_params["instanceId"] = kwargs["instanceId"]
+        if "apiToken" in kwargs:
+            body = kwargs["apiToken"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -123,7 +139,7 @@ class ExperienceDomains(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/experience/domains".format(**path_params)
+        path = "/instances/{instanceId}/tokens".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

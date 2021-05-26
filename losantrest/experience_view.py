@@ -42,7 +42,7 @@ class ExperienceView(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceView.*, or experienceView.delete.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, experienceView.*, or experienceView.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -90,7 +90,7 @@ class ExperienceView(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceView.*, or experienceView.get.
+        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, experienceView.*, or experienceView.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -141,7 +141,7 @@ class ExperienceView(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceView.*, or experienceView.linkedResources.
+        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, experienceView.*, or experienceView.linkedResources.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -195,7 +195,7 @@ class ExperienceView(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceView.*, or experienceView.patch.
+        all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, experienceView.*, or experienceView.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
