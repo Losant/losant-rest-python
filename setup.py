@@ -37,5 +37,5 @@ setup(
     keywords=['REST', 'Losant', 'IoT'],
     test_suite='tests',
     install_requires=['requests>=2.13'],
-    tests_require=['requests-mock'],
+    tests_require=['requests-mock>=1.9.0'],
 )
