@@ -52,7 +52,6 @@ class InstanceOrgs(object):
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
-        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from org summaries
         *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -85,8 +84,6 @@ class InstanceOrgs(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
-        if "summaryExclude" in kwargs:
-            query_params["summaryExclude"] = kwargs["summaryExclude"]
         if "summaryInclude" in kwargs:
             query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
@@ -114,6 +111,7 @@ class InstanceOrgs(object):
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
         *  {hash} orgConfig - Object containing configurations for the new organization (https://api.losant.com/#/definitions/instanceOrgPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -134,6 +132,8 @@ class InstanceOrgs(object):
 
         if "instanceId" in kwargs:
             path_params["instanceId"] = kwargs["instanceId"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "orgConfig" in kwargs:
             body = kwargs["orgConfig"]
         if "losantdomain" in kwargs:

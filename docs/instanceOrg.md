@@ -75,6 +75,7 @@ all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or inst
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | instanceId | string | Y | ID associated with the instance |  | 575ec8687ae143cd83dc4a97 |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| summaryInclude | string | N | Comma-separated list of summary fields to include in org summary |  | payloadCount |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -116,6 +117,7 @@ all.Instance, all.User, instanceOrg.*, or instanceOrg.patch.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | instanceId | string | Y | ID associated with the instance |  | 575ec8687ae143cd83dc4a97 |
 | orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| summaryInclude | string | N | Comma-separated list of summary fields to include in org summary |  | payloadCount |
 | organization | [Instance Owned Organization Patch](_schemas.md#instance-owned-organization-patch) | Y | Object containing new organization properties |  | [Instance Owned Organization Patch Example](_schemas.md#instance-owned-organization-patch-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 

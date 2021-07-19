@@ -25,39 +25,40 @@ SOFTWARE.
 
 import json
 
-""" Module for Losant API InstanceOrg wrapper class """
+""" Module for Losant API InstanceOrgInvite wrapper class """
 # pylint: disable=C0301
 
-class InstanceOrg(object):
-    """ Class containing all the actions for the Instance Org Resource """
+class InstanceOrgInvite(object):
+    """ Class containing all the actions for the Instance Org Invite Resource """
 
     def __init__(self, client):
         self.client = client
 
     def delete(self, **kwargs):
         """
-        Deletes an organization
+        Revokes an instance org invitation
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.User, instanceOrg.*, or instanceOrg.delete.
+        all.Instance, all.User, instanceOrgInvite.*, or instanceOrgInvite.delete.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
         *  {string} orgId - ID associated with the organization
+        *  {string} inviteId - ID associated with the organization invite
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If organization was successfully deleted (https://api.losant.com/#/definitions/success)
+        *  200 - If an invite was successfully deleted (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if instance, organization or invite was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -69,6 +70,8 @@ class InstanceOrg(object):
             path_params["instanceId"] = kwargs["instanceId"]
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
+        if "inviteId" in kwargs:
+            path_params["inviteId"] = kwargs["inviteId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -78,35 +81,35 @@ class InstanceOrg(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/instances/{instanceId}/orgs/{orgId}".format(**path_params)
+        path = "/instances/{instanceId}/orgs/{orgId}/invites/{inviteId}".format(**path_params)
 
         return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
 
     def get(self, **kwargs):
         """
-        Retrieves information on an organization
+        Returns an organization invite
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.get.
+        all.Instance, all.Instance.read, all.User, all.User.read, instanceOrgInvite.*, or instanceOrgInvite.get.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
         *  {string} orgId - ID associated with the organization
-        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
+        *  {string} inviteId - ID associated with the organization invite
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - A single organization (https://api.losant.com/#/definitions/instanceOrg)
+        *  200 - A single organization invite (https://api.losant.com/#/definitions/orgInvite)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if instance, organization, or invite was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -118,8 +121,8 @@ class InstanceOrg(object):
             path_params["instanceId"] = kwargs["instanceId"]
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
-        if "summaryInclude" in kwargs:
-            query_params["summaryInclude"] = kwargs["summaryInclude"]
+        if "inviteId" in kwargs:
+            path_params["inviteId"] = kwargs["inviteId"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -129,36 +132,36 @@ class InstanceOrg(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/instances/{instanceId}/orgs/{orgId}".format(**path_params)
+        path = "/instances/{instanceId}/orgs/{orgId}/invites/{inviteId}".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
-    def patch(self, **kwargs):
+    def resend_invite(self, **kwargs):
         """
-        Updates information about an organization
+        Resend an organization invite with modified role info
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.User, instanceOrg.*, or instanceOrg.patch.
+        all.Instance, all.User, instanceOrgInvite.*, or instanceOrgInvite.resendInvite.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
         *  {string} orgId - ID associated with the organization
-        *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
-        *  {hash} organization - Object containing new organization properties (https://api.losant.com/#/definitions/instanceOrgPatch)
+        *  {string} inviteId - ID associated with the organization invite
+        *  {hash} roleInfo - Object containing updated role info (https://api.losant.com/#/definitions/orgRoleInfo)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Updated organization information (https://api.losant.com/#/definitions/instanceOrg)
+        *  201 - The new org invite (https://api.losant.com/#/definitions/orgInvite)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
-        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
+        *  404 - Error if instance, organization, or invite was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -170,10 +173,10 @@ class InstanceOrg(object):
             path_params["instanceId"] = kwargs["instanceId"]
         if "orgId" in kwargs:
             path_params["orgId"] = kwargs["orgId"]
-        if "summaryInclude" in kwargs:
-            query_params["summaryInclude"] = kwargs["summaryInclude"]
-        if "organization" in kwargs:
-            body = kwargs["organization"]
+        if "inviteId" in kwargs:
+            path_params["inviteId"] = kwargs["inviteId"]
+        if "roleInfo" in kwargs:
+            body = kwargs["roleInfo"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -183,7 +186,7 @@ class InstanceOrg(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/instances/{instanceId}/orgs/{orgId}".format(**path_params)
+        path = "/instances/{instanceId}/orgs/{orgId}/invites/{inviteId}".format(**path_params)
 
-        return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

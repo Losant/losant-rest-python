@@ -1,7 +1,7 @@
-# Instance Org Members Actions
+# Instance Org Invites Actions
 
 Details on the various actions that can be performed on the
-Instance Org Members resource, including the expected
+Instance Org Invites resource, including the expected
 parameters and the potential responses.
 
 ##### Contents
@@ -13,10 +13,10 @@ parameters and the potential responses.
 
 ## Get
 
-Returns a collection of instance organization members
+Returns a collection of instance organization invites
 
 ```python
-result = client.instance_org_members.get(
+result = client.instance_org_invites.get(
     instanceId=my_instance_id,
     orgId=my_org_id)
 
@@ -26,7 +26,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceOrgMembers.*, or instanceOrgMembers.get.
+all.Instance, all.Instance.read, all.User, all.User.read, instanceOrgInvites.*, or instanceOrgInvites.get.
 
 #### Available Parameters
 
@@ -34,8 +34,8 @@ all.Instance, all.Instance.read, all.User, all.User.read, instanceOrgMembers.*, 
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | instanceId | string | Y | ID associated with the instance |  | 575ec8687ae143cd83dc4a97 |
 | orgId | string | Y | ID associated with the organization |  | 575ec8687ae143cd83dc4a97 |
-| sortField | string | N | Field to sort the results by. Accepted values are: email, role | email | role |
-| sortDirection | string | N | Direction to sort the results by. Accepted values are: asc, desc | asc | asc |
+| sortField | string | N | Field to sort the results by. Accepted values are: email, role, inviteDate | inviteDate | role |
+| sortDirection | string | N | Direction to sort the results by. Accepted values are: asc, desc | desc | asc |
 | filterField | string | N | Field to filter the results by. Blank or not provided means no filtering. Accepted values are: email, role |  | email |
 | filter | string | N | Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering. |  | my * instance |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
@@ -44,26 +44,26 @@ all.Instance, all.Instance.read, all.User, all.User.read, instanceOrgMembers.*, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Instance Organization Members](_schemas.md#instance-organization-members) | A collection of instance organization members |
+| 200 | [Instance Organization Invitations](_schemas.md#instance-organization-invitations) | A collection of instance organization invitations |
 
 #### Error Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if instance was not found |
+| 404 | [Error](_schemas.md#error) | Error if instance or organization was not found |
 
 <br/>
 
 ## Post
 
-Creates a new organization member
+Invites a member to an instance organization
 
 ```python
-result = client.instance_org_members.post(
+result = client.instance_org_invites.post(
     instanceId=my_instance_id,
     orgId=my_org_id,
-    member=my_member)
+    invite=my_invite)
 
 print(result)
 ```
@@ -71,7 +71,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceOrgMembers.*, or instanceOrgMembers.post.
+all.Instance, all.User, instanceOrgInvites.*, or instanceOrgInvites.post.
 
 #### Available Parameters
 
@@ -79,18 +79,18 @@ all.Instance, all.User, instanceOrgMembers.*, or instanceOrgMembers.post.
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | instanceId | string | Y | ID associated with the instance |  | 575ec8687ae143cd83dc4a97 |
 | orgId | string | Y | ID associated with the organization |  | 575ec8687ae143cd83dc4a97 |
-| member | [Instance Org Member Post](_schemas.md#instance-org-member-post) | Y | Object containing new member info |  | [Instance Org Member Post Example](_schemas.md#instance-org-member-post-example) |
+| invite | [Organization Invitation Post](_schemas.md#organization-invitation-post) | Y | Object containing new invite info |  | [Organization Invitation Post Example](_schemas.md#organization-invitation-post-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Instance Org Member](_schemas.md#instance-org-member) | The newly created instance member |
+| 201 | [Instance Organization Invitations](_schemas.md#instance-organization-invitations) | The new organization invite |
 
 #### Error Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
-| 404 | [Error](_schemas.md#error) | Error if instance was not found |
+| 404 | [Error](_schemas.md#error) | Error if instance or organization was not found |

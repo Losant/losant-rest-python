@@ -568,7 +568,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Payload Counts](_schemas.md#payload-counts) | Payload counts, by type and source |
+| 200 | [Payload Stats](_schemas.md#payload-stats) | Payload counts, by type and source |
 
 #### Error Responses
 

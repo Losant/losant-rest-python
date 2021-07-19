@@ -56,6 +56,7 @@ from .device import Device
 from .device_recipe import DeviceRecipe
 from .device_recipes import DeviceRecipes
 from .devices import Devices
+from .edge_deployment import EdgeDeployment
 from .edge_deployments import EdgeDeployments
 from .event import Event
 from .events import Events
@@ -86,6 +87,8 @@ from .instance_api_tokens import InstanceApiTokens
 from .instance_member import InstanceMember
 from .instance_members import InstanceMembers
 from .instance_org import InstanceOrg
+from .instance_org_invite import InstanceOrgInvite
+from .instance_org_invites import InstanceOrgInvites
 from .instance_org_member import InstanceOrgMember
 from .instance_org_members import InstanceOrgMembers
 from .instance_orgs import InstanceOrgs
@@ -113,7 +116,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.20.1
+    Built For Version 1.21.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -147,6 +150,7 @@ class Client(object):
         self.device_recipe = DeviceRecipe(self)
         self.device_recipes = DeviceRecipes(self)
         self.devices = Devices(self)
+        self.edge_deployment = EdgeDeployment(self)
         self.edge_deployments = EdgeDeployments(self)
         self.event = Event(self)
         self.events = Events(self)
@@ -177,6 +181,8 @@ class Client(object):
         self.instance_member = InstanceMember(self)
         self.instance_members = InstanceMembers(self)
         self.instance_org = InstanceOrg(self)
+        self.instance_org_invite = InstanceOrgInvite(self)
+        self.instance_org_invites = InstanceOrgInvites(self)
         self.instance_org_member = InstanceOrgMember(self)
         self.instance_org_members = InstanceOrgMembers(self)
         self.instance_orgs = InstanceOrgs(self)
@@ -202,7 +208,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.20.1"
+        headers["Accept-Version"] = "^1.21.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
