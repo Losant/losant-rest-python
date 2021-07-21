@@ -32,7 +32,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3'
     ],
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(),
     include_package_data=True,
     keywords=['REST', 'Losant', 'IoT'],
     test_suite='tests',
