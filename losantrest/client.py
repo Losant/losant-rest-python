@@ -26,6 +26,7 @@ SOFTWARE.
 # pylint: disable=E0401
 
 import requests
+import collections
 import sys
 from .application import Application
 from .application_api_token import ApplicationApiToken
@@ -108,12 +109,6 @@ from .losant_error import LosantError
 
 if sys.version_info[0] == 3:
     basestring = str
-
-try:
-    from collections.abc import Mapping
-except ImportError:
-    from collections import Mapping
-
 
 class Client(object):
     """
@@ -240,7 +235,7 @@ class Client(object):
             return result
 
         map_data = None
-        if not isinstance(data, Mapping):
+        if not isinstance(data, collections.Mapping):
             map_data = []
             for idx, val in enumerate(data):
                 map_data.append([str(idx), val])
