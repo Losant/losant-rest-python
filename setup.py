@@ -36,6 +36,6 @@ setup(
     include_package_data=True,
     keywords=['REST', 'Losant', 'IoT'],
     test_suite='tests',
-    install_requires=['requests>=2.13', 'chardet'],
+    install_requires=['requests>=2.13'],
     tests_require=['requests-mock>=1.9.0'],
 )
