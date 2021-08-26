@@ -135,7 +135,9 @@ all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instanc
 Updates information about an instance
 
 ```python
-result = client.instance.patch(instanceId=my_instance_id)
+result = client.instance.patch(
+    instanceId=my_instance_id,
+    instance=my_instance)
 
 print(result)
 ```
@@ -150,7 +152,7 @@ all.Instance, all.User, instance.*, or instance.patch.
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | instanceId | string | Y | ID associated with the instance |  | 575ec8687ae143cd83dc4a97 |
-| instance | [Instance Patch](_schemas.md#instance-patch) | N | Updated instance information |  | [Instance Patch Example](_schemas.md#instance-patch-example) |
+| instance | [Instance Patch](_schemas.md#instance-patch) | Y | Updated instance information |  | [Instance Patch Example](_schemas.md#instance-patch-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
