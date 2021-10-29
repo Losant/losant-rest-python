@@ -148,7 +148,7 @@ class Flow(object):
         *  {string} limit - Maximum number of errors to return
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} flowVersion - Flow version name or ID. When not included, will be errors for all versions. Pass develop for just the develop version.
-        *  {string} deviceId - For edge workflows, the Device ID to return workflow errors for. When not included, will be errors for all device IDs.
+        *  {string} deviceId - For edge or embedded workflows, the Device ID to return workflow errors for. When not included, will be errors for all device IDs.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -570,7 +570,7 @@ class Flow(object):
         *  {string} end - End of time range in milliseconds since epoch
         *  {string} resolution - Resolution in milliseconds
         *  {string} flowVersion - Flow version name or ID. When not included, will be aggregate for all versions. Pass develop for just the develop version.
-        *  {string} deviceId - For edge workflows, the device ID to return workflow stats for. When not included, will be aggregate for all device IDs.
+        *  {string} deviceId - For edge or embedded workflows, the device ID to return workflow stats for. When not included, will be aggregate for all device IDs.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response

@@ -58,6 +58,8 @@ from .device_recipes import DeviceRecipes
 from .devices import Devices
 from .edge_deployment import EdgeDeployment
 from .edge_deployments import EdgeDeployments
+from .embedded_deployment import EmbeddedDeployment
+from .embedded_deployments import EmbeddedDeployments
 from .event import Event
 from .events import Events
 from .experience import Experience
@@ -116,7 +118,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.21.1
+    Built For Version 1.22.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -152,6 +154,8 @@ class Client(object):
         self.devices = Devices(self)
         self.edge_deployment = EdgeDeployment(self)
         self.edge_deployments = EdgeDeployments(self)
+        self.embedded_deployment = EmbeddedDeployment(self)
+        self.embedded_deployments = EmbeddedDeployments(self)
         self.event = Event(self)
         self.events = Events(self)
         self.experience = Experience(self)
@@ -208,7 +212,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.21.1"
+        headers["Accept-Version"] = "^1.22.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
