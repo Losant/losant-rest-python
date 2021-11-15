@@ -242,7 +242,7 @@ class Client(object):
             return result
 
         map_data = None
-        if not isinstance(data, collections):
+        if not isinstance(data, Mapping):
             map_data = []
             for idx, val in enumerate(data):
                 map_data.append([str(idx), val])
