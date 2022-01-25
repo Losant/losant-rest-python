@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2021 Losant IoT, Inc.
+Copyright (c) 2022 Losant IoT, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,7 @@ SOFTWARE.
 # pylint: disable=E0401
 
 import requests
-try:
-    from collections.abc import Mapping
-except ImportError:
-    from collections import Mapping
+import collections
 import sys
 from .application import Application
 from .application_api_token import ApplicationApiToken
@@ -121,7 +118,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.22.1
+    Built For Version 1.22.2
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -215,7 +212,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.22.1"
+        headers["Accept-Version"] = "^1.22.2"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
@@ -242,7 +239,7 @@ class Client(object):
             return result
 
         map_data = None
-        if not isinstance(data, Mapping):
+        if not isinstance(data, collections.Mapping):
             map_data = []
             for idx, val in enumerate(data):
                 map_data.append([str(idx), val])

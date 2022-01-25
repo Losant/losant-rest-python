@@ -8,6 +8,7 @@ parameters and the potential responses.
 
 *   [Attribute Names](#attribute-names)
 *   [Delete](#delete)
+*   [Device Names](#device-names)
 *   [Export](#export)
 *   [Get](#get)
 *   [Patch](#patch)
@@ -91,6 +92,45 @@ all.Application, all.Organization, all.User, devices.*, or devices.delete.
 | ---- | ---- | ----------- |
 | 200 | [Bulk Deletion Response](_schemas.md#bulk-deletion-response) | Object indicating number of devices deleted or failed |
 | 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If a job was enqueued for the devices to be deleted |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Device Names
+
+Gets the device names that match the given query. Maximum 1K returned.
+
+```python
+result = client.devices.device_names(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.deviceNames.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| query | [Advanced Device Query](_schemas.md#advanced-device-query) | N | Device filter JSON object |  | [Advanced Device Query Example](_schemas.md#advanced-device-query-example) |
+| startsWith | string | N | Filter devices down to those that have names starting with the given string. Case insensitive. |  | temper |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Device Names Response](_schemas.md#device-names-response) | The matching device names |
 
 #### Error Responses
 
