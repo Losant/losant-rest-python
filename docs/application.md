@@ -421,9 +421,7 @@ all.Application, all.Application.cli, all.Organization, all.User, all.User.cli, 
 Add multiple resources to an application via a zip file
 
 ```python
-result = client.application.api_import(
-    applicationId=my_application_id,
-    importBundle=my_import_bundle)
+result = client.application.api_import(applicationId=my_application_id)
 
 print(result)
 ```
@@ -438,8 +436,9 @@ all.Application, all.Organization, all.User, application.*, or application.impor
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
-| importBundle | file | Y | The zip file containing all of the resources to import into the application |  | undefined |
+| importBundle | file | N | The zip file containing all of the resources to import into the application |  | undefined |
 | email | string | N | Email address to notify the user when the job to import the application resources has completed or errored, defaults to the email address of the user making the request |  | email@example.com |
+| options | [Application Import Options](_schemas.md#application-import-options) | N | Additional import options |  | [Application Import Options Example](_schemas.md#application-import-options-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses

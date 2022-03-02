@@ -61,7 +61,7 @@ all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, 
 Create a new application from an import bundle
 
 ```python
-result = client.applications.api_import(importBundle=my_import_bundle)
+result = client.applications.api_import(**optional_params)
 
 print(result)
 ```
@@ -75,13 +75,14 @@ all.Organization, all.User, applications.*, or applications.import.
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
-| importBundle | file | Y | The zip file containing the application to import and all of its resources |  | undefined |
+| importBundle | file | N | The zip file containing the application to import and all of its resources |  | undefined |
 | ownerId | string | N | The owner id of the new application, defaults to the id of the user making the request |  | 575ed6e87ae143cd83dc4aa8 |
 | ownerType | string | N | The type of the owner id. Accepted values are: user, organization | user | user |
 | includeDevices | string | N | If set, import devices from the import bundle |  | true |
 | includeDataTableRows | string | N | If set, import data table rows from import bundle |  | true |
 | includeFiles | string | N | If set, import files from import bundle |  | true |
 | email | string | N | Email address to notify the user when the job to import the application has completed or errored, defaults to the email address of the user making the request |  | email@example.com |
+| options | [Application Import Options](_schemas.md#application-import-options) | N | Additional import options |  | [Application Import Options Example](_schemas.md#application-import-options-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses

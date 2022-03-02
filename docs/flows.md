@@ -9,6 +9,7 @@ parameters and the potential responses.
 *   [Get](#get)
 *   [Get by Version](#get-by-version)
 *   [Import](#import)
+*   [Palette](#palette)
 *   [Post](#post)
 
 <br/>
@@ -141,6 +142,43 @@ all.Application, all.Organization, all.User, flows.*, or flows.import.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 201 | [Workflow Import Result](_schemas.md#workflow-import-result) | Successfully imported workflows |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Palette
+
+Gets additional nodes that should be available in the palette
+
+```python
+result = client.flows.palette(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flows.*, or flows.palette.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Palette Response](_schemas.md#palette-response) | The additional nodes available in the palette |
 
 #### Error Responses
 

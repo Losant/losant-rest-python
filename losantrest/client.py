@@ -26,10 +26,7 @@ SOFTWARE.
 # pylint: disable=E0401
 
 import requests
-try:
-    from collections.abc import Mapping
-except ImportError:
-    from collections import Mapping
+import collections
 import sys
 from .application import Application
 from .application_api_token import ApplicationApiToken
@@ -89,6 +86,8 @@ from .flows import Flows
 from .instance import Instance
 from .instance_api_token import InstanceApiToken
 from .instance_api_tokens import InstanceApiTokens
+from .instance_custom_node import InstanceCustomNode
+from .instance_custom_nodes import InstanceCustomNodes
 from .instance_member import InstanceMember
 from .instance_members import InstanceMembers
 from .instance_org import InstanceOrg
@@ -121,7 +120,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.22.2
+    Built For Version 1.23.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -185,6 +184,8 @@ class Client(object):
         self.instance = Instance(self)
         self.instance_api_token = InstanceApiToken(self)
         self.instance_api_tokens = InstanceApiTokens(self)
+        self.instance_custom_node = InstanceCustomNode(self)
+        self.instance_custom_nodes = InstanceCustomNodes(self)
         self.instance_member = InstanceMember(self)
         self.instance_members = InstanceMembers(self)
         self.instance_org = InstanceOrg(self)
@@ -215,7 +216,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.22.2"
+        headers["Accept-Version"] = "^1.23.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
@@ -242,7 +243,7 @@ class Client(object):
             return result
 
         map_data = None
-        if not isinstance(data, Mapping):
+        if not isinstance(data, collections.Mapping):
             map_data = []
             for idx, val in enumerate(data):
                 map_data.append([str(idx), val])
