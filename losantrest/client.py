@@ -99,6 +99,8 @@ from .instance_org_invites import InstanceOrgInvites
 from .instance_org_member import InstanceOrgMember
 from .instance_org_members import InstanceOrgMembers
 from .instance_orgs import InstanceOrgs
+from .instance_sandbox import InstanceSandbox
+from .instance_sandboxes import InstanceSandboxes
 from .instances import Instances
 from .integration import Integration
 from .integrations import Integrations
@@ -123,7 +125,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.23.1
+    Built For Version 1.23.2
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -197,6 +199,8 @@ class Client(object):
         self.instance_org_member = InstanceOrgMember(self)
         self.instance_org_members = InstanceOrgMembers(self)
         self.instance_orgs = InstanceOrgs(self)
+        self.instance_sandbox = InstanceSandbox(self)
+        self.instance_sandboxes = InstanceSandboxes(self)
         self.instances = Instances(self)
         self.integration = Integration(self)
         self.integrations = Integrations(self)
@@ -219,7 +223,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.23.1"
+        headers["Accept-Version"] = "^1.23.2"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
