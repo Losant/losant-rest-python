@@ -46,6 +46,8 @@ class InstanceSandboxes(object):
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from user summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in user summary
         *  {string} sortField - Field to sort the results by. Accepted values are: firstName, lastName, email, id, creationDate, lastSuccessfulLogin, lastFailedLogin, failedLoginCount, lastUpdated
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} startingAfterId - Exclusive ID from which to begin querying
@@ -73,6 +75,10 @@ class InstanceSandboxes(object):
 
         if "instanceId" in kwargs:
             path_params["instanceId"] = kwargs["instanceId"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "sortField" in kwargs:
             query_params["sortField"] = kwargs["sortField"]
         if "sortDirection" in kwargs:
