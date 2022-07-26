@@ -265,6 +265,8 @@ class Devices(object):
         *  {string} excludeConnectionInfo - If set, do not return connection info
         *  {string} parentId - Filter devices as children of a given system id
         *  {hash} query - Device filter JSON object which overrides the filterField, filter, deviceClass, tagFilter, and parentId parameters. (https://api.losant.com/#/definitions/advancedDeviceQuery)
+        *  {string} tagsAsObject - Return tags as an object map instead of an array.
+        *  {string} attributesAsObject - Return attributes as an object map instead of an array.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -307,6 +309,10 @@ class Devices(object):
             query_params["parentId"] = kwargs["parentId"]
         if "query" in kwargs:
             query_params["query"] = json.dumps(kwargs["query"])
+        if "tagsAsObject" in kwargs:
+            query_params["tagsAsObject"] = kwargs["tagsAsObject"]
+        if "attributesAsObject" in kwargs:
+            query_params["attributesAsObject"] = kwargs["attributesAsObject"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -430,6 +436,8 @@ class Devices(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} device - New device information (https://api.losant.com/#/definitions/devicePost)
+        *  {string} tagsAsObject - Return tags as an object map instead of an array.
+        *  {string} attributesAsObject - Return attributes as an object map instead of an array.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -452,6 +460,10 @@ class Devices(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "device" in kwargs:
             body = kwargs["device"]
+        if "tagsAsObject" in kwargs:
+            query_params["tagsAsObject"] = kwargs["tagsAsObject"]
+        if "attributesAsObject" in kwargs:
+            query_params["attributesAsObject"] = kwargs["attributesAsObject"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
