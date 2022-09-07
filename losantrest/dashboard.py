@@ -231,6 +231,8 @@ class Dashboard(object):
         *  {string} dashboardId - ID of the associated dashboard
         *  {hash} ctx - The context object to validate (https://api.losant.com/#/definitions/dashboardContextInstance)
         *  {string} password - Password for password-protected dashboards
+        *  {string} duration - Duration of data to fetch in milliseconds
+        *  {string} resolution - Resolution in milliseconds
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -255,6 +257,10 @@ class Dashboard(object):
             body = kwargs["ctx"]
         if "password" in kwargs:
             query_params["password"] = kwargs["password"]
+        if "duration" in kwargs:
+            query_params["duration"] = kwargs["duration"]
+        if "resolution" in kwargs:
+            query_params["resolution"] = kwargs["resolution"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

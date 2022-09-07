@@ -13,6 +13,7 @@ parameters and the potential responses.
 *   [Disconnect Github](#disconnect-github)
 *   [Enable Two Factor Auth](#enable-two-factor-auth)
 *   [Fetch Recent Items](#fetch-recent-items)
+*   [Generate Two Factor Auth](#generate-two-factor-auth)
 *   [Get](#get)
 *   [Patch](#patch)
 *   [Payload Counts](#payload-counts)
@@ -265,6 +266,41 @@ all.User, all.User.read, me.*, or me.fetchRecentItems.
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Recent Item List](_schemas.md#recent-item-list) | Recent item list |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+
+<br/>
+
+## Generate Two Factor Auth
+
+Returns the two factor auth key for a user
+
+```python
+result = client.me.generate_two_factor_auth(**optional_params)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.User, me.*, or me.generateTwoFactorAuth.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Two Factor Auth Info](_schemas.md#two-factor-auth-info) | Updated user information |
 
 #### Error Responses
 
