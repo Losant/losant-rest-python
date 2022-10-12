@@ -41,7 +41,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If generation of export was successfully started |
+| 200 | [Success With Job ID](_schemas.md#success-with-job-id) | If generation of export was successfully started |
 
 #### Error Responses
 

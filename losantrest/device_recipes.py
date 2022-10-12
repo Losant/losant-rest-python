@@ -52,6 +52,8 @@ class DeviceRecipes(object):
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {string} tagsAsObject - Return tags as an object map instead of an array
+        *  {string} attributesAsObject - Return attributes as an object map instead of an array
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +86,10 @@ class DeviceRecipes(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "tagsAsObject" in kwargs:
+            query_params["tagsAsObject"] = kwargs["tagsAsObject"]
+        if "attributesAsObject" in kwargs:
+            query_params["attributesAsObject"] = kwargs["attributesAsObject"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -110,6 +116,8 @@ class DeviceRecipes(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} deviceRecipe - New device recipe information (https://api.losant.com/#/definitions/deviceRecipePost)
+        *  {string} tagsAsObject - Return tags as an object map instead of an array
+        *  {string} attributesAsObject - Return attributes as an object map instead of an array
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -132,6 +140,10 @@ class DeviceRecipes(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "deviceRecipe" in kwargs:
             body = kwargs["deviceRecipe"]
+        if "tagsAsObject" in kwargs:
+            query_params["tagsAsObject"] = kwargs["tagsAsObject"]
+        if "attributesAsObject" in kwargs:
+            query_params["attributesAsObject"] = kwargs["attributesAsObject"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

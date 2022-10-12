@@ -159,8 +159,8 @@ class Device(object):
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
         *  {string} excludeConnectionInfo - If set, do not return connection info
-        *  {string} tagsAsObject - Return tags as an object map instead of an array.
-        *  {string} attributesAsObject - Return attributes as an object map instead of an array.
+        *  {string} tagsAsObject - Return tags as an object map instead of an array
+        *  {string} attributesAsObject - Return attributes as an object map instead of an array
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -444,8 +444,8 @@ class Device(object):
         *  {string} applicationId - ID associated with the application
         *  {string} deviceId - ID associated with the device
         *  {hash} device - Object containing new properties of the device (https://api.losant.com/#/definitions/devicePatch)
-        *  {string} tagsAsObject - Return tags as an object map instead of an array.
-        *  {string} attributesAsObject - Return attributes as an object map instead of an array.
+        *  {string} tagsAsObject - Return tags as an object map instead of an array
+        *  {string} attributesAsObject - Return attributes as an object map instead of an array
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
