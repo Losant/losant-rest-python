@@ -25,32 +25,32 @@ SOFTWARE.
 
 import json
 
-""" Module for Losant API ApplicationApiTokens wrapper class """
+""" Module for Losant API ResourceJobs wrapper class """
 # pylint: disable=C0301
 
-class ApplicationApiTokens(object):
-    """ Class containing all the actions for the Application Api Tokens Resource """
+class ResourceJobs(object):
+    """ Class containing all the actions for the Resource Jobs Resource """
 
     def __init__(self, client):
         self.client = client
 
     def get(self, **kwargs):
         """
-        Returns the API tokens for an application
+        Returns the resource jobs for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, applicationApiTokens.*, or applicationApiTokens.get.
+        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, resourceJobs.*, or resourceJobs.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: name, status, id, creationDate, lastUpdated, expirationDate
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated, lastExecutionRequested, resourceType
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
-        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name, status
+        *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name, resourceType
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -58,10 +58,11 @@ class ApplicationApiTokens(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Collection of API tokens (https://api.losant.com/#/definitions/apiTokens)
+        *  200 - Collection of resource jobs (https://api.losant.com/#/definitions/resourceJobs)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -92,33 +93,34 @@ class ApplicationApiTokens(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/tokens".format(**path_params)
+        path = "/applications/{applicationId}/resource-jobs".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def post(self, **kwargs):
         """
-        Create a new API token for an application
+        Create a new resource job for an application
 
         Authentication:
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, applicationApiTokens.*, or applicationApiTokens.post.
+        all.Application, all.Organization, all.User, resourceJobs.*, or resourceJobs.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} apiToken - API token information (https://api.losant.com/#/definitions/apiTokenPost)
+        *  {hash} resourceJob - New resource job information (https://api.losant.com/#/definitions/resourceJobPost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - The successfully created API token (https://api.losant.com/#/definitions/apiToken)
+        *  201 - Successfully created resource job (https://api.losant.com/#/definitions/resourceJob)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
@@ -128,8 +130,8 @@ class ApplicationApiTokens(object):
 
         if "applicationId" in kwargs:
             path_params["applicationId"] = kwargs["applicationId"]
-        if "apiToken" in kwargs:
-            body = kwargs["apiToken"]
+        if "resourceJob" in kwargs:
+            body = kwargs["resourceJob"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -139,7 +141,7 @@ class ApplicationApiTokens(object):
         if "_embedded" in kwargs:
             query_params["_embedded"] = kwargs["_embedded"]
 
-        path = "/applications/{applicationId}/tokens".format(**path_params)
+        path = "/applications/{applicationId}/resource-jobs".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 

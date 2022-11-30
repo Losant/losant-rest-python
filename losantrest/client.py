@@ -110,6 +110,8 @@ from .notebooks import Notebooks
 from .org import Org
 from .org_invites import OrgInvites
 from .orgs import Orgs
+from .resource_job import ResourceJob
+from .resource_jobs import ResourceJobs
 from .user_api_token import UserApiToken
 from .user_api_tokens import UserApiTokens
 from .webhook import Webhook
@@ -125,7 +127,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.23.6
+    Built For Version 1.24.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -210,6 +212,8 @@ class Client(object):
         self.org = Org(self)
         self.org_invites = OrgInvites(self)
         self.orgs = Orgs(self)
+        self.resource_job = ResourceJob(self)
+        self.resource_jobs = ResourceJobs(self)
         self.user_api_token = UserApiToken(self)
         self.user_api_tokens = UserApiTokens(self)
         self.webhook = Webhook(self)
@@ -223,7 +227,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.23.6"
+        headers["Accept-Version"] = "^1.24.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

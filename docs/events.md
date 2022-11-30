@@ -164,7 +164,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | undefined | The event, plus count of currently new events |
+| 200 | [Event Plus New Count](_schemas.md#event-plus-new-count) | The event, plus count of currently new events |
 
 #### Error Responses
 

@@ -130,7 +130,7 @@ all.Application, all.Organization, all.User, notebook.*, or notebook.execute.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If execution request was accepted and successfully queued |
+| 200 | [Success With Execution ID](_schemas.md#success-with-execution-id) | If execution request was accepted and successfully queued |
 
 #### Error Responses
 
