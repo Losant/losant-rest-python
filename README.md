@@ -230,6 +230,6 @@ Each of the following is a property on the client object, and returns a wrapper 
 
 *****
 
-Copyright (c) 2021 Losant IoT, Inc
+Copyright (c) 2023 Losant IoT, Inc
 
 <https://www.losant.com>
