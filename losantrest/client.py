@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2022 Losant IoT, Inc.
+Copyright (c) 2023 Losant IoT, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -127,7 +127,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.24.0
+    Built For Version 1.24.1
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -227,7 +227,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.24.0"
+        headers["Accept-Version"] = "^1.24.1"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
