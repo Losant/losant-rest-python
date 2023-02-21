@@ -53,7 +53,7 @@ class Instance(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If generation of report was successfully started (https://api.losant.com/#/definitions/success)
+        *  202 - If generation of report was successfully started (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

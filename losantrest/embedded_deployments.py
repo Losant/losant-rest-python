@@ -53,7 +53,7 @@ class EmbeddedDeployments(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If generation of export was successfully started (https://api.losant.com/#/definitions/successWithJobId)
+        *  202 - If generation of export was successfully started (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

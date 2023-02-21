@@ -80,7 +80,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If generation of export was successfully started |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If generation of export was successfully started |
 
 #### Error Responses
 
@@ -207,7 +207,8 @@ all.Application, all.Organization, all.User, events.*, or events.patch.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If the bulk update has been successfully started |
+| 200 | [Success](_schemas.md#success) | If the bulk update has been completed |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If a bulk update job has been enqueued |
 
 #### Error Responses
 

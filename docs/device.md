@@ -96,7 +96,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If generation of export was successfully started |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If generation of export was successfully started |
 
 #### Error Responses
 
@@ -439,7 +439,7 @@ all.Application, all.Organization, all.User, device.*, or device.removeData.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If data removal was successfully started |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If data removal was successfully started |
 
 #### Error Responses
 

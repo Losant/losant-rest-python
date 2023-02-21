@@ -102,7 +102,7 @@ class Application(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Enqueued a job to archive this applications device data (https://api.losant.com/#/definitions/success)
+        *  202 - Enqueued a job to archive this applications device data (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -149,7 +149,7 @@ class Application(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Enqueued a job to backfill device data to this application archive location (https://api.losant.com/#/definitions/success)
+        *  202 - Enqueued a job to backfill device data to this application archive location (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -339,7 +339,7 @@ class Application(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Enqueued a job to archive all selected data tables of this application archive location (https://api.losant.com/#/definitions/success)
+        *  202 - Enqueued a job to archive all selected data tables of this application archive location (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -384,7 +384,7 @@ class Application(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Enqueued a job to archive all events to this application archive location (https://api.losant.com/#/definitions/success)
+        *  202 - Enqueued a job to archive all events to this application archive location (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

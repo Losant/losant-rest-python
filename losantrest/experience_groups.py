@@ -52,6 +52,7 @@ class ExperienceGroups(object):
         *  {string} perPage - How many items to return per page
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
+        *  {hash} query - Experience group filter JSON object which overrides the filter and filterField fields. (https://api.losant.com/#/definitions/advancedExperienceGroupQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -84,6 +85,8 @@ class ExperienceGroups(object):
             query_params["filterField"] = kwargs["filterField"]
         if "filter" in kwargs:
             query_params["filter"] = kwargs["filter"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

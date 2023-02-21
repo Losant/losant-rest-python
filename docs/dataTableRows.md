@@ -88,7 +88,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success With Job ID](_schemas.md#success-with-job-id) | If request was successfully queued |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If request was successfully queued |
 
 #### Error Responses
 

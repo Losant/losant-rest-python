@@ -191,7 +191,7 @@ class Dashboard(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Send dashboard report (https://api.losant.com/#/definitions/success)
+        *  202 - If dashboard report was enqueued to be sent (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

@@ -53,7 +53,7 @@ class Data(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If command was successfully sent (https://api.losant.com/#/definitions/success)
+        *  202 - If command was successfully sent (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

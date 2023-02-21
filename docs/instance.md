@@ -40,7 +40,7 @@ all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instanc
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If generation of report was successfully started |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If generation of report was successfully started |
 
 #### Error Responses
 

@@ -55,7 +55,7 @@ class DeviceRecipe(object):
 
         Responses:
         *  201 - If devices were successfully created (https://api.losant.com/#/definitions/deviceRecipeBulkCreate)
-        *  202 - If devices were enqueued to be created (https://api.losant.com/#/definitions/deviceRecipeBulkCreateEnqueued)
+        *  202 - If devices were enqueued to be created (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

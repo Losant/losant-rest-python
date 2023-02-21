@@ -209,7 +209,7 @@ class Devices(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If generation of export was successfully started (https://api.losant.com/#/definitions/success)
+        *  202 - If generation of export was successfully started (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -394,7 +394,7 @@ class Devices(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If generation of export was successfully started (https://api.losant.com/#/definitions/success)
+        *  202 - If generation of export was successfully started (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -546,6 +546,7 @@ class Devices(object):
 
         Responses:
         *  200 - If command was successfully sent (https://api.losant.com/#/definitions/success)
+        *  202 - If command was queued to be sent (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

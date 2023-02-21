@@ -41,7 +41,7 @@ all.Application, all.Application.read, all.Device, all.Device.read, all.Organiza
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | If command was successfully sent |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If command was successfully sent |
 
 #### Error Responses
 

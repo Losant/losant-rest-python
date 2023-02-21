@@ -101,7 +101,7 @@ class Events(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If generation of export was successfully started (https://api.losant.com/#/definitions/success)
+        *  202 - If generation of export was successfully started (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -272,7 +272,8 @@ class Events(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - If the bulk update has been successfully started (https://api.losant.com/#/definitions/success)
+        *  200 - If the bulk update has been completed (https://api.losant.com/#/definitions/success)
+        *  202 - If a bulk update job has been enqueued (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
