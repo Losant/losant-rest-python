@@ -166,7 +166,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Success](_schemas.md#success) | Send dashboard report |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If dashboard report was enqueued to be sent |
 
 #### Error Responses
 
