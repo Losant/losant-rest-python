@@ -166,6 +166,53 @@ class Me(object):
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
+    def device_counts(self, **kwargs):
+        """
+        Returns device counts by day for the time range specified for all applications the current user owns
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.User, all.User.read, me.*, or me.deviceCounts.
+
+        Parameters:
+        *  {string} start - Start of range for device count query (ms since epoch)
+        *  {string} end - End of range for device count query (ms since epoch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Device counts by day (https://api.losant.com/#/definitions/deviceCounts)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "start" in kwargs:
+            query_params["start"] = kwargs["start"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/me/deviceCounts".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
     def disable_two_factor_auth(self, **kwargs):
         """
         Disables two factor auth for the current user
@@ -429,6 +476,53 @@ class Me(object):
             query_params["_embedded"] = kwargs["_embedded"]
 
         path = "/me".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
+    def notebook_minute_counts(self, **kwargs):
+        """
+        Returns notebook execution usage by day for the time range specified for all applications the current user owns
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.User, all.User.read, me.*, or me.notebookMinuteCounts.
+
+        Parameters:
+        *  {string} start - Start of range for notebook execution query (ms since epoch)
+        *  {string} end - End of range for notebook execution query (ms since epoch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Notebook usage information (https://api.losant.com/#/definitions/notebookMinuteCounts)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "start" in kwargs:
+            query_params["start"] = kwargs["start"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/me/notebookMinuteCounts".format(**path_params)
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 

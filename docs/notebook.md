@@ -11,6 +11,7 @@ parameters and the potential responses.
 *   [Execute](#execute)
 *   [Get](#get)
 *   [Logs](#logs)
+*   [Notebook Minute Counts](#notebook-minute-counts)
 *   [Patch](#patch)
 *   [Request Input Data Export](#request-input-data-export)
 *   [Upload](#upload)
@@ -213,6 +214,48 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Notebook Execution Logs](_schemas.md#notebook-execution-logs) | notebook execution information |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if notebook was not found |
+
+<br/>
+
+## Notebook Minute Counts
+
+Returns notebook execution usage by day for the time range specified for this notebook
+
+```python
+result = client.notebook.notebook_minute_counts(
+    applicationId=my_application_id,
+    notebookId=my_notebook_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, notebook.*, or notebook.notebookMinuteCounts.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| notebookId | string | Y | ID associated with the notebook |  | 575ed78e7ae143cd83dc4aab |
+| start | string | N | Start of range for notebook execution query (ms since epoch) |  | 0 |
+| end | string | N | End of range for notebook execution query (ms since epoch) |  | 1465790400000 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Notebook Minute Counts](_schemas.md#notebook-minute-counts) | Notebook usage information |
 
 #### Error Responses
 

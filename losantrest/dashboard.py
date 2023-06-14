@@ -233,6 +233,7 @@ class Dashboard(object):
         *  {string} password - Password for password-protected dashboards
         *  {string} duration - Duration of data to fetch in milliseconds
         *  {string} resolution - Resolution in milliseconds
+        *  {string} end - End timestamp of the data, in ms since epoch
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -261,6 +262,8 @@ class Dashboard(object):
             query_params["duration"] = kwargs["duration"]
         if "resolution" in kwargs:
             query_params["resolution"] = kwargs["resolution"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

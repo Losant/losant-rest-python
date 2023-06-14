@@ -79,6 +79,57 @@ class Org(object):
 
         return self.client.request("DELETE", path, params=query_params, headers=headers, body=body)
 
+    def device_counts(self, **kwargs):
+        """
+        Returns device counts by day for the time range specified for this organization
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.deviceCounts.
+
+        Parameters:
+        *  {string} orgId - ID associated with the organization
+        *  {string} start - Start of range for device count query (ms since epoch)
+        *  {string} end - End of range for device count query (ms since epoch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Device counts by day (https://api.losant.com/#/definitions/deviceCounts)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "orgId" in kwargs:
+            path_params["orgId"] = kwargs["orgId"]
+        if "start" in kwargs:
+            query_params["start"] = kwargs["start"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/orgs/{orgId}/deviceCounts".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
     def get(self, **kwargs):
         """
         Retrieves information on an organization
@@ -231,6 +282,57 @@ class Org(object):
         path = "/orgs/{orgId}/member".format(**path_params)
 
         return self.client.request("PATCH", path, params=query_params, headers=headers, body=body)
+
+    def notebook_minute_counts(self, **kwargs):
+        """
+        Returns notebook execution usage by day for the time range specified for this organization
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.notebookMinuteCounts.
+
+        Parameters:
+        *  {string} orgId - ID associated with the organization
+        *  {string} start - Start of range for notebook execution query (ms since epoch)
+        *  {string} end - End of range for notebook execution query (ms since epoch)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Notebook usage information (https://api.losant.com/#/definitions/notebookMinuteCounts)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if organization was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "orgId" in kwargs:
+            path_params["orgId"] = kwargs["orgId"]
+        if "start" in kwargs:
+            query_params["start"] = kwargs["start"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/orgs/{orgId}/notebookMinuteCounts".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
     def patch(self, **kwargs):
         """
