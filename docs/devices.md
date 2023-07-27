@@ -11,6 +11,7 @@ parameters and the potential responses.
 *   [Device Names](#device-names)
 *   [Export](#export)
 *   [Get](#get)
+*   [Get Composite State](#get-composite-state)
 *   [Patch](#patch)
 *   [Payload Counts](#payload-counts)
 *   [Post](#post)
@@ -221,6 +222,51 @@ all.Application, all.Application.read, all.Device, all.Device.read, all.Organiza
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Devices](_schemas.md#devices) | Collection of devices |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
+
+<br/>
+
+## Get Composite State
+
+Retrieve the composite last complete state of the matching devices
+
+```python
+result = client.devices.get_composite_state(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.getCompositeState.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
+| start | string | N | Start of time range to look at to build composite state | 1 | 1465790400000 |
+| end | string | N | End of time range to look at to build composite state | 0 | 1465790400000 |
+| attributes | string | N | Comma-separated list of attributes to include. When not provided, returns all attributes. |  | myAttr1,myAttr2 |
+| sortField | string | N | Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated, connectionStatus | name | name |
+| sortDirection | string | N | Direction to sort the results by. Accepted values are: asc, desc | asc | asc |
+| page | string | N | Which page of results to return | 0 | 0 |
+| perPage | string | N | How many items to return per page | 100 | 10 |
+| query | [Advanced Device Query](_schemas.md#advanced-device-query) | N | Device advanced query JSON object |  | [Advanced Device Query Example](_schemas.md#advanced-device-query-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Devices Composite State](_schemas.md#devices-composite-state) | Collection of composite last state of the devices |
 
 #### Error Responses
 

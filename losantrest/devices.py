@@ -326,6 +326,75 @@ class Devices(object):
 
         return self.client.request("GET", path, params=query_params, headers=headers, body=body)
 
+    def get_composite_state(self, **kwargs):
+        """
+        Retrieve the composite last complete state of the matching devices
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.getCompositeState.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {string} start - Start of time range to look at to build composite state
+        *  {string} end - End of time range to look at to build composite state
+        *  {string} attributes - Comma-separated list of attributes to include. When not provided, returns all attributes.
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated, connectionStatus
+        *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
+        *  {string} page - Which page of results to return
+        *  {string} perPage - How many items to return per page
+        *  {hash} query - Device advanced query JSON object (https://api.losant.com/#/definitions/advancedDeviceQuery)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Collection of composite last state of the devices (https://api.losant.com/#/definitions/compositeDevicesState)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "start" in kwargs:
+            query_params["start"] = kwargs["start"]
+        if "end" in kwargs:
+            query_params["end"] = kwargs["end"]
+        if "attributes" in kwargs:
+            query_params["attributes"] = kwargs["attributes"]
+        if "sortField" in kwargs:
+            query_params["sortField"] = kwargs["sortField"]
+        if "sortDirection" in kwargs:
+            query_params["sortDirection"] = kwargs["sortDirection"]
+        if "page" in kwargs:
+            query_params["page"] = kwargs["page"]
+        if "perPage" in kwargs:
+            query_params["perPage"] = kwargs["perPage"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/devices/compositeState".format(**path_params)
+
+        return self.client.request("GET", path, params=query_params, headers=headers, body=body)
+
     def patch(self, **kwargs):
         """
         Update the fields of one or more devices

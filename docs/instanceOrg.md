@@ -11,6 +11,7 @@ parameters and the potential responses.
 *   [Get](#get)
 *   [Notebook Minute Counts](#notebook-minute-counts)
 *   [Patch](#patch)
+*   [Payload Counts Breakdown](#payload-counts-breakdown)
 
 <br/>
 
@@ -219,3 +220,48 @@ all.Instance, all.User, instanceOrg.*, or instanceOrg.patch.
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if organization was not found |
+
+<br/>
+
+## Payload Counts Breakdown
+
+Returns payload counts per resolution in the time range specified for all application this organization owns
+
+```python
+result = client.instance_org.payload_counts_breakdown(
+    instanceId=my_instance_id,
+    orgId=my_org_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.payloadCountsBreakdown.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| instanceId | string | Y | ID associated with the instance |  | 575ec8687ae143cd83dc4a97 |
+| orgId | string | Y | ID associated with the organization |  | 575ed6e87ae143cd83dc4aa8 |
+| start | string | N | Start of range for payload count query (ms since epoch) |  | 0 |
+| end | string | N | End of range for payload count query (ms since epoch) |  | 1465790400000 |
+| resolution | string | N | Resolution in milliseconds. Accepted values are: 86400000, 3600000 | 86400000 | 86400000 |
+| asBytes | string | N | If the resulting stats should be returned as bytes | false | true |
+| includeNonBillable | string | N | If non-billable payloads should be included in the result | false | true |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Payload Counts Breakdown](_schemas.md#payload-counts-breakdown) | Payload counts, by type and source |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if instance was not found |
