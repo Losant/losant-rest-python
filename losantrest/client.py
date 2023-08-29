@@ -48,6 +48,8 @@ from .applications import Applications
 from .audit_log import AuditLog
 from .audit_logs import AuditLogs
 from .auth import Auth
+from .credential import Credential
+from .credentials import Credentials
 from .dashboard import Dashboard
 from .dashboards import Dashboards
 from .data import Data
@@ -127,7 +129,7 @@ class Client(object):
 
     User API for accessing Losant data
 
-    Built For Version 1.25.0
+    Built For Version 1.26.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -150,6 +152,8 @@ class Client(object):
         self.audit_log = AuditLog(self)
         self.audit_logs = AuditLogs(self)
         self.auth = Auth(self)
+        self.credential = Credential(self)
+        self.credentials = Credentials(self)
         self.dashboard = Dashboard(self)
         self.dashboards = Dashboards(self)
         self.data = Data(self)
@@ -227,7 +231,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.25.0"
+        headers["Accept-Version"] = "^1.26.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
