@@ -16,11 +16,14 @@ parameters and the potential responses.
 *   [Fetch Recent Items](#fetch-recent-items)
 *   [Generate Two Factor Auth](#generate-two-factor-auth)
 *   [Get](#get)
+*   [Invite](#invite)
+*   [Invites](#invites)
 *   [Notebook Minute Counts](#notebook-minute-counts)
 *   [Patch](#patch)
 *   [Payload Counts](#payload-counts)
 *   [Payload Counts Breakdown](#payload-counts-breakdown)
 *   [Refresh Token](#refresh-token)
+*   [Respond to Invite](#respond-to-invite)
 *   [Transfer Resources](#transfer-resources)
 *   [Verify Email](#verify-email)
 
@@ -387,6 +390,78 @@ all.User, all.User.read, me.*, or me.get.
 
 <br/>
 
+## Invite
+
+Retrieves information for an invitation to an organization
+
+```python
+result = client.me.invite(inviteId=my_invite_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.User, me.*, or me.invite.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| inviteId | string | Y | ID associated with the invitation |  | 575ec8687ae143cd83dc4a97 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Organization Invitation Information For User](_schemas.md#organization-invitation-information-for-user) | Information about invitation |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if invite not found |
+
+<br/>
+
+## Invites
+
+Retrieves pending organization invitations for a user
+
+```python
+result = client.me.invites(**optional_params)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.User, me.*, or me.invites.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [User Organization Invitations](_schemas.md#user-organization-invitations) | Information about invitations |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+
+<br/>
+
 ## Notebook Minute Counts
 
 Returns notebook execution usage by day for the time range specified for all applications the current user owns
@@ -572,6 +647,47 @@ all.User, or me.*.
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 401 | [Error](_schemas.md#error) | Unauthorized error if authentication fails |
+
+<br/>
+
+## Respond to Invite
+
+Accepts or rejects an invitation to an organization
+
+```python
+result = client.me.respond_to_invite(
+    inviteId=my_invite_id,
+    response=my_response)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.User, me.*, or me.respondToInvite.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| inviteId | string | Y | ID associated with the invitation |  | 575ec8687ae143cd83dc4a97 |
+| response | [Organization Invitation Action For User](_schemas.md#organization-invitation-action-for-user) | Y | Response to invitation |  | [Organization Invitation Action For User Example](_schemas.md#organization-invitation-action-for-user-example) |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Organization Invitation Result For User](_schemas.md#organization-invitation-result-for-user) | Acceptance or rejection of invitation |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if invitation not found |
+| 410 | [Error](_schemas.md#error) | Error if invitation has expired |
 
 <br/>
 
