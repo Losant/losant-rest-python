@@ -176,7 +176,7 @@ all.User, all.User.read, me.*, or me.deviceCounts.
 
 ## Disable Two Factor Auth
 
-Disables two factor auth for the current user
+Disables multi-factor authentication for the current user
 
 ```python
 result = client.me.disable_two_factor_auth(data=my_data)
@@ -193,7 +193,7 @@ all.User, me.*, or me.disableTwoFactorAuth.
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
-| data | [Disable Two Factor Auth](_schemas.md#disable-two-factor-auth) | Y | Object containing two factor auth properties |  | [Disable Two Factor Auth Example](_schemas.md#disable-two-factor-auth-example) |
+| data | [Disable Multi-Factor Authentication](_schemas.md#disable-multi-factor-authentication) | Y | Object containing multi-factor authentication properties |  | [Disable Multi-Factor Authentication Example](_schemas.md#disable-multi-factor-authentication-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -247,7 +247,7 @@ all.User, me.*, or me.disconnectGithub.
 
 ## Enable Two Factor Auth
 
-Enables two factor auth for the current user
+Enables multi-factor authentication for the current user
 
 ```python
 result = client.me.enable_two_factor_auth(data=my_data)
@@ -264,7 +264,7 @@ all.User, me.*, or me.enableTwoFactorAuth.
 
 | Name | Type | Required | Description | Default | Example |
 | ---- | ---- | -------- | ----------- | ------- | ------- |
-| data | [Enable Two Factor Auth](_schemas.md#enable-two-factor-auth) | Y | Object containing two factor auth properties |  | [Enable Two Factor Auth Example](_schemas.md#enable-two-factor-auth-example) |
+| data | [Enable Multi-Factor Authentication](_schemas.md#enable-multi-factor-authentication) | Y | Object containing multi-factor authentication properties |  | [Enable Multi-Factor Authentication Example](_schemas.md#enable-multi-factor-authentication-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -320,7 +320,7 @@ all.User, all.User.read, me.*, or me.fetchRecentItems.
 
 ## Generate Two Factor Auth
 
-Returns the two factor auth key for a user
+Returns the multi-factor authentication key for the current user
 
 ```python
 result = client.me.generate_two_factor_auth(**optional_params)
@@ -343,7 +343,7 @@ all.User, me.*, or me.generateTwoFactorAuth.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Two Factor Auth Info](_schemas.md#two-factor-auth-info) | Updated user information |
+| 200 | [Multi-Factor Authentication Info](_schemas.md#multi-factor-authentication-info) | Multi-factor authentication info |
 
 #### Error Responses
 
