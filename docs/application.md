@@ -18,6 +18,7 @@ parameters and the potential responses.
 *   [Get](#get)
 *   [Globals](#globals)
 *   [Import](#import)
+*   [Import Logs](#import-logs)
 *   [Mqtt Publish Message](#mqtt-publish-message)
 *   [Notebook Minute Counts](#notebook-minute-counts)
 *   [Patch](#patch)
@@ -496,6 +497,45 @@ all.Application, all.Organization, all.User, application.*, or application.impor
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if application is not found |
+
+<br/>
+
+## Import Logs
+
+Retrieves information on application import logs
+
+```python
+result = client.application.import_logs(applicationId=my_application_id)
+
+print(result)
+```
+
+#### Authentication
+The client must be configured with a valid api access token to call this
+action. The token must include at least one of the following scopes:
+all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, application.*, or application.importLogs.
+
+#### Available Parameters
+
+| Name | Type | Required | Description | Default | Example |
+| ---- | ---- | -------- | ----------- | ------- | ------- |
+| applicationId | string | Y | ID of the associated application |  | 575ec8687ae143cd83dc4a97 |
+| limit | string | N | Max log entries to return (ordered by time descending) | 1 | 10 |
+| since | string | N | Look for log entries since this time (ms since epoch) |  | 1465790400000 |
+| losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
+
+#### Successful Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 200 | [Application Import Executions](_schemas.md#application-import-executions) | Application log objects |
+
+#### Error Responses
+
+| Code | Type | Description |
+| ---- | ---- | ----------- |
+| 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if application was not found |
 
 <br/>
 
