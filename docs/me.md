@@ -403,7 +403,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.invite.
+all.User, all.User.read, me.*, or me.invite.
 
 #### Available Parameters
 
@@ -440,7 +440,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.invites.
+all.User, all.User.read, me.*, or me.invites.
 
 #### Available Parameters
 
