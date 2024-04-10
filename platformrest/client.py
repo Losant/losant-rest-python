@@ -91,6 +91,8 @@ from .flows import Flows
 from .instance import Instance
 from .instance_api_token import InstanceApiToken
 from .instance_api_tokens import InstanceApiTokens
+from .instance_audit_log import InstanceAuditLog
+from .instance_audit_logs import InstanceAuditLogs
 from .instance_custom_node import InstanceCustomNode
 from .instance_custom_nodes import InstanceCustomNodes
 from .instance_member import InstanceMember
@@ -129,7 +131,7 @@ class Client(object):
 
     User API for accessing platform data
 
-    Built For Version 1.26.5
+    Built For Version 1.26.6
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -195,6 +197,8 @@ class Client(object):
         self.instance = Instance(self)
         self.instance_api_token = InstanceApiToken(self)
         self.instance_api_tokens = InstanceApiTokens(self)
+        self.instance_audit_log = InstanceAuditLog(self)
+        self.instance_audit_logs = InstanceAuditLogs(self)
         self.instance_custom_node = InstanceCustomNode(self)
         self.instance_custom_nodes = InstanceCustomNodes(self)
         self.instance_member = InstanceMember(self)
@@ -231,7 +235,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.26.5"
+        headers["Accept-Version"] = "^1.26.6"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
