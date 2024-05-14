@@ -54,6 +54,7 @@ class ExperienceUsers(object):
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} experienceGroupId - Filter users to those only in the specified group, special experienceGroupIds of 'any' which will give users who are in at least one group and 'none' will give you users who are not in any groups.
         *  {string} includeAncestorGroups - If set will include members from ancestors of the specified experienceGroupId
+        *  {hash} query - Experience user filter JSON object which overrides all other filter params. (https://api.losant.com/#/definitions/advancedExperienceUserQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -90,6 +91,8 @@ class ExperienceUsers(object):
             query_params["experienceGroupId"] = kwargs["experienceGroupId"]
         if "includeAncestorGroups" in kwargs:
             query_params["includeAncestorGroups"] = kwargs["includeAncestorGroups"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
