@@ -427,7 +427,6 @@ all.Application, all.Organization, all.User, devices.*, or devices.removeData.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Devices Data Removed](_schemas.md#devices-data-removed) | Object indicating number of devices completed or skipped |
 | 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If a job was enqueued for device data to be removed |
 
 #### Error Responses

@@ -565,7 +565,6 @@ class Devices(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - Object indicating number of devices completed or skipped (https://api.losant.com/#/definitions/devicesDataRemoved)
         *  202 - If a job was enqueued for device data to be removed (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:

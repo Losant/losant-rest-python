@@ -53,6 +53,7 @@ class InstanceOrgs(object):
         *  {string} filterField - Field to filter the results by. Blank or not provided means no filtering. Accepted values are: name
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} summaryInclude - Comma-separated list of summary fields to include in org summary
+        *  {hash} query - Organization filter JSON object which overrides all other filter params. (https://api.losant.com/#/definitions/advancedInstanceOrgQuery)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -86,6 +87,8 @@ class InstanceOrgs(object):
             query_params["filter"] = kwargs["filter"]
         if "summaryInclude" in kwargs:
             query_params["summaryInclude"] = kwargs["summaryInclude"]
+        if "query" in kwargs:
+            query_params["query"] = json.dumps(kwargs["query"])
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
