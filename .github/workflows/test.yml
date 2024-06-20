@@ -17,7 +17,15 @@ jobs:
           - os: 'ubuntu-latest'
             python: '3.6'
           - os: 'ubuntu-20.04'
-            python: [ '3.11', '3.10', '3.9', '3.8', '3.7' ]
+            python: '3.11'
+          - os: 'ubuntu-20.04'
+            python: '3.10'
+          - os: 'ubuntu-20.04'
+            python: '3.9'
+          - os: 'ubuntu-20.04'
+            python: '3.8'
+          - os: 'ubuntu-20.04'
+            python: '3.7'
     runs-on: ${{ matrix.os }}
     permissions:
       actions: write
@@ -31,6 +39,6 @@ jobs:
       with:
         python-version: ${{ matrix.python }}
     - name: Install deps
-      run: pip install --upgrade pip
+      run: pip install --upgrade --force-reinstall pip
     - name: Run tests
       run: python setup.py test
