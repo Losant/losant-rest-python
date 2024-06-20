@@ -11,8 +11,12 @@ jobs:
   test:
     strategy:
       matrix:
-        python: [ '3.11', '3.10', '3.9', '3.8', '3.7', '3.6.15' ]
-    runs-on: ubuntu-latest
+        os: [ 'ubuntu-latest', 'ubuntu-20.04' ]
+        python: [ '3.11', '3.10', '3.9', '3.8', '3.7', '3.6' ],
+        exclude:
+          - os: 'ubuntu-latest'
+            python: '3.6'
+    runs-on: ${{ matrix.os }}
     permissions:
       actions: write
       contents: read
