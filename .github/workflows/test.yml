@@ -16,6 +16,8 @@ jobs:
         exclude:
           - os: 'ubuntu-latest'
             python: '3.6'
+          - os: 'ubuntu-20.04'
+            python: [ '3.11', '3.10', '3.9', '3.8', '3.7' ]
     runs-on: ${{ matrix.os }}
     permissions:
       actions: write
@@ -28,5 +30,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python }}
+    - name: Install deps
+      run: pip install --upgrade pip
     - name: Run tests
       run: python setup.py test
