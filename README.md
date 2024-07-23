@@ -13,7 +13,7 @@ This client works with both Python 2.7 and 3. It uses [Requests](https://github.
 The latest stable version is available in the Python Package Index (PyPi) and can be installed using
 
 ```bash
-pip install platform-rest
+pip install losant-rest
 ```
 
 <br/>
@@ -23,7 +23,7 @@ pip install platform-rest
 Below is a high-level example of using the Losant Python REST API client to authenticate against the Losant Platform and report state for a device.
 
 ```python
-from losantrest import Client
+from platformrest import Client
 from analog import AnalogSensor
 
 client = Client()
