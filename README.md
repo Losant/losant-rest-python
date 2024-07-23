@@ -23,7 +23,7 @@ pip install losant-rest
 Below is a high-level example of using the Losant Python REST API client to authenticate against the Losant Platform and report state for a device.
 
 ```python
-from losantrest import Client
+from platformrest import Client
 from analog import AnalogSensor
 
 client = Client()
