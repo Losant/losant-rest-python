@@ -13,7 +13,7 @@ This client works with both Python 2.7 and 3. It uses [Requests](https://github.
 The latest stable version is available in the Python Package Index (PyPi) and can be installed using
 
 ```bash
-pip install losant-rest
+pip install platform-rest
 ```
 
 <br/>
