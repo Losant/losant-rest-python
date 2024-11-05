@@ -97,6 +97,8 @@ from .instance_custom_node import InstanceCustomNode
 from .instance_custom_nodes import InstanceCustomNodes
 from .instance_member import InstanceMember
 from .instance_members import InstanceMembers
+from .instance_notification_rule import InstanceNotificationRule
+from .instance_notification_rules import InstanceNotificationRules
 from .instance_org import InstanceOrg
 from .instance_org_invite import InstanceOrgInvite
 from .instance_org_invites import InstanceOrgInvites
@@ -131,7 +133,7 @@ class Client(object):
 
     User API for accessing platform data
 
-    Built For Version 1.26.11
+    Built For Version 1.27.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -203,6 +205,8 @@ class Client(object):
         self.instance_custom_nodes = InstanceCustomNodes(self)
         self.instance_member = InstanceMember(self)
         self.instance_members = InstanceMembers(self)
+        self.instance_notification_rule = InstanceNotificationRule(self)
+        self.instance_notification_rules = InstanceNotificationRules(self)
         self.instance_org = InstanceOrg(self)
         self.instance_org_invite = InstanceOrgInvite(self)
         self.instance_org_invites = InstanceOrgInvites(self)
@@ -235,7 +239,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.26.11"
+        headers["Accept-Version"] = "^1.27.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

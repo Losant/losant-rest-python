@@ -1,4 +1,4 @@
-from losantrest import Client
+from platformrest import Client
 
 client = Client('my_token')
 result = client.devices.get(applicationId='myAppId')
