@@ -402,6 +402,7 @@ class Org(object):
         *  {string} orgId - ID associated with the organization
         *  {string} start - Start of range for payload count query (ms since epoch)
         *  {string} end - End of range for payload count query (ms since epoch)
+        *  {string} asBytes - If the resulting stats should be returned as bytes
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -426,6 +427,8 @@ class Org(object):
             query_params["start"] = kwargs["start"]
         if "end" in kwargs:
             query_params["end"] = kwargs["end"]
+        if "asBytes" in kwargs:
+            query_params["asBytes"] = kwargs["asBytes"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

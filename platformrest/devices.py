@@ -100,7 +100,7 @@ class Devices(object):
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} options - Object containing device query and email (https://api.losant.com/#/definitions/devicesDeletePost)
+        *  {hash} options - Object containing device deletion options (https://api.losant.com/#/definitions/devicesDeleteOrRestorePost)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -254,7 +254,7 @@ class Devices(object):
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated, connectionStatus
+        *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated, connectionStatus, deletedAt
         *  {string} sortDirection - Direction to sort the results by. Accepted values are: asc, desc
         *  {string} page - Which page of results to return
         *  {string} perPage - How many items to return per page
@@ -267,6 +267,7 @@ class Devices(object):
         *  {hash} query - Device filter JSON object which overrides the filterField, filter, deviceClass, tagFilter, and parentId parameters. (https://api.losant.com/#/definitions/advancedDeviceQuery)
         *  {string} tagsAsObject - Return tags as an object map instead of an array
         *  {string} attributesAsObject - Return attributes as an object map instead of an array
+        *  {string} queryDeleted - If true, endpoint will return recently deleted devices instead
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -313,6 +314,8 @@ class Devices(object):
             query_params["tagsAsObject"] = kwargs["tagsAsObject"]
         if "attributesAsObject" in kwargs:
             query_params["attributesAsObject"] = kwargs["attributesAsObject"]
+        if "queryDeleted" in kwargs:
+            query_params["queryDeleted"] = kwargs["queryDeleted"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -591,6 +594,55 @@ class Devices(object):
             query_params["_embedded"] = kwargs["_embedded"]
 
         path = "/applications/{applicationId}/devices/removeData".format(**path_params)
+
+        return self.client.request("POST", path, params=query_params, headers=headers, body=body)
+
+    def restore(self, **kwargs):
+        """
+        Restore deleted devices
+
+        Authentication:
+        The client must be configured with a valid api
+        access token to call this action. The token
+        must include at least one of the following scopes:
+        all.Application, all.Organization, all.User, devices.*, or devices.restore.
+
+        Parameters:
+        *  {string} applicationId - ID associated with the application
+        *  {hash} options - Object containing device restoration options (https://api.losant.com/#/definitions/devicesDeleteOrRestorePost)
+        *  {string} losantdomain - Domain scope of request (rarely needed)
+        *  {boolean} _actions - Return resource actions in response
+        *  {boolean} _links - Return resource link in response
+        *  {boolean} _embedded - Return embedded resources in response
+
+        Responses:
+        *  200 - Object indicating number of devices restored or failed (https://api.losant.com/#/definitions/bulkRestoreResponse)
+        *  202 - If a job was enqueued for the devices to be restored (https://api.losant.com/#/definitions/jobEnqueuedResult)
+
+        Errors:
+        *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if application was not found (https://api.losant.com/#/definitions/error)
+        """
+
+        query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}
+        path_params = {}
+        headers = {}
+        body = None
+
+        if "applicationId" in kwargs:
+            path_params["applicationId"] = kwargs["applicationId"]
+        if "options" in kwargs:
+            body = kwargs["options"]
+        if "losantdomain" in kwargs:
+            headers["losantdomain"] = kwargs["losantdomain"]
+        if "_actions" in kwargs:
+            query_params["_actions"] = kwargs["_actions"]
+        if "_links" in kwargs:
+            query_params["_links"] = kwargs["_links"]
+        if "_embedded" in kwargs:
+            query_params["_embedded"] = kwargs["_embedded"]
+
+        path = "/applications/{applicationId}/devices/restore".format(**path_params)
 
         return self.client.request("POST", path, params=query_params, headers=headers, body=body)
 
