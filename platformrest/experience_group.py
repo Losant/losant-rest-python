@@ -96,7 +96,7 @@ class ExperienceGroup(object):
         *  {string} applicationId - ID associated with the application
         *  {string} experienceGroupId - ID associated with the experience group
         *  {string} includeDirectDeviceCount - Whether or not to return count of devices associated directly with this group
-        *  {string} includeTotalDeviceCount - Whether or not to return count of devices associated with this group or any of its descendents
+        *  {string} includeTotalDeviceCount - Whether or not to return count of devices associated with this group or any of its descendants
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
