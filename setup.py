@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='losant-rest',
-    version='1.21.3',
+    version='1.22.0',
     description='A REST client for the Losant API',
     long_description_content_type='text/markdown',
     long_description=long_description,

@@ -58,6 +58,8 @@ from .data_table_row import DataTableRow
 from .data_table_rows import DataTableRows
 from .data_tables import DataTables
 from .device import Device
+from .device_attribute import DeviceAttribute
+from .device_attributes import DeviceAttributes
 from .device_recipe import DeviceRecipe
 from .device_recipes import DeviceRecipes
 from .devices import Devices
@@ -133,7 +135,7 @@ class Client(object):
 
     User API for accessing platform data
 
-    Built For Version 1.27.3
+    Built For Version 1.28.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -166,6 +168,8 @@ class Client(object):
         self.data_table_rows = DataTableRows(self)
         self.data_tables = DataTables(self)
         self.device = Device(self)
+        self.device_attribute = DeviceAttribute(self)
+        self.device_attributes = DeviceAttributes(self)
         self.device_recipe = DeviceRecipe(self)
         self.device_recipes = DeviceRecipes(self)
         self.devices = Devices(self)
@@ -239,7 +243,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.27.3"
+        headers["Accept-Version"] = "^1.28.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
