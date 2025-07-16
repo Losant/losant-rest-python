@@ -3,7 +3,7 @@ import unittest
 import requests_mock
 import json
 import sys
-from losant_rest import Client, PlatformError
+from losant_rest import Client, LosantError
 
 if sys.version_info[0] == 3:
     from urllib.parse import urlparse, parse_qs
@@ -56,7 +56,7 @@ class TestClient(unittest.TestCase):
         mock.post("https://api.losant.com/auth/user", json=expected_body, status_code=401)
         creds = {"email": "example@losant.com", "password": "qwerqwer"}
 
-        with self.assertRaises(PlatformError) as cm:
+        with self.assertRaises(LosantError) as cm:
             Client().auth.authenticate_user(credentials=creds)
 
         the_exception = cm.exception

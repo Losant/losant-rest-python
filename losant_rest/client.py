@@ -126,7 +126,7 @@ from .user_api_token import UserApiToken
 from .user_api_tokens import UserApiTokens
 from .webhook import Webhook
 from .webhooks import Webhooks
-from .platform_error import PlatformError
+from .losant_error import LosantError
 
 if sys.version_info[0] == 3:
     basestring = str
@@ -262,7 +262,7 @@ class Client(object):
             pass
 
         if response.status_code >= 400:
-            raise PlatformError(response.status_code, result)
+            raise LosantError(response.status_code, result)
 
         return result
 
