@@ -27,4 +27,4 @@ jobs:
     - name: Install deps
       run: pip install --upgrade --force-reinstall pip
     - name: Run tests
-      run: python setup.py test
+      run: tox
