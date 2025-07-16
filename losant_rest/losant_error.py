@@ -1,3 +1,4 @@
+"""
 The MIT License (MIT)
 
 Copyright (c) 2025 Losant IoT, Inc.
@@ -19,3 +20,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+"""
+
+""" Module containing the LosantError class """
+
+class LosantError(Exception):
+    """ Exception class for any Platform API errors """
+
+    def __init__(self, status, data):
+        Exception.__init__(self)
+        self.status = status
+        self.data = data
+        self.args = [status, data]
+
+    def __str__(self):
+        return str(self.status) + " " + str(self.data)
