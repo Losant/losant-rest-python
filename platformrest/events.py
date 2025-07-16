@@ -47,6 +47,8 @@ class Events(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {hash} query - Query to apply to filter the events (https://api.losant.com/#/definitions/advancedEventQuery)
+        *  {string} email - Email address to send job complete notification to. Defaults to current user's email.
+        *  {string} callbackUrl - Callback URL to call with delete result
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -54,6 +56,7 @@ class Events(object):
 
         Responses:
         *  200 - If request successfully deletes a set of Events (https://api.losant.com/#/definitions/eventsDeleted)
+        *  202 - If a bulk delete job has been enqueued (https://api.losant.com/#/definitions/jobEnqueuedResult)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -69,6 +72,10 @@ class Events(object):
             path_params["applicationId"] = kwargs["applicationId"]
         if "query" in kwargs:
             body = kwargs["query"]
+        if "email" in kwargs:
+            query_params["email"] = kwargs["email"]
+        if "callbackUrl" in kwargs:
+            query_params["callbackUrl"] = kwargs["callbackUrl"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:

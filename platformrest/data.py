@@ -46,7 +46,7 @@ class Data(object):
 
         Parameters:
         *  {string} applicationId - ID associated with the application
-        *  {hash} query - The query parameters (https://api.losant.com/#/definitions/dataExport)
+        *  {hash} query - The query parameters (https://api.losant.com/#/definitions/devicesDataExport)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response

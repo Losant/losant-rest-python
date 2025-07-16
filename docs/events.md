@@ -36,6 +36,8 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | query | [Advanced Event Query](_schemas.md#advanced-event-query) | N | Query to apply to filter the events |  | [Advanced Event Query Example](_schemas.md#advanced-event-query-example) |
+| email | string | N | Email address to send job complete notification to. Defaults to current user&#x27;s email. |  | email@example.com |
+| callbackUrl | string | N | Callback URL to call with delete result |  | https://example.com/cburl |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -43,6 +45,7 @@ all.Application, all.Application.read, all.Organization, all.Organization.read, 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 200 | [Events Deleted](_schemas.md#events-deleted) | If request successfully deletes a set of Events |
+| 202 | [Job Enqueued API Result](_schemas.md#job-enqueued-api-result) | If a bulk delete job has been enqueued |
 
 #### Error Responses
 

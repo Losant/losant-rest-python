@@ -40,6 +40,8 @@ from .application_certificate_authority import ApplicationCertificateAuthority
 from .application_certificates import ApplicationCertificates
 from .application_dashboard import ApplicationDashboard
 from .application_dashboards import ApplicationDashboards
+from .application_job_log import ApplicationJobLog
+from .application_job_logs import ApplicationJobLogs
 from .application_key import ApplicationKey
 from .application_keys import ApplicationKeys
 from .application_template import ApplicationTemplate
@@ -150,6 +152,8 @@ class Client(object):
         self.application_certificates = ApplicationCertificates(self)
         self.application_dashboard = ApplicationDashboard(self)
         self.application_dashboards = ApplicationDashboards(self)
+        self.application_job_log = ApplicationJobLog(self)
+        self.application_job_logs = ApplicationJobLogs(self)
         self.application_key = ApplicationKey(self)
         self.application_keys = ApplicationKeys(self)
         self.application_template = ApplicationTemplate(self)
