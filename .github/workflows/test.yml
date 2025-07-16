@@ -26,5 +26,7 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install deps
       run: pip install --upgrade --force-reinstall pip
+    - name: Install tox
+      run: pip install tox
     - name: Run tests
       run: python -m tox
