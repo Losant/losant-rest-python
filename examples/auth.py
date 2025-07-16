@@ -1,4 +1,4 @@
-from platformrest import Client
+from losant_rest import Client
 client = Client()
 
 
