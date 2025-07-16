@@ -24,9 +24,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python }}
-    - name: Install deps
+    - name: Reinstall Pip
       run: pip install --upgrade --force-reinstall pip
-    - name: Install tox
-      run: pip install tox
+    - name: Install Test Deps
+      run: pip install ".[test]"
     - name: Run tests
       run: python -m tox

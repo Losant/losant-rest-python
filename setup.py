@@ -35,5 +35,8 @@ setup(
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
     keywords=['REST', 'Losant', 'IoT'],
-    install_requires=['requests>=2.13']
+    install_requires=['requests>=2.13'],
+    extras_require={
+        'test': ['tox']
+    }
 )
