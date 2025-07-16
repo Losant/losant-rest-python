@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API InstanceMember wrapper class """
+""" Module for Losant API InstanceMember wrapper class """
 # pylint: disable=C0301
 
 class InstanceMember(object):

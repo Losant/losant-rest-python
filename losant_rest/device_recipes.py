@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API DeviceRecipes wrapper class """
+""" Module for Losant API DeviceRecipes wrapper class """
 # pylint: disable=C0301
 
 class DeviceRecipes(object):

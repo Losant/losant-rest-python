@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API ResourceJob wrapper class """
+""" Module for Losant API ResourceJob wrapper class """
 # pylint: disable=C0301
 
 class ResourceJob(object):

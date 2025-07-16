@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API DataTableRows wrapper class """
+""" Module for Losant API DataTableRows wrapper class """
 # pylint: disable=C0301
 
 class DataTableRows(object):

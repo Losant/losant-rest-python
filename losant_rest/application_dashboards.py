@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API ApplicationDashboards wrapper class """
+""" Module for Losant API ApplicationDashboards wrapper class """
 # pylint: disable=C0301
 
 class ApplicationDashboards(object):

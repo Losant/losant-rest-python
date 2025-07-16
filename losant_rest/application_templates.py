@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API ApplicationTemplates wrapper class """
+""" Module for Losant API ApplicationTemplates wrapper class """
 # pylint: disable=C0301
 
 class ApplicationTemplates(object):

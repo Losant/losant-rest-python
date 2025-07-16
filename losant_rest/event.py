@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Event wrapper class """
+""" Module for Losant API Event wrapper class """
 # pylint: disable=C0301
 
 class Event(object):

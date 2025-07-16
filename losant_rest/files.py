@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Files wrapper class """
+""" Module for Losant API Files wrapper class """
 # pylint: disable=C0301
 
 class Files(object):

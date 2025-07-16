@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API DeviceAttribute wrapper class """
+""" Module for Losant API DeviceAttribute wrapper class """
 # pylint: disable=C0301
 
 class DeviceAttribute(object):

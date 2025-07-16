@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API InstanceApiToken wrapper class """
+""" Module for Losant API InstanceApiToken wrapper class """
 # pylint: disable=C0301
 
 class InstanceApiToken(object):

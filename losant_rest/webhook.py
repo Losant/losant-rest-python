@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Webhook wrapper class """
+""" Module for Losant API Webhook wrapper class """
 # pylint: disable=C0301
 
 class Webhook(object):

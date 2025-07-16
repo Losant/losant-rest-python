@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API InstanceAuditLogs wrapper class """
+""" Module for Losant API InstanceAuditLogs wrapper class """
 # pylint: disable=C0301
 
 class InstanceAuditLogs(object):

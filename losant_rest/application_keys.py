@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API ApplicationKeys wrapper class """
+""" Module for Losant API ApplicationKeys wrapper class """
 # pylint: disable=C0301
 
 class ApplicationKeys(object):

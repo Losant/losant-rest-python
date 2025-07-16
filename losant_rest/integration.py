@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Integration wrapper class """
+""" Module for Losant API Integration wrapper class """
 # pylint: disable=C0301
 
 class Integration(object):

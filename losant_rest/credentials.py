@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Credentials wrapper class """
+""" Module for Losant API Credentials wrapper class """
 # pylint: disable=C0301
 
 class Credentials(object):

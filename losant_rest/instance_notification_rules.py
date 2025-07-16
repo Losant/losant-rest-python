@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API InstanceNotificationRules wrapper class """
+""" Module for Losant API InstanceNotificationRules wrapper class """
 # pylint: disable=C0301
 
 class InstanceNotificationRules(object):

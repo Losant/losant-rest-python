@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Org wrapper class """
+""" Module for Losant API Org wrapper class """
 # pylint: disable=C0301
 
 class Org(object):

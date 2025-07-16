@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API FlowVersion wrapper class """
+""" Module for Losant API FlowVersion wrapper class """
 # pylint: disable=C0301
 
 class FlowVersion(object):

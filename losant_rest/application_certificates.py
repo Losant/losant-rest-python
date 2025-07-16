@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API ApplicationCertificates wrapper class """
+""" Module for Losant API ApplicationCertificates wrapper class """
 # pylint: disable=C0301
 
 class ApplicationCertificates(object):

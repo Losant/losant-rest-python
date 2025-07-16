@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-""" Module for Platform API Client class """
+""" Module for Losant Client class """
 # pylint: disable=E0401
 
 import requests

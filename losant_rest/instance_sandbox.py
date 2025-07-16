@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API InstanceSandbox wrapper class """
+""" Module for Losant API InstanceSandbox wrapper class """
 # pylint: disable=C0301
 
 class InstanceSandbox(object):

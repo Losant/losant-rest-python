@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API Experience wrapper class """
+""" Module for Losant API Experience wrapper class """
 # pylint: disable=C0301
 
 class Experience(object):

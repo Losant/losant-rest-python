@@ -25,7 +25,7 @@ SOFTWARE.
 
 import json
 
-""" Module for Platform API EmbeddedDeployments wrapper class """
+""" Module for Losant API EmbeddedDeployments wrapper class """
 # pylint: disable=C0301
 
 class EmbeddedDeployments(object):
