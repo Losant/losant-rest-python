@@ -3,7 +3,7 @@ import unittest
 import requests_mock
 import json
 import sys
-from platformrest import Client, PlatformError
+from losant_rest import Client, PlatformError
 
 if sys.version_info[0] == 3:
     from urllib.parse import urlparse, parse_qs
