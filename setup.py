@@ -9,8 +9,8 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='losant-rest',
-    version='2.0.0',
+    name='losant_rest',
+    version='2.0.1',
     description='A REST client for the Losant API',
     long_description_content_type='text/markdown',
     long_description=long_description,
