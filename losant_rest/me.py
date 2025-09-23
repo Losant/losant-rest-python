@@ -225,6 +225,9 @@ class Me(object):
 
         Parameters:
         *  {hash} data - Object containing multi-factor authentication properties (https://api.losant.com/#/definitions/multiFactorAuthDisable)
+        *  {string} includeRecent - Should the user include recent app/dashboard info
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from user summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in user summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -244,6 +247,12 @@ class Me(object):
 
         if "data" in kwargs:
             body = kwargs["data"]
+        if "includeRecent" in kwargs:
+            query_params["includeRecent"] = kwargs["includeRecent"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -268,6 +277,9 @@ class Me(object):
         all.User, me.*, or me.disconnectGithub.
 
         Parameters:
+        *  {string} includeRecent - Should the user include recent app/dashboard info
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from user summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in user summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -285,6 +297,12 @@ class Me(object):
         headers = {}
         body = None
 
+        if "includeRecent" in kwargs:
+            query_params["includeRecent"] = kwargs["includeRecent"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -310,6 +328,9 @@ class Me(object):
 
         Parameters:
         *  {hash} data - Object containing multi-factor authentication properties (https://api.losant.com/#/definitions/multiFactorAuthEnable)
+        *  {string} includeRecent - Should the user include recent app/dashboard info
+        *  {string} summaryExclude - Comma-separated list of summary fields to exclude from user summary
+        *  {string} summaryInclude - Comma-separated list of summary fields to include in user summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -329,6 +350,12 @@ class Me(object):
 
         if "data" in kwargs:
             body = kwargs["data"]
+        if "includeRecent" in kwargs:
+            query_params["includeRecent"] = kwargs["includeRecent"]
+        if "summaryExclude" in kwargs:
+            query_params["summaryExclude"] = kwargs["summaryExclude"]
+        if "summaryInclude" in kwargs:
+            query_params["summaryInclude"] = kwargs["summaryInclude"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
@@ -441,7 +468,7 @@ class Me(object):
         all.User, all.User.read, me.*, or me.get.
 
         Parameters:
-        *  {undefined} includeRecent - Should the user include recent app/dashboard info
+        *  {string} includeRecent - Should the user include recent app/dashboard info
         *  {string} summaryExclude - Comma-separated list of summary fields to exclude from user summary
         *  {string} summaryInclude - Comma-separated list of summary fields to include in user summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -624,6 +651,7 @@ class Me(object):
 
         Parameters:
         *  {hash} user - Object containing new user properties (https://api.losant.com/#/definitions/mePatch)
+        *  {string} includeRecent - Should the user include recent app/dashboard info
         *  {string} summaryExclude - Comma-separated list of summary fields to exclude from user summary
         *  {string} summaryInclude - Comma-separated list of summary fields to include in user summary
         *  {string} losantdomain - Domain scope of request (rarely needed)
@@ -645,6 +673,8 @@ class Me(object):
 
         if "user" in kwargs:
             body = kwargs["user"]
+        if "includeRecent" in kwargs:
+            query_params["includeRecent"] = kwargs["includeRecent"]
         if "summaryExclude" in kwargs:
             query_params["summaryExclude"] = kwargs["summaryExclude"]
         if "summaryInclude" in kwargs:
