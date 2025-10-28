@@ -120,6 +120,8 @@ from .notebooks import Notebooks
 from .org import Org
 from .org_invites import OrgInvites
 from .orgs import Orgs
+from .private_file import PrivateFile
+from .private_files import PrivateFiles
 from .resource_job import ResourceJob
 from .resource_jobs import ResourceJobs
 from .user_api_token import UserApiToken
@@ -137,7 +139,7 @@ class Client(object):
 
     User API for accessing platform data
 
-    Built For Version 1.28.4
+    Built For Version 1.29.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -232,6 +234,8 @@ class Client(object):
         self.org = Org(self)
         self.org_invites = OrgInvites(self)
         self.orgs = Orgs(self)
+        self.private_file = PrivateFile(self)
+        self.private_files = PrivateFiles(self)
         self.resource_job = ResourceJob(self)
         self.resource_jobs = ResourceJobs(self)
         self.user_api_token = UserApiToken(self)
@@ -247,7 +251,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.28.4"
+        headers["Accept-Version"] = "^1.29.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

@@ -125,7 +125,7 @@ class Files(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully created file and returned a post url to respond with (https://api.losant.com/#/definitions/fileUploadPostResponse)
+        *  201 - Successfully created file and the information needed to upload the file content (https://api.losant.com/#/definitions/fileUploadPostResponse)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
