@@ -139,7 +139,7 @@ class Client(object):
 
     User API for accessing platform data
 
-    Built For Version 1.29.1
+    Built For Version 1.29.2
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -251,7 +251,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.29.1"
+        headers["Accept-Version"] = "^1.29.2"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 
