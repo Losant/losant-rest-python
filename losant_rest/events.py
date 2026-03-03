@@ -1,7 +1,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2025 Losant IoT, Inc.
+Copyright (c) 2026 SUSE
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -272,7 +272,9 @@ class Events(object):
         *  {string} filter - Filter to apply against the filtered field. Supports globbing. Blank or not provided means no filtering.
         *  {string} state - If provided, act on events only in the given state. Accepted values are: new, acknowledged, resolved
         *  {hash} query - Event filter JSON object which overrides the filterField, filter, and state parameters. (https://api.losant.com/#/definitions/advancedEventQuery)
-        *  {hash} updates - Object containing updated information for the events (https://api.losant.com/#/definitions/eventPatch)
+        *  {string} email - Email address to send a notification with update job results. Defaults to current user's email.
+        *  {string} callbackUrl - Callback URL to call with update results from a job.
+        *  {hash} updates - Object containing updated information for the events. (https://api.losant.com/#/definitions/eventPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -302,6 +304,10 @@ class Events(object):
             query_params["state"] = kwargs["state"]
         if "query" in kwargs:
             query_params["query"] = json.dumps(kwargs["query"])
+        if "email" in kwargs:
+            query_params["email"] = kwargs["email"]
+        if "callbackUrl" in kwargs:
+            query_params["callbackUrl"] = kwargs["callbackUrl"]
         if "updates" in kwargs:
             body = kwargs["updates"]
         if "losantdomain" in kwargs:
