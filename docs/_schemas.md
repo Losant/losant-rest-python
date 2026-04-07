@@ -1752,6 +1752,9 @@ Schema for advanced application key queries
         {
           "oneOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "object",
               "properties": {
                 "$tagKey": {
@@ -1906,6 +1909,9 @@ Schema for advanced application key queries
           "properties": {
             "$eq": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -2067,6 +2073,9 @@ Schema for advanced application key queries
           "properties": {
             "$ne": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -4359,6 +4368,9 @@ Schema for advanced device queries
         {
           "oneOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "object",
               "properties": {
                 "$tagKey": {
@@ -4513,6 +4525,9 @@ Schema for advanced device queries
           "properties": {
             "$eq": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -4674,6 +4689,9 @@ Schema for advanced device queries
           "properties": {
             "$ne": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -6338,6 +6356,9 @@ Schema for advanced event queries
         {
           "oneOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "object",
               "properties": {
                 "$tagKey": {
@@ -6492,6 +6513,9 @@ Schema for advanced event queries
           "properties": {
             "$eq": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -6653,6 +6677,9 @@ Schema for advanced event queries
           "properties": {
             "$ne": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -7495,6 +7522,9 @@ Schema for advanced experience group queries
         {
           "oneOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "object",
               "properties": {
                 "$tagKey": {
@@ -7649,6 +7679,9 @@ Schema for advanced experience group queries
           "properties": {
             "$eq": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -7810,6 +7843,9 @@ Schema for advanced experience group queries
           "properties": {
             "$ne": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -9056,6 +9092,9 @@ Schema for advanced experience user queries
         {
           "oneOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "object",
               "properties": {
                 "$tagKey": {
@@ -9210,6 +9249,9 @@ Schema for advanced experience user queries
           "properties": {
             "$eq": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -9371,6 +9413,9 @@ Schema for advanced experience user queries
           "properties": {
             "$ne": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -13577,6 +13622,9 @@ Schema for advanced instance organization queries
         {
           "oneOf": [
             {
+              "type": "null"
+            },
+            {
               "type": "object",
               "properties": {
                 "$tagKey": {
@@ -13731,6 +13779,9 @@ Schema for advanced instance organization queries
           "properties": {
             "$eq": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -13892,6 +13943,9 @@ Schema for advanced instance organization queries
           "properties": {
             "$ne": {
               "oneOf": [
+                {
+                  "type": "null"
+                },
                 {
                   "type": "object",
                   "properties": {
@@ -14689,7 +14743,6 @@ Schema for the body of an API Token creation request
                   "devices.delete",
                   "devices.restore",
                   "devices.removeData",
-                  "devices.detailedSummary",
                   "devices.deviceNames",
                   "devices.export",
                   "devices.get",
@@ -16030,6 +16083,11 @@ Schema for a single Application Certificate
         }
       }
     },
+    "certificate": {
+      "type": "string",
+      "maxLength": 32767,
+      "minLength": 50
+    },
     "filterType": {
       "oneOf": [
         {
@@ -16774,6 +16832,11 @@ Schema for a collection of Application Certificates
                 "format": "date-time"
               }
             }
+          },
+          "certificate": {
+            "type": "string",
+            "maxLength": 32767,
+            "minLength": 50
           },
           "filterType": {
             "oneOf": [
@@ -29170,7 +29233,8 @@ Schema for a single Credential
         "mailgun",
         "snowflake",
         "git",
-        "datadog"
+        "datadog",
+        "certificateKeyPair"
       ]
     },
     "awsConfig": {
@@ -29442,6 +29506,47 @@ Schema for a single Credential
           "type": "string",
           "minLength": 1,
           "maxLength": 128
+        }
+      },
+      "additionalProperties": false
+    },
+    "certificateKeyPairConfig": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "info": {
+          "type": "object",
+          "properties": {
+            "serialNumber": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "fingerprint": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "commonName": {
+              "type": "string",
+              "maxLength": 1024
+            },
+            "issuerName": {
+              "type": "string",
+              "maxLength": 1024
+            },
+            "notValidBefore": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "notValidAfter": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
         }
       },
       "additionalProperties": false
@@ -39323,6 +39428,20 @@ Schema for a Credential update request
         }
       },
       "additionalProperties": false
+    },
+    "certificateKeyPairConfig": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "privateKey": {
+          "type": "string",
+          "maxLength": 8196
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -39382,7 +39501,8 @@ Schema for a Credential creation request
         "mailgun",
         "snowflake",
         "git",
-        "datadog"
+        "datadog",
+        "certificateKeyPair"
       ]
     },
     "awsConfig": {
@@ -39776,6 +39896,24 @@ Schema for a Credential creation request
       "required": [
         "secretValue"
       ]
+    },
+    "certificateKeyPairConfig": {
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "type": "string",
+          "maxLength": 8192
+        },
+        "privateKey": {
+          "type": "string",
+          "maxLength": 8196
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "certificate",
+        "privateKey"
+      ]
     }
   },
   "additionalProperties": false,
@@ -39888,7 +40026,8 @@ Schema for a collection of Credentials
               "mailgun",
               "snowflake",
               "git",
-              "datadog"
+              "datadog",
+              "certificateKeyPair"
             ]
           },
           "awsConfig": {
@@ -40160,6 +40299,47 @@ Schema for a collection of Credentials
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 128
+              }
+            },
+            "additionalProperties": false
+          },
+          "certificateKeyPairConfig": {
+            "type": "object",
+            "properties": {
+              "certificate": {
+                "type": "string",
+                "maxLength": 8192
+              },
+              "info": {
+                "type": "object",
+                "properties": {
+                  "serialNumber": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "fingerprint": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024
+                  },
+                  "commonName": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "issuerName": {
+                    "type": "string",
+                    "maxLength": 1024
+                  },
+                  "notValidBefore": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "notValidAfter": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
               }
             },
             "additionalProperties": false
@@ -73961,6 +74141,9 @@ Schema for exporting the data for multiple devices
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -74115,6 +74298,9 @@ Schema for exporting the data for multiple devices
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -74276,6 +74462,9 @@ Schema for exporting the data for multiple devices
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -76102,6 +76291,9 @@ Schema for the body of a bulk device deletion or restoration request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -76256,6 +76448,9 @@ Schema for the body of a bulk device deletion or restoration request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -76417,6 +76612,9 @@ Schema for the body of a bulk device deletion or restoration request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -78218,6 +78416,9 @@ Schema for the body of a device payload count export request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -78372,6 +78573,9 @@ Schema for the body of a device payload count export request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -78533,6 +78737,9 @@ Schema for the body of a device payload count export request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -80328,6 +80535,9 @@ Schema for the body of a device metadata export request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -80482,6 +80692,9 @@ Schema for the body of a device metadata export request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -80643,6 +80856,9 @@ Schema for the body of a device metadata export request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -82685,6 +82901,9 @@ Schema for the body of a Devices modification request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -82839,6 +83058,9 @@ Schema for the body of a Devices modification request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -83000,6 +83222,9 @@ Schema for the body of a Devices modification request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -85603,6 +85828,9 @@ Schema for the body of a bulk data removal request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -85757,6 +85985,9 @@ Schema for the body of a bulk data removal request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -85918,6 +86149,9 @@ Schema for the body of a bulk data removal request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -90283,6 +90517,9 @@ Export options for events
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -90437,6 +90674,9 @@ Export options for events
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -90598,6 +90838,9 @@ Export options for events
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -148750,7 +148993,6 @@ Schema for the body of a Github login request
                   "devices.delete",
                   "devices.restore",
                   "devices.removeData",
-                  "devices.detailedSummary",
                   "devices.deviceNames",
                   "devices.export",
                   "devices.get",
@@ -162086,6 +162328,9 @@ Schema for the body of a last value query request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -162240,6 +162485,9 @@ Schema for the body of a last value query request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -162401,6 +162649,9 @@ Schema for the body of a last value query request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -164999,6 +165250,9 @@ Schema for the body of a request to send a command to multiple Devices
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -165153,6 +165407,9 @@ Schema for the body of a request to send a command to multiple Devices
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -165314,6 +165571,9 @@ Schema for the body of a request to send a command to multiple Devices
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -175663,7 +175923,6 @@ SAML Response body for login
                   "devices.delete",
                   "devices.restore",
                   "devices.removeData",
-                  "devices.detailedSummary",
                   "devices.deviceNames",
                   "devices.export",
                   "devices.get",
@@ -178063,6 +178322,9 @@ Schema for the body of a time series query request
             {
               "oneOf": [
                 {
+                  "type": "null"
+                },
+                {
                   "type": "object",
                   "properties": {
                     "$tagKey": {
@@ -178217,6 +178479,9 @@ Schema for the body of a time series query request
               "properties": {
                 "$eq": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -178378,6 +178643,9 @@ Schema for the body of a time series query request
               "properties": {
                 "$ne": {
                   "oneOf": [
+                    {
+                      "type": "null"
+                    },
                     {
                       "type": "object",
                       "properties": {
@@ -179090,7 +179358,6 @@ Schema for the body of a User authentication request
                   "devices.delete",
                   "devices.restore",
                   "devices.removeData",
-                  "devices.detailedSummary",
                   "devices.deviceNames",
                   "devices.export",
                   "devices.get",
@@ -179711,7 +179978,6 @@ Schema for the body of a User creation request
                   "devices.delete",
                   "devices.restore",
                   "devices.removeData",
-                  "devices.detailedSummary",
                   "devices.deviceNames",
                   "devices.export",
                   "devices.get",
