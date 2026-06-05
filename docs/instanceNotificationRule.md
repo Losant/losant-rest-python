@@ -29,7 +29,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceNotificationRule.*, or instanceNotificationRule.delete.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceNotificationRule.*, or instanceNotificationRule.delete.
 
 #### Available Parameters
 
@@ -70,7 +70,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceNotificationRule.*, or instanceNotificationRule.evaluate.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceNotificationRule.*, or instanceNotificationRule.evaluate.
 
 #### Available Parameters
 
@@ -111,7 +111,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceNotificationRule.*, or instanceNotificationRule.get.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceNotificationRule.*, or instanceNotificationRule.get.
 
 #### Available Parameters
 
@@ -151,7 +151,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceNotificationRule.*, or instanceNotificationRule.logs.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceNotificationRule.*, or instanceNotificationRule.logs.
 
 #### Available Parameters
 
@@ -194,7 +194,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceNotificationRule.*, or instanceNotificationRule.patch.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceNotificationRule.*, or instanceNotificationRule.patch.
 
 #### Available Parameters
 

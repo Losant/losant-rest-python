@@ -42,7 +42,7 @@ class Instances(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.User, all.User.read, instances.*, or instances.get.
+        all.User, all.User.bounded, all.User.read, instances.*, instances.get, only.User, only.User.bounded, or only.User.read.
 
         Parameters:
         *  {string} sortField - Field to sort the results by. Accepted values are: name, id, creationDate, lastUpdated

@@ -42,7 +42,7 @@ class ResourceJob(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, resourceJob.*, or resourceJob.cancelExecution.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, resourceJob.*, or resourceJob.cancelExecution.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -93,7 +93,7 @@ class ResourceJob(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, resourceJob.*, or resourceJob.delete.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, resourceJob.*, or resourceJob.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -144,7 +144,7 @@ class ResourceJob(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, resourceJob.*, or resourceJob.execute.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, resourceJob.*, or resourceJob.execute.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -195,7 +195,7 @@ class ResourceJob(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, resourceJob.*, or resourceJob.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, resourceJob.*, or resourceJob.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -243,7 +243,7 @@ class ResourceJob(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, resourceJob.*, or resourceJob.logs.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, resourceJob.*, or resourceJob.logs.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -297,7 +297,7 @@ class ResourceJob(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, resourceJob.*, or resourceJob.patch.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, resourceJob.*, or resourceJob.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

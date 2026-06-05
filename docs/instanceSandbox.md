@@ -31,7 +31,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceSandbox.*, or instanceSandbox.delete.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceSandbox.*, or instanceSandbox.delete.
 
 #### Available Parameters
 
@@ -71,7 +71,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.deviceCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.deviceCounts.
 
 #### Available Parameters
 
@@ -113,7 +113,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.get.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.get.
 
 #### Available Parameters
 
@@ -155,7 +155,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.notebookMinuteCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.notebookMinuteCounts.
 
 #### Available Parameters
 
@@ -197,7 +197,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCounts.
 
 #### Available Parameters
 
@@ -240,7 +240,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCountsBreakdown.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCountsBreakdown.
 
 #### Available Parameters
 
@@ -285,7 +285,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceSandbox.*, or instanceSandbox.undelete.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceSandbox.*, or instanceSandbox.undelete.
 
 #### Available Parameters
 

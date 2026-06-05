@@ -36,7 +36,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.attributeNames.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.attributeNames.
 
 #### Available Parameters
 
@@ -78,7 +78,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, devices.*, or devices.delete.
+all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, devices.*, or devices.delete.
 
 #### Available Parameters
 
@@ -117,7 +117,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.deviceNames.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.deviceNames.
 
 #### Available Parameters
 
@@ -156,7 +156,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.export.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.export.
 
 #### Available Parameters
 
@@ -196,7 +196,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.get.
+all.Application, all.Application.bounded, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.get.
 
 #### Available Parameters
 
@@ -247,7 +247,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.getCompositeState.
+all.Application, all.Application.bounded, all.Application.read, all.Device, all.Device.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.getCompositeState.
 
 #### Available Parameters
 
@@ -294,7 +294,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, devices.*, or devices.patch.
+all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, devices.*, or devices.patch.
 
 #### Available Parameters
 
@@ -333,7 +333,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.payloadCounts.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.payloadCounts.
 
 #### Available Parameters
 
@@ -373,7 +373,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, devices.*, or devices.post.
+all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, devices.*, or devices.post.
 
 #### Available Parameters
 
@@ -415,7 +415,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, devices.*, or devices.removeData.
+all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, devices.*, or devices.removeData.
 
 #### Available Parameters
 
@@ -455,7 +455,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, devices.*, or devices.restore.
+all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, devices.*, or devices.restore.
 
 #### Available Parameters
 
@@ -496,7 +496,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Device, all.Organization, all.User, devices.*, or devices.sendCommand.
+all.Application, all.Application.bounded, all.Device, all.Organization, all.Organization.bounded, all.User, all.User.bounded, devices.*, or devices.sendCommand.
 
 #### Available Parameters
 
@@ -535,7 +535,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.tagKeys.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.tagKeys.
 
 #### Available Parameters
 
@@ -576,7 +576,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, devices.*, or devices.tagValues.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, devices.*, or devices.tagValues.
 
 #### Available Parameters
 

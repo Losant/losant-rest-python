@@ -27,7 +27,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, dashboard.*, or dashboard.delete.
+all.Organization, all.Organization.bounded, all.User, all.User.bounded, dashboard.*, dashboard.delete, only.Organization, or only.Organization.bounded.
 
 #### Available Parameters
 
@@ -102,7 +102,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, dashboard.*, or dashboard.patch.
+all.Organization, all.Organization.bounded, all.User, all.User.bounded, dashboard.*, dashboard.patch, only.Organization, or only.Organization.bounded.
 
 #### Available Parameters
 
@@ -142,7 +142,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, dashboard.*, or dashboard.sendReport.
+all.Organization, all.Organization.bounded, all.User, all.User.bounded, dashboard.*, dashboard.sendReport, only.Organization, or only.Organization.bounded.
 
 #### Available Parameters
 

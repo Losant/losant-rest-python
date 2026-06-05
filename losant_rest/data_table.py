@@ -42,7 +42,7 @@ class DataTable(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, dataTable.*, or dataTable.addColumn.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, dataTable.*, or dataTable.addColumn.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -93,7 +93,7 @@ class DataTable(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, dataTable.*, or dataTable.delete.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, dataTable.*, or dataTable.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -141,7 +141,7 @@ class DataTable(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.cli, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.cli, all.User.read, dataTable.*, or dataTable.get.
+        all.Application, all.Application.bounded, all.Application.cli, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.cli, all.User.read, dataTable.*, or dataTable.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -189,7 +189,7 @@ class DataTable(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, dataTable.*, or dataTable.patch.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, dataTable.*, or dataTable.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -240,7 +240,7 @@ class DataTable(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, dataTable.*, or dataTable.removeColumn.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, dataTable.*, or dataTable.removeColumn.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

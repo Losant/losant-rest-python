@@ -42,7 +42,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.addRecentItem.
+all.User, all.User.bounded, me.*, me.addRecentItem, only.User, or only.User.bounded.
 
 #### Available Parameters
 
@@ -78,7 +78,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.changePassword.
+all.User, me.*, me.changePassword, or only.User.
 
 #### Available Parameters
 
@@ -114,7 +114,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.delete.
+all.User, me.*, me.delete, or only.User.
 
 #### Available Parameters
 
@@ -150,7 +150,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.deviceCounts.
+all.User, all.User.bounded, all.User.read, me.*, me.deviceCounts, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -187,7 +187,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.disableTwoFactorAuth.
+all.User, me.*, me.disableTwoFactorAuth, or only.User.
 
 #### Available Parameters
 
@@ -226,7 +226,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.disconnectGithub.
+all.User, me.*, me.disconnectGithub, or only.User.
 
 #### Available Parameters
 
@@ -264,7 +264,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.enableTwoFactorAuth.
+all.User, me.*, me.enableTwoFactorAuth, or only.User.
 
 #### Available Parameters
 
@@ -303,7 +303,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.fetchRecentItems.
+all.User, all.User.bounded, all.User.read, me.*, me.fetchRecentItems, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -340,7 +340,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.generateTwoFactorAuth.
+all.User, me.*, me.generateTwoFactorAuth, or only.User.
 
 #### Available Parameters
 
@@ -375,7 +375,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.get.
+all.User, all.User.bounded, all.User.read, me.*, me.get, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -412,7 +412,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.invite.
+all.User, all.User.bounded, all.User.read, me.*, me.invite, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -449,7 +449,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.invites.
+all.User, all.User.bounded, all.User.read, me.*, me.invites, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -484,7 +484,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.notebookMinuteCounts.
+all.User, all.User.bounded, all.User.read, me.*, me.notebookMinuteCounts, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -521,7 +521,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.patch.
+all.User, me.*, me.patch, or only.User.
 
 #### Available Parameters
 
@@ -560,7 +560,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.payloadCounts.
+all.User, all.User.bounded, all.User.read, me.*, me.payloadCounts, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -598,7 +598,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, me.*, or me.payloadCountsBreakdown.
+all.User, all.User.bounded, all.User.read, me.*, me.payloadCountsBreakdown, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -638,7 +638,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, or me.*.
+all.User, me.*, me.refreshToken, or only.User.
 
 #### Available Parameters
 
@@ -676,7 +676,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.respondToInvite.
+all.User, me.*, me.respondToInvite, or only.User.
 
 #### Available Parameters
 
@@ -715,7 +715,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.transferResources.
+all.User, me.*, me.transferResources, or only.User.
 
 #### Available Parameters
 
@@ -751,7 +751,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, me.*, or me.verifyEmail.
+all.User, me.*, me.verifyEmail, or only.User.
 
 #### Available Parameters
 

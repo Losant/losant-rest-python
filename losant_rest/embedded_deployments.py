@@ -42,7 +42,7 @@ class EmbeddedDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, embeddedDeployments.*, or embeddedDeployments.export.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, embeddedDeployments.*, or embeddedDeployments.export.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -90,7 +90,7 @@ class EmbeddedDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, embeddedDeployments.*, or embeddedDeployments.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, embeddedDeployments.*, or embeddedDeployments.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -156,7 +156,7 @@ class EmbeddedDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, embeddedDeployments.*, or embeddedDeployments.release.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, embeddedDeployments.*, or embeddedDeployments.release.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -204,7 +204,7 @@ class EmbeddedDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, embeddedDeployments.*, or embeddedDeployments.remove.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, embeddedDeployments.*, or embeddedDeployments.remove.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -252,7 +252,7 @@ class EmbeddedDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, embeddedDeployments.*, or embeddedDeployments.replace.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, embeddedDeployments.*, or embeddedDeployments.replace.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

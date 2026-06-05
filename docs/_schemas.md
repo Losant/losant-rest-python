@@ -261,6 +261,10 @@
 *   [Notification Rule Patch](#notification-rule-patch)
 *   [Notification Rule Post](#notification-rule-post)
 *   [Notification Rules](#notification-rules)
+*   [OAuth Client](#oauth-client)
+*   [OAuth Client Registration Request](#oauth-client-registration-request)
+*   [OAuth DCR Error](#oauth-dcr-error)
+*   [OAuth Error](#oauth-error)
 *   [Organization](#organization)
 *   [Organization Invitation](#organization-invitation)
 *   [Organization Invitation Action](#organization-invitation-action)
@@ -306,6 +310,10 @@
 *   [Time Series Data](#time-series-data)
 *   [Time Series Query](#time-series-query)
 *   [User Credentials](#user-credentials)
+*   [User OAuth Token](#user-oauth-token)
+*   [User OAuth Token Patch](#user-oauth-token-patch)
+*   [User OAuth Token Post](#user-oauth-token-post)
+*   [User OAuth Tokens](#user-oauth-tokens)
 *   [User Post](#user-post)
 *   [Validate Context Error](#validate-context-error)
 *   [Validate Context Success](#validate-context-success)
@@ -14451,6 +14459,106 @@ Schema for a single API Token
       "type": "string",
       "format": "date-time"
     },
+    "defaultRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "collaborate",
+        "view",
+        "none"
+      ]
+    },
+    "orgRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "sandbox"
+                ]
+              }
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "applicationRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          },
+          "dashboardRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "orgId",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 25
+    },
     "scope": {
       "type": "array",
       "items": {
@@ -14517,6 +14625,106 @@ Schema for the body of an API Token modification request
       "type": "string",
       "maxLength": 32767
     },
+    "defaultRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "collaborate",
+        "view",
+        "none"
+      ]
+    },
+    "orgRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "sandbox"
+                ]
+              }
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "applicationRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          },
+          "dashboardRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "orgId",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 25
+    },
     "status": {
       "type": "string",
       "enum": [
@@ -14563,6 +14771,106 @@ Schema for the body of an API Token creation request
       "type": "string",
       "format": "date-time"
     },
+    "defaultRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "collaborate",
+        "view",
+        "none"
+      ]
+    },
+    "orgRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "sandbox"
+                ]
+              }
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "applicationRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          },
+          "dashboardRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "orgId",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 25
+    },
     "scope": {
       "type": "array",
       "uniqueItems": true,
@@ -14574,6 +14882,7 @@ Schema for the body of an API Token creation request
                 "type": "string",
                 "enum": [
                   "all.Application",
+                  "all.Application.bounded",
                   "all.Application.read",
                   "all.Application.cli",
                   "all.Device",
@@ -14900,7 +15209,11 @@ Schema for the body of an API Token creation request
                 "type": "string",
                 "enum": [
                   "all.Organization",
+                  "all.Organization.bounded",
                   "all.Organization.read",
+                  "only.Organization",
+                  "only.Organization.bounded",
+                  "only.Organization.read",
                   "applications.*",
                   "auditLog.*",
                   "auditLogs.*",
@@ -14943,6 +15256,7 @@ Schema for the body of an API Token creation request
             "type": "string",
             "enum": [
               "all.Instance",
+              "all.Instance.bounded",
               "all.Instance.read",
               "instance.*",
               "instance.get",
@@ -15031,8 +15345,12 @@ Schema for the body of an API Token creation request
             "type": "string",
             "enum": [
               "all.User",
+              "all.User.bounded",
               "all.User.read",
               "all.User.cli",
+              "only.User",
+              "only.User.bounded",
+              "only.User.read",
               "userApiToken.*",
               "userApiToken.get",
               "userApiToken.patch",
@@ -15040,6 +15358,13 @@ Schema for the body of an API Token creation request
               "userApiTokens.*",
               "userApiTokens.get",
               "userApiTokens.post",
+              "userOauthToken.*",
+              "userOauthToken.get",
+              "userOauthToken.patch",
+              "userOauthToken.delete",
+              "userOauthTokens.*",
+              "userOauthTokens.get",
+              "userOauthTokens.post",
               "applicationTemplate.*",
               "applicationTemplate.get",
               "applicationTemplates.*",
@@ -15069,6 +15394,7 @@ Schema for the body of an API Token creation request
               "me.invite",
               "me.invites",
               "me.respondToInvite",
+              "me.refreshToken",
               "orgs.*",
               "orgs.get",
               "orgs.post"
@@ -15179,6 +15505,106 @@ Schema for a collection of API Tokens
           "expirationDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "defaultRole": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "orgRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "orgId": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^[A-Fa-f\\d]{24}$"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "sandbox"
+                      ]
+                    }
+                  ]
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "admin",
+                    "edit",
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                },
+                "applicationRoles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resourceId": {
+                        "type": "string",
+                        "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "collaborate",
+                          "view",
+                          "none"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "resourceId",
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 100
+                },
+                "dashboardRoles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resourceId": {
+                        "type": "string",
+                        "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "collaborate",
+                          "view",
+                          "none"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "resourceId",
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 100
+                }
+              },
+              "required": [
+                "orgId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 25
           },
           "scope": {
             "type": "array",
@@ -19330,6 +19756,10 @@ Schema for the body of an Application scoped Dashboard creation request
                   },
                   "includeDeviceInfo": {
                     "type": "boolean"
+                  },
+                  "maxResultsPerDevice": {
+                    "type": "string",
+                    "maxLength": 255
                   }
                 },
                 "additionalProperties": false
@@ -42207,6 +42637,10 @@ Schema for a single Dashboard
                   },
                   "includeDeviceInfo": {
                     "type": "boolean"
+                  },
+                  "maxResultsPerDevice": {
+                    "type": "string",
+                    "maxLength": 255
                   }
                 },
                 "additionalProperties": false
@@ -49386,6 +49820,10 @@ Schema for the body of a Dashboard modification request
                   },
                   "includeDeviceInfo": {
                     "type": "boolean"
+                  },
+                  "maxResultsPerDevice": {
+                    "type": "string",
+                    "maxLength": 255
                   }
                 },
                 "additionalProperties": false
@@ -55823,6 +56261,10 @@ Schema for the body of a Dashboard creation request
                   },
                   "includeDeviceInfo": {
                     "type": "boolean"
+                  },
+                  "maxResultsPerDevice": {
+                    "type": "string",
+                    "maxLength": 255
                   }
                 },
                 "additionalProperties": false
@@ -62684,6 +63126,10 @@ Schema for a collection of Dashboards
                         },
                         "includeDeviceInfo": {
                           "type": "boolean"
+                        },
+                        "maxResultsPerDevice": {
+                          "type": "string",
+                          "maxLength": 255
                         }
                       },
                       "additionalProperties": false
@@ -148824,6 +149270,7 @@ Schema for the body of a Github login request
                 "type": "string",
                 "enum": [
                   "all.Application",
+                  "all.Application.bounded",
                   "all.Application.read",
                   "all.Application.cli",
                   "all.Device",
@@ -149150,7 +149597,11 @@ Schema for the body of a Github login request
                 "type": "string",
                 "enum": [
                   "all.Organization",
+                  "all.Organization.bounded",
                   "all.Organization.read",
+                  "only.Organization",
+                  "only.Organization.bounded",
+                  "only.Organization.read",
                   "applications.*",
                   "auditLog.*",
                   "auditLogs.*",
@@ -149193,6 +149644,7 @@ Schema for the body of a Github login request
             "type": "string",
             "enum": [
               "all.Instance",
+              "all.Instance.bounded",
               "all.Instance.read",
               "instance.*",
               "instance.get",
@@ -149281,8 +149733,12 @@ Schema for the body of a Github login request
             "type": "string",
             "enum": [
               "all.User",
+              "all.User.bounded",
               "all.User.read",
               "all.User.cli",
+              "only.User",
+              "only.User.bounded",
+              "only.User.read",
               "userApiToken.*",
               "userApiToken.get",
               "userApiToken.patch",
@@ -149290,6 +149746,13 @@ Schema for the body of a Github login request
               "userApiTokens.*",
               "userApiTokens.get",
               "userApiTokens.post",
+              "userOauthToken.*",
+              "userOauthToken.get",
+              "userOauthToken.patch",
+              "userOauthToken.delete",
+              "userOauthTokens.*",
+              "userOauthTokens.get",
+              "userOauthTokens.post",
               "applicationTemplate.*",
               "applicationTemplate.get",
               "applicationTemplates.*",
@@ -149319,6 +149782,7 @@ Schema for the body of a Github login request
               "me.invite",
               "me.invites",
               "me.respondToInvite",
+              "me.refreshToken",
               "orgs.*",
               "orgs.get",
               "orgs.post"
@@ -155628,7 +156092,7 @@ Schema for an Instance Organization member modification request
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "dashboardRoles": {
       "type": "array",
@@ -155654,7 +156118,7 @@ Schema for an Instance Organization member modification request
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     }
   },
   "additionalProperties": false
@@ -155721,7 +156185,7 @@ Schema for an Instance Organization member creation request
             ],
             "additionalProperties": false
           },
-          "maxItems": 1000
+          "maxItems": 100
         },
         "dashboardRoles": {
           "type": "array",
@@ -155747,7 +156211,7 @@ Schema for an Instance Organization member creation request
             ],
             "additionalProperties": false
           },
-          "maxItems": 1000
+          "maxItems": 100
         }
       },
       "additionalProperties": false,
@@ -155798,7 +156262,7 @@ Schema for an Instance Organization member creation request
             ],
             "additionalProperties": false
           },
-          "maxItems": 1000
+          "maxItems": 100
         },
         "dashboardRoles": {
           "type": "array",
@@ -155824,7 +156288,7 @@ Schema for an Instance Organization member creation request
             ],
             "additionalProperties": false
           },
-          "maxItems": 1000
+          "maxItems": 100
         },
         "disallowTransfer": {
           "type": "boolean"
@@ -156402,7 +156866,7 @@ Schema for the body of an Organization creation request within an instance
                   ],
                   "additionalProperties": false
                 },
-                "maxItems": 1000
+                "maxItems": 100
               },
               "dashboardRoles": {
                 "type": "array",
@@ -156428,7 +156892,7 @@ Schema for the body of an Organization creation request within an instance
                   ],
                   "additionalProperties": false
                 },
-                "maxItems": 1000
+                "maxItems": 100
               }
             },
             "additionalProperties": false,
@@ -156479,7 +156943,7 @@ Schema for the body of an Organization creation request within an instance
                   ],
                   "additionalProperties": false
                 },
-                "maxItems": 1000
+                "maxItems": 100
               },
               "dashboardRoles": {
                 "type": "array",
@@ -156505,7 +156969,7 @@ Schema for the body of an Organization creation request within an instance
                   ],
                   "additionalProperties": false
                 },
-                "maxItems": 1000
+                "maxItems": 100
               },
               "disallowTransfer": {
                 "type": "boolean"
@@ -170740,6 +171204,364 @@ Schema for a collection of notification rules
 
 <br/>
 
+## OAuth Client
+
+Schema for an OAuth 2.0 client registration response
+
+### <a name="oauth-client-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Unique client identifier"
+    },
+    "client_secret": {
+      "type": "string",
+      "description": "Client secret (only included in registration response)"
+    },
+    "client_id_issued_at": {
+      "type": "integer",
+      "description": "Time at which the client_id was issued (seconds since epoch)"
+    },
+    "client_secret_expires_at": {
+      "type": "integer",
+      "description": "Time at which the client_secret will expire or 0 if it will not expire (seconds since epoch)"
+    },
+    "client_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Human-readable name of the client"
+    },
+    "client_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1024
+    },
+    "logo_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 32768,
+      "description": "URL of the client's logo. May be an http(s) URL or a data:image/* URI."
+    },
+    "redirect_uris": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 25,
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "maxLength": 1024
+      },
+      "description": "Array of redirect URIs for use in redirect-based flows"
+    },
+    "grant_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "authorization_code",
+          "refresh_token"
+        ]
+      },
+      "description": "Array of OAuth 2.0 grant types"
+    },
+    "response_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "code"
+        ]
+      },
+      "description": "Array of OAuth 2.0 response types"
+    },
+    "token_endpoint_auth_method": {
+      "type": "string",
+      "description": "Authentication method for the token endpoint",
+      "enum": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "maxLength": 1024,
+      "description": "Space-separated list of requested scope values"
+    },
+    "tos_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1024
+    },
+    "policy_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1024
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    }
+  }
+}
+```
+### <a name="oauth-client-example"></a> Example
+
+```json
+{
+  "id": "575ec7417ae143cd83dc4a95",
+  "client_id": "575ec7417ae143cd83dc4a95",
+  "client_name": "My OAuth Application",
+  "client_uri": "https://example.com",
+  "logo_uri": "https://example.com/logo.png",
+  "redirect_uris": [
+    "https://example.com/callback",
+    "http://localhost:3000/callback"
+  ],
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "token_endpoint_auth_method": "client_secret_post",
+  "scope": "all.User.read all.Application.read",
+  "client_id_issued_at": 1465790400,
+  "client_secret_expires_at": 0,
+  "tos_uri": "https://example.com/terms",
+  "policy_uri": "https://example.com/privacy",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z"
+}
+```
+
+<br/>
+
+## OAuth Client Registration Request
+
+Schema for OAuth 2.0 dynamic client registration request
+
+### <a name="oauth-client-registration-request-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "client_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "Human-readable name of the client"
+    },
+    "client_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1024
+    },
+    "logo_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 32768,
+      "description": "URL of the client's logo. May be an http(s) URL or a data:image/* URI."
+    },
+    "redirect_uris": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 25,
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "maxLength": 1024
+      },
+      "description": "Array of redirect URIs for use in redirect-based flows"
+    },
+    "grant_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "authorization_code",
+          "refresh_token"
+        ]
+      },
+      "description": "Array of OAuth 2.0 grant types"
+    },
+    "response_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "code"
+        ]
+      },
+      "description": "Array of OAuth 2.0 response types"
+    },
+    "token_endpoint_auth_method": {
+      "type": "string",
+      "description": "Authentication method for the token endpoint",
+      "enum": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "maxLength": 1024,
+      "description": "Space-separated list of requested scope values"
+    },
+    "contacts": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "format": "email",
+        "maxLength": 1024
+      },
+      "description": "Contact email addresses (stored but not returned in responses)"
+    },
+    "tos_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1024
+    },
+    "policy_uri": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1024
+    }
+  }
+}
+```
+### <a name="oauth-client-registration-request-example"></a> Example
+
+```json
+{
+  "client_name": "My OAuth Application",
+  "client_uri": "https://example.com",
+  "logo_uri": "https://example.com/logo.png",
+  "redirect_uris": [
+    "https://example.com/callback",
+    "http://localhost:3000/callback"
+  ],
+  "contacts": [
+    "admin@example.com"
+  ],
+  "tos_uri": "https://example.com/terms",
+  "policy_uri": "https://example.com/privacy"
+}
+```
+
+<br/>
+
+## OAuth DCR Error
+
+Schema for OAuth 2.0 Dynamic Client Registration error responses (RFC 7591 Section 3.2.2)
+
+### <a name="oauth-dcr-error-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "string",
+      "enum": [
+        "invalid_redirect_uri",
+        "invalid_client_metadata",
+        "invalid_software_statement",
+        "unapproved_software_statement"
+      ],
+      "description": "OAuth 2.0 DCR error code"
+    },
+    "error_description": {
+      "type": "string",
+      "description": "Human-readable error description"
+    }
+  },
+  "required": [
+    "error"
+  ]
+}
+```
+### <a name="oauth-dcr-error-example"></a> Example
+
+```json
+{
+  "error": "invalid_redirect_uri",
+  "error_description": "HTTP redirect URIs are only allowed for localhost"
+}
+```
+
+<br/>
+
+## OAuth Error
+
+Schema for OAuth 2.0 error responses (RFC 6749 Section 5.2)
+
+### <a name="oauth-error-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "string",
+      "enum": [
+        "invalid_request",
+        "invalid_client",
+        "invalid_grant",
+        "unauthorized_client",
+        "unsupported_grant_type",
+        "invalid_scope",
+        "invalid_target",
+        "temporarily_unavailable"
+      ],
+      "description": "OAuth 2.0 error code"
+    },
+    "error_description": {
+      "type": "string",
+      "description": "Human-readable error description"
+    },
+    "error_uri": {
+      "type": "string",
+      "description": "URI identifying a human-readable web page with information about the error"
+    }
+  },
+  "required": [
+    "error"
+  ]
+}
+```
+### <a name="oauth-error-example"></a> Example
+
+```json
+{
+  "error": "invalid_grant",
+  "error_description": "The provided authorization code is invalid, expired, or revoked"
+}
+```
+
+<br/>
+
 ## Organization
 
 Schema for a single Organization
@@ -170838,7 +171660,7 @@ Schema for a single Organization
               ],
               "additionalProperties": false
             },
-            "maxItems": 1000
+            "maxItems": 100
           },
           "dashboardRoles": {
             "type": "array",
@@ -170864,7 +171686,7 @@ Schema for a single Organization
               ],
               "additionalProperties": false
             },
-            "maxItems": 1000
+            "maxItems": 100
           },
           "twoFactorAuthEnabled": {
             "type": "boolean"
@@ -171470,7 +172292,7 @@ Schema for a pending invitation to an Organization
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "dashboardRoles": {
       "type": "array",
@@ -171496,7 +172318,7 @@ Schema for a pending invitation to an Organization
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "inviteDate": {
       "type": "string",
@@ -171683,7 +172505,7 @@ Schema for an collection of pending invitations to an Instance Organization
               ],
               "additionalProperties": false
             },
-            "maxItems": 1000
+            "maxItems": 100
           },
           "dashboardRoles": {
             "type": "array",
@@ -171709,7 +172531,7 @@ Schema for an collection of pending invitations to an Instance Organization
               ],
               "additionalProperties": false
             },
-            "maxItems": 1000
+            "maxItems": 100
           },
           "inviteDate": {
             "type": "string",
@@ -171904,7 +172726,7 @@ Schema for the body of a request to send an invitation
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "dashboardRoles": {
       "type": "array",
@@ -171930,7 +172752,7 @@ Schema for the body of a request to send an invitation
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "disallowTransfer": {
       "type": "boolean"
@@ -172157,7 +172979,7 @@ Schema for an array of pending invitations to an Organization
             ],
             "additionalProperties": false
           },
-          "maxItems": 1000
+          "maxItems": 100
         },
         "dashboardRoles": {
           "type": "array",
@@ -172183,7 +173005,7 @@ Schema for an array of pending invitations to an Organization
             ],
             "additionalProperties": false
           },
-          "maxItems": 1000
+          "maxItems": 100
         },
         "inviteDate": {
           "type": "string",
@@ -172374,7 +173196,7 @@ Schema for the body of a request to modify an Organization member
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "dashboardRoles": {
       "type": "array",
@@ -172400,7 +173222,7 @@ Schema for the body of a request to modify an Organization member
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     }
   },
   "additionalProperties": false,
@@ -172588,7 +173410,7 @@ Schema for an Organization member&#x27;s role info
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     },
     "dashboardRoles": {
       "type": "array",
@@ -172614,7 +173436,7 @@ Schema for an Organization member&#x27;s role info
         ],
         "additionalProperties": false
       },
-      "maxItems": 1000
+      "maxItems": 100
     }
   },
   "additionalProperties": false
@@ -172735,7 +173557,7 @@ Schema for a collection of Organizations
                     ],
                     "additionalProperties": false
                   },
-                  "maxItems": 1000
+                  "maxItems": 100
                 },
                 "dashboardRoles": {
                   "type": "array",
@@ -172761,7 +173583,7 @@ Schema for a collection of Organizations
                     ],
                     "additionalProperties": false
                   },
-                  "maxItems": 1000
+                  "maxItems": 100
                 },
                 "twoFactorAuthEnabled": {
                   "type": "boolean"
@@ -175754,6 +176576,7 @@ SAML Response body for login
                 "type": "string",
                 "enum": [
                   "all.Application",
+                  "all.Application.bounded",
                   "all.Application.read",
                   "all.Application.cli",
                   "all.Device",
@@ -176080,7 +176903,11 @@ SAML Response body for login
                 "type": "string",
                 "enum": [
                   "all.Organization",
+                  "all.Organization.bounded",
                   "all.Organization.read",
+                  "only.Organization",
+                  "only.Organization.bounded",
+                  "only.Organization.read",
                   "applications.*",
                   "auditLog.*",
                   "auditLogs.*",
@@ -176123,6 +176950,7 @@ SAML Response body for login
             "type": "string",
             "enum": [
               "all.Instance",
+              "all.Instance.bounded",
               "all.Instance.read",
               "instance.*",
               "instance.get",
@@ -176211,8 +177039,12 @@ SAML Response body for login
             "type": "string",
             "enum": [
               "all.User",
+              "all.User.bounded",
               "all.User.read",
               "all.User.cli",
+              "only.User",
+              "only.User.bounded",
+              "only.User.read",
               "userApiToken.*",
               "userApiToken.get",
               "userApiToken.patch",
@@ -176220,6 +177052,13 @@ SAML Response body for login
               "userApiTokens.*",
               "userApiTokens.get",
               "userApiTokens.post",
+              "userOauthToken.*",
+              "userOauthToken.get",
+              "userOauthToken.patch",
+              "userOauthToken.delete",
+              "userOauthTokens.*",
+              "userOauthTokens.get",
+              "userOauthTokens.post",
               "applicationTemplate.*",
               "applicationTemplate.get",
               "applicationTemplates.*",
@@ -176249,6 +177088,7 @@ SAML Response body for login
               "me.invite",
               "me.invites",
               "me.respondToInvite",
+              "me.refreshToken",
               "orgs.*",
               "orgs.get",
               "orgs.post"
@@ -179189,6 +180029,7 @@ Schema for the body of a User authentication request
                 "type": "string",
                 "enum": [
                   "all.Application",
+                  "all.Application.bounded",
                   "all.Application.read",
                   "all.Application.cli",
                   "all.Device",
@@ -179515,7 +180356,11 @@ Schema for the body of a User authentication request
                 "type": "string",
                 "enum": [
                   "all.Organization",
+                  "all.Organization.bounded",
                   "all.Organization.read",
+                  "only.Organization",
+                  "only.Organization.bounded",
+                  "only.Organization.read",
                   "applications.*",
                   "auditLog.*",
                   "auditLogs.*",
@@ -179558,6 +180403,7 @@ Schema for the body of a User authentication request
             "type": "string",
             "enum": [
               "all.Instance",
+              "all.Instance.bounded",
               "all.Instance.read",
               "instance.*",
               "instance.get",
@@ -179646,8 +180492,12 @@ Schema for the body of a User authentication request
             "type": "string",
             "enum": [
               "all.User",
+              "all.User.bounded",
               "all.User.read",
               "all.User.cli",
+              "only.User",
+              "only.User.bounded",
+              "only.User.read",
               "userApiToken.*",
               "userApiToken.get",
               "userApiToken.patch",
@@ -179655,6 +180505,13 @@ Schema for the body of a User authentication request
               "userApiTokens.*",
               "userApiTokens.get",
               "userApiTokens.post",
+              "userOauthToken.*",
+              "userOauthToken.get",
+              "userOauthToken.patch",
+              "userOauthToken.delete",
+              "userOauthTokens.*",
+              "userOauthTokens.get",
+              "userOauthTokens.post",
               "applicationTemplate.*",
               "applicationTemplate.get",
               "applicationTemplates.*",
@@ -179684,6 +180541,7 @@ Schema for the body of a User authentication request
               "me.invite",
               "me.invites",
               "me.respondToInvite",
+              "me.refreshToken",
               "orgs.*",
               "orgs.get",
               "orgs.post"
@@ -179710,6 +180568,918 @@ Schema for the body of a User authentication request
 {
   "email": "email@example.com",
   "password": "this is the password"
+}
+```
+
+<br/>
+
+## User OAuth Token
+
+Schema for a single OAuth Token
+
+### <a name="user-oauth-token-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "oauthTokenId": {
+      "type": "string",
+      "pattern": "^[A-Fa-f\\d]{24}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "creationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expirationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "defaultRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "collaborate",
+        "view",
+        "none"
+      ]
+    },
+    "orgRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "sandbox"
+                ]
+              }
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "applicationRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          },
+          "dashboardRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "orgId",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 25
+    },
+    "scope": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "description": "OAuth-supported user-context API scope. See the `scopes_supported` field of the OAuth authorization server metadata document at /.well-known/oauth-authorization-server for the authoritative list.",
+        "enum": [
+          "all.Application.read",
+          "all.Application.bounded",
+          "only.Organization.read",
+          "only.Organization.bounded",
+          "all.Organization.read",
+          "all.Organization.bounded",
+          "only.User.read"
+        ]
+      },
+      "description": "API scopes for this OAuth client"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "oauth": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "minLength": 24,
+          "maxLength": 1024,
+          "description": "The registered OAuth client ID (ObjectId or HTTPS URL for CIMD)"
+        },
+        "client_name": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "Human-readable name of the OAuth client (from client registration)"
+        },
+        "client_uri": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "Informational URL for the OAuth client's homepage (from client registration)"
+        },
+        "logo_uri": {
+          "type": "string",
+          "maxLength": 32768,
+          "description": "Logo URL for the OAuth client (http(s) URL or data: URI, from client registration)"
+        },
+        "redirect_uri": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 1024
+        },
+        "resource": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 1024
+          },
+          "description": "Resource indicator(s) per RFC 8707 — audience(s) this token is bound to"
+        },
+        "authorizationStatus": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "authorized"
+          ]
+        }
+      }
+    }
+  }
+}
+```
+### <a name="user-oauth-token-example"></a> Example
+
+```json
+{
+  "id": "575ec7417ae143cd83dc4a95",
+  "oauthTokenId": "575ec7417ae143cd83dc4a95",
+  "name": "My OAuth App",
+  "description": "OAuth application for automation",
+  "creationDate": "2016-06-13T04:00:00.000Z",
+  "lastUpdated": "2016-06-13T04:00:00.000Z",
+  "scope": [
+    "only.User.read",
+    "all.Application.read"
+  ],
+  "defaultRole": "view",
+  "orgRoles": [],
+  "status": "active",
+  "oauth": {
+    "client_id": "575ec8687ae143cd83dc4a97",
+    "client_name": "My OAuth Client",
+    "client_uri": "https://example.com",
+    "logo_uri": "https://example.com/logo.png",
+    "redirect_uri": "https://example.com/callback",
+    "authorizationStatus": "authorized"
+  }
+}
+```
+
+<br/>
+
+## User OAuth Token Patch
+
+Schema for the body of an OAuth Token modification request
+
+### <a name="user-oauth-token-patch-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "defaultRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "collaborate",
+        "view",
+        "none"
+      ]
+    },
+    "orgRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "sandbox"
+                ]
+              }
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "applicationRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          },
+          "dashboardRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "orgId",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 25
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+### <a name="user-oauth-token-patch-example"></a> Example
+
+```json
+{
+  "name": "Updated OAuth App Name",
+  "description": "Updated description",
+  "defaultRole": "edit",
+  "status": "inactive"
+}
+```
+
+<br/>
+
+## User OAuth Token Post
+
+Schema for the body of an OAuth Token creation request
+
+### <a name="user-oauth-token-post-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 32767
+    },
+    "expirationDate": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Session expiration. Omit for the default 1-year session, pass an ISO date for a specific expiration, or pass null for a session that does not expire."
+    },
+    "oauth": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "minLength": 24,
+          "maxLength": 1024,
+          "description": "The registered OAuth client ID (ObjectId or HTTPS URL for CIMD)"
+        },
+        "redirect_uri": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 1024
+        },
+        "resource": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 1024
+          },
+          "description": "Resource indicator(s) per RFC 8707 — absolute URI(s) identifying the audience(s) this token is being requested for"
+        },
+        "code_challenge": {
+          "type": "string",
+          "minLength": 43,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "description": "PKCE code challenge (RFC 7636 base64url, 43-128 chars)"
+        },
+        "code_challenge_method": {
+          "type": "string",
+          "enum": [
+            "S256"
+          ],
+          "description": "PKCE code challenge method"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "client_id",
+        "redirect_uri",
+        "code_challenge",
+        "code_challenge_method"
+      ]
+    },
+    "defaultRole": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "edit",
+        "collaborate",
+        "view",
+        "none"
+      ]
+    },
+    "orgRoles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Fa-f\\d]{24}$"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "sandbox"
+                ]
+              }
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "applicationRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          },
+          "dashboardRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "pattern": "^[A-Fa-f\\d]{24}$"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                }
+              },
+              "required": [
+                "resourceId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "orgId",
+          "role"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 25
+    },
+    "scope": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "description": "OAuth-supported user-context API scope. See the `scopes_supported` field of the OAuth authorization server metadata document at /.well-known/oauth-authorization-server for the authoritative list.",
+        "enum": [
+          "all.Application.read",
+          "all.Application.bounded",
+          "only.Organization.read",
+          "only.Organization.bounded",
+          "all.Organization.read",
+          "all.Organization.bounded",
+          "only.User.read"
+        ]
+      },
+      "description": "API scopes for this OAuth client"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "oauth"
+  ]
+}
+```
+### <a name="user-oauth-token-post-example"></a> Example
+
+```json
+{
+  "name": "My OAuth App",
+  "description": "OAuth application for automation",
+  "scope": [
+    "only.User.read",
+    "all.Application.read"
+  ],
+  "defaultRole": "view",
+  "oauth": {
+    "client_id": "575ec8687ae143cd83dc4a97",
+    "redirect_uri": "https://example.com/callback",
+    "code_challenge": "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
+    "code_challenge_method": "S256"
+  }
+}
+```
+
+<br/>
+
+## User OAuth Tokens
+
+Schema for a collection of OAuth Tokens
+
+### <a name="user-oauth-tokens-schema"></a> Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "title": "User OAuth Token",
+        "description": "Schema for a single OAuth Token",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "oauthTokenId": {
+            "type": "string",
+            "pattern": "^[A-Fa-f\\d]{24}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 32767
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "defaultRole": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "edit",
+              "collaborate",
+              "view",
+              "none"
+            ]
+          },
+          "orgRoles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "orgId": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^[A-Fa-f\\d]{24}$"
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "sandbox"
+                      ]
+                    }
+                  ]
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "admin",
+                    "edit",
+                    "collaborate",
+                    "view",
+                    "none"
+                  ]
+                },
+                "applicationRoles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resourceId": {
+                        "type": "string",
+                        "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "collaborate",
+                          "view",
+                          "none"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "resourceId",
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 100
+                },
+                "dashboardRoles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "resourceId": {
+                        "type": "string",
+                        "pattern": "^[A-Fa-f\\d]{24}$"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "collaborate",
+                          "view",
+                          "none"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "resourceId",
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 100
+                }
+              },
+              "required": [
+                "orgId",
+                "role"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 25
+          },
+          "scope": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "description": "OAuth-supported user-context API scope. See the `scopes_supported` field of the OAuth authorization server metadata document at /.well-known/oauth-authorization-server for the authoritative list.",
+              "enum": [
+                "all.Application.read",
+                "all.Application.bounded",
+                "only.Organization.read",
+                "only.Organization.bounded",
+                "all.Organization.read",
+                "all.Organization.bounded",
+                "only.User.read"
+              ]
+            },
+            "description": "API scopes for this OAuth client"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive"
+            ]
+          },
+          "oauth": {
+            "type": "object",
+            "properties": {
+              "client_id": {
+                "type": "string",
+                "minLength": 24,
+                "maxLength": 1024,
+                "description": "The registered OAuth client ID (ObjectId or HTTPS URL for CIMD)"
+              },
+              "client_name": {
+                "type": "string",
+                "maxLength": 255,
+                "description": "Human-readable name of the OAuth client (from client registration)"
+              },
+              "client_uri": {
+                "type": "string",
+                "maxLength": 1024,
+                "description": "Informational URL for the OAuth client's homepage (from client registration)"
+              },
+              "logo_uri": {
+                "type": "string",
+                "maxLength": 32768,
+                "description": "Logo URL for the OAuth client (http(s) URL or data: URI, from client registration)"
+              },
+              "redirect_uri": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 1024
+              },
+              "resource": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "maxLength": 1024
+                },
+                "description": "Resource indicator(s) per RFC 8707 — audience(s) this token is bound to"
+              },
+              "authorizationStatus": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "authorized"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "count": {
+      "type": "integer"
+    },
+    "totalCount": {
+      "type": "integer"
+    },
+    "perPage": {
+      "type": "integer"
+    },
+    "page": {
+      "type": "integer"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "filterField": {
+      "type": "string"
+    },
+    "sortField": {
+      "type": "string"
+    },
+    "sortDirection": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc",
+        "ASC",
+        "DESC",
+        ""
+      ]
+    }
+  }
+}
+```
+### <a name="user-oauth-tokens-example"></a> Example
+
+```json
+{
+  "items": [
+    {
+      "id": "575ec7417ae143cd83dc4a95",
+      "oauthTokenId": "575ec7417ae143cd83dc4a95",
+      "name": "My OAuth App",
+      "description": "OAuth application for automation",
+      "creationDate": "2016-06-13T04:00:00.000Z",
+      "lastUpdated": "2016-06-13T04:00:00.000Z",
+      "scope": [
+        "only.User.read",
+        "all.Application.read"
+      ],
+      "defaultRole": "view",
+      "orgRoles": [],
+      "status": "active",
+      "oauth": {
+        "client_id": "575ec8687ae143cd83dc4a97",
+        "client_name": "My OAuth Client",
+        "client_uri": "https://example.com",
+        "logo_uri": "https://example.com/logo.png",
+        "redirect_uri": "https://example.com/callback",
+        "authorizationStatus": "authorized"
+      }
+    }
+  ],
+  "count": 1,
+  "totalCount": 1,
+  "perPage": 1000,
+  "page": 0,
+  "sortField": "name",
+  "sortDirection": "asc"
 }
 ```
 
@@ -179809,6 +181579,7 @@ Schema for the body of a User creation request
                 "type": "string",
                 "enum": [
                   "all.Application",
+                  "all.Application.bounded",
                   "all.Application.read",
                   "all.Application.cli",
                   "all.Device",
@@ -180135,7 +181906,11 @@ Schema for the body of a User creation request
                 "type": "string",
                 "enum": [
                   "all.Organization",
+                  "all.Organization.bounded",
                   "all.Organization.read",
+                  "only.Organization",
+                  "only.Organization.bounded",
+                  "only.Organization.read",
                   "applications.*",
                   "auditLog.*",
                   "auditLogs.*",
@@ -180178,6 +181953,7 @@ Schema for the body of a User creation request
             "type": "string",
             "enum": [
               "all.Instance",
+              "all.Instance.bounded",
               "all.Instance.read",
               "instance.*",
               "instance.get",
@@ -180266,8 +182042,12 @@ Schema for the body of a User creation request
             "type": "string",
             "enum": [
               "all.User",
+              "all.User.bounded",
               "all.User.read",
               "all.User.cli",
+              "only.User",
+              "only.User.bounded",
+              "only.User.read",
               "userApiToken.*",
               "userApiToken.get",
               "userApiToken.patch",
@@ -180275,6 +182055,13 @@ Schema for the body of a User creation request
               "userApiTokens.*",
               "userApiTokens.get",
               "userApiTokens.post",
+              "userOauthToken.*",
+              "userOauthToken.get",
+              "userOauthToken.patch",
+              "userOauthToken.delete",
+              "userOauthTokens.*",
+              "userOauthTokens.get",
+              "userOauthTokens.post",
               "applicationTemplate.*",
               "applicationTemplate.get",
               "applicationTemplates.*",
@@ -180304,6 +182091,7 @@ Schema for the body of a User creation request
               "me.invite",
               "me.invites",
               "me.respondToInvite",
+              "me.refreshToken",
               "orgs.*",
               "orgs.get",
               "orgs.post"

@@ -42,7 +42,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.User, instanceSandbox.*, or instanceSandbox.delete.
+        all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceSandbox.*, or instanceSandbox.delete.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -90,7 +90,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.deviceCounts.
+        all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.deviceCounts.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -144,7 +144,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.get.
+        all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.get.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -198,7 +198,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.notebookMinuteCounts.
+        all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.notebookMinuteCounts.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -252,7 +252,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCounts.
+        all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCounts.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -309,7 +309,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCountsBreakdown.
+        all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceSandbox.*, or instanceSandbox.payloadCountsBreakdown.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -372,7 +372,7 @@ class InstanceSandbox(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.User, instanceSandbox.*, or instanceSandbox.undelete.
+        all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceSandbox.*, or instanceSandbox.undelete.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance

@@ -30,7 +30,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.deviceCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.deviceCounts.
 
 #### Available Parameters
 
@@ -69,7 +69,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.generateReport.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.generateReport.
 
 #### Available Parameters
 
@@ -106,7 +106,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.get.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.get.
 
 #### Available Parameters
 
@@ -143,7 +143,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.historicalSummaries.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.historicalSummaries.
 
 #### Available Parameters
 
@@ -186,7 +186,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.notebookMinuteCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.notebookMinuteCounts.
 
 #### Available Parameters
 
@@ -227,7 +227,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instance.*, or instance.patch.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instance.*, or instance.patch.
 
 #### Available Parameters
 
@@ -264,7 +264,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.payloadCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.payloadCounts.
 
 #### Available Parameters
 
@@ -304,7 +304,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instance.*, or instance.payloadCountsBreakdown.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instance.*, or instance.payloadCountsBreakdown.
 
 #### Available Parameters
 

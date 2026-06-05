@@ -35,7 +35,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.delete.
+all.Organization, all.Organization.bounded, all.User, all.User.bounded, only.Organization, only.Organization.bounded, org.*, or org.delete.
 
 #### Available Parameters
 
@@ -72,7 +72,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.deviceCounts.
+all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, only.Organization, only.Organization.bounded, only.Organization.read, org.*, or org.deviceCounts.
 
 #### Available Parameters
 
@@ -111,7 +111,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.get.
+all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, only.Organization, only.Organization.bounded, only.Organization.read, org.*, or org.get.
 
 #### Available Parameters
 
@@ -152,7 +152,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.inviteMember.
+all.Organization, all.User, only.Organization, org.*, or org.inviteMember.
 
 #### Available Parameters
 
@@ -192,7 +192,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.modifyMember.
+all.Organization, all.User, only.Organization, org.*, or org.modifyMember.
 
 #### Available Parameters
 
@@ -232,7 +232,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.notebookMinuteCounts.
+all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, only.Organization, only.Organization.bounded, only.Organization.read, org.*, or org.notebookMinuteCounts.
 
 #### Available Parameters
 
@@ -273,7 +273,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.patch.
+all.Organization, all.Organization.bounded, all.User, all.User.bounded, only.Organization, only.Organization.bounded, org.*, or org.patch.
 
 #### Available Parameters
 
@@ -313,7 +313,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.payloadCounts.
+all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, only.Organization, only.Organization.bounded, only.Organization.read, org.*, or org.payloadCounts.
 
 #### Available Parameters
 
@@ -353,7 +353,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.payloadCountsBreakdown.
+all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, only.Organization, only.Organization.bounded, only.Organization.read, org.*, or org.payloadCountsBreakdown.
 
 #### Available Parameters
 
@@ -395,7 +395,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.Organization.read, all.User, all.User.read, org.*, or org.pendingInvites.
+all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, only.Organization, only.Organization.bounded, only.Organization.read, org.*, or org.pendingInvites.
 
 #### Available Parameters
 
@@ -434,7 +434,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.removeMember.
+all.Organization, all.User, only.Organization, org.*, or org.removeMember.
 
 #### Available Parameters
 
@@ -476,7 +476,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.revokeInvite.
+all.Organization, all.User, only.Organization, org.*, or org.revokeInvite.
 
 #### Available Parameters
 
@@ -516,7 +516,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Organization, all.User, org.*, or org.transferResources.
+all.Organization, all.User, only.Organization, org.*, or org.transferResources.
 
 #### Available Parameters
 

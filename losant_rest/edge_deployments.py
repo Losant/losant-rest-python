@@ -42,7 +42,7 @@ class EdgeDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, edgeDeployments.*, or edgeDeployments.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, edgeDeployments.*, or edgeDeployments.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -111,7 +111,7 @@ class EdgeDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.release.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, edgeDeployments.*, or edgeDeployments.release.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -159,7 +159,7 @@ class EdgeDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.remove.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, edgeDeployments.*, or edgeDeployments.remove.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -207,7 +207,7 @@ class EdgeDeployments(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, edgeDeployments.*, or edgeDeployments.replace.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, edgeDeployments.*, or edgeDeployments.replace.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

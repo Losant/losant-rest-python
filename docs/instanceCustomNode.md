@@ -29,7 +29,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceCustomNode.*, or instanceCustomNode.delete.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceCustomNode.*, or instanceCustomNode.delete.
 
 #### Available Parameters
 
@@ -69,7 +69,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceCustomNode.*, or instanceCustomNode.errors.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceCustomNode.*, or instanceCustomNode.errors.
 
 #### Available Parameters
 
@@ -113,7 +113,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceCustomNode.*, or instanceCustomNode.get.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceCustomNode.*, or instanceCustomNode.get.
 
 #### Available Parameters
 
@@ -154,7 +154,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceCustomNode.*, or instanceCustomNode.patch.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceCustomNode.*, or instanceCustomNode.patch.
 
 #### Available Parameters
 
@@ -195,7 +195,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceCustomNode.*, or instanceCustomNode.stats.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceCustomNode.*, or instanceCustomNode.stats.
 
 #### Available Parameters
 

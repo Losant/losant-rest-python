@@ -42,7 +42,7 @@ class InstanceCustomNodes(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.Instance.read, all.User, all.User.read, instanceCustomNodes.*, or instanceCustomNodes.get.
+        all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceCustomNodes.*, or instanceCustomNodes.get.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance
@@ -104,7 +104,7 @@ class InstanceCustomNodes(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Instance, all.User, instanceCustomNodes.*, or instanceCustomNodes.post.
+        all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceCustomNodes.*, or instanceCustomNodes.post.
 
         Parameters:
         *  {string} instanceId - ID associated with the instance

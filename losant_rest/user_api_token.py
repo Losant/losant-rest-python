@@ -42,7 +42,7 @@ class UserApiToken(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.User, userApiToken.*, or userApiToken.delete.
+        all.User, only.User, userApiToken.*, or userApiToken.delete.
 
         Parameters:
         *  {string} apiTokenId - ID associated with the API token
@@ -87,7 +87,7 @@ class UserApiToken(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.User, all.User.read, userApiToken.*, or userApiToken.get.
+        all.User, all.User.bounded, all.User.read, only.User, only.User.bounded, only.User.read, userApiToken.*, or userApiToken.get.
 
         Parameters:
         *  {string} apiTokenId - ID associated with the API token
@@ -132,7 +132,7 @@ class UserApiToken(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.User, userApiToken.*, or userApiToken.patch.
+        all.User, only.User, userApiToken.*, or userApiToken.patch.
 
         Parameters:
         *  {string} apiTokenId - ID associated with the API token

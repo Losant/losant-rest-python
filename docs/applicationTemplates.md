@@ -25,7 +25,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, applicationTemplates.*, or applicationTemplates.get.
+all.User, all.User.bounded, all.User.read, applicationTemplates.*, applicationTemplates.get, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -68,7 +68,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, applicationTemplates.*, or applicationTemplates.getCategories.
+all.User, all.User.bounded, all.User.read, applicationTemplates.*, applicationTemplates.getCategories, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 
@@ -104,7 +104,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.User, all.User.read, applicationTemplates.*, or applicationTemplates.getUniqueKeywords.
+all.User, all.User.bounded, all.User.read, applicationTemplates.*, applicationTemplates.getUniqueKeywords, only.User, only.User.bounded, or only.User.read.
 
 #### Available Parameters
 

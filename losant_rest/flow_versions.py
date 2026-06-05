@@ -42,7 +42,7 @@ class FlowVersions(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, flowVersions.*, or flowVersions.delete.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, flowVersions.*, or flowVersions.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -94,7 +94,7 @@ class FlowVersions(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, flowVersions.*, or flowVersions.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, flowVersions.*, or flowVersions.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -166,7 +166,7 @@ class FlowVersions(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, flowVersions.*, or flowVersions.post.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, flowVersions.*, or flowVersions.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

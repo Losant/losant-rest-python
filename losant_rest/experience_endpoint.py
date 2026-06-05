@@ -42,7 +42,7 @@ class ExperienceEndpoint(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceEndpoint.*, or experienceEndpoint.delete.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, experienceEndpoint.*, or experienceEndpoint.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -93,7 +93,7 @@ class ExperienceEndpoint(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceEndpoint.*, or experienceEndpoint.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, experienceEndpoint.*, or experienceEndpoint.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -144,7 +144,7 @@ class ExperienceEndpoint(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceEndpoint.*, or experienceEndpoint.linkedResources.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, experienceEndpoint.*, or experienceEndpoint.linkedResources.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -198,7 +198,7 @@ class ExperienceEndpoint(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceEndpoint.*, or experienceEndpoint.patch.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, experienceEndpoint.*, or experienceEndpoint.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

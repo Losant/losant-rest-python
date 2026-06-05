@@ -31,7 +31,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceOrg.*, or instanceOrg.delete.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceOrg.*, or instanceOrg.delete.
 
 #### Available Parameters
 
@@ -71,7 +71,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.deviceCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceOrg.*, or instanceOrg.deviceCounts.
 
 #### Available Parameters
 
@@ -113,7 +113,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.get.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceOrg.*, or instanceOrg.get.
 
 #### Available Parameters
 
@@ -154,7 +154,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.notebookMinuteCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceOrg.*, or instanceOrg.notebookMinuteCounts.
 
 #### Available Parameters
 
@@ -197,7 +197,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.User, instanceOrg.*, or instanceOrg.patch.
+all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceOrg.*, or instanceOrg.patch.
 
 #### Available Parameters
 
@@ -239,7 +239,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.payloadCounts.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceOrg.*, or instanceOrg.payloadCounts.
 
 #### Available Parameters
 
@@ -282,7 +282,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Instance, all.Instance.read, all.User, all.User.read, instanceOrg.*, or instanceOrg.payloadCountsBreakdown.
+all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounded, all.User.read, instanceOrg.*, or instanceOrg.payloadCountsBreakdown.
 
 #### Available Parameters
 

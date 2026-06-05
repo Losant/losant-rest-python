@@ -24,7 +24,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, applicationCertificateAuthorities.*, or applicationCertificateAuthorities.get.
+all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, applicationCertificateAuthorities.*, or applicationCertificateAuthorities.get.
 
 #### Available Parameters
 
@@ -69,7 +69,7 @@ print(result)
 #### Authentication
 The client must be configured with a valid api access token to call this
 action. The token must include at least one of the following scopes:
-all.Application, all.Organization, all.User, applicationCertificateAuthorities.*, or applicationCertificateAuthorities.post.
+all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, applicationCertificateAuthorities.*, or applicationCertificateAuthorities.post.
 
 #### Available Parameters
 

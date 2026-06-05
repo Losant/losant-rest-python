@@ -42,7 +42,7 @@ class ExperienceSlug(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceSlug.*, or experienceSlug.delete.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, experienceSlug.*, or experienceSlug.delete.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -90,7 +90,7 @@ class ExperienceSlug(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, experienceSlug.*, or experienceSlug.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, experienceSlug.*, or experienceSlug.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -138,7 +138,7 @@ class ExperienceSlug(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, experienceSlug.*, or experienceSlug.patch.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, experienceSlug.*, or experienceSlug.patch.
 
         Parameters:
         *  {string} applicationId - ID associated with the application

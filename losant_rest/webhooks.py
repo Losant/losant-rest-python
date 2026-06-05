@@ -42,7 +42,7 @@ class Webhooks(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Application.read, all.Organization, all.Organization.read, all.User, all.User.read, webhooks.*, or webhooks.get.
+        all.Application, all.Application.bounded, all.Application.read, all.Organization, all.Organization.bounded, all.Organization.read, all.User, all.User.bounded, all.User.read, webhooks.*, or webhooks.get.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
@@ -105,7 +105,7 @@ class Webhooks(object):
         The client must be configured with a valid api
         access token to call this action. The token
         must include at least one of the following scopes:
-        all.Application, all.Organization, all.User, webhooks.*, or webhooks.post.
+        all.Application, all.Application.bounded, all.Organization, all.Organization.bounded, all.User, all.User.bounded, webhooks.*, or webhooks.post.
 
         Parameters:
         *  {string} applicationId - ID associated with the application
