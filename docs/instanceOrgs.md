@@ -83,7 +83,7 @@ all.Instance, all.Instance.bounded, all.User, all.User.bounded, instanceOrgs.*, 
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Organization](_schemas.md#organization) | The newly created organization |
+| 201 | [Instance Organization](_schemas.md#instance-organization) | The newly created organization |
 
 #### Error Responses
 

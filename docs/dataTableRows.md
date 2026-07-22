@@ -146,7 +146,7 @@ all.Application, all.Application.bounded, all.Application.cli, all.Application.r
 
 ## Post
 
-Inserts a new row(s) into a data table
+Creates new row(s) in a data table
 
 ```python
 result = client.data_table_rows.post(
@@ -168,14 +168,14 @@ all.Application, all.Application.bounded, all.Organization, all.Organization.bou
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | dataTableId | string | Y | ID associated with the data table |  | 575ed78e7ae143cd83dc4aab |
-| dataTableRow | [Data Table Row Insert](_schemas.md#data-table-row-insert) | Y | The row(s) to insert |  | [Data Table Row Insert Example](_schemas.md#data-table-row-insert-example) |
+| dataTableRow | [Data Table Row Post](_schemas.md#data-table-row-post) | Y | The row(s) to create |  | [Data Table Row Post Example](_schemas.md#data-table-row-post-example) |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [Data Table Row Insert Result](_schemas.md#data-table-row-insert-result) | Successfully created data table row, or bulk insert count |
+| 201 | [Data Table Row Post Result](_schemas.md#data-table-row-post-result) | Successfully created data table row, or bulk creation information |
 
 #### Error Responses
 

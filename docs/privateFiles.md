@@ -47,7 +47,7 @@ all.Application, all.Application.bounded, all.Application.cli, all.Application.r
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Files Schema](_schemas.md#files-schema) | Collection of private files |
+| 200 | [Files](_schemas.md#files) | Collection of private files |
 
 #### Error Responses
 

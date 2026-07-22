@@ -39,7 +39,7 @@ all.Application, all.Application.bounded, all.Organization, all.Organization.bou
 | ---- | ---- | -------- | ----------- | ------- | ------- |
 | applicationId | string | Y | ID associated with the application |  | 575ec8687ae143cd83dc4a97 |
 | resourceJobId | string | Y | ID associated with the resource job |  | 575ec8687ae143cd83dc4a97 |
-| executionId | undefined | Y | The ID of the execution to cancel |  | 632e18632f59592e773a4153 |
+| executionId | string | Y | The ID of the execution to cancel |  | 632e18632f59592e773a4153 |
 | losantdomain | string | N | Domain scope of request (rarely needed) |  | example.com |
 
 #### Successful Responses
@@ -253,7 +253,7 @@ all.Application, all.Application.bounded, all.Organization, all.Organization.bou
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [Resource Job](_schemas.md#resource-job) | Successfully updated resource job |
+| 200 | [Resource Job](_schemas.md#resource-job) | Successfully updated resource job |
 
 #### Error Responses
 

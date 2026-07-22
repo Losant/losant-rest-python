@@ -116,7 +116,7 @@ all.Organization, all.Organization.bounded, all.User, all.User.bounded, dashboar
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Dashboard](_schemas.md#dashboard) | Update dashboard information |
+| 200 | [Dashboard](_schemas.md#dashboard) | Updated dashboard information |
 
 #### Error Responses
 

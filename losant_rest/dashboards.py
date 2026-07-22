@@ -121,6 +121,7 @@ class Dashboards(object):
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
+        *  404 - Error if associated application or organization was not found (https://api.losant.com/#/definitions/error)
         """
 
         query_params = {"_actions": "false", "_links": "true", "_embedded": "true"}

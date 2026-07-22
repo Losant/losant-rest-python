@@ -114,7 +114,8 @@ class InstanceOrgMembers(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - The newly created instance member (https://api.losant.com/#/definitions/instanceOrgMember)
+        *  201 - The newly added instance org member (https://api.losant.com/#/definitions/instanceOrgMember)
+        *  202 - An invite was sent to the new member's email address (https://api.losant.com/#/definitions/instanceOrgInviteSent)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

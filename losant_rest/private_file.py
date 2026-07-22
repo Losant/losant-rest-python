@@ -155,7 +155,7 @@ class PrivateFile(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Returns a new private file or directory that was created by the move, if a directory a job will kick off to move all the directories children. (https://api.losant.com/#/definitions/file)
+        *  201 - Returns a new private file or directory that was created by the move, if a directory a job will kick off to move all the directory's children. (https://api.losant.com/#/definitions/file)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -210,7 +210,7 @@ class PrivateFile(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully updated private file and the information needed to upload the file content (https://api.losant.com/#/definitions/fileUploadPostResponse)
+        *  200 - Successfully updated private file and the information needed to upload the file content (https://api.losant.com/#/definitions/fileUploadPostResponse)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

@@ -150,7 +150,7 @@ class DataTableRow(object):
         *  {string} applicationId - ID associated with the application
         *  {string} dataTableId - ID associated with the data table
         *  {string} rowId - ID associated with the data table row
-        *  {hash} dataTableRow - Object containing updated properties for the data table row (https://api.losant.com/#/definitions/dataTableRowInsertUpdate)
+        *  {hash} dataTableRow - Object containing updated properties for the data table row (https://api.losant.com/#/definitions/dataTableRowPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response

@@ -86,7 +86,7 @@ all.Instance, all.User, instanceOrgInvites.*, or instanceOrgInvites.post.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [Instance Organization Invitations](_schemas.md#instance-organization-invitations) | The new organization invite |
+| 201 | [Instance Organization Invitation](_schemas.md#instance-organization-invitation) | The new organization invite |
 
 #### Error Responses
 

@@ -42,7 +42,7 @@ all.User, all.User.bounded, all.User.read, only.User, only.User.bounded, only.Us
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [API Token](_schemas.md#api-token) | Collection of API tokens |
+| 200 | [API Tokens](_schemas.md#api-tokens) | Collection of API tokens |
 
 #### Error Responses
 
@@ -54,7 +54,7 @@ all.User, all.User.bounded, all.User.read, only.User, only.User.bounded, only.Us
 
 ## Post
 
-Create a new API token for an user
+Create a new API token for a user
 
 ```python
 result = client.user_api_tokens.post(apiToken=my_api_token)

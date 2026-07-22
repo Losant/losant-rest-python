@@ -342,7 +342,7 @@ all.Organization, all.Organization.bounded, all.Organization.read, all.User, all
 
 ## Payload Counts Breakdown
 
-Returns payload counts per resolution in the time range specified for all application this organization owns
+Returns payload counts per resolution in the time range specified for all applications this organization owns
 
 ```python
 result = client.org.payload_counts_breakdown(orgId=my_org_id)

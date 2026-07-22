@@ -124,7 +124,7 @@ all.Application, all.Application.bounded, all.Organization, all.Organization.bou
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Dashboard](_schemas.md#dashboard) | Update dashboard information |
+| 200 | [Dashboard](_schemas.md#dashboard) | Updated dashboard information |
 
 #### Error Responses
 

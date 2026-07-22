@@ -47,7 +47,7 @@ class ResourceJob(object):
         Parameters:
         *  {string} applicationId - ID associated with the application
         *  {string} resourceJobId - ID associated with the resource job
-        *  {undefined} executionId - The ID of the execution to cancel
+        *  {string} executionId - The ID of the execution to cancel
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -309,7 +309,7 @@ class ResourceJob(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - Successfully updated resource job (https://api.losant.com/#/definitions/resourceJob)
+        *  200 - Successfully updated resource job (https://api.losant.com/#/definitions/resourceJob)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

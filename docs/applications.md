@@ -99,7 +99,7 @@ all.Organization, all.Organization.bounded, all.User, all.User.bounded, applicat
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
 | 404 | [Error](_schemas.md#error) | Error if application is not found |
-| 422 | [Validation Error](_schemas.md#validation-error) | Error if too many validation errors occurred on other resources |
+| 422 | [Validation Errors](_schemas.md#validation-errors) | Error if too many validation errors occurred on other resources |
 
 <br/>
 

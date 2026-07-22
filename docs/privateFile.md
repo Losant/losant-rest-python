@@ -84,7 +84,7 @@ all.Application, all.Application.bounded, all.Application.cli, all.Application.r
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [File Schema](_schemas.md#file-schema) | Private file information |
+| 200 | [File](_schemas.md#file) | Private file information |
 
 #### Error Responses
 
@@ -127,7 +127,7 @@ all.Application, all.Application.bounded, all.Application.cli, all.Organization,
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [File Schema](_schemas.md#file-schema) | Returns a new private file or directory that was created by the move, if a directory a job will kick off to move all the directories children. |
+| 201 | [File](_schemas.md#file) | Returns a new private file or directory that was created by the move, if a directory a job will kick off to move all the directory&#x27;s children. |
 
 #### Error Responses
 
@@ -169,7 +169,7 @@ all.Application, all.Application.bounded, all.Application.cli, all.Organization,
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 201 | [File Upload Post Response](_schemas.md#file-upload-post-response) | Successfully updated private file and the information needed to upload the file content |
+| 200 | [File Upload Post Response](_schemas.md#file-upload-post-response) | Successfully updated private file and the information needed to upload the file content |
 
 #### Error Responses
 
@@ -212,7 +212,7 @@ all.Application, all.Application.bounded, all.Application.cli, all.Organization,
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [File Schema](_schemas.md#file-schema) | Updated private file content |
+| 200 | [File](_schemas.md#file) | Updated private file content |
 
 #### Error Responses
 

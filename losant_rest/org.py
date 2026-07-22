@@ -444,7 +444,7 @@ class Org(object):
 
     def payload_counts_breakdown(self, **kwargs):
         """
-        Returns payload counts per resolution in the time range specified for all application this organization owns
+        Returns payload counts per resolution in the time range specified for all applications this organization owns
 
         Authentication:
         The client must be configured with a valid api

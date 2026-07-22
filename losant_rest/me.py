@@ -268,7 +268,7 @@ class Me(object):
 
     def disconnect_github(self, **kwargs):
         """
-        Disconnects the user from Github
+        Disconnects the user from GitHub
 
         Authentication:
         The client must be configured with a valid api

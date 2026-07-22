@@ -167,7 +167,7 @@ class EmbeddedDeployments(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - If deployment release has been initiated successfully (https://api.losant.com/#/definitions/success)
+        *  202 - If deployment release has been accepted for processing (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -215,7 +215,7 @@ class EmbeddedDeployments(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - If deployment removal has been initiated successfully (https://api.losant.com/#/definitions/success)
+        *  202 - If deployment removal has been accepted for processing (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -263,7 +263,7 @@ class EmbeddedDeployments(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - If deployment replacement has been initiated successfully (https://api.losant.com/#/definitions/success)
+        *  202 - If deployment replacement has been accepted for processing (https://api.losant.com/#/definitions/success)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

@@ -105,7 +105,7 @@ class InstanceOrgInvite(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  200 - A single organization invite (https://api.losant.com/#/definitions/orgInvite)
+        *  200 - A single organization invite (https://api.losant.com/#/definitions/instanceOrgInvite)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)
@@ -157,7 +157,7 @@ class InstanceOrgInvite(object):
         *  {boolean} _embedded - Return embedded resources in response
 
         Responses:
-        *  201 - The new org invite (https://api.losant.com/#/definitions/orgInvite)
+        *  201 - The new org invite (https://api.losant.com/#/definitions/instanceOrgInvite)
 
         Errors:
         *  400 - Error if malformed request (https://api.losant.com/#/definitions/error)

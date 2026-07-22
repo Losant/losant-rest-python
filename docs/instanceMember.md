@@ -123,7 +123,7 @@ all.Instance, all.User, instanceMember.*, or instanceMember.patch.
 
 | Code | Type | Description |
 | ---- | ---- | ----------- |
-| 200 | [Instance Member Patch](_schemas.md#instance-member-patch) | The modified instance member |
+| 200 | [Instance Member](_schemas.md#instance-member) | The modified instance member |
 
 #### Error Responses
 

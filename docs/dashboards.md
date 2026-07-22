@@ -87,3 +87,4 @@ all.Organization, all.Organization.bounded, all.User, all.User.bounded, dashboar
 | Code | Type | Description |
 | ---- | ---- | ----------- |
 | 400 | [Error](_schemas.md#error) | Error if malformed request |
+| 404 | [Error](_schemas.md#error) | Error if associated application or organization was not found |

@@ -269,7 +269,7 @@ all.Instance, all.Instance.bounded, all.Instance.read, all.User, all.User.bounde
 
 ## Payload Counts Breakdown
 
-Returns payload counts per resolution in the time range specified for all application this organization owns
+Returns payload counts per resolution in the time range specified for all applications this organization owns
 
 ```python
 result = client.instance_org.payload_counts_breakdown(
