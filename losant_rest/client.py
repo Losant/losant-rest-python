@@ -126,6 +126,8 @@ from .resource_job import ResourceJob
 from .resource_jobs import ResourceJobs
 from .user_api_token import UserApiToken
 from .user_api_tokens import UserApiTokens
+from .user_oauth_client import UserOauthClient
+from .user_oauth_clients import UserOauthClients
 from .user_oauth_token import UserOauthToken
 from .user_oauth_tokens import UserOauthTokens
 from .webhook import Webhook
@@ -141,7 +143,7 @@ class Client(object):
 
     User API for accessing platform data
 
-    Built For Version 1.30.2
+    Built For Version 1.31.0
     """
 
     def __init__(self, auth_token=None, url="https://api.losant.com"):
@@ -242,6 +244,8 @@ class Client(object):
         self.resource_jobs = ResourceJobs(self)
         self.user_api_token = UserApiToken(self)
         self.user_api_tokens = UserApiTokens(self)
+        self.user_oauth_client = UserOauthClient(self)
+        self.user_oauth_clients = UserOauthClients(self)
         self.user_oauth_token = UserOauthToken(self)
         self.user_oauth_tokens = UserOauthTokens(self)
         self.webhook = Webhook(self)
@@ -255,7 +259,7 @@ class Client(object):
             params = {}
 
         headers["Accept"] = "application/json"
-        headers["Accept-Version"] = "^1.30.2"
+        headers["Accept-Version"] = "^1.31.0"
         if self.auth_token:
             headers["Authorization"] = "Bearer {0}".format(self.auth_token)
 

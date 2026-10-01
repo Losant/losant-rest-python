@@ -411,6 +411,7 @@ class Flow(object):
         *  {string} applicationId - ID associated with the application
         *  {string} flowId - ID associated with the flow
         *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
+        *  {string} strictValidation - When true, perform stricter validation on node and trigger configuration
         *  {hash} flow - Object containing new properties of the flow (https://api.losant.com/#/definitions/flowPatch)
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
@@ -436,6 +437,8 @@ class Flow(object):
             path_params["flowId"] = kwargs["flowId"]
         if "includeCustomNodes" in kwargs:
             query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
+        if "strictValidation" in kwargs:
+            query_params["strictValidation"] = kwargs["strictValidation"]
         if "flow" in kwargs:
             body = kwargs["flow"]
         if "losantdomain" in kwargs:

@@ -174,6 +174,7 @@ class FlowVersions(object):
         *  {hash} flowVersion - New flow version information (https://api.losant.com/#/definitions/flowVersionPost)
         *  {string} includeCustomNodes - If the result of the request should also include the details of any custom nodes referenced by the returned workflows
         *  {string} allowReplacement - Allow replacement of an existing flow version with same version name
+        *  {string} strictValidation - When true, perform stricter validation on node and trigger configuration
         *  {string} losantdomain - Domain scope of request (rarely needed)
         *  {boolean} _actions - Return resource actions in response
         *  {boolean} _links - Return resource link in response
@@ -202,6 +203,8 @@ class FlowVersions(object):
             query_params["includeCustomNodes"] = kwargs["includeCustomNodes"]
         if "allowReplacement" in kwargs:
             query_params["allowReplacement"] = kwargs["allowReplacement"]
+        if "strictValidation" in kwargs:
+            query_params["strictValidation"] = kwargs["strictValidation"]
         if "losantdomain" in kwargs:
             headers["losantdomain"] = kwargs["losantdomain"]
         if "_actions" in kwargs:
